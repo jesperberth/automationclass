@@ -9,61 +9,62 @@
     subnet: Servers
     adminUser: jesbe
     adminPassword: SomeThingSimple8
+
+  tasks:
+  - name: Create a virtual network
+    azure_rm_virtualnetwork:
+      resource_group: "{{ resource_group }}"
+      name: "{{ virtual_network_name }}"
+      address_prefixes_cidr: "10.1.0.0/16"
+      tags:
+          purpose: testing
+          delete: allow
   
-- name: Create a virtual network
-  azure_rm_virtualnetwork:
-    resource_group: "{{ resource_group }}"
-    name: "{{ virtual_network_name }}"
-    address_prefixes_cidr: "10.1.0.0/16"
-    tags:
-        purpose: testing
-        delete: allow
-  
-- name: Create a subnet
-  azure_rm_subnet:
-    resource_group: "{{ resource_group }}"
-    virtual_network_name: "{{ virtual_network_name }}"
-    name: "{{ subnet }}"
-    address_prefix_cidr: "10.1.0.0/24"
+  - name: Create a subnet
+    azure_rm_subnet:
+      resource_group: "{{ resource_group }}"
+      virtual_network_name: "{{ virtual_network_name }}"
+      name: "{{ subnet }}"
+      address_prefix_cidr: "10.1.0.0/24"
 
-- name: Create a public ip address ansible
-  azure_rm_publicipaddress:
-    resource_group: "{{ resource_group }}"
-    name: public_ip_ansible
-    allocation_method: static
-    domain_name: "ansible{{ domain_sub }}"
+  - name: Create a public ip address ansible
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: public_ip_ansible
+      allocation_method: static
+      domain_name: "ansible{{ domain_sub }}"
 
-- name: Create a public ip address tower
-  azure_rm_publicipaddress:
-    resource_group: "{{ resource_group }}"
-    name: public_ip_tower
-    allocation_method: static
-    domain_name: "tower{{ domain_sub }}"
+  - name: Create a public ip address tower
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: public_ip_tower
+      allocation_method: static
+      domain_name: "tower{{ domain_sub }}"
 
-- name: Create a public ip address server1
-  azure_rm_publicipaddress:
-    resource_group: "{{ resource_group }}"
-    name: public_ip_server1
-    allocation_method: static
-    domain_name: "server1{{ domain_sub }}"
+  - name: Create a public ip address server1
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: public_ip_server1
+      allocation_method: static
+      domain_name: "server1{{ domain_sub }}"
 
-- name: Create a public ip address server2
-  azure_rm_publicipaddress:
-    resource_group: "{{ resource_group }}"
-    name: public_ip_server2
-    allocation_method: static
-    domain_name: "server2{{ domain_sub }}"
+  - name: Create a public ip address server2
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: public_ip_server2
+      allocation_method: static
+      domain_name: "server2{{ domain_sub }}"
 
-- name: Create a public ip address server3
-  azure_rm_publicipaddress:
-    resource_group: "{{ resource_group }}"
-    name: public_ip_server3
-    allocation_method: static
-    domain_name: "server3{{ domain_sub }}"
+  - name: Create a public ip address server3
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: public_ip_server3
+      allocation_method: static
+      domain_name: "server3{{ domain_sub }}"
 
-- name: Create a public ip address server4
-  azure_rm_publicipaddress:
-    resource_group: "{{ resource_group }}"
-    name: public_ip_server4
-    allocation_method: static
-    domain_name: "server4{{ domain_sub }}"
+  - name: Create a public ip address server4
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: public_ip_server4
+      allocation_method: static
+      domain_name: "server4{{ domain_sub }}"
