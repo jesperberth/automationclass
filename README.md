@@ -9,4 +9,7 @@ Log on to server ansible using ssh
 Type:
 
 sudo yum install -y ansible
+
+Wait for yum to finish
+
 ![Alt text](pics/001_install_ansible.png?raw=true "Install Ansible")
