@@ -8,8 +8,10 @@ Log on to server ansible using ssh
 
 Type:
 
-sudo yum install -y ansible
+sudo dnf install -y python3-pip
 
-Wait for yum to finish
+sudo pip3 install --upgrade pip
+
+pip 3 install ansible --user
 
 ![Alt text](pics/001_install_ansible.png?raw=true "Install Ansible")
