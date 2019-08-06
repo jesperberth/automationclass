@@ -35,8 +35,26 @@ Type:
 
 sudo dnf install -y python3-pip
 
+![Alt text](pics/001_install_pip3.png?raw=true "Install Python3 PIP3")
+
 sudo pip3 install --upgrade pip
 
-pip 3 install ansible --user
+![Alt text](pics/002_install_pip3_upgrade.png?raw=true "Upgrade PIP")
 
-![Alt text](pics/001_install_ansible.png?raw=true "Install Ansible")
+Note: Sudo Password is equal to your user account password
+
+pip3 install ansible --user
+
+![Alt text](pics/003_install_ansible.png?raw=true "Install Ansible")
+
+## Task 2: Run ansible command
+
+Log on to server "ansible" using ssh 
+
+Type:
+
+ansible --version
+
+![Alt text](pics/004_install_ansible_version.png?raw=true "Ansible --version")
+
+ansible --help
