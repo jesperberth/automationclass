@@ -2,7 +2,7 @@
 ## Automate Linux, Windows and Cloud
 
 ### Prerequsits
-Environment
+__Environment__
 
 6 servers - made available in Azure - (use 01_class_setup.yml to deploy in Azure)
 
@@ -18,9 +18,9 @@ Accessible with winRM and RDP
 * server3 - 10.1.0.8
 * server4 - 10.1.0.9
 
-Software on your client
-* VSCode (or other IDE)
-* Git
+__Software on your client__
+* VSCode (or other IDE) [Download vscode](https://code.visualstudio.com/download)
+* Git [Download Git](https://git-scm.com/downloads)
 * ssh client
 * RDP client
 * Webbrowser
@@ -62,6 +62,7 @@ ansible --version
 ![Alt text](pics/004_install_ansible_version.png?raw=true "Ansible --version")
 
 ansible --help
+
 Will give you other options for ansible command
 
 ansible localhost -m ping

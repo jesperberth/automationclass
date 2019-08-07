@@ -210,3 +210,22 @@
         version: latest
       vm_size: Standard_A1
       network_interfaces: "server1_nic01"
+
+  # Create Virtual Machine server2       
+  - name: Create a VM server2
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "server2"
+      os_type: Linux
+      admin_username: "{{ adminUser }}"
+      admin_password: "{{ adminPassword }}"
+      managed_disk_type: Standard_LRS
+      state: present 
+      started: no
+      image:
+        offer: RHEL
+        publisher: RedHat
+        sku: 8
+        version: latest
+      vm_size: Standard_A1
+      network_interfaces: "server2_nic01"
