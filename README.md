@@ -168,3 +168,31 @@ ansible linuxservers -m ping
 
 
 ![Alt text](pics/014_ping_pong.png?raw=true "SSH Copy ID")
+
+Lets test a few ansible commands
+
+__Type:__
+
+ansible linuxservers -m file -a "path=/home/jesbe/testfile.txt state=touch"
+
+ssh server1
+
+ls
+
+is the file testfile.txt there?
+
+exit
+
+![Alt text](pics/015_file_test.png?raw=true "ansible file")
+
+__Type:__
+
+ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=yes" 
+
+![Alt text](pics/016_systemd_error.png?raw=true "ansible systemd error")
+
+This will fail as the user dosn't have the right permissions
+
+ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=yes" -b --ask-become-pass
+
+![Alt text](pics/017_systemd_works.png?raw=true "ansible systemd works")

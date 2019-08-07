@@ -156,6 +156,18 @@
           public_ip_address_name: "server1_public_ip"
           primary: True
 
+  - name: Create a network interface for server2
+    azure_rm_networkinterface:
+      name: "server2_nic01"
+      resource_group: "{{ resource_group }}"
+      virtual_network: "{{ virtual_network_name }}"
+      subnet_name: "{{ subnet }}"
+      security_group: "server2_securitygroup"
+      ip_configurations:
+        - name: "server2_nic01_ipconfig"
+          public_ip_address_name: "server2_public_ip"
+          primary: True
+
   # Create Virtual Machine ansible       
   - name: Create a VM ansible
     azure_rm_virtualmachine:
@@ -184,7 +196,7 @@
       admin_password: "{{ adminPassword }}"
       managed_disk_type: Standard_LRS
       state: present
-      started: no 
+      started: false 
       image:
         offer: RHEL
         publisher: RedHat
@@ -221,7 +233,7 @@
       admin_password: "{{ adminPassword }}"
       managed_disk_type: Standard_LRS
       state: present 
-      started: no
+      started: false
       image:
         offer: RHEL
         publisher: RedHat
