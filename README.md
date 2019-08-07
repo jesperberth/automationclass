@@ -123,7 +123,42 @@ ssh server1
 
 ![Alt text](pics/010_ssh_connect.png?raw=true "SSH Connect")
 
-type:
+Type:
 
 exit
 
+We need to generate a ssh-key pair for passwordless connection
+
+Type:
+
+ssh-keygen
+
+hit enter on key-path
+hit enter for empty passphrase
+hit enter again
+
+![Alt text](pics/011_ssh_keygen.png?raw=true "SSH Connect")
+
+We need to copy the public key to server1
+
+Type:
+
+ssh-copy-id jesbe@server1
+
+![Alt text](pics/012_ssh_copy.png?raw=true "SSH Copy ID")
+
+Type:
+
+ssh server1
+
+You should now be able to ssh to server1 without beeing prompted for a password
+
+![Alt text](pics/013_ssh_passwordless.png?raw=true "SSH Copy ID")
+
+Type:
+
+exit
+
+ansible linuxservers -m ping
+
+![Alt text](pics/014_ping_pong.png?raw=true "SSH Copy ID")
