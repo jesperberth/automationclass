@@ -31,7 +31,7 @@ Software on your client
 
 Log on to server "ansible" using ssh 
 
-Type:
+__Type:__
 
 Note: Sudo Password is equal to your user account password
 
@@ -51,7 +51,7 @@ pip3 install ansible --user
 
 Log on to server "ansible" using ssh 
 
-Type:
+__Type:__
 
 ansible --version
 
@@ -84,7 +84,7 @@ ansible <hosts> -m <module> -a <module arguments>
 
 Log on to server "ansible" using ssh 
 
-Type:
+__Type:__
 
 sudo mkdir /etc/ansible
 
@@ -92,7 +92,7 @@ sudo vi /etc/ansible/hosts
 
 ![Alt text](pics/007_mkdir_ansible.png?raw=true "mkdir ansible")
 
-In vi type:
+In vi __type:__
 
 i (for input)
 
@@ -101,7 +101,7 @@ server1
 
 Hit Esc-key
 
-Type:
+__Type:__
 
 :wq (: for a command w for write and q for quit vi)
 
@@ -123,13 +123,13 @@ ssh server1
 
 ![Alt text](pics/010_ssh_connect.png?raw=true "SSH Connect")
 
-Type:
+__Type:__
 
 exit
 
 We need to generate a ssh-key pair for passwordless connection
 
-Type:
+__Type:__
 
 ssh-keygen
 
@@ -141,13 +141,13 @@ hit enter again
 
 We need to copy the public key to server1
 
-Type:
+__Type:__
 
 ssh-copy-id jesbe@server1
 
 ![Alt text](pics/012_ssh_copy.png?raw=true "SSH Copy ID")
 
-Type:
+__Type:__
 
 ssh server1
 
@@ -155,12 +155,11 @@ You should now be able to ssh to server1 without beeing prompted for a password
 
 ![Alt text](pics/013_ssh_passwordless.png?raw=true "SSH Copy ID")
 
-Type:
+__Type:__
 
---- |
 exit
 
 ansible linuxservers -m ping
-|
+
 
 ![Alt text](pics/014_ping_pong.png?raw=true "SSH Copy ID")
