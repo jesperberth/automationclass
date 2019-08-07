@@ -115,4 +115,15 @@ when it asks "Are you sure you want to continue connecting (yes/no)?" type yes
 
 ![Alt text](pics/009_connect_error.png?raw=true "Connect Error")
 
-Connection will fail
+Connection will fail, as ansible expects passwordless ssh connections to be established before running
+
+Test ssh to server 1
+
+ssh server1
+
+![Alt text](pics/010_ssh_connect.png?raw=true "SSH Connect")
+
+type:
+
+exit
+
