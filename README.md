@@ -39,9 +39,13 @@ sudo dnf install -y python3-pip
 
 ![Alt text](pics/001_install_pip3.png?raw=true "Install Python3 PIP3")
 
+__Type:__
+
 sudo pip3 install --upgrade pip
 
 ![Alt text](pics/002_install_pip3_upgrade.png?raw=true "Upgrade PIP")
+
+__Type:__
 
 pip3 install ansible --user
 
