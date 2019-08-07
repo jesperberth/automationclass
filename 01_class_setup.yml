@@ -44,27 +44,169 @@
   - name: Create a public ip address server1
     azure_rm_publicipaddress:
       resource_group: "{{ resource_group }}"
-      name: public_ip_server1
+      name: server1_public_ip
       allocation_method: static
       domain_name: "server1{{ domain_sub }}"
 
   - name: Create a public ip address server2
     azure_rm_publicipaddress:
       resource_group: "{{ resource_group }}"
-      name: public_ip_server2
+      name: server2_public_ip
       allocation_method: static
       domain_name: "server2{{ domain_sub }}"
 
   - name: Create a public ip address server3
     azure_rm_publicipaddress:
       resource_group: "{{ resource_group }}"
-      name: public_ip_server3
+      name: server3_public_ip
       allocation_method: static
       domain_name: "server3{{ domain_sub }}"
 
   - name: Create a public ip address server4
     azure_rm_publicipaddress:
       resource_group: "{{ resource_group }}"
-      name: public_ip_server4
+      name: server4_public_ip
       allocation_method: static
       domain_name: "server4{{ domain_sub }}"
+
+  - name: Create Security Group for ansible
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "ansible_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 100
+            direction: Inbound
+
+  - name: Create Security Group for tower
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "tower_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 100
+            direction: Inbound
+          - name: Allow_HTTP
+            protocol: Tcp
+            destination_port_range: 80
+            access: Allow
+            priority: 101
+            direction: Inbound
+          - name: Allow_HTTPS
+            protocol: Tcp
+            destination_port_range: 443
+            access: Allow
+            priority: 102
+            direction: Inbound
+
+  - name: Create Security Group for server1
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "server1_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 100
+            direction: Inbound
+
+  - name: Create a network interface for ansible
+    azure_rm_networkinterface:
+      name: "ansible_nic01"
+      resource_group: "{{ resource_group }}"
+      virtual_network: "{{ virtual_network_name }}"
+      subnet_name: "{{ subnet }}"
+      security_group: "ansible_securitygroup"
+      ip_configurations:
+        - name: "ansible_nic01_ipconfig"
+          public_ip_address_name: "ansible_public_ip"
+          primary: True
+ 
+  - name: Create a network interface for tower
+    azure_rm_networkinterface:
+      name: "tower_nic01"
+      resource_group: "{{ resource_group }}"
+      virtual_network: "{{ virtual_network_name }}"
+      subnet_name: "{{ subnet }}"
+      security_group: "tower_securitygroup"
+      ip_configurations:
+        - name: "tower_nic01_ipconfig"
+          public_ip_address_name: "tower_public_ip"
+          primary: True
+
+  - name: Create a network interface for server1
+    azure_rm_networkinterface:
+      name: "server1_nic01"
+      resource_group: "{{ resource_group }}"
+      virtual_network: "{{ virtual_network_name }}"
+      subnet_name: "{{ subnet }}"
+      security_group: "server1_securitygroup"
+      ip_configurations:
+        - name: "server1_nic01_ipconfig"
+          public_ip_address_name: "server1_public_ip"
+          primary: True
+
+  # Create Virtual Machine ansible       
+  - name: Create a VM ansible
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "ansible"
+      os_type: Linux
+      admin_username: "{{ adminUser }}"
+      admin_password: "{{ adminPassword }}"
+      managed_disk_type: Standard_LRS
+      state: present 
+      image:
+        offer: RHEL
+        publisher: RedHat
+        sku: 8
+        version: latest
+      vm_size: Standard_A1
+      network_interfaces: "ansible_nic01"
+
+  # Create Virtual Machine tower 
+  - name: Create a VM tower
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "tower"
+      os_type: Linux
+      admin_username: "{{ adminUser }}"
+      admin_password: "{{ adminPassword }}"
+      managed_disk_type: Standard_LRS
+      state: present
+      started: no 
+      image:
+        offer: RHEL
+        publisher: RedHat
+        sku: 8
+        version: latest
+      vm_size: Standard_A1
+      network_interfaces: "tower_nic01"
+
+  # Create Virtual Machine server1       
+  - name: Create a VM server1
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "server1"
+      os_type: Linux
+      admin_username: "{{ adminUser }}"
+      admin_password: "{{ adminPassword }}"
+      managed_disk_type: Standard_LRS
+      state: present 
+      image:
+        offer: RHEL
+        publisher: RedHat
+        sku: 8
+        version: latest
+      vm_size: Standard_A1
+      network_interfaces: "server1_nic01"

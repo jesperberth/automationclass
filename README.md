@@ -33,6 +33,8 @@ Log on to server "ansible" using ssh
 
 Type:
 
+Note: Sudo Password is equal to your user account password
+
 sudo dnf install -y python3-pip
 
 ![Alt text](pics/001_install_pip3.png?raw=true "Install Python3 PIP3")
@@ -40,8 +42,6 @@ sudo dnf install -y python3-pip
 sudo pip3 install --upgrade pip
 
 ![Alt text](pics/002_install_pip3_upgrade.png?raw=true "Upgrade PIP")
-
-Note: Sudo Password is equal to your user account password
 
 pip3 install ansible --user
 
@@ -68,6 +68,8 @@ Will run ansible against localhost with module ping
 
 ansible localhost -m file -a "path=/home/jesbe/testfile.txt state=touch"
 
+change jesbe with your username
+
 ansible <hosts> -m <module> -a <module arguments>
 
 <hosts> can be localhost, a specified host (10.1.0.4/ansible), a group from the hostfile or all
@@ -78,3 +80,39 @@ ansible <hosts> -m <module> -a <module arguments>
 
 ![Alt text](pics/006_install_ansible_localhost_file.png?raw=true "Ansible localhost ping")
 
+## Task 3: Ansible hosts file
+
+Log on to server "ansible" using ssh 
+
+Type:
+
+sudo mkdir /etc/ansible
+
+sudo vi /etc/ansible/hosts
+
+![Alt text](pics/007_mkdir_ansible.png?raw=true "mkdir ansible")
+
+In vi type:
+
+i (for input)
+
+[linuxservers]
+server1
+
+Hit Esc-key
+
+Type:
+
+:wq (: for a command w for write and q for quit vi)
+
+![Alt text](pics/008_edit_hostfile.png?raw=true "Edit ansible hostfile")
+
+Lets ping our remote host server1 
+
+ansible linuxservers -m ping
+
+when it asks "Are you sure you want to continue connecting (yes/no)?" type yes
+
+![Alt text](pics/009_connect_error.png?raw=true "Connect Error")
+
+Connection will fail
