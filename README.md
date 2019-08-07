@@ -157,8 +157,10 @@ You should now be able to ssh to server1 without beeing prompted for a password
 
 Type:
 
+--- |
 exit
 
 ansible linuxservers -m ping
+|
 
 ![Alt text](pics/014_ping_pong.png?raw=true "SSH Copy ID")
