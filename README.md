@@ -4,7 +4,7 @@
 ### Prerequsits
 __Environment__
 
-6 servers - made available in Azure - (use 01_class_setup.yml to deploy in Azure)
+6 servers - made available in Azure - (use azure_class_playbooks/01_azure_class_setup.yml to deploy in Azure)
 
 4 - Running Red Hat Enterprise Linux 8
 Accessible with ssh and http/https
