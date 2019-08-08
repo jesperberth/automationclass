@@ -1,5 +1,9 @@
 # Lesson 1: Install Ansible
 
+In this session we will install ansible on server ansible, and connect to linux - server1 and windows - server3
+
+---
+
 Log on to server "ansible" using ssh 
 
 __Type:__
