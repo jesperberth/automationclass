@@ -3,7 +3,11 @@
 In this session we will install ansible on server ansible, and connect to linux - server1 and windows - server3
 
 ---
+Prerequisits 
 
+Following servers must be running
+ansible, server1, server3
+---
 Log on to server "ansible" using ssh 
 
 __Type:__
