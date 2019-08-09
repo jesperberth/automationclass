@@ -2,13 +2,18 @@
 
 In this session we will install ansible on server ansible, and connect to linux - server1 and windows - server3
 
----
-Prerequisits 
+## Prepare
 
-Following servers must be running
-ansible, server1, server3
----
-Log on to server "ansible" using ssh 
+We need to start servers, ansible, server1 and server3
+
+In Azure Cloud Shell(Bash)
+
+``` bash
+cd clouddrive
+
+```
+
+Log on to server "ansible" using ssh
 
 __Type:__
 
@@ -32,7 +37,7 @@ pip3 install ansible --user
 
 ## Task 2: Run ansible command
 
-Log on to server "ansible" using ssh 
+Log on to server "ansible" using ssh
 
 __Type:__
 
@@ -66,7 +71,7 @@ ansible <hosts> -m <module> -a <module arguments>
 
 ## Task 3: Ansible hosts file
 
-Log on to server "ansible" using ssh 
+Log on to server "ansible" using ssh
 
 __Type:__
 
@@ -91,7 +96,7 @@ __Type:__
 
 ![Alt text](pics/008_edit_hostfile.png?raw=true "Edit ansible hostfile")
 
-Lets ping our remote host server1 
+Lets ping our remote host server1
 
 ansible linuxservers -m ping
 
@@ -166,7 +171,7 @@ exit
 
 __Type:__
 
-ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=yes" 
+ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=yes"
 
 ![Alt text](pics/016_systemd_error.png?raw=true "ansible systemd error")
 
