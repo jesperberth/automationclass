@@ -17,6 +17,8 @@ ansible-playbook 01_azure_class_setup.yml
 
 ```
 
+## Task 1: Install Ansible
+
 Log on to server "ansible" using ssh
 
 __Type:__
