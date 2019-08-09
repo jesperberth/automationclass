@@ -59,6 +59,8 @@ ansible --version
 
 ![Alt text](pics/004_install_ansible_version.png?raw=true "Ansible --version")
 
+__Type:__
+
 ```bash
 ansible --help
 ```
@@ -72,6 +74,8 @@ ansible localhost -m ping
 Will run ansible against localhost with module ping
 
 ![Alt text](pics/005_install_ansible_localhost_ping.png?raw=true "Ansible localhost ping")
+
+__Type:__
 
 ```bash
 ansible localhost -m file -a "path=/home/jesbe/testfile.txt state=touch"
@@ -110,19 +114,21 @@ i (for input)
 
 [linuxservers]
 server1
-
-Hit Esc-key
 ```
 
 __Type:__
 
 ```bash
+Hit Esc-key
+
 :wq (: for a command w for write and q for quit vi)
 ```
 
 ![Alt text](pics/008_edit_hostfile.png?raw=true "Edit ansible hostfile")
 
 Lets ping our remote host server1
+
+__Type:__
 
 ```bash
 ansible linuxservers -m ping
@@ -135,6 +141,8 @@ when it asks "Are you sure you want to continue connecting (yes/no)?" type yes
 Connection will fail, as ansible expects passwordless ssh connections to be established before running
 
 Test ssh to server 1
+
+__Type:__
 
 ```bash
 ssh server1
