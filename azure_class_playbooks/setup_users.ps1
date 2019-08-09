@@ -1,6 +1,3 @@
-$email = "jesper@santaz.dk"
-$name = "Jesper Santaz"
-
 function CreateUser {
     param (
 
@@ -18,4 +15,6 @@ function CreateUser {
 
     New-AzureRmRoleAssignment -ObjectId $group.ObjectId -RoleDefinitionName Contributor -ResourceGroupName $rgname
 }
+$email = Read-Host -Prompt 'Input email'
+$name = = Read-Host -Prompt 'Input name'
 CreateUser
