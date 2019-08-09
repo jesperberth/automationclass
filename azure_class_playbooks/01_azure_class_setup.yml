@@ -3,12 +3,16 @@
   connection: local
   vars:
     location: northeurope
-    resource_group: Automation_FunSantaz
+    #resource_group: Automation_FunSantaz
     domain_sub: automationfunsantaz
     virtual_network_name: automationNetwork
     subnet: Servers
     adminUser: jesbe
     adminPassword: SomeThingSimple8
+
+  vars_prompt:
+    - name: resource_group
+      prompt: "Type the name of your Azure Resource Group"
 
   tasks:
   - name: Create a virtual network

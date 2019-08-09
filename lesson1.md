@@ -10,6 +10,10 @@ In Azure Cloud Shell(Bash)
 
 ``` bash
 cd clouddrive
+cd automationclass
+cd azure_class_playbooks
+
+ansible-playbook 01_azure_class_setup.yml
 
 ```
 

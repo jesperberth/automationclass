@@ -37,7 +37,7 @@ __Software on your client__
 In Azure Cloud Shell(Bash)
 
 ``` bash
-git clone https://github.com/jesperberth/automationclass/tree/master/azure_class_playbooks
+git clone https://github.com/jesperberth/automationclass/
 
 ```
 
