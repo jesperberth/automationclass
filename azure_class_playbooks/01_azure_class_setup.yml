@@ -13,6 +13,7 @@
   vars_prompt:
     - name: resource_group
       prompt: "Type the name of your Azure Resource Group"
+      private: no
 
   tasks:
   - name: Create a virtual network
