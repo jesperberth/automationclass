@@ -13,7 +13,7 @@ cd clouddrive
 cd automationclass
 cd azure_class_playbooks
 
-ansible-playbook 01_azure_class_setup.yml
+ansible-playbook 02_azure_lesson1_start.yml
 
 ```
 

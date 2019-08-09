@@ -4,7 +4,7 @@
   vars:
     location: northeurope
     #resource_group: Automation_FunSantaz
-    domain_sub: automationfunsantaz
+    #domain_sub: automationfunjesper
     virtual_network_name: automationNetwork
     subnet: Servers
     #adminUser: jesbe
@@ -13,6 +13,9 @@
   vars_prompt:
     - name: resource_group
       prompt: "Type the name of your Azure Resource Group"
+      private: no
+    - name: domain_sub
+      prompt: "Type a uniq name for servers Domain Name"
       private: no
     - name: adminUser
       prompt: "Type the name of your root/administrator account"

@@ -36,9 +36,23 @@ __Software on your client__
 
 In Azure Cloud Shell(Bash)
 
+Note:
+
+You need to type the name of your allocated Azure Resource Group
+
+Type a uniq name for your dns string
+
+Username cannot be root/administrator
+
+Password must meet complexity requirements, 3 of 4 types and minumum 12 characters
+
 ``` bash
 git clone https://github.com/jesperberth/automationclass/
+cd clouddrive
+cd automationclass
+cd azure_class_playbooks
 
+ansible-playbook 01_azure_class_setup.yml
 ```
 
 ### Lesson 1: [Install Ansible](lesson1.md)
