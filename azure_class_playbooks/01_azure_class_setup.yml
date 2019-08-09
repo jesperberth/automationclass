@@ -7,12 +7,18 @@
     domain_sub: automationfunsantaz
     virtual_network_name: automationNetwork
     subnet: Servers
-    adminUser: jesbe
-    adminPassword: SomeThingSimple8
+    #adminUser: jesbe
+    #adminPassword: SomeThingSimple8
 
   vars_prompt:
     - name: resource_group
       prompt: "Type the name of your Azure Resource Group"
+      private: no
+    - name: adminUser
+      prompt: "Type the name of your root/administrator account"
+      private: no
+    - name: adminPassword
+      prompt: "Type the password of your root/administrator account"
       private: no
 
   tasks:
@@ -207,7 +213,6 @@
       admin_password: "{{ adminPassword }}"
       managed_disk_type: Standard_LRS
       state: present 
-      started: false
       image:
         offer: RHEL
         publisher: RedHat
@@ -226,7 +231,6 @@
       admin_password: "{{ adminPassword }}"
       managed_disk_type: Standard_LRS
       state: present
-      started: false 
       image:
         offer: RHEL
         publisher: RedHat
@@ -245,7 +249,6 @@
       admin_password: "{{ adminPassword }}"
       managed_disk_type: Standard_LRS
       state: present 
-      started: false
       image:
         offer: RHEL
         publisher: RedHat
@@ -264,7 +267,6 @@
       admin_password: "{{ adminPassword }}"
       managed_disk_type: Standard_LRS
       state: present 
-      started: false
       image:
         offer: RHEL
         publisher: RedHat
@@ -283,7 +285,6 @@
       admin_password: "{{ adminPassword }}"
       managed_disk_type: Standard_LRS
       state: present
-      started: false
       image:
         offer: WindowsServer
         publisher: MicrosoftWindowsServer
@@ -302,7 +303,6 @@
       admin_password: "{{ adminPassword }}"
       managed_disk_type: Standard_LRS
       state: present
-      started: false
       image:
         offer: WindowsServer
         publisher: MicrosoftWindowsServer
@@ -310,3 +310,47 @@
         version: latest
       vm_size: Standard_A1
       network_interfaces: "server4_nic01"
+
+# Stop All Virtual Machines
+  - name: Stop VM ansible
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "ansible"
+      state: present
+      started: false
+  
+  - name: Stop VM tower
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "tower"
+      state: present
+      started: false
+
+  - name: Stop VM server1
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "server1"
+      state: present
+      started: false
+  
+  - name: Stop VM server2
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "server2"
+      state: present
+      started: false
+
+  - name: Stop VM server3
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "server3"
+      state: present
+      started: false
+
+  - name: Stop VM server4
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "server4"
+      state: present
+      started: false
+                     

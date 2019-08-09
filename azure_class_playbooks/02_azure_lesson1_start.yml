@@ -3,124 +3,33 @@
   connection: local
   vars:
     location: northeurope
-    resource_group: Automation_FunSantaz
     domain_sub: automationfunsantaz
     virtual_network_name: automationNetwork
     subnet: Servers
-    adminUser: jesbe
-    adminPassword: SomeThingSimple8
+
+  vars_prompt:
+    - name: resource_group
+      prompt: "Type the name of your Azure Resource Group"
+      private: no
 
   tasks:
-  # Create Virtual Machine ansible       
-  - name: Create a VM ansible
+  # Start All Virtual Machines
+  - name: Start VM ansible
     azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
       name: "ansible"
-      os_type: Linux
-      admin_username: "{{ adminUser }}"
-      admin_password: "{{ adminPassword }}"
-      managed_disk_type: Standard_LRS
-      state: present 
-      started: true
-      image:
-        offer: RHEL
-        publisher: RedHat
-        sku: 8
-        version: latest
-      vm_size: Standard_A1
-      network_interfaces: "ansible_nic01"
-
-  # Create Virtual Machine tower 
-  - name: Create a VM tower
-    azure_rm_virtualmachine:
-      resource_group: "{{ resource_group }}"
-      name: "tower"
-      os_type: Linux
-      admin_username: "{{ adminUser }}"
-      admin_password: "{{ adminPassword }}"
-      managed_disk_type: Standard_LRS
       state: present
-      started: false 
-      image:
-        offer: RHEL
-        publisher: RedHat
-        sku: 8
-        version: latest
-      vm_size: Standard_A1
-      network_interfaces: "tower_nic01"
-
-  # Create Virtual Machine server1       
-  - name: Create a VM server1
+      started: true
+  - name: Start VM server1
     azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
       name: "server1"
-      os_type: Linux
-      admin_username: "{{ adminUser }}"
-      admin_password: "{{ adminPassword }}"
-      managed_disk_type: Standard_LRS
-      state: present 
+      state: present
       started: true
-      image:
-        offer: RHEL
-        publisher: RedHat
-        sku: 8
-        version: latest
-      vm_size: Standard_A1
-      network_interfaces: "server1_nic01"
-
-  # Create Virtual Machine server2       
-  - name: Create a VM server2
-    azure_rm_virtualmachine:
-      resource_group: "{{ resource_group }}"
-      name: "server2"
-      os_type: Linux
-      admin_username: "{{ adminUser }}"
-      admin_password: "{{ adminPassword }}"
-      managed_disk_type: Standard_LRS
-      state: present 
-      started: false
-      image:
-        offer: RHEL
-        publisher: RedHat
-        sku: 8
-        version: latest
-      vm_size: Standard_A1
-      network_interfaces: "server2_nic01"
-
-# Create Virtual Machine server3      
-  - name: Create a VM server3
+  
+  - name: Start VM server3
     azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
       name: "server3"
-      os_type: Windows
-      admin_username: "{{ adminUser }}"
-      admin_password: "{{ adminPassword }}"
-      managed_disk_type: Standard_LRS
       state: present
       started: true
-      image:
-        offer: WindowsServer
-        publisher: MicrosoftWindowsServer
-        sku: 2019-Datacenter
-        version: latest
-      vm_size: Standard_A1
-      network_interfaces: "server3_nic01"
-
-# Create Virtual Machine server4      
-  - name: Create a VM server4
-    azure_rm_virtualmachine:
-      resource_group: "{{ resource_group }}"
-      name: "server4"
-      os_type: Windows
-      admin_username: "{{ adminUser }}"
-      admin_password: "{{ adminPassword }}"
-      managed_disk_type: Standard_LRS
-      state: present
-      started: false
-      image:
-        offer: WindowsServer
-        publisher: MicrosoftWindowsServer
-        sku: 2019-Datacenter
-        version: latest
-      vm_size: Standard_A1
-      network_interfaces: "server4_nic01"
