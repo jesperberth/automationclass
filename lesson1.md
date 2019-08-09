@@ -77,13 +77,13 @@ ansible localhost -m file -a "path=/home/jesbe/testfile.txt state=touch"
 
 change jesbe with your username
 
-ansible hosts -m module -a module arguments
+ansible __hosts__ -m __module__ -a __module arguments__
 
-hosts can be localhost, a specified host (10.1.0.4/ansible), a group from the hostfile or all
+__hosts__ can be localhost, a specified host (10.1.0.4/ansible), a group from the hostfile or all
 
-module any ansible module, here file
+__module__ any ansible module, here file
 
-module arguments arguments for module if needed, here path=/home/jesbe/testfile.txt and state=touch
+__module arguments__ arguments for module if needed, here path=/home/jesbe/testfile.txt and state=touch
 
 ![Alt text](pics/006_install_ansible_localhost_file.png?raw=true "Ansible localhost ping")
 
