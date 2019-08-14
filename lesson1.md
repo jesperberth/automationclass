@@ -93,7 +93,7 @@ __module arguments__ arguments for module if needed, here path=/home/jesbe/testf
 
 ![Alt text](pics/006_install_ansible_localhost_file.png?raw=true "Ansible localhost ping")
 
-## Task 3: Ansible hosts file
+## Task 3: Connect Linux host
 
 Log on to server "ansible" using ssh
 
@@ -237,3 +237,54 @@ ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=ye
 ```
 
 ![Alt text](pics/017_systemd_works.png?raw=true "ansible systemd works")
+
+## Task 4: Connect Windows Host
+
+Connect to server3 using RDP
+
+We need to enable Windows Remote Management on the server
+
+Start a powershell console with elevated rights (Run As Administrator) and run the following commands
+
+__Type:__
+
+```powershell
+$url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+$file = "$env:temp\ConfigureRemotingForAnsible.ps1"
+
+(New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
+
+powershell.exe -ExecutionPolicy ByPass -File $file
+```
+
+![Alt text](pics/018_enable_winrm.png?raw=true "enable winRm")
+
+Lets add the windows server to our ansible hosts file
+
+Log on to server "ansible" using ssh
+
+__Type:__
+
+```bash
+sudo vi /etc/ansible/hosts
+
+i (for input)
+
+[windowsservers]
+server3
+
+[windowsservers:vars]
+ansible_user: jesbe
+ansible_password: SomeThingSimple8
+ansible_port: 5986
+ansible_connection: winrm
+ansible_winrm_server_cert_validation: ignore
+```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```

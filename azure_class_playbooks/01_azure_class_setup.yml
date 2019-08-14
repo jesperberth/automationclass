@@ -134,6 +134,45 @@
             priority: 100
             direction: Inbound
 
+  - name: Create Security Group for server2
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "server2_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 100
+            direction: Inbound
+
+  - name: Create Security Group for server3
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "server3_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_RDP
+            protocol: Tcp
+            destination_port_range: 3389
+            access: Allow
+            priority: 100
+            direction: Inbound
+
+  - name: Create Security Group for server4
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "server4_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_RDP
+            protocol: Tcp
+            destination_port_range: 3389
+            access: Allow
+            priority: 100
+            direction: Inbound
+
   - name: Create a network interface for ansible
     azure_rm_networkinterface:
       name: "ansible_nic01"

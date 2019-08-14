@@ -58,3 +58,7 @@ ansible-playbook 01_azure_class_setup.yml
 ### Lesson 1: [Install Ansible](lesson1.md)
 
 Install Ansible and Connect to a Linux and Windows Server
+
+### Lesson 2: Playbooks
+
+Create Ansible Playbooks for Linux and Windows
