@@ -85,7 +85,7 @@ change jesbe with your username
 
 ansible __hosts__ -m __module__ -a __module arguments__
 
-__hosts__ can be localhost, a specified host (10.1.0.4/ansible), a group from the hostfile or all
+__hosts__ can be localhost or a group from the hostfile or all
 
 __module__ any ansible module, here file
 
@@ -263,6 +263,16 @@ Lets add the windows server to our ansible hosts file
 
 Log on to server "ansible" using ssh
 
+We need to install pywinrm before being able to connect to windows servers from ansible
+
+__Type:__
+
+```bash
+pip3 install pywinrm --user
+```
+
+![Alt text](pics/019_install_pywinrm.png?raw=true "enable winRm")
+
 __Type:__
 
 ```bash
@@ -274,11 +284,11 @@ i (for input)
 server3
 
 [windowsservers:vars]
-ansible_user: jesbe
-ansible_password: SomeThingSimple8
-ansible_port: 5986
-ansible_connection: winrm
-ansible_winrm_server_cert_validation: ignore
+ansible_user=jesbe
+ansible_password=SomeThingSimple8
+ansible_port=5986
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
 ```
 
 __Type:__
@@ -288,3 +298,15 @@ Hit Esc-key
 
 :wq (: for a command w for write and q for quit vi)
 ```
+
+![Alt text](pics/020_winrm_hostsfile.png?raw=true "hosts file winRm")
+
+Lets test connection to the Windows server
+
+__Type:__
+
+```bash
+ansible windowsservers -m win_ping
+```
+
+![Alt text](pics/021_ansible_win_ping.png?raw=true "win_ping")
