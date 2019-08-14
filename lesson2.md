@@ -1,6 +1,6 @@
 # Lesson 2: Playbooks
 
-In this session we will install ansible on server ansible, and connect to linux - server1 and windows - server3
+In this session we will use Visual Studio Code and modules to work with ansible playbooks and create two playbooks, one for linux and one for windows
 
 ## Prepare
 
@@ -18,4 +18,6 @@ ansible-playbook 03_azure_lesson2_start.yml
 ```
 
 ## Task 1: Setup Visual Studio Code
+
+Get module ansible
 

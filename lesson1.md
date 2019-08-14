@@ -273,6 +273,8 @@ pip3 install pywinrm --user
 
 ![Alt text](pics/019_install_pywinrm.png?raw=true "enable winRm")
 
+Yes the password is in clear text, we will look into this later
+
 __Type:__
 
 ```bash
