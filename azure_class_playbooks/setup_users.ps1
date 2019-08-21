@@ -7,6 +7,7 @@ function CreateUser {
     $emailString = $emailStringTmp -replace "\.","_"
     write-host $emailString
     $rgname = $emailString
+    
     $uniqtext1 = 1..99 | Get-Random -Count 1
     $uniqtext2 = 1..99 | Get-Random -Count 1
     $sec = Get-Date -Second

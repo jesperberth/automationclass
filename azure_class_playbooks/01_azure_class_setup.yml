@@ -260,7 +260,7 @@
         publisher: RedHat
         sku: 8
         version: latest
-      vm_size: Standard_A1
+      vm_size: Standard_A1_V2
       network_interfaces: "ansible_nic01"
 
   # Create Virtual Machine tower 
@@ -278,7 +278,7 @@
         publisher: RedHat
         sku: 8
         version: latest
-      vm_size: Standard_A1
+      vm_size: Standard_A2_V2
       network_interfaces: "tower_nic01"
 
   # Create Virtual Machine server1       
@@ -296,7 +296,7 @@
         publisher: RedHat
         sku: 8
         version: latest
-      vm_size: Standard_A1
+      vm_size: Standard_A1_V2
       network_interfaces: "server1_nic01"
 
   # Create Virtual Machine server2       
@@ -314,7 +314,7 @@
         publisher: RedHat
         sku: 8
         version: latest
-      vm_size: Standard_A1
+      vm_size: Standard_A1_V2
       network_interfaces: "server2_nic01"
 
 # Create Virtual Machine server3      
@@ -332,7 +332,7 @@
         publisher: MicrosoftWindowsServer
         sku: 2019-Datacenter
         version: latest
-      vm_size: Standard_A1
+      vm_size: Standard_A1_V2
       network_interfaces: "server3_nic01"
 
 # Create Virtual Machine server4      
@@ -350,13 +350,14 @@
         publisher: MicrosoftWindowsServer
         sku: 2019-Datacenter
         version: latest
-      vm_size: Standard_A1
+      vm_size: Standard_A1_V2
       network_interfaces: "server4_nic01"
 
 # Stop All Virtual Machines
   - name: Stop VM ansible
     azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
+      allocated: no
       name: "ansible"
       state: present
       started: false
@@ -364,6 +365,7 @@
   - name: Stop VM tower
     azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
+      allocated: no
       name: "tower"
       state: present
       started: false
@@ -371,6 +373,7 @@
   - name: Stop VM server1
     azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
+      allocated: no
       name: "server1"
       state: present
       started: false
@@ -378,6 +381,7 @@
   - name: Stop VM server2
     azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
+      allocated: no
       name: "server2"
       state: present
       started: false
@@ -385,6 +389,7 @@
   - name: Stop VM server3
     azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
+      allocated: no
       name: "server3"
       state: present
       started: false
@@ -392,6 +397,7 @@
   - name: Stop VM server4
     azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
+      allocated: no
       name: "server4"
       state: present
       started: false
