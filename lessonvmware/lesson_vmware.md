@@ -49,7 +49,7 @@ i for insert
   vars:
     hostname: 192.168.130.242
     username: userx
-    password: password
+    password: P@s$w0rd!
     nfs_user: NFS_userx
   tasks:
   - name: Add NFS Storage ESXi
@@ -61,7 +61,7 @@ i for insert
       datastore_name: "{{ nfs_user }}"
       datastore_type: nfs
       nfs_server: 192.168.130.251
-      nfs_path: "/storage/{{ user }}"
+      nfs_path: "/storage/{{ username }}"
       nfs_ro: no
       state: present
       validate_certs: False
@@ -69,13 +69,25 @@ i for insert
 
 ```
 
+![Alt text](pics/01_add_nfs_to_vmware.png?raw=true "nfs playbook")
+
 __Type:__
 
 ```bash
 Hit Esc-key
 
-:wq (: for a command w for write and q for quit vi)
+wq (: for a command w for write and q for quit vi)
 ```
+
+__Type:__
+
+```bash
+
+ansible-playbook add_nfs_to_vmware.yml
+
+```
+
+![Alt text](pics/02_add_nfs_to_vmware.png?raw=true "nfs playbook run")
 
 ## Task 2: Add Network portgroup to ESXi host
 
