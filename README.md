@@ -1,6 +1,6 @@
 # Automationclass with Ansible
 
-## Automate Linux, Windows and Cloud
+## Automate Linux, Windows, VMware, Network and Cloud
 
 ### Prerequsits
 
@@ -60,6 +60,10 @@ ansible-playbook 01_azure_class_setup.yml
 
 Install Ansible and Connect to a Linux and Windows Server
 
-### Lesson 2: Playbooks
+### Lesson 2: [Ansible Playbooks](lesson02/lesson2.md)
 
 Create Ansible Playbooks for Linux and Windows
+
+### Lesson xx: [Manage VMware](lessonvmware/lesson_vmware.md)
+
+Create Ansible Playbooks for Vmware host and Guests
