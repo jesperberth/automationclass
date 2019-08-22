@@ -19,6 +19,13 @@
         - { 'name': 'user1', 'pw': '{{ password }}'}
         - { 'name': 'user2', 'pw': '{{ password }}'}
         - { 'name': 'user3', 'pw': '{{ password }}'}
+        - { 'name': 'user4', 'pw': '{{ password }}'}
+        - { 'name': 'user5', 'pw': '{{ password }}'}
+        - { 'name': 'user6', 'pw': '{{ password }}'}        
+        - { 'name': 'user7', 'pw': '{{ password }}'}
+        - { 'name': 'user8', 'pw': '{{ password }}'}
+        - { 'name': 'user9', 'pw': '{{ password }}'}
+        - { 'name': 'user10', 'pw': '{{ password }}'}
 
 # Create Ansible Hosts file
   - name: Create Ansible dir

@@ -9,9 +9,33 @@ In this session we will use ansible to manage a vmware esxi host, adding NFS sto
 
 ```
 
-## Task 1: Add NFS storage to ESXi host
+## Task 1: Install Ansible on ansible2.demo.local
+
+Logon to ansible2.demo.local with ssh
+
+Use your "userxx" account and password
+
+We need to install ansible and the python modules for vmware and fortinet
+
+__Type:__
+
+```bash
+pip3 install ansible --user
+pip3 install pyvmomi --user
+pip3 install fortiosapi --user
+
+ansible --version
+```
+
+## Task 2: Add NFS storage to ESXi host
 
 [Ansible VMware Datastore](https://docs.ansible.com/ansible/latest/modules/vmware_host_datastore_module.html#vmware-host-datastore-module)
+
+In your browser logon to the esxi host
+
+esxi.demo.local or ip 10.172.10.10 with you userxx
+
+Logon to ansible2.demo.local with ssh
 
 __Type:__
 
@@ -54,6 +78,8 @@ Hit Esc-key
 ```
 
 ## Task 2: Add Network portgroup to ESXi host
+
+[Ansible VMware PortGroup](https://docs.ansible.com/ansible/latest/modules/vmware_portgroup_module.html#vmware-portgroup-module)
 
 __Type:__
 
