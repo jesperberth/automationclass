@@ -4,6 +4,7 @@
     hostname: 192.168.130.242
     username: root
     password: xxxxxx
+    esxi_hostname: esxi.arrowdemo.local
   tasks:
   - name: Add local user to ESXi
     vmware_local_user_manager:
@@ -55,8 +56,20 @@
       username: "{{ username }}"
       password: "{{ password }}"
       validate_certs: False
-      esxi_hostname: esxi.arrowdemo.local
+      esxi_hostname: "{{ esxi_hostname }}"
       switch_name: user_vswitch
       nic_name: vmnic1
       mtu: 9000
+    delegate_to: localhost
+
+  - name: Change NFS.MaxVolumes setting for an ESXi host
+    vmware_host_config_manager:
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: False
+      esxi_hostname: "{{ esxi_hostname }}"
+      options:
+        'NFS.MaxVolumes': '16'
+        'NFS41.MaxVolumes': '16'
     delegate_to: localhost

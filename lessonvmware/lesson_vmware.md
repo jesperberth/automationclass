@@ -1,9 +1,8 @@
 # Lesson xx: Ansible VMware
 
-In this session we will use ansible to manage a vmware esxi host, adding NFS storage, 
+In this session we will use ansible to manage a vmware esxi host, adding NFS storage, PortGroup to a virtual switch
 
 ## Prepare
-
 
 ``` bash
 
@@ -11,6 +10,10 @@ In this session we will use ansible to manage a vmware esxi host, adding NFS sto
 ```
 
 ## Task 1: Add NFS storage to ESXi host
+
+[Ansible VMware Datastore](https://docs.ansible.com/ansible/latest/modules/vmware_host_datastore_module.html#vmware-host-datastore-module)
+
+__Type:__
 
 ```bash
 vi add_nfs_to_vmware.yml
@@ -21,9 +24,9 @@ i for insert
 - hosts: localhost
   vars:
     hostname: 192.168.130.242
-    username: root
+    username: userx
     password: password
-    nfs_user: user1
+    nfs_user: NFS_userx
   tasks:
   - name: Add NFS Storage ESXi
     vmware_host_datastore:
@@ -34,7 +37,7 @@ i for insert
       datastore_name: "{{ nfs_user }}"
       datastore_type: nfs
       nfs_server: 192.168.130.251
-      nfs_path: "/storage/{{ nfs_user }}"
+      nfs_path: "/storage/{{ user }}"
       nfs_ro: no
       state: present
       validate_certs: False
@@ -42,7 +45,17 @@ i for insert
 
 ```
 
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
 ## Task 2: Add Network portgroup to ESXi host
+
+__Type:__
 
 ```bash
 vi add_portgroup_to_vmware.yml
@@ -53,7 +66,7 @@ i for insert
 - hosts: localhost
   vars:
     hostname: 192.168.130.242
-    username: root
+    username: userx
     password: password
     portgroup_name: vlan101
     vlan_id: 101
@@ -71,3 +84,15 @@ i for insert
     delegate_to: localhost
 
 ```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+## Task 3: Add a VM to ESXi host
+
+[Ansible Vmware Guest](https://docs.ansible.com/ansible/latest/modules/vmware_guest_module.html#vmware-guest-module)
