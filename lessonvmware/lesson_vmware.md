@@ -87,7 +87,11 @@ ansible-playbook add_nfs_to_vmware.yml
 
 ```
 
-![Alt text](pics/02_add_nfs_to_vmware.png?raw=true "nfs playbook run")
+![Alt text](pics/02_add_nfs_to_vmware_play.png?raw=true "nfs playbook run")
+
+In the vmware host webconsole check under storage that your nfs share is connected
+
+![Alt text](pics/03_add_nfs_to_vmware_connect.png?raw=true "nfs vmware")
 
 ## Task 2: Add Network portgroup to ESXi host
 
