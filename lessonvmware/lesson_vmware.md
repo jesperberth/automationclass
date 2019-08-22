@@ -79,6 +79,8 @@ Hit Esc-key
 wq (: for a command w for write and q for quit vi)
 ```
 
+Let's run the playbook
+
 __Type:__
 
 ```bash
@@ -109,7 +111,7 @@ i for insert
   vars:
     hostname: 192.168.130.242
     username: userx
-    password: password
+    password: P@s$w0rd!
     portgroup_name: vlan101
     vlan_id: 101
   tasks:
@@ -134,6 +136,24 @@ Hit Esc-key
 
 :wq (: for a command w for write and q for quit vi)
 ```
+
+![Alt text](pics/04_add_portgroup_to_vmware.png?raw=true "portgroup playbook")
+
+Let's run the playbook
+
+__Type:__
+
+```bash
+
+ansible-playbook add_portgroup_to_vmware.yml
+
+```
+
+![Alt text](pics/05_add_portgroup_to_vmware_run.png?raw=true "portgroup playbook run")
+
+In the vmware host webconsole check under networking/port groups that your vlan is created
+
+![Alt text](pics/06_add_portgroup_to_vmware_created.png?raw=true "nfs vmware")
 
 ## Task 3: Add a VM to ESXi host
 
