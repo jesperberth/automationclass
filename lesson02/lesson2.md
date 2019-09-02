@@ -124,3 +124,15 @@ Write the following in the text pane
       path: /root/testfile.txt
       state: touch
 ```
+
+Click the version control button in the left panel, write a comment and click "Ctrl + Enter" to commit the changes
+
+![Alt text](pics/017_code_git_commit.png?raw=true "git commit in VSCode")
+
+Now Sync the changes Push/Pull, in the blue bar at the bottom, 0 up, 1 down it will start the sync process
+
+![Alt text](pics/018_code_git_sync.png?raw=true "git sync in VSCode")
+
+The first time you will be prompted for github credentials
+
+![Alt text](pics/019_code_git_sync_login.png?raw=true "git login in VSCode")
