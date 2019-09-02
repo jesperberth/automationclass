@@ -71,8 +71,32 @@ __Type:__
 ```powershell
 mkdir ansible
 cd ansible
-
-
+code .
 ```
 
+![Alt text](pics/009_start_code.png?raw=true "Start VSCode")
 
+On your "ansbleclass" repository page
+
+Click the "Clone or Download" to retrieve the URL for the repository
+
+![Alt text](pics/010_repourl.png?raw=true "Repo URL")
+
+In VSCode
+
+Click (Windows: Ctrl + Shift + P) (Mac: Command + Shift + P)
+This will open the VSCode command Palette
+
+![Alt text](pics/011_git_clone.png?raw=true "VSCode Command")
+
+Paste the git url
+
+![Alt text](pics/012_git_clone_url.png?raw=true "Paste Repo URL")
+
+Specify a path for the git repository on your disk (Don't use a One Drive)
+
+![Alt text](pics/013_git_clone_path.png?raw=true "Set Git local path")
+
+Click "Yes" to Open the repository
+
+![Alt text](pics/014_git_in_vscode.png?raw=true "Git repo is now in VSCode")
