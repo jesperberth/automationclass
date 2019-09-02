@@ -105,9 +105,11 @@ Click "Yes" to Open the repository
 
 In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
 
-![Alt text](pics/014_git_in_vscode.png?raw=true "new file in VSCode")
+![Alt text](pics/015_code_newfile.png?raw=true "new file in VSCode")
 
-call it "01_linux.yml"
+Name it "01_linux.yml"
+
+![Alt text](pics/016_code_playbook.png?raw=true "playbook in VSCode")
 
 Write the following in the text pane
 
