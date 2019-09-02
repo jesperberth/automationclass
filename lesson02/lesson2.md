@@ -60,7 +60,7 @@ Your new repository is created with an empty README.md file
 
 ![Alt text](pics/008_newrepo_created_github.png?raw=true "New Repo")
 
-## Task 2: Create first playbook using VSCode
+## Task 2: Create Git Repository
 
 We need to create a simple folder structure for keeping our files
 
@@ -100,3 +100,25 @@ Specify a path for the git repository on your disk (Don't use a One Drive)
 Click "Yes" to Open the repository
 
 ![Alt text](pics/014_git_in_vscode.png?raw=true "Git repo is now in VSCode")
+
+## Task 3: Create the first playbook
+
+In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
+
+![Alt text](pics/014_git_in_vscode.png?raw=true "new file in VSCode")
+
+call it "01_linux.yml"
+
+Write the following in the text pane
+
+```ansible
+---
+- hosts: linuxservers
+  become: yes
+
+  tasks:
+  - name: Create file
+    file:
+      path: /root/testfile.txt
+      state: touch
+```
