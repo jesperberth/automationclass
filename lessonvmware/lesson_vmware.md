@@ -15,14 +15,13 @@ Logon to ansible2.demo.local with ssh
 
 Use your "userxx" account and password
 
-We need to install ansible and the python modules for vmware and fortinet
+We need to install ansible and the python modules for vmware
 
 __Type:__
 
 ```bash
 pip3 install ansible --user
 pip3 install pyvmomi --user
-pip3 install fortiosapi --user
 
 ansible --version
 ```

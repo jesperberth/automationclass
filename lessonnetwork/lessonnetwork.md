@@ -4,33 +4,19 @@ In this session we will use Visual Studio Code and modules to work with ansible 
 
 ## Prepare
 
-https://github.com/fortinet-solutions-cse/40ansible
-
-We need to start servers, ansible, server1 and server3
-
-In Azure Cloud Shell(Bash)
-
-``` bash
-cd clouddrive
-cd automationclass
-cd azure_class_playbooks
-
-ansible-playbook 0xx_azure_lessonxx_start.yml
-
-```
-
 ## Task 1: Setup Visual Studio Code
 
-```bash
-wget https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz
+Logon to ansible2.demo.local with ssh
 
-tar xvzf ansible-tower-setup-latest.tar.gz
+Use your "userxx" account and password
 
-cd ansible-tower-setup-<tower_version>
-```
+We need to python modules for fortios
 
-```bash
-vi inventory
+``` bash
 
-sudo ./setup.sh
+pip3 install fortiosapi --user
+pip3 install pip-tools --user
+pip3 install netaddr --user
+pip3 install pyfg --user
+
 ```
