@@ -1,4 +1,4 @@
-# Lesson 2: Playbooks
+# Lesson 2: Ansible Playbooks
 
 In this session we will install and use Visual Studio Code with a few plugins to start working with ansible playbooks and create two playbooks, one for linux and one for windows
 
@@ -179,4 +179,49 @@ ansible-playbook 01_linux.yml --ask-become-pass
 
 ![Alt text](pics/023_run_playbook.png?raw=true "Run playbook")
 
-## Task 4:
+## Task 4: Adding tasks to the playbook
+
+Lets add a second task in the playbook 01_linux.yml
+
+In VSCode add the following text to the file
+
+```ansible
+
+  - name: Add line in file
+    lineinfile:
+      path: /root/testfile.txt
+      line: Ansible was here...
+
+```
+
+![Alt text](pics/023_run_playbook.png?raw=true "Add second task to playbook")
+
+Save the file
+
+Notice that Git detects the changed file, do a commit add a comment "Second Edition" and Sync to Git
+
+![Alt text](pics/023_run_playbook.png?raw=true "Second Commit to playbook")
+
+Clone the git repository
+
+__Type:__
+
+```bash
+git pull https://github.com/jesperberth/ansibleclass.git
+```
+
+![Alt text](pics/022_git_clone.png?raw=true "git clone")
+
+Run the playbook
+
+__Type:__
+
+```bash
+cd ansibleclass
+ls
+
+ansible-playbook 01_linux.yml --ask-become-pass
+
+```
+
+![Alt text](pics/023_run_playbook.png?raw=true "Run playbook")

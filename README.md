@@ -56,14 +56,18 @@ cd azure_class_playbooks
 ansible-playbook 01_azure_class_setup.yml
 ```
 
-### Lesson 1: [Install Ansible](lesson01/lesson1.md)
+### Lab 1: [Install Ansible](lab01/lab1.md)
 
 Install Ansible and Connect to a Linux and Windows Server
 
-### Lesson 2: [Ansible Playbooks](lesson02/lesson2.md)
+### Lab 2: [Ansible Playbooks](lab02/lab2.md)
 
-Create Ansible Playbooks for Linux and Windows
+Create Ansible Playbooks
 
-### Lesson xx: [Manage VMware](lessonvmware/lesson_vmware.md)
+### Lab 3: [Work with Playbooks](lab03/lab3.md)
+
+Use Variables, prompts, facts and handlers in Playbooks
+
+### Lab xx: [Manage VMware](labvmware/lab_vmware.md)
 
 Create Ansible Playbooks for Vmware host and Guests
