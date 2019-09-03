@@ -1,4 +1,4 @@
-# Lesson 3: Work with Playbooks
+# Lab 3: Work with Playbooks
 
 In this session we will use Visual Studio Code and modules to work with ansible playbooks and create two playbooks, one for linux and one for windows
 

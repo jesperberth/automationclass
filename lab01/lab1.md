@@ -1,4 +1,4 @@
-# Lesson 1: Install Ansible
+# Lab 1: Install Ansible
 
 In this session we will install ansible on server ansible, and connect to linux - server1 and windows - server3
 
@@ -14,7 +14,7 @@ cd automationclass
 cd setup_class
 cd azure_class_playbooks
 
-ansible-playbook 02_azure_lesson1_start.yml
+ansible-playbook 02_azure_lab1_start.yml
 
 ```
 

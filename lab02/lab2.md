@@ -1,4 +1,4 @@
-# Lesson 2: Ansible Playbooks
+# Lab 2: Ansible Playbooks
 
 In this session we will install and use Visual Studio Code with a few plugins to start working with ansible playbooks and create two playbooks, one for linux and one for windows
 
@@ -14,7 +14,7 @@ cd automationclass
 cd setup_class
 cd azure_class_playbooks
 
-ansible-playbook 03_azure_lesson2_start.yml
+ansible-playbook 03_azure_lab2_start.yml
 
 ```
 
