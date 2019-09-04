@@ -194,34 +194,35 @@ In VSCode add the following text to the file
 
 ```
 
-![Alt text](pics/023_run_playbook.png?raw=true "Add second task to playbook")
+![Alt text](pics/024_secondtask_code.png?raw=true "Add second task to playbook")
 
 Save the file
 
 Notice that Git detects the changed file, do a commit add a comment "Second Edition" and Sync to Git
 
-![Alt text](pics/023_run_playbook.png?raw=true "Second Commit to playbook")
+![Alt text](pics/025_secondtask_commit.png?raw=true "Second Commit to playbook")
 
-Clone the git repository
+On ansible
+
+Pull the updated git repository
 
 __Type:__
 
 ```bash
-git pull https://github.com/jesperberth/ansibleclass.git
+cd ansibleclass
+git pull
 ```
 
-![Alt text](pics/022_git_clone.png?raw=true "git clone")
+![Alt text](pics/026_git_pull.png?raw=true "git pull")
 
 Run the playbook
 
 __Type:__
 
 ```bash
-cd ansibleclass
 ls
 
 ansible-playbook 01_linux.yml --ask-become-pass
-
 ```
 
-![Alt text](pics/023_run_playbook.png?raw=true "Run playbook")
+![Alt text](pics/027_run_playbook_secondtask.png?raw=true "Run playbook")
