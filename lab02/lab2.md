@@ -226,3 +226,15 @@ ansible-playbook 01_linux.yml --ask-become-pass
 ```
 
 ![Alt text](pics/027_run_playbook_secondtask.png?raw=true "Run playbook")
+
+Run the playbook again, the second task will become green as the line is already there, this is the idempotency
+
+__Type:__
+
+```bash
+ls
+
+ansible-playbook 01_linux.yml --ask-become-pass
+```
+
+![Alt text](pics/028_run_playbook_secondtask_idempodent.png?raw=true "Run playbook")
