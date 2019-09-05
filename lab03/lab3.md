@@ -126,3 +126,42 @@ ansible linuxservers -m setup -a "filter=*.ipv4"
 ```
 
 ![Alt text](pics/006_ansible_facts_filter.png?raw=true "facts")
+
+In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
+
+Name it "04_linux.yml"
+
+![Alt text](pics/007_ansible_fact_playbook.png?raw=true "playbook in VSCode")
+
+Write the following in the text pane
+
+```ansible
+---
+- hosts: all
+
+  tasks:
+  - name: Ping
+    ping:
+    when: ansible_system == "Linux"
+    ignore_errors: True
+
+  - name: Winping
+    win_ping:
+    when: ansible_system == "Win32NT"
+    ignore_errors: True
+```
+
+Save the file
+
+Notice that Git detects the changed file, do a commit add a comment "Variables" and Sync to Git
+
+On server ansible do a git pull and run the playbook
+
+```ansible
+cd ansibleclass
+
+git pull
+
+ansible-playbook 04_linux.yml
+
+```
