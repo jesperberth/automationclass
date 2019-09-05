@@ -1,22 +1,21 @@
 # Lab 3: Work with Playbooks
 
-In this session we will use Visual Studio Code and modules to work with ansible playbooks and create two playbooks, one for linux and one for windows
+Use Variables, prompts, facts and handlers in Playbooks
 
 ## Prepare
 
-## Task 1: Setup Visual Studio Code
+We need to start servers, ansible, server1 and server2
 
-Logon to ansible2.demo.local with ssh
-
-Use your "userxx" account and password
-
-We need to python modules for fortios
+In Azure Cloud Shell(Bash)
 
 ``` bash
+cd clouddrive
+cd automationclass
+cd setup_class
+cd azure_class_playbooks
 
-pip3 install fortiosapi --user
-pip3 install pip-tools --user
-pip3 install netaddr --user
-pip3 install pyfg --user
+ansible-playbook 04_azure_lab3_start.yml
 
-```
+## Task 1: Using variables in a playbook
+
+[ansible docs](https://docs.ansible.com/ansible/2.5/user_guide/playbooks_variables.html)
