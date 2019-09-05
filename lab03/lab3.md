@@ -21,6 +21,8 @@ ansible-playbook 04_azure_lab3_start.yml
 
 [ansible docs](https://docs.ansible.com/ansible/2.5/user_guide/playbooks_variables.html)
 
+[ansible tímezone](https://docs.ansible.com/ansible/latest/modules/timezone_module.html)
+
 In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
 
 Name it "02_linux.yml"
@@ -99,6 +101,28 @@ git pull
 
 ansible-playbook 03_linux.yml --ask-become-pass
 
+Type: Etc/UTC with - lower and upper case
+
 ```
 
 ![Alt text](pics/004_vars_prompt_run.png?raw=true "run playbook prompt")
+
+## Task 2: Facts
+
+Ansible facts
+
+On server ansible run ansible linuxservers -m setup
+
+```ansible
+ansible linuxservers -m setup
+```
+
+![Alt text](pics/005_ansible_facts.png?raw=true "facts")
+
+Using a filter will help a bit
+
+```ansible
+ansible linuxservers -m setup -a "filter=*.ipv4"
+```
+
+![Alt text](pics/006_ansible_facts_filter.png?raw=true "facts")
