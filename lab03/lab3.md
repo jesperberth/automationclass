@@ -15,6 +15,7 @@ cd setup_class
 cd azure_class_playbooks
 
 ansible-playbook 04_azure_lab3_start.yml
+```
 
 ## Task 1: Using variables in a playbook
 
