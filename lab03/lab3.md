@@ -23,8 +23,6 @@ ansible-playbook 04_azure_lab3_start.yml
 
 In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
 
-![Alt text](pics/015_code_newfile.png?raw=true "new file in VSCode")
-
 Name it "02_linux.yml"
 
 ![Alt text](pics/001_timezone.png?raw=true "playbook in VSCode")
@@ -37,7 +35,7 @@ Write the following in the text pane
   become: yes
 
   vars:
-    zone: "Europe/Copenhagen"
+    timezone: "Europe/Copenhagen"
 
   tasks:
   - name: Set timezone
@@ -61,3 +59,46 @@ ansible-playbook 02_linux.yml --ask-become-pass
 ```
 
 ![Alt text](pics/002_run_timezone.png?raw=true "run playbook")
+
+Now lets make a variable with a prompt
+
+In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
+
+Name it "03_linux.yml"
+
+![Alt text](pics/003_vars_prompt.png?raw=true "playbook in VSCode")
+
+Write the following in the text pane
+
+```ansible
+---
+- hosts: linuxservers
+  become: yes
+
+  vars_prompt:
+    - name: timezone
+      prompt: "Type the Timezone"
+      private: no
+
+  tasks:
+  - name: Set timezone
+    timezone:
+      name: {{ timezone }}
+```
+
+Save the file
+
+Notice that Git detects the changed file, do a commit add a comment "Prompt" and Sync to Git
+
+On server ansible do a git pull and run the playbook
+
+```ansible
+cd ansibleclass
+
+git pull
+
+ansible-playbook 03_linux.yml --ask-become-pass
+
+```
+
+![Alt text](pics/004_vars_prompt_run.png?raw=true "run playbook prompt")
