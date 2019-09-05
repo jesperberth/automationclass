@@ -4,7 +4,7 @@ In this session we will install and use Visual Studio Code with a few plugins to
 
 ## Prepare
 
-We need to start servers, ansible, server1 and server3
+We need to start servers, ansible, server1 and server2
 
 In Azure Cloud Shell(Bash)
 
@@ -229,6 +229,8 @@ ansible-playbook 01_linux.yml --ask-become-pass
 
 Run the playbook again, the second task will become green as the line is already there, this is the idempotency
 
+The "Create File" task will be changed every time as we use the touch command on the file
+
 __Type:__
 
 ```bash
@@ -238,3 +240,46 @@ ansible-playbook 01_linux.yml --ask-become-pass
 ```
 
 ![Alt text](pics/028_run_playbook_secondtask_idempodent.png?raw=true "Run playbook")
+
+## Task 4: Add server two and run the playbook
+
+We will add server 2 to the inventory
+
+__Type:__
+
+```bash
+sudo vi /etc/ansible/hosts
+
+```
+
+![Alt text](pics/029_edit_hosts.png?raw=true "Edit hosts")
+
+In vi __type:__
+
+```bash
+i (for input)
+
+[linuxservers]
+server1
+server2
+```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+__Type:__
+
+```bash
+cd ansibleclass
+
+ansible-playbook 01_linux.yml --ask-become-pass
+```
+
+![Alt text](pics/030_2_server_play.png?raw=true "Run playbook")
+
+If server2 fails, did you copy your ssh key, "ssh-copy-id server" and run the playbook again

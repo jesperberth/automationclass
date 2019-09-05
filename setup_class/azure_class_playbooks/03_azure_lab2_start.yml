@@ -28,9 +28,9 @@
       state: present
       started: true
   
-  - name: Start VM server3
+  - name: Start VM server2
     azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
-      name: "server3"
+      name: "server2"
       state: present
       started: true
