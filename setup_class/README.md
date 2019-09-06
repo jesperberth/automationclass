@@ -31,6 +31,10 @@ Management network
 
 Vlan 124
 
+VM Network
+
+Vlan 124
+
 ip: 10.172.10.10/24
 Gateway: 10.172.10.1
 DNS: 10.172.10.2
@@ -48,6 +52,7 @@ ip: 10.172.10.11/24
 Gateway: 10.172.10.1
 DNS: 10.172.10.2
 name: vcenter.ansible.local
+Size: Tiny
 
 ## storage.ansible.local
 
@@ -109,7 +114,7 @@ cd automationclass/setup_class/class_room
 
 ansible-playbook 01_class_setup.yml
 
-TEMP: nmcli connection modify ens33 ipv4.dns "127.0.0.1"
+TEMP: nmcli connection modify ens192 ipv4.dns "127.0.0.1"
 
 On esxi.ansible.local
 
