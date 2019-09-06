@@ -84,12 +84,7 @@
        state: enabled
        immediate: yes
     
-    - name: Restart firewalld
-      systemd:
-       name: firewalld
-       enabled: yes
-       state: restarted
-  # Create DHCP server
+    # Create DHCP server
 
     - name: Install dhcp
       yum:
@@ -117,7 +112,7 @@
        name: firewalld
        enabled: yes
        state: restarted
-       
+
     - name: Enable dhcpd
       systemd:
        name: dhcpd
