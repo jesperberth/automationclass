@@ -15,6 +15,59 @@ ip: 10.172.10.2/24
 Gateway: 10.172.10.1
 DNS 1.1.1.1
 
+Vlan 124
+
+## esxi.ansible.local
+
+Role: Vmware ESXi host
+
+Intel NUC
+32GB Ram, 500Gb Nvme
+Vmware ESXi 6.7U3
+
+Install on local disk
+
+Management network
+
+Vlan 124
+
+ip: 10.172.10.10/24
+Gateway: 10.172.10.1
+DNS: 10.172.10.2
+name: esxi.ansible.local
+
+## vcenter.ansible.local
+
+Role: Vmware vcenter
+
+Vmware vcenter appliance 6.7U3
+
+Vlan 124
+
+ip: 10.172.10.11/24
+Gateway: 10.172.10.1
+DNS: 10.172.10.2
+name: vcenter.ansible.local
+
+## storage.ansible.local
+
+Role: NFS storage server for esxi host
+
+Fedora 30
+
+Virtual Machine running on ESXi
+2 CPU
+4Gb Mem
+Disk 1 16Gb
+Disk 2 100Gb
+
+Vlan 124
+
+ip: 10.172.10.12/24
+Gateway: 10.172.10.1
+DNS: 10.172.10.2
+name: storage.ansible.local
+
 ## VMware Class Setup
 
 ## Hardware
@@ -54,8 +107,10 @@ git clone https://github.com/jesperberth/automationclass.git
 
 cd automationclass/setup_class/class_room
 
-ansible-playbook 01_vmware_class_setup.yml --ask-become-pass
-ansible-playbook 02_vmware_class_setup.yml
-ansible-playbook 03_vmware_class_setup.yml
-ansible-playbook 04_vmware_class_setup.yml --ask-become-pass
+ansible-playbook 01_class_setup.yml
+
+TEMP: nmcli connection modify ens33 ipv4.dns "127.0.0.1"
+
+On esxi.ansible.local
+
 ```

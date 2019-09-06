@@ -11,8 +11,8 @@ $TTL 604800	; 1 week
 $ORIGIN {{ domain }}.
 $TTL 300	; 5 minutes
 $TTL 604800	; 1 week
-ns1      A {{ ansible_facts.ens33.ipv4.address }}
-{{ ansible_hostname }}	A {{ ansible_facts.ens33.ipv4.address }}
+ns1      A {{ ansible_default_ipv4.address }}
+{{ ansible_hostname }}	A {{ ansible_default_ipv4.address }}
 ansibleserver	A	10.172.10.9
 esxi	A	10.172.10.10
 vcenter	A	10.172.10.11
