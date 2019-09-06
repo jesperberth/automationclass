@@ -1,4 +1,4 @@
-# Class Setup 
+# Class Setup
 
 ## ansiblehost.ansible.local
 
@@ -15,16 +15,7 @@ ip: 10.172.10.2/24
 Gateway: 10.172.10.1
 DNS 1.1.1.1
 
-```bash
-pip3 install ansible --user
-pip3 install pyvmomi --user
-pip3 install pyforti --user
-
-```
-
-
-
-# VMware Class Setup
+## VMware Class Setup
 
 ## Hardware
 
