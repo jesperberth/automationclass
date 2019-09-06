@@ -24,8 +24,6 @@ Name: esxi.ansible.local
 IP: 10.172.10.10/24
 ESXi 6.7U3
 
-
-
 Ansible
 Name ansibleserver.ansible.local
 IP: 10.172.10.11/24
@@ -54,7 +52,7 @@ pip3 install pyfortiapi --user
 
 git clone https://github.com/jesperberth/automationclass.git
 
-cd automationclass/setup_class
+cd automationclass/setup_class/class_room
 
 ansible-playbook 01_vmware_class_setup.yml --ask-become-pass
 ansible-playbook 02_vmware_class_setup.yml
