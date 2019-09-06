@@ -8,6 +8,8 @@
     netmask: 255.255.255.0
     broadcast: 10.172.10.255
     gateway: 10.172.10.1
+    rangelow: 10.172.10.100
+    rangehigh: 10.172.10.200
     
   tasks:
     # Configure firewall
@@ -100,12 +102,27 @@
        permanent: true
        state: enabled
        immediate: yes
-    
+
+    - name: Copy dhcpd conf local file
+      template:
+       src: templates/dhcpd.conf.j2
+       dest: /etc/dhcp/dhcpd.conf
+       owner: root
+       group: root
+       mode: 0644
+      notify: restart dhcpd
+
     - name: Restart firewalld
       systemd:
        name: firewalld
        enabled: yes
        state: restarted
+       
+    - name: Enable dhcpd
+      systemd:
+       name: dhcpd
+       enabled: yes
+       state: started
 
   # Create Ansible Hosts file
     - name: Create Ansible dir
@@ -135,4 +152,9 @@
     - name: restart named
       service: 
        name: named
+       state: restarted
+
+    - name: restart dhcpd
+      service: 
+       name: dhcpd
        state: restarted
