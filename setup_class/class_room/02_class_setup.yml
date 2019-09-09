@@ -60,7 +60,9 @@
       groups: storagetmp
 
    - name: Copy SSH ID
-     shell: ssh-copy-id "{{ user }}@{{ storagevm_ip_fact }}"
+     shell: |
+      ssh-keyscan -H {{storagevm_ip_fact }} >> ~/.ssh/known_hosts
+      ssh-copy-id "{{ user }}@{{ storagevm_ip_fact }}"
 
 -  hosts: storagetmp
    become: yes
