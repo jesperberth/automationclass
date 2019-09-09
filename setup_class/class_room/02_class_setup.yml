@@ -51,8 +51,8 @@
       groups: storagetmp
 
 -  hosts: storagetmp
-   gather_facts: yes
    tasks:
-   file:
-     path: /home/jesbe/testfile.txt
-     state: touch
+   - name: Test file
+     file:
+       path: /home/jesbe/testfile.txt
+       state: touch
