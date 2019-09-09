@@ -3,11 +3,20 @@
    connection: local
    gather_facts: yes
    vars:
+    user: jesbe
     vmwhostname: vcenter.ansible.local
     vmwusername: administrator@vsphere.local
     vmwpassword: Only4Demo!
     esxihostname: esxi.ansible.local
    tasks:
+#  Generate SSH Key for User
+   - name: Generate SSH keys
+     user:
+       name: "{{ user }}"
+       generate_ssh_key: yes
+       ssh_key_bits: 2048
+       ssh_key_file: .ssh/id_rsa
+
    - name: Change NFS.MaxVolumes setting for an ESXi host
      vmware_host_config_manager:
        hostname: "{{ vmwhostname }}"
@@ -49,6 +58,9 @@
      add_host:
       name: "{{ storagevm_ip_fact }}"
       groups: storagetmp
+
+   - name: Copy SSH ID
+     shell: ssh-copy-id "{{ user }}@{{ storagevm_ip_fact }}"
 
 -  hosts: storagetmp
    tasks:
