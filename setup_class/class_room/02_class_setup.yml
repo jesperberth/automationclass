@@ -17,7 +17,7 @@
        name: storage.ansible.local
        template: _TEMP_fedora30
        datacenter: Datacenter
-       folder: /Datacenter/Lab1
+       folder: /Admin
        state: poweredon
        wait_for_ip_address: yes
 
