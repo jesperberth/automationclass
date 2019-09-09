@@ -29,14 +29,14 @@ Install on local disk
 
 Management network
 
-Vlan 124
+Vlan 24
 
 VM Network
 
 Vlan 124
 
-ip: 10.172.10.10/24
-Gateway: 10.172.10.1
+ip: 10.172.1.10/24
+Gateway: 10.172.1.1
 DNS: 10.172.10.2
 name: esxi.ansible.local
 
@@ -63,8 +63,8 @@ Fedora 30
 Virtual Machine running on ESXi
 2 CPU
 4Gb Mem
-Disk 1 16Gb
-Disk 2 100Gb
+Disk 1 16Gb - Thin
+Disk 2 120Gb - Thin
 
 Vlan 124
 
@@ -72,25 +72,6 @@ ip: 10.172.10.12/24
 Gateway: 10.172.10.1
 DNS: 10.172.10.2
 name: storage.ansible.local
-
-## VMware Class Setup
-
-## Hardware
-
-VMware Host
-Name: esxi.ansible.local
-IP: 10.172.10.10/24
-ESXi 6.7U3
-
-Ansible
-Name ansibleserver.ansible.local
-IP: 10.172.10.11/24
-Fedora 30
-
-Storage
-Name: storage.ansible.local
-IP: 10.172.10.12
-Fedora 30
 
 ### Setup
 
@@ -118,4 +99,21 @@ TEMP: nmcli connection modify ens192 ipv4.dns "127.0.0.1"
 
 On esxi.ansible.local
 
+Set VM Network to vlan 124
 ```
+
+Manual Configure vcenter
+
+Make folder iso
+Upload fedora_30_x86_64.iso
+
+Upload or Create Fedora 30 Template
+
+Create VM Folder
+
+\Templates
+\Admin
+
+Place vcenter.ansible.local in folder \admin
+Register the _TEMP_fedora30 and place it in folder \Templates
+

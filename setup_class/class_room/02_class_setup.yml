@@ -1,0 +1,34 @@
+---
+-  hosts: localhost
+   connection: local
+   gather_facts: yes
+   vars:
+    vmwhostname: vcenter.ansible.local
+    vmwusername: administrator@vsphere.local
+    vmwpassword: Only4Demo!
+    esxi_hostname: esxi.arrowdemo.local
+   tasks:
+   - name: Clone fedora 30 to storage.ansible.local
+     vmware_guest:
+       hostname: {{ vmwhostname }}
+       username: {{ vmwusername }}
+       password: {{ vmwpassword }}
+       validate_certs: False
+       name: storage.ansible.local
+       template: _TEMP_fedora30
+       datacenter: Datacenter
+       folder: /Datacenter/Lab1
+       state: poweredon
+       wait_for_ip_address: yes
+
+   - name: Change NFS.MaxVolumes setting for an ESXi host
+     vmware_host_config_manager:
+       hostname: {{ vmwhostname }}
+       username: {{ vmwusername }}
+       password: {{ vmwpassword }}
+       validate_certs: False
+       esxi_hostname: "{{ esxi_hostname }}"
+       options:
+         'NFS.MaxVolumes': '16'
+         'NFS41.MaxVolumes': '16'
+       delegate_to: localhost

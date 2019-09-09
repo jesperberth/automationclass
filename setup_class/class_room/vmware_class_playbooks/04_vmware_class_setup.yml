@@ -50,6 +50,8 @@
           - { 'name': 'user8' }
           - { 'name': 'user9' }
           - { 'name': 'user10' }     
+          - { 'name': 'user11' }
+          - { 'name': 'user12' }  
     
     - name: create directory for lv.data mountpoint
       file:
@@ -73,7 +75,9 @@
           - { 'name': 'user7' }
           - { 'name': 'user8' }
           - { 'name': 'user9' }
-          - { 'name': 'user10' }    
+          - { 'name': 'user10' }
+          - { 'name': 'user11' }
+          - { 'name': 'user12' }      
     
     - name: mount disk
       shell: mount -a
@@ -100,21 +104,25 @@
           - {'name': 'user8'}
           - {'name': 'user9'}
           - {'name': 'user10'}
+          - {'name': 'user11'}
+          - {'name': 'user12'}  
 
     - name: Create exports
       blockinfile:
        path: /etc/exports
        block: |
-          /storage/user1 192.168.130.0/24(rw,no_root_squash)
-          /storage/user2 192.168.130.0/24(rw,no_root_squash)
-          /storage/user3 192.168.130.0/24(rw,no_root_squash)
-          /storage/user4 192.168.130.0/24(rw,no_root_squash)
-          /storage/user5 192.168.130.0/24(rw,no_root_squash)
-          /storage/user6 192.168.130.0/24(rw,no_root_squash)
-          /storage/user7 192.168.130.0/24(rw,no_root_squash)
-          /storage/user8 192.168.130.0/24(rw,no_root_squash)
-          /storage/user9 192.168.130.0/24(rw,no_root_squash)
-          /storage/user10 192.168.130.0/24(rw,no_root_squash)
+          /storage/user1 10.172.1.0/24(rw,no_root_squash)
+          /storage/user2 10.172.1.0/24(rw,no_root_squash)
+          /storage/user3 10.172.1.0/24(rw,no_root_squash)
+          /storage/user4 10.172.1.0/24(rw,no_root_squash)
+          /storage/user5 10.172.1.0/24(rw,no_root_squash)
+          /storage/user6 10.172.1.0/24(rw,no_root_squash)
+          /storage/user7 10.172.1.0/24(rw,no_root_squash)
+          /storage/user8 10.172.1.0/24(rw,no_root_squash)
+          /storage/user9 10.172.1.0/24(rw,no_root_squash)
+          /storage/user10 10.172.1.0/24(rw,no_root_squash)
+          /storage/user11 10.172.1.0/24(rw,no_root_squash)
+          /storage/user12 10.172.1.0/24(rw,no_root_squash)
 
     - name: Start rpcbind
       systemd:
