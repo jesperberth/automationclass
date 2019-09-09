@@ -77,4 +77,4 @@
    - name: Restart NetworkManager
      systemd:
       name: NetworkManager
-      state: reloaded
+      state: restarted
