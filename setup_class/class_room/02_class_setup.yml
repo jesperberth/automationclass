@@ -10,9 +10,9 @@
    tasks:
    - name: Clone fedora 30 to storage.ansible.local
      vmware_guest:
-       hostname: {{ vmwhostname }}
-       username: {{ vmwusername }}
-       password: {{ vmwpassword }}
+       hostname: "{{ vmwhostname }}"
+       username: "{{ vmwusername }}"
+       password: "{{ vmwpassword }}"
        validate_certs: False
        name: storage.ansible.local
        template: _TEMP_fedora30
@@ -23,9 +23,9 @@
 
    - name: Change NFS.MaxVolumes setting for an ESXi host
      vmware_host_config_manager:
-       hostname: {{ vmwhostname }}
-       username: {{ vmwusername }}
-       password: {{ vmwpassword }}
+       hostname: "{{ vmwhostname }}"
+       username: "{{ vmwusername }}"
+       password: "{{ vmwpassword }}"
        validate_certs: False
        esxi_hostname: "{{ esxi_hostname }}"
        options:
