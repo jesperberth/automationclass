@@ -8,6 +8,17 @@
     vmwpassword: Only4Demo!
     esxihostname: esxi.ansible.local
    tasks:
+   - name: Change NFS.MaxVolumes setting for an ESXi host
+     vmware_host_config_manager:
+       hostname: "{{ vmwhostname }}"
+       username: "{{ vmwusername }}"
+       password: "{{ vmwpassword }}"
+       validate_certs: False
+       esxi_hostname: "{{ esxihostname }}"
+       options:
+         'NFS.MaxVolumes': '16'
+         'NFS41.MaxVolumes': '16'
+
    - name: Clone fedora 30 to storage.ansible.local
      vmware_guest:
        hostname: "{{ vmwhostname }}"
@@ -19,15 +30,19 @@
        datacenter: Datacenter
        folder: /Admin
        state: poweredon
+       networks:
+       - name: VM Network
+         ip: 10.172.10.12
+         netmask: 255.255.255.0
+         gateway: 10.172.10.1
+         type: static
+         dns_servers:
+          - 10.172.10.2
        wait_for_ip_address: yes
+     register: storagevm
 
-   - name: Change NFS.MaxVolumes setting for an ESXi host
-     vmware_host_config_manager:
-       hostname: "{{ vmwhostname }}"
-       username: "{{ vmwusername }}"
-       password: "{{ vmwpassword }}"
-       validate_certs: False
-       esxi_hostname: "{{ esxihostname }}"
-       options:
-         'NFS.MaxVolumes': '16'
-         'NFS41.MaxVolumes': '16'
+   - name: IP address info
+     debug:
+       msg: "{{ storagevm.instance.ipv4 }}"
+
+   

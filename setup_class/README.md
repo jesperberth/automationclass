@@ -116,3 +116,13 @@ Create VM Folder
 
 Place vcenter.ansible.local in folder \admin
 Register the _TEMP_fedora30 and place it in folder \Templates
+
+On ansiblehost.ansible.local log on as user
+
+Now deploy the storage server, and make esxi configurations
+
+```bash
+
+ansible-playbook 02_class_setup.yml
+
+```
