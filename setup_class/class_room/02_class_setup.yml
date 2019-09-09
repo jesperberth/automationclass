@@ -66,7 +66,7 @@
    become:
    tasks:
    - name: install needed network manager libs
-     package:
+     yum:
        name:
          - NetworkManager-glib
          - nm-connection-editor
