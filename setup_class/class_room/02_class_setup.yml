@@ -64,7 +64,11 @@
 
 -  hosts: storagetmp
    tasks:
-   - name: Test file
-     file:
-       path: /home/jesbe/testfile.txt
-       state: touch
+   - name: install needed network manager libs
+     package:
+       name:
+         - NetworkManager-glib
+         - nm-connection-editor
+         - libsemanage-python
+         - policycoreutils-python
+       state: present
