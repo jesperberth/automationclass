@@ -41,7 +41,11 @@
      set_fact:
       storagevm_ip_fact: "{{ storagevm.instance.ipv4 }}"
 
+   - name: IP address info
+     debug:
+       msg: "{{ storagevm_ip_fact }}"   
+
    - name: add storagevm to ansible host file
      add_host:
       name: "{{ storagevm_ip_fact }}"
-      groups: storage
+      groups: storagetmp
