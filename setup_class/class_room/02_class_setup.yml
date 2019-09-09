@@ -23,7 +23,7 @@
 
    - name: Change NFS.MaxVolumes setting for an ESXi host
      vmware_host_config_manager:
-       hostname: "{{ vmwihostname }}"
+       hostname: "{{ vmwhostname }}"
        username: "{{ vmwusername }}"
        password: "{{ vmwpassword }}"
        validate_certs: False
