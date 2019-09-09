@@ -30,14 +30,6 @@
        datacenter: Datacenter
        folder: /Admin
        state: poweredon
-       networks:
-       - name: VM Network
-         ip: 10.172.10.12
-         netmask: 255.255.255.0
-         gateway: 10.172.10.1
-         type: static
-         dns_servers:
-          - 10.172.10.2
        wait_for_ip_address: yes
      register: storagevm
 
@@ -45,4 +37,11 @@
      debug:
        msg: "{{ storagevm.instance.ipv4 }}"
 
-   
+   - name: Set Fact storagevm_ip_fact
+     set_fact:
+      storagevm_ip_fact: "{{ storagevm.instance.ipv4 }}"
+
+   - name: add storagevm to ansible host file
+     add_host:
+      name: "{{ storagevm_ip_fact }}"
+      groups: storage

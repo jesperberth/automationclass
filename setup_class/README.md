@@ -89,6 +89,8 @@ pip3 install ansible --user
 pip3 install pyvmomi --user
 pip3 install pyfortiapi --user
 
+ssh-keygen
+
 git clone https://github.com/jesperberth/automationclass.git
 
 cd automationclass/setup_class/class_room
