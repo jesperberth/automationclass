@@ -68,10 +68,7 @@
      ansible_python_interpreter: /usr/bin/python3
    tasks:
    - name: configure network
-     nmcli:
-      conn_name: ens192
-      ifname: ens192
-      type: ethernet
-      ip4: 10.172.10.102/24
-      gw4: 10.172.10.1
-      state: present
+     shell: |
+      nmcli connection modify ens192 ipv4.addresses "10.172.10.12/24"
+      nmcli connection modify ens192 ipv4.gateway "10.172.10.1"
+      nmcli connection modify ens192 ipv4.dns "10.172.10.2"
