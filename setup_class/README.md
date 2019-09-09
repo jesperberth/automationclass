@@ -116,4 +116,3 @@ Create VM Folder
 
 Place vcenter.ansible.local in folder \admin
 Register the _TEMP_fedora30 and place it in folder \Templates
-
