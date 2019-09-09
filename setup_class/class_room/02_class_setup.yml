@@ -75,4 +75,4 @@
       nmcli connection modify ens192 ipv4.gateway "10.172.10.1"
       nmcli connection modify ens192 ipv4.dns "10.172.10.2"
       reboot
-     when: 'storagevm_ip_fact != 10.172.10.12'
+     when: '"storagevm_ip_fact" != 10.172.10.12'
