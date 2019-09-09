@@ -49,3 +49,10 @@
      add_host:
       name: "{{ storagevm_ip_fact }}"
       groups: storagetmp
+
+-  hosts: storagetmp
+   gather_facts: yes
+   tasks:
+   file:
+     path: /home/jesbe/testfile.txt
+     state: touch
