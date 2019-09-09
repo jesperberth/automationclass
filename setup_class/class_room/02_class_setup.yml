@@ -1,7 +1,6 @@
 ---
 -  hosts: localhost
    connection: local
-   become: yes
    gather_facts: yes
    vars:
     vmwhostname: vcenter.ansible.local
