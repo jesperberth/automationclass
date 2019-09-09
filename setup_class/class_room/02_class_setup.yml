@@ -61,13 +61,12 @@
 
    - name: Copy SSH ID
      shell: |
-      ssh-keyscan -H {{storagevm_ip_fact }} >> ~/.ssh/known_hosts
       ssh-copy-id "{{ user }}@{{ storagevm_ip_fact }}"
 
 -  hosts: storagetmp
    become: yes
    vars:
-     ansible_python_interpreter: /usr/bin/python3
+     #ansible_python_interpreter: /usr/bin/python3
    tasks:
    - name: configure network
      shell: |
