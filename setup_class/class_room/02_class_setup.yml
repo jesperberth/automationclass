@@ -6,7 +6,7 @@
     vmwhostname: vcenter.ansible.local
     vmwusername: administrator@vsphere.local
     vmwpassword: Only4Demo!
-    esxi_hostname: esxi.arrowdemo.local
+    esxihostname: esxi.ansible.local
    tasks:
    - name: Clone fedora 30 to storage.ansible.local
      vmware_guest:
@@ -23,11 +23,11 @@
 
    - name: Change NFS.MaxVolumes setting for an ESXi host
      vmware_host_config_manager:
-       hostname: "{{ vmwhostname }}"
+       hostname: "{{ vmwihostname }}"
        username: "{{ vmwusername }}"
        password: "{{ vmwpassword }}"
        validate_certs: False
-       esxi_hostname: "{{ esxi_hostname }}"
+       esxi_hostname: "{{ esxihostname }}"
        options:
          'NFS.MaxVolumes': '16'
          'NFS41.MaxVolumes': '16'
