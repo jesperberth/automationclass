@@ -31,4 +31,3 @@
        options:
          'NFS.MaxVolumes': '16'
          'NFS41.MaxVolumes': '16'
-       delegate_to: localhost
