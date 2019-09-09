@@ -63,7 +63,7 @@
      shell: ssh-copy-id "{{ user }}@{{ storagevm_ip_fact }}"
 
 -  hosts: storagetmp
-   become:
+   become: yes
    tasks:
    - name: install needed network manager libs
      yum:
