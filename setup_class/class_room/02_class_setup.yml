@@ -91,5 +91,9 @@
        path: ~/.ssh/known_hosts
        name: "{{ storagevm.instance.ipv4 }}"
        state: absent
-     when: storagevm_ip_fact != "10.172.10.12"    
-    
+     when: storagevm_ip_fact != "10.172.10.12"
+
+   - name: pause for 2 minutes
+     pause:
+       minute: 2    
+     when: storagevm_ip_fact != "10.172.10.12"
