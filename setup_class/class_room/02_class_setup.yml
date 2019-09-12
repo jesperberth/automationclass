@@ -147,6 +147,8 @@
           - { 'name': 'user8' }
           - { 'name': 'user9' }
           - { 'name': 'user10' }
+          - { 'name': 'user11' }
+          - { 'name': 'user12' }
 
     - name: create filesystem xfs on lv.data
       filesystem:
