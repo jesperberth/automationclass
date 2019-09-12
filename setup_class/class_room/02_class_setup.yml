@@ -39,7 +39,13 @@
        datacenter: Datacenter
        folder: /Admin
        state: poweredon
+       hardware:
+         memory_mb: 4096
+         num_cpus: 2
        disk:
+       - size_gb: 16
+         type: thin
+         datastore: datastore1
        - size_gb: 120
          type: thin
          datastore: datastore1
