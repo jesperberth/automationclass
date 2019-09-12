@@ -107,15 +107,11 @@
      pause:
        minutes: 2    
      when: storagevm_ip_fact != "10.172.10.12"
-    
-  # - name: Copy SSH ID
-  #   shell: |
-  #    ssh-copy-id "{{ user }}@storage.ansible.local"
-
+ 
 - hosts: storage
   become: yes
   vars:
-
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
 # Setup /dev/sdb
     - name: create partion /dev/sdb
