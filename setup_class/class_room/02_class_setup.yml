@@ -68,6 +68,10 @@
    vars:
      #ansible_python_interpreter: /usr/bin/python3
    tasks:
+   - name: IP address info
+     debug:
+       msg: "{{ storagevm_ip_fact }}"  
+   
    - name: configure network
      shell: |
       nmcli connection modify ens192 -ipv4.addresses "{{ ansible_default_ipv4.address }}/24"
