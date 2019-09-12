@@ -54,10 +54,11 @@
      debug:
        msg: "{{ storagevm_ip_fact }}"   
 
-   - name: add storagevm to ansible host file
+   - name: add storagevm to ansible in memory host file
      add_host:
       name: "{{ storagevm_ip_fact }}"
       groups: storagetmp
+     when: "'storagevm_ip_fact' != '10.172.10.12'"
 
    - name: Copy SSH ID
      shell: |
