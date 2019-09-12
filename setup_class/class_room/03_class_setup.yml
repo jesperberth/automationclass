@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  vars:
+   host: "10.172.10.1"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure admin users.
+    fortios_system_admin:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_admin:
+        state: "present"
+        name: "user1"
+        password: "{{ password }}"
