@@ -71,7 +71,7 @@
    - name: configure network
      shell: |
       nmcli connection modify ens192 ipv4.method manual
-      nmcli connection modify ens192 -ipv4.addresses "10.172.10.147/24"
+      nmcli connection modify ens192 -ipv4.addresses "{{ ansible_default_ipv4.address }}/24"
       nmcli connection modify ens192 ipv4.addresses "10.172.10.12/24"
       nmcli connection modify ens192 ipv4.gateway "10.172.10.1"
       nmcli connection modify ens192 ipv4.dns "10.172.10.2"
