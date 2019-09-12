@@ -39,6 +39,10 @@
        datacenter: Datacenter
        folder: /Admin
        state: poweredon
+       disk:
+       - size_gb: 120
+         type: thin
+         datastore: datastore1
        wait_for_ip_address: yes
      register: storagevm
 
