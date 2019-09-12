@@ -175,7 +175,7 @@
 
     - name: create /storage/userxx directory for lv.data mountpoint
       file:
-       path: /storage{{ item.name }}
+       path: /storage/{{ item.name }}
        state: directory
       loop:
           - { 'name': 'user1' }
