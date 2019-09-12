@@ -75,4 +75,15 @@
       nmcli connection modify ens192 ipv4.gateway "10.172.10.1"
       nmcli connection modify ens192 ipv4.dns "10.172.10.2"
       nmcli connection down ens192; nmcli connection up ens192
+      shutdown -r +1
      when: "'storagevm_ip_fact' != '10.172.10.12'"
+
+-  hosts: localhost
+   vars:
+     #ansible_python_interpreter: /usr/bin/python3
+   tasks:
+   - name: remove ssh knownhost
+     known_hosts:
+       path: .ssh/ssh_known_hosts
+       name: "{{ storagevm.instance.ipv4 }}"
+       state: absent
