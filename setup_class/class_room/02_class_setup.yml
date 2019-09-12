@@ -95,5 +95,5 @@
 
    - name: pause for 2 minutes
      pause:
-       minute: 2    
+       minutes: 2    
      when: storagevm_ip_fact != "10.172.10.12"
