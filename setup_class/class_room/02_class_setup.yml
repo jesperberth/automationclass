@@ -169,9 +169,9 @@
        path: /storage
        state: directory
 
-    - name: create /storage/userxx directory for lv.data mountpoint
+    - name: Create directorys for export
       file:
-       path: /storage/{{ item.name }}
+       path: "/storage/{{ item.name }}"
        state: directory
       loop:
           - { 'name': 'user1' }
@@ -218,24 +218,6 @@
        name: nfs-utils
        state: present
     
-    - name: Create directorys for export
-      file:
-       path: "/storage/{{ item.name }}"
-       state: directory
-      loop:
-          - {'name': 'user1'}
-          - {'name': 'user2'}
-          - {'name': 'user3'}
-          - {'name': 'user4'}
-          - {'name': 'user5'}
-          - {'name': 'user6'}
-          - {'name': 'user7'}
-          - {'name': 'user8'}
-          - {'name': 'user9'}
-          - {'name': 'user10'}
-          - {'name': 'user11'}
-          - {'name': 'user12'}  
-
     - name: Create exports
       blockinfile:
        path: /etc/exports
