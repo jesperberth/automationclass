@@ -58,7 +58,7 @@
      add_host:
       name: "{{ storagevm_ip_fact }}"
       groups: storagetmp
-     when: storagevm_ip_fact != 10.172.10.12
+     when: storagevm_ip_fact != "10.172.10.12"
 
    - name: Copy SSH ID
      shell: |
