@@ -1,13 +1,13 @@
 ---
-- hosts: localhost
-  connection: local
-  gather_facts: yes
-  vars:
-   user: jesbe
-   vmwhostname: vcenter.ansible.local
-   vmwusername: administrator@vsphere.local
-   vmwpassword: Only4Demo!
-   esxihostname: esxi.ansible.local
+-  hosts: localhost
+   connection: local
+   gather_facts: yes
+   vars:
+    user: jesbe
+    vmwhostname: vcenter.ansible.local
+    vmwusername: administrator@vsphere.local
+    vmwpassword: Only4Demo!
+    esxihostname: esxi.ansible.local
    tasks:
 #  Generate SSH Key for User
    - name: Generate SSH keys
