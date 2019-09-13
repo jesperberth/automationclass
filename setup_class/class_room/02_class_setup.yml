@@ -116,6 +116,11 @@
      when: storagevm_ip_fact != "10.172.10.12"
 
 # Prepare ansible for ansibleserver.ansible.local
+-  hosts: localhost
+   connection: local
+   gather_facts: yes
+   vars:
+   tasks:
    - name: IP address info ansibleserver.ansible.local
      debug:
        msg: "{{ ansiblevm.instance.ipv4 }}"
@@ -172,7 +177,7 @@
        path: ~/.ssh/known_hosts
        name: "{{ ansiblevm.instance.ipv4 }}"
        state: absent
-     when: ansiblevm_ip_fact != "10.172.10.9"
+     when: storagevm_ip_fact != "10.172.10.9"
 
    - name: pause for 2 minutes
      pause:
