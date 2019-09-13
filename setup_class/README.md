@@ -2,7 +2,7 @@
 
 ## ansiblehost.ansible.local
 
-Role: DNS, ansible for setting up classroom, Firewall, Vmware environment
+Role: DNS, DHCP, ansible for setting up classroom, Firewall, Vmware environment
 
 Local VM, or laptop
 
@@ -111,9 +111,9 @@ cd automationclass/setup_class/class_room
 ansible-playbook 01_class_setup.yml
 
 TEMP: nmcli connection modify ens192 ipv4.dns "127.0.0.1" & reboot
+```
 
 Install esxi.ansible.local
-
 
 On esxi.ansible.local
 
