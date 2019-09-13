@@ -122,7 +122,7 @@
 
    - name: Set Fact ansiblevm_ip_fact
      set_fact:
-      storagevm_ip_fact: "{{ ansiblevm.instance.ipv4 }}"
+      ansiblevm_ip_fact: "{{ ansiblevm.instance.ipv4 }}"
 
    - name: IP address info
      debug:
@@ -182,7 +182,7 @@
    - name: pause for 2 minutes
      pause:
        minutes: 2    
-     when: ansiblevm_ip_fact != "10.172.10.12"
+     when: ansiblevm_ip_fact != "10.172.10.9"
  
 - hosts: storage
   become: yes
