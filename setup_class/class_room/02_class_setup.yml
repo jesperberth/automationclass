@@ -120,6 +120,7 @@
    connection: local
    gather_facts: yes
    vars:
+     user: "{{ hostvars['localhost']['user'] }}"
    tasks:
    - name: IP address info ansibleserver.ansible.local
      debug:
