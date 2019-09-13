@@ -3,7 +3,6 @@
    connection: local
    gather_facts: yes
    vars:
-    user: jesbe
     vmwhostname: vcenter.ansible.local
     vmwusername: administrator@vsphere.local
     vmwpassword: Only4Demo!
@@ -12,7 +11,7 @@
 #  Generate SSH Key for User
    - name: Generate SSH keys
      user:
-       name: "{{ user }}"
+       name: "{{ ansible_user_id }}"
        generate_ssh_key: yes
        ssh_key_bits: 2048
        ssh_key_file: .ssh/id_rsa
@@ -94,7 +93,7 @@
 
    - name: Copy SSH ID
      shell: |
-      ssh-copy-id "{{ user }}@{{ storagevm_ip_fact }}"
+      ssh-copy-id "{{ ansible_user_id }}@{{ storagevm_ip_fact }}"
 
 -  hosts: storagetmp
    become: yes
