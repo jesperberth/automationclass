@@ -120,7 +120,6 @@
    connection: local
    gather_facts: yes
    vars:
-     user: "{{ hostvars['localhost']['user'] }}"
    tasks:
    - name: IP address info ansibleserver.ansible.local
      debug:
@@ -142,7 +141,7 @@
 
    - name: Copy SSH ID
      shell: |
-      ssh-copy-id "{{ user }}@{{ ansiblevm_ip_fact }}"
+      ssh-copy-id "{{ ansible_user_id }}@{{ ansiblevm_ip_fact }}"
 
 -  hosts: ansibletmp
    become: yes
