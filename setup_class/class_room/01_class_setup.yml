@@ -135,11 +135,13 @@
         path: /etc/ansible/hosts
         block: |
           [storage]
-          10.172.10.12
+          storage.ansible.local
           [esxi]
-          10.172.1.10
+          esxi.ansible.local
           [vcenter]
-          10.172.10.11
+          vcenter.ansible.local
+          [ansibleserver]
+          ansibleserver.ansible.local
   
   # handlers
 

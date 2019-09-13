@@ -52,7 +52,29 @@
        wait_for_ip_address: yes
      register: storagevm
 
-   - name: IP address info
+   - name: Clone fedora 30 to ansibleserver.ansible.local
+     vmware_guest:
+       hostname: "{{ vmwhostname }}"
+       username: "{{ vmwusername }}"
+       password: "{{ vmwpassword }}"
+       validate_certs: False
+       name: ansibleserver.ansible.local
+       template: _TEMP_fedora30
+       datacenter: Datacenter
+       folder: /Admin
+       state: poweredon
+       hardware:
+         memory_mb: 8192
+         num_cpus: 4
+       disk:
+       - size_gb: 16
+         type: thin
+         datastore: datastore1
+       wait_for_ip_address: yes
+     register: ansiblevm
+
+# Prepare ansible for storage.ansible.local
+   - name: IP address info storage.ansible.local
      debug:
        msg: "{{ storagevm.instance.ipv4 }}"
 
@@ -93,20 +115,74 @@
       shutdown -r +1
      when: storagevm_ip_fact != "10.172.10.12"
 
+# Prepare ansible for ansibleserver.ansible.local
+   - name: IP address info ansibleserver.ansible.local
+     debug:
+       msg: "{{ ansiblevm.instance.ipv4 }}"
+
+   - name: Set Fact ansiblevm_ip_fact
+     set_fact:
+      storagevm_ip_fact: "{{ ansiblevm.instance.ipv4 }}"
+
+   - name: IP address info
+     debug:
+       msg: "{{ ansiblevm_ip_fact }}"   
+
+   - name: add ansiblevm to ansible in memory host file
+     add_host:
+      name: "{{ ansiblevm_ip_fact }}"
+      groups: ansibletmp
+     when: ansiblevm_ip_fact != "10.172.10.9"
+
+   - name: Copy SSH ID
+     shell: |
+      ssh-copy-id "{{ user }}@{{ ansiblevm_ip_fact }}"
+
+-  hosts: ansibletmp
+   become: yes
+   vars:
+     storagevm_ip_fact: "{{ hostvars['localhost']['ansiblevm_ip_fact'] }}"
+   tasks:
+   - name: IP address info
+     debug:
+       msg: "{{ ansiblevm_ip_fact }}"  
+   
+   - name: configure network
+     shell: |
+      nmcli connection modify ens192 -ipv4.addresses "{{ ansible_default_ipv4.address }}/24"
+      nmcli connection modify ens192 ipv4.addresses "10.172.10.9/24"
+      nmcli connection modify ens192 ipv4.gateway "10.172.10.1"
+      nmcli connection modify ens192 ipv4.dns "10.172.10.2"
+      nmcli connection modify ens192 ipv4.method manual
+      shutdown -r +1
+     when: ansiblevm_ip_fact != "10.172.10.9"
+
 -  hosts: localhost
    vars:
    tasks:
-   - name: remove ssh knownhost
+   - name: remove ssh knownhost storagetmp
      known_hosts:
        path: ~/.ssh/known_hosts
        name: "{{ storagevm.instance.ipv4 }}"
        state: absent
      when: storagevm_ip_fact != "10.172.10.12"
 
+   - name: remove ssh knownhost ansibletmp
+     known_hosts:
+       path: ~/.ssh/known_hosts
+       name: "{{ ansiblevm.instance.ipv4 }}"
+       state: absent
+     when: storagevm_ip_fact != "10.172.10.9"
+
    - name: pause for 2 minutes
      pause:
        minutes: 2    
      when: storagevm_ip_fact != "10.172.10.12"
+
+   - name: pause for 2 minutes
+     pause:
+       minutes: 2    
+     when: ansiblevm_ip_fact != "10.172.10.12"
  
 - hosts: storage
   become: yes
