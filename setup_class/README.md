@@ -58,7 +58,7 @@ Size: Tiny
 
 Role: NFS storage server for esxi host
 
-Fedora 30
+Fedora 30 - deployed from template
 
 Virtual Machine running on ESXi
 2 CPU
@@ -72,6 +72,19 @@ ip: 10.172.10.12/24
 Gateway: 10.172.10.1
 DNS: 10.172.10.2
 name: storage.ansible.local
+
+## ansibleserver.ansible.local
+
+Role: Lab users ansible server
+
+Fedora 30 - deployed from template
+
+ip: 10.172.10.22/24
+Gateway: 10.172.10.1
+DNS 10.172.10.2
+name: ansibleserver.ansible.local
+
+Vlan 124
 
 ### Setup
 
@@ -97,12 +110,16 @@ cd automationclass/setup_class/class_room
 
 ansible-playbook 01_class_setup.yml
 
-TEMP: nmcli connection modify ens192 ipv4.dns "127.0.0.1"
+TEMP: nmcli connection modify ens192 ipv4.dns "127.0.0.1" & reboot
+
+Install esxi.ansible.local
+
 
 On esxi.ansible.local
 
 Set VM Network to vlan 124
-```
+
+deploy vcenter
 
 Manual Configure vcenter
 
@@ -121,7 +138,7 @@ Register the _TEMP_fedora30 and place it in folder \Templates
 
 On ansiblehost.ansible.local log on as user
 
-Now deploy the storage server, and make esxi configurations
+Now deploy the storage server, ansible server, and make esxi configurations
 
 ```bash
 
