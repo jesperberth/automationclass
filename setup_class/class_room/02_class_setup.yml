@@ -141,7 +141,7 @@
 -  hosts: ansibletmp
    become: yes
    vars:
-     storagevm_ip_fact: "{{ hostvars['localhost']['ansiblevm_ip_fact'] }}"
+     ansiblevm_ip_fact: "{{ hostvars['localhost']['ansiblevm_ip_fact'] }}"
    tasks:
    - name: IP address info
      debug:
@@ -172,7 +172,7 @@
        path: ~/.ssh/known_hosts
        name: "{{ ansiblevm.instance.ipv4 }}"
        state: absent
-     when: storagevm_ip_fact != "10.172.10.9"
+     when: ansiblevm_ip_fact != "10.172.10.9"
 
    - name: pause for 2 minutes
      pause:
