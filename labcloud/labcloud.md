@@ -1,6 +1,6 @@
 # Lesson xx: Ansible Cloud
 
-In this session we will use ansible to setup and manage virtual machines and other resources in Azure 
+In this session we will use ansible to setup and manage virtual machines and other resources in Azure
 
 ## Prepare
 
@@ -32,17 +32,17 @@ pip3 install ansible[azure] --user
 
 We need to register an azure application to enable ansible automation
 
-In your browser log on to https://portal.azure.com
+In your browser log on to [https://portal.azure.com](https://portal.azure.com)
 
 In the left pane, click "Azure Active Directory" and "App Registrations"
 
-In the top click "New registration" 
+In the top click "New registration"
 
 ![Alt text](pics/002_azure_app_registration.png?raw=true "new azure app")
 
 Type a Name, Call it "ansible-yourname" so its possible to ID it later
 
-Select the 
+Select the:
 
 "Accounts in this organizational directory only (AzureADFS only - Single tenant)"
 
@@ -52,7 +52,7 @@ Click Register
 
 ![Alt text](pics/003_azure_app_registration_name.png?raw=true "register azure app")
 
-Copy the "Tenant ID" and "Client ID" save them in a text file for now 
+Copy the "Tenant ID" and "Client ID" save them in a text file for now
 
 ![Alt text](pics/004_azure_app_tenent_id.png?raw=true "get tenant id client id")
 
@@ -60,7 +60,7 @@ Click "Certificates & Secrets" and "New client secret"
 
 ![Alt text](pics/005_azure_app_client_secret.png?raw=true "new secret")
 
-Copy the "Tenant ID" and "Client ID" save them in a text file for now 
+Copy the "Tenant ID" and "Client ID" save them in a text file for now
 
 ![Alt text](pics/006_azure_app_client_secret_value.png?raw=true "secret value")
 
@@ -80,3 +80,8 @@ Select your application and click Save
 
 ![Alt text](pics/007_azure_assign_rights.png?raw=true "azure role assignment")
 
+Still in the Subscribtion pane, click the "Overview"
+
+Copy the "Subscribtion ID" to the text file
+
+![Alt text](pics/008_azure_sub_id.png?raw=true "azure sub id")
