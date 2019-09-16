@@ -117,9 +117,11 @@ Install esxi.ansible.local
 
 On esxi.ansible.local
 
+Set Management network to 24
+
 Set VM Network to vlan 124
 
-deploy vcenter
+Deploy vcenter
 
 Manual Configure vcenter
 
