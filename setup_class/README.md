@@ -98,7 +98,6 @@ cd automationclass/setup_class/class_room
 
 ansible-playbook 01_class_setup.yml
 
-TEMP: nmcli connection modify ens192 ipv4.dns "127.0.0.1" & reboot
 ```
 
 Install esxi.ansible.local
