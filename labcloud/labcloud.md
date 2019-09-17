@@ -85,3 +85,85 @@ Still in the Subscribtion pane, click the "Overview"
 Copy the "Subscribtion ID" to the text file
 
 ![Alt text](pics/008_azure_sub_id.png?raw=true "azure sub id")
+
+Log on to server "ansible" using ssh
+
+We will create the authentication file
+
+__Type:__
+
+```bash
+mkdir .azure
+vi .azure/credentials
+
+```
+
+![Alt text](pics/009_azure_credfile.png?raw=true "azure credentials")
+
+In vi __type:__
+
+Use the vaules you collected from the Azure portal
+
+```bash
+i (for input)
+
+[default]
+subscription_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+client_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+secret=xxxxxxxxxxxxxxxxx
+tenant=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+```
+
+![Alt text](pics/009_azure_credfile.png?raw=true "azure credentials file")
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](pics/010_azure_credfile_input.png?raw=true "azure credentials file input")
+
+Lets test the connection to azure by creating a small playbook
+
+In VSCode
+
+create a new playbook file 01_azure.yml
+
+add the following text to the file, change the name of the resource group to "ansible-userxx"
+
+```ansible
+---
+- hosts: localhost
+  connection: local
+  tasks:
+  - name: Create resource group
+    azure_rm_resourcegroup:
+      name: ansible-user01
+      location: northeurope
+    register: rg
+  - debug:
+      var: rg
+```
+
+![Alt text](pics/011_azure_play.png?raw=true "azure play")
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+Change url to your own repository
+
+__Type:__
+
+```bash
+
+git clone https://github.com/jesperberth/ansibleclass.git
+
+cd ansibleclass
+
+ansible-playbook 01_azure.yml
+
+```

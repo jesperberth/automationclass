@@ -15,8 +15,6 @@ ip: 10.172.10.2/24
 Gateway: 10.172.10.1
 DNS 1.1.1.1
 
-Vlan 124
-
 ## esxi.ansible.local
 
 Role: Vmware ESXi host
@@ -31,10 +29,6 @@ Management network
 
 Vlan 24
 
-VM Network
-
-Vlan 124
-
 ip: 10.172.1.10/24
 Gateway: 10.172.1.1
 DNS: 10.172.10.2
@@ -45,8 +39,6 @@ name: esxi.ansible.local
 Role: Vmware vcenter
 
 Vmware vcenter appliance 6.7U3
-
-Vlan 124
 
 ip: 10.172.10.11/24
 Gateway: 10.172.10.1
@@ -66,8 +58,6 @@ Virtual Machine running on ESXi
 Disk 1 16Gb - Thin
 Disk 2 120Gb - Thin
 
-Vlan 124
-
 ip: 10.172.10.12/24
 Gateway: 10.172.10.1
 DNS: 10.172.10.2
@@ -83,8 +73,6 @@ ip: 10.172.10.22/24
 Gateway: 10.172.10.1
 DNS 10.172.10.2
 name: ansibleserver.ansible.local
-
-Vlan 124
 
 ### Setup
 
@@ -118,8 +106,6 @@ Install esxi.ansible.local
 On esxi.ansible.local
 
 Set Management network to 24
-
-Set VM Network to vlan 124
 
 Deploy vcenter
 

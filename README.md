@@ -6,13 +6,12 @@
 
 #### Environment
 
-6 servers - made available in Azure - (use azure_class_playbooks/01_azure_class_setup.yml to deploy in Azure)
+5 servers - made available in Azure - (use azure_class_playbooks/01_azure_class_setup.yml to deploy in Azure)
 
-4 - Running Red Hat Enterprise Linux 8
+3 - Running Red Hat Enterprise Linux 8
 Accessible with ssh and http/https
 
 * ansible - 10.1.0.4
-* tower   - 10.1.0.5
 * server1 - 10.1.0.6
 * server2 - 10.1.0.7
 
