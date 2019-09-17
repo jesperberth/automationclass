@@ -142,7 +142,12 @@
           vcenter.ansible.local
           [ansibleserver]
           ansibleserver.ansible.local
-  
+
+    - name: configure network
+      shell: |
+        nmcli connection modify ens192 ipv4.dns "127.0.0.1"
+        shutdown -r +1
+
   # handlers
 
   handlers:
