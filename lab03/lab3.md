@@ -1,10 +1,10 @@
 # Lab 3: Work with Playbooks
 
-Use Variables, prompts, facts and handlers in Playbooks
+Use Variables, prompts, facts, conditions and handlers in Playbooks
 
 ## Prepare
 
-We need to start servers, ansible, server1 and server2
+We need to start servers, ansible, server1, server2 and server3
 
 In Azure Cloud Shell(Bash)
 
@@ -31,6 +31,8 @@ Name it "02_linux.yml"
 
 Write the following in the text pane
 
+__Type:__
+
 ```ansible
 ---
 - hosts: linuxservers
@@ -50,6 +52,8 @@ Save the file
 Notice that Git detects the changed file, do a commit add a comment "Variables" and Sync to Git
 
 On server ansible do a git pull and run the playbook
+
+__Type:__
 
 ```ansible
 cd ansibleclass
@@ -71,6 +75,8 @@ Name it "03_linux.yml"
 ![Alt text](pics/003_vars_prompt.png?raw=true "playbook in VSCode")
 
 Write the following in the text pane
+
+__Type:__
 
 ```ansible
 ---
@@ -94,6 +100,8 @@ Notice that Git detects the changed file, do a commit add a comment "Prompt" and
 
 On server ansible do a git pull and run the playbook
 
+__Type:__
+
 ```ansible
 cd ansibleclass
 
@@ -113,6 +121,8 @@ Ansible facts
 
 On server ansible run ansible linuxservers -m setup
 
+__Type:__
+
 ```ansible
 ansible linuxservers -m setup
 ```
@@ -121,19 +131,27 @@ ansible linuxservers -m setup
 
 Using a filter will help a bit
 
+__Type:__
+
 ```ansible
 ansible linuxservers -m setup -a "filter=*.ipv4"
 ```
 
 ![Alt text](pics/006_ansible_facts_filter.png?raw=true "facts")
 
+## Task 3: Facts and Conditions
+
+We will add a Condition and only run the task if it matches
+
+when: ansible_system == "Linux" or "Win32NT"
+
 In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
 
-Name it "04_linux.yml"
-
-![Alt text](pics/007_ansible_fact_playbook.png?raw=true "playbook in VSCode")
+Name it "04_linux_win.yml"
 
 Write the following in the text pane
+
+__Type:__
 
 ```ansible
 ---
@@ -155,7 +173,11 @@ Save the file
 
 Notice that Git detects the changed file, do a commit add a comment "Variables" and Sync to Git
 
+![Alt text](pics/007_ansible_fact_playbook.png?raw=true "playbook in VSCode")
+
 On server ansible do a git pull and run the playbook
+
+__Type:__
 
 ```ansible
 cd ansibleclass
