@@ -60,7 +60,6 @@ ansible --version
 
 ![Alt text](pics/004_install_ansible_version.png?raw=true "Ansible --version")
 
-[Ansible Ping Module](https://docs.ansible.com/ansible/latest/modules/ping_module.html)
 __Type:__
 
 ```bash
@@ -68,6 +67,8 @@ ansible --help
 ```
 
 Will give you other options for ansible command
+
+[Ansible Ping Module](https://docs.ansible.com/ansible/latest/modules/ping_module.html)
 
 ```bash
 ansible localhost -m ping
@@ -221,6 +222,8 @@ exit
 ```
 
 ![Alt text](pics/015_file_test.png?raw=true "ansible file")
+
+[Ansible Systemd module](https://docs.ansible.com/ansible/latest/modules/systemd_module.html)
 
 __Type:__
 
