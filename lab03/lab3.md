@@ -184,6 +184,41 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 04_linux.yml
+ansible-playbook 04_linux_win.yml
 
 ```
+
+![Alt text](pics/008_ansible_play.png?raw=true "playbook run")
+
+## Task 4: Handlers
+
+We will create a short playbook to test a handler
+
+First task will do an dnf update on both server1 and server2 and notify the reboot handler
+
+![Alt text](pics/009_ansible_handlers.png?raw=true "handlers playbook")
+
+Save the file
+
+Do a commit, add a comment "handlers" and Sync to Git
+
+On server ansible do a git pull and run the playbook
+
+__Type:__
+
+```ansible
+cd ansibleclass
+
+git pull
+
+ansible-playbook 05_linux.yml
+
+```
+
+![Alt text](pics/010_ansible_play_handlers.png?raw=true "handlers playbook run")
+
+It will run for a while, there is a lot of packages to update...
+
+Do a second run of the playbook, it should stay green on dnf update and not do a reboot...
+
+![Alt text](pics/011_ansible_play_handlers_2.png?raw=true "handlers playbook run 2")
