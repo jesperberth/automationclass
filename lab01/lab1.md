@@ -60,6 +60,7 @@ ansible --version
 
 ![Alt text](pics/004_install_ansible_version.png?raw=true "Ansible --version")
 
+[Ansible Ping Module](https://docs.ansible.com/ansible/latest/modules/ping_module.html)
 __Type:__
 
 ```bash
@@ -75,6 +76,8 @@ ansible localhost -m ping
 Will run ansible against localhost with module ping
 
 ![Alt text](pics/005_install_ansible_localhost_ping.png?raw=true "Ansible localhost ping")
+
+[Ansible File Module](https://docs.ansible.com/ansible/latest/modules/list_of_files_modules.html)
 
 __Type:__
 
