@@ -3,12 +3,8 @@
   connection: local
   vars:
     location: northeurope
-    #resource_group: Automation_FunSantaz
-    #domain_sub: automationfunjesper
     virtual_network_name: automationNetwork
     subnet: Servers
-    #adminUser: jesbe
-    #adminPassword: SomeThingSimple8
 
   vars_prompt:
     - name: resource_group

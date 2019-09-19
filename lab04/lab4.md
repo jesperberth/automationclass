@@ -132,7 +132,7 @@ In VSCode
 
 create a new playbook file 01_azure.yml
 
-add the following text to the file, change the name of the resource group to "ansible-userxx"
+add the following text to the file, change the name of the resource group to "webserver_userxx"
 
 ```ansible
 ---
@@ -141,7 +141,7 @@ add the following text to the file, change the name of the resource group to "an
   tasks:
   - name: Create resource group
     azure_rm_resourcegroup:
-      name: ansible-user01
+      name: webserver_userxx
       location: northeurope
     register: rg
   - debug:
@@ -166,4 +166,49 @@ cd ansibleclass
 
 ansible-playbook 01_azure.yml
 
+```
+
+## Task 2: Create Network in Azure
+
+In VSCode
+
+create a new playbook file 02_azure.yml
+
+add the following text to the file, change the name of any vars with _userxx to your number 
+
+```ansible
+---
+- hosts: localhost
+  connection: local
+  vars:
+    location: northeurope
+    virtual_network_name: webserver_userxx
+    subnet: Webserver
+    resource_group: webserver_userxx
+    domain_sub: domainuserxx
+
+  vars_prompt:
+    - name: adminUser
+      prompt: "Type the name of your root/administrator account"
+      private: no
+    - name: adminPassword
+      prompt: "Type the password of your root/administrator account"
+      private: no
+
+  tasks:
+  - name: Create a virtual network
+    azure_rm_virtualnetwork:
+      resource_group: "{{ resource_group }}"
+      name: "{{ virtual_network_name }}"
+      address_prefixes_cidr: "10.99.0.0/16"
+      tags:
+          purpose: production
+          delete: not_allowed
+  
+  - name: Create a subnet
+    azure_rm_subnet:
+      resource_group: "{{ resource_group }}"
+      virtual_network_name: "{{ virtual_network_name }}"
+      name: "{{ subnet }}"
+      address_prefix_cidr: "10.99.0.0/24"
 ```
