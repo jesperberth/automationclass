@@ -6,7 +6,7 @@
 
 #### Environment
 
-5 servers - made available in Azure - (use azure_class_playbooks/01_azure_class_setup.yml to deploy in Azure)
+5 servers - made available in Azure - (use setup_class/azure_class_playbooks/00_azure_class_setup.yml to deploy)
 
 3 - Running Red Hat Enterprise Linux 8
 Accessible with ssh and http/https

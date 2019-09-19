@@ -14,7 +14,7 @@ cd automationclass
 cd setup_class
 cd azure_class_playbooks
 
-ansible-playbook 02_azure_lab1_start.yml
+ansible-playbook 01_azure_lab1_start.yml
 
 ```
 

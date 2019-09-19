@@ -1,6 +1,6 @@
 # Lesson 04: Ansible Cloud
 
-In this session we will use ansible to setup and manage virtual machines and other resources in Azure
+In this session we will use ansible to setup and manage resources in Azure to deploy a virtual machine with a webserver installed and running
 
 ## Prepare
 
@@ -13,7 +13,7 @@ cd clouddrive
 cd automationclass
 cd azure_class_playbooks
 
-ansible-playbook 0xx_azure_lessonxx_start.yml
+ansible-playbook 04_azure_lab4_start.yml
 
 ```
 
