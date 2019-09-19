@@ -222,3 +222,7 @@ It will run for a while, there is a lot of packages to update...
 Do a second run of the playbook, it should stay green on "dnf update" and not do a reboot...
 
 ![Alt text](pics/011_ansible_play_handlers_2.png?raw=true "handlers playbook run 2")
+
+Next Lab
+
+[Cloud Playbooks](../lab04/lab4.md)

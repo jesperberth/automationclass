@@ -283,3 +283,7 @@ ansible-playbook 01_linux.yml --ask-become-pass
 ![Alt text](pics/030_2_server_play.png?raw=true "Run playbook")
 
 If server2 fails, did you copy your ssh key, "ssh-copy-id server" and run the playbook again
+
+Next Lab
+
+[Work with Playbooks](../lab03/lab3.md)

@@ -1,4 +1,4 @@
-# Lesson xx: Ansible Cloud
+# Lesson 04: Ansible Cloud
 
 In this session we will use ansible to setup and manage virtual machines and other resources in Azure
 

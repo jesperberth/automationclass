@@ -1,4 +1,4 @@
-# Lesson xx: Ansible VMware
+# Lesson 06: Ansible VMware
 
 In this session we will use ansible to manage a vmware esxi host, adding NFS storage, PortGroup to a virtual switch
 
