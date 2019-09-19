@@ -313,3 +313,7 @@ ansible windowsservers -m win_ping
 ```
 
 ![Alt text](pics/021_ansible_win_ping.png?raw=true "win_ping")
+
+Next Lab
+
+[Ansible Playbooks](../lab02/lab2.md)

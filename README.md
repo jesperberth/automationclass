@@ -67,6 +67,14 @@ Create Ansible Playbooks
 
 Use Variables, prompts, facts and handlers in Playbooks
 
-### Lab xx: [Manage VMware](labvmware/lab_vmware.md)
+### Lab 4: [Cloud Playbooks](lab04/lab4.md)
 
-Create Ansible Playbooks for Vmware host and Guests
+Use Ansible in the Cloud (Microsoft Azure)
+
+### Lab 5: [Network Playbooks](lab05/lab5.md)
+
+Use Ansible to manage your network infrastructure (Fortinet)
+
+### Lab 5: [Network Playbooks](lab06/lab6.md)
+
+Use Ansible to manage Vmware VSphere
