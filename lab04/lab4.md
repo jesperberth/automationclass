@@ -361,3 +361,66 @@ ansible-playbook 02_azure.yml
 ```
 
 ![Alt text](pics/017_azure_vm_run.png?raw=true "azure vm playbook run")
+
+## Task 4: Install Apache Webserver and create the site
+
+We need to collect the public ip address for webserver and add it to the in memory hosts file
+
+[Ansible Module azure_rm_publicipaddress_facts](https://docs.ansible.com/ansible/latest/modules/azure_rm_publicipaddress_facts_module.html#azure-rm-publicipaddress-facts-module)
+
+[Ansible Module set_fact](https://docs.ansible.com/ansible/latest/modules/set_fact_module.html)
+
+[Ansible Module debug](https://docs.ansible.com/ansible/latest/modules/debug_module.html)
+
+[Ansible Module add_host](https://docs.ansible.com/ansible/latest/modules/add_host_module.html?highlight=add_host)
+
+In VSCode add the next sections to the 02_azure.yml playbook
+
+```ansible
+  - name: Get facts for webserver Public IP
+    azure_rm_publicipaddress_facts:
+      resource_group: "{{ resource_group }}"
+      name: "public_ip_webserver"
+    register: "public_ip_facts_webserver"
+  
+  - name: Set Fact webserver_ip_fact
+    set_fact:
+      webserver_ip_fact: "{{ item.ip_address }}"
+    loop: "{{ public_ip_facts_webserver.publicipaddresses }}"
+  
+  - name: print webserver public ip
+    debug:
+     msg: "{{ webserver_ip_fact }}"
+  
+  - name: add webserver to ansible host file
+    add_host:
+      name: "{{ webserver_ip_fact }}"
+      groups: webserver
+      ansible_user: "{{ adminUser }}"
+      ansible_password: "{{ adminPassword }}"
+
+```
+
+![Alt text](pics/018_azure_get_ip.png?raw=true "azure get ip playbook")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+Change url to your own repository
+
+__Type:__
+
+```bash
+
+git clone https://github.com/jesperberth/ansibleclass.git
+
+cd ansibleclass
+
+ansible-playbook 02_azure.yml
+
+```
+
+![Alt text](pics/019_azure_get_ip_run.png?raw=true "azure get ip playbook run")
