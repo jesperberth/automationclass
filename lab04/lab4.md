@@ -238,3 +238,126 @@ cd ansibleclass
 ansible-playbook 02_azure.yml
 
 ```
+
+![Alt text](pics/013_azure_net_playbook_run.png?raw=true "azure net playbook")
+
+## Task 3: Create Public Ip, NIC and Security Group in Azure
+
+[Ansible Module azure_rm_publicipaddress](https://docs.ansible.com/ansible/latest/modules/azure_rm_publicipaddress_module.html#azure-rm-publicipaddress-module)
+
+[Ansible Module azure_rm_securitygroup](https://docs.ansible.com/ansible/latest/modules/azure_rm_securitygroup_module.html#azure-rm-securitygroup-module)
+
+In VSCode add the next sections to the 02_azure.yml playbook
+
+```ansible
+  - name: Create a public ip address for webserver
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: public_ip_webserver
+      allocation_method: static
+      domain_name: "webserver{{ domain_sub }}"
+
+  - name: Create Security Group for webserver
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "webserver_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 100
+            direction: Inbound
+          - name: Allow_HTTP
+            protocol: Tcp
+            destination_port_range: 80
+            access: Allow
+            priority: 101
+            direction: Inbound
+
+  - name: Create a network interface for webserver
+    azure_rm_networkinterface:
+      name: "webserver_nic01"
+      resource_group: "{{ resource_group }}"
+      virtual_network: "{{ virtual_network_name }}"
+      subnet_name: "{{ subnet }}"
+      security_group: "webserver_securitygroup"
+      ip_configurations:
+        - name: "webserver_nic01_ipconfig"
+          public_ip_address_name: "webserver_public_ip"
+          primary: True
+```
+
+![Alt text](pics/014_azure_network.png?raw=true "azure nic playbook")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+Change url to your own repository
+
+__Type:__
+
+```bash
+
+git clone https://github.com/jesperberth/ansibleclass.git
+
+cd ansibleclass
+
+ansible-playbook 02_azure.yml
+
+```
+
+![Alt text](pics/015_azure_network_run.png?raw=true "azure nic playbook run")
+
+[Ansible Module azure_rm_virtualmachine](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualmachine_module.html#azure-rm-virtualmachine-module)
+
+Add the virtualmachine task to the 02_azure.yml playbook
+
+In VSCode add the next sections to the 02_azure.yml playbook
+
+```ansible
+  - name: Create a VM webserver
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "webserver"
+      os_type: Linux
+      admin_username: "{{ adminUser }}"
+      admin_password: "{{ adminPassword }}"
+      managed_disk_type: Standard_LRS
+      state: present
+      image:
+        offer: RHEL
+        publisher: RedHat
+        sku: 8
+        version: latest
+      vm_size: Standard_A1_v2
+      network_interfaces: "webserver_nic01"
+```
+
+![Alt text](pics/016_azure_vm.png?raw=true "azure vm playbook")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+Change url to your own repository
+
+__Type:__
+
+```bash
+
+git clone https://github.com/jesperberth/ansibleclass.git
+
+cd ansibleclass
+
+ansible-playbook 02_azure.yml
+
+```
+
+![Alt text](pics/017_azure_vm_run.png?raw=true "azure vm playbook run")
