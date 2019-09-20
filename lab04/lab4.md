@@ -364,7 +364,7 @@ ansible-playbook 02_azure.yml
 
 ## Task 4: Install Apache Webserver and create the site
 
-We need to collect the public ip address for webserver and add it to the in memory hosts file
+We need to collect the public ip address for webserver and add it to the in memory hosts file, and copy the ssh id to the new machine
 
 [Ansible Module azure_rm_publicipaddress_facts](https://docs.ansible.com/ansible/latest/modules/azure_rm_publicipaddress_facts_module.html#azure-rm-publicipaddress-facts-module)
 
@@ -373,6 +373,8 @@ We need to collect the public ip address for webserver and add it to the in memo
 [Ansible Module debug](https://docs.ansible.com/ansible/latest/modules/debug_module.html)
 
 [Ansible Module add_host](https://docs.ansible.com/ansible/latest/modules/add_host_module.html?highlight=add_host)
+
+[Ansible Module shell](https://docs.ansible.com/ansible/latest/modules/shell_module.html?highlight=shell)
 
 In VSCode add the next sections to the 02_azure.yml playbook
 
@@ -396,6 +398,10 @@ In VSCode add the next sections to the 02_azure.yml playbook
     add_host:
       name: "{{ webserver_ip_fact }}"
       groups: webserver
+
+  - name: Copy SSH ID
+    shell: |
+      ssh-copy-id "{{ adminUser }}@{{ webserver_ip_fact }}"
 
 ```
 
@@ -439,7 +445,7 @@ In VSCode add the next sections to the 02_azure.yml playbook
       state: latest
 ```
 
-![Alt text](pics/018_azure_get_ip.png?raw=true "azure get ip playbook")
+![Alt text](pics/020_azure_httpd.png?raw=true "azure install httpd playbook")
 
 Save and commit to Git
 
