@@ -285,7 +285,7 @@ In VSCode add the next sections to the 02_azure.yml playbook
       security_group: "webserver_securitygroup"
       ip_configurations:
         - name: "webserver_nic01_ipconfig"
-          public_ip_address_name: "webserver_public_ip"
+          public_ip_address_name: "public_ip_webserver"
           primary: True
 ```
 
@@ -422,3 +422,41 @@ ansible-playbook 02_azure.yml
 ```
 
 ![Alt text](pics/019_azure_get_ip_run.png?raw=true "azure get ip playbook run")
+
+Install apache webserver, setup the static website, allow http trafic on the local firewall
+
+[Ansible Module dnf](https://docs.ansible.com/ansible/latest/modules/dnf_module.html)
+
+In VSCode add the next sections to the 02_azure.yml playbook
+
+```ansible
+- hosts: webserver
+  vars:
+  tasks:
+  - name: Install Apache
+    dnf:
+      name: httpd
+      state: latest
+```
+
+![Alt text](pics/018_azure_get_ip.png?raw=true "azure get ip playbook")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+Change url to your own repository
+
+__Type:__
+
+```bash
+
+git clone https://github.com/jesperberth/ansibleclass.git
+
+cd ansibleclass
+
+ansible-playbook 02_azure.yml
+
+```
