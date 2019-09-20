@@ -396,8 +396,6 @@ In VSCode add the next sections to the 02_azure.yml playbook
     add_host:
       name: "{{ webserver_ip_fact }}"
       groups: webserver
-      ansible_user: "{{ adminUser }}"
-      ansible_password: "{{ adminPassword }}"
 
 ```
 
