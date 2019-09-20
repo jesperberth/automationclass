@@ -128,6 +128,8 @@ Hit Esc-key
 
 Lets test the connection to azure by creating a small playbook
 
+[Ansible Module azure_rm_resourcegroup](https://docs.ansible.com/ansible/latest/modules/azure_rm_resourcegroup_module.html#azure-rm-resourcegroup-module)
+
 In VSCode
 
 create a new playbook file 01_azure.yml
@@ -170,6 +172,8 @@ ansible-playbook 01_azure.yml
 
 ## Task 2: Create Network in Azure
 
+[Ansible Module azure_rm_virtualnetwork](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualnetwork_module.html#azure-rm-virtualnetwork-module)
+[Ansible Module azure_rm_subnet](https://docs.ansible.com/ansible/latest/modules/azure_rm_subnet_module.html#azure-rm-subnet-module)
 In VSCode
 
 create a new playbook file 02_azure.yml
@@ -211,4 +215,26 @@ add the following text to the file, change the name of any vars with _userxx to 
       virtual_network_name: "{{ virtual_network_name }}"
       name: "{{ subnet }}"
       address_prefix_cidr: "10.99.0.0/24"
+```
+
+![Alt text](pics/012_azure_net_playbook.png?raw=true "azure net playbook")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+Change url to your own repository
+
+__Type:__
+
+```bash
+
+git clone https://github.com/jesperberth/ansibleclass.git
+
+cd ansibleclass
+
+ansible-playbook 02_azure.yml
+
 ```
