@@ -178,7 +178,7 @@ In VSCode
 
 create a new playbook file 02_azure.yml
 
-add the following text to the file, change the name of any vars with _userxx to your number 
+add the following text to the file, change the name of any vars with _userxx to your number
 
 ```ansible
 ---
