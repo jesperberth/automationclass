@@ -196,6 +196,28 @@ We will create a short playbook to test a handler
 
 First task will do an dnf update on both server1 and server2 and notify the reboot handler
 
+In VSCode create a new file 05_linux.yml
+
+__Type:__
+
+```ansible
+---
+- hosts: linuxservers
+  become: yes
+  
+  tasks:
+  - name: dnf update
+    dnf:
+      name: "*"
+      state: latest
+    notify:
+      - reboot server
+
+  handlers:
+  - name: reboot server
+    reboot:
+```
+
 ![Alt text](pics/009_ansible_handlers.png?raw=true "handlers playbook")
 
 Save the file
