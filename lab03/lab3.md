@@ -233,7 +233,7 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 05_linux.yml
+ansible-playbook 05_linux.yml --ask-become-pass
 
 ```
 
