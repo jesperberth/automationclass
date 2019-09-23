@@ -21,6 +21,8 @@ ansible-playbook 04_azure_lab4_start.yml
 
 Log on to server "ansible" using ssh
 
+Install ansible azure module
+
 __Type:__
 
 ```bash
@@ -173,7 +175,9 @@ ansible-playbook 01_azure.yml
 ## Task 2: Create Network in Azure
 
 [Ansible Module azure_rm_virtualnetwork](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualnetwork_module.html#azure-rm-virtualnetwork-module)
+
 [Ansible Module azure_rm_subnet](https://docs.ansible.com/ansible/latest/modules/azure_rm_subnet_module.html#azure-rm-subnet-module)
+
 In VSCode
 
 create a new playbook file 02_azure.yml
