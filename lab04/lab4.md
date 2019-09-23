@@ -472,38 +472,71 @@ ansible-playbook 02_azure.yml --ask-become-pass
 
 ![Alt text](pics/021_azure_httpd_run.png?raw=true "azure install httpd playbook run")
 
+In VSCode add these two variables to the webserver play, change the value to your desire
+
+```ansible
+  vars:
+    websiteheader: "Ansible Playbook"
+    websiteauthor: "Jesper Berth"
+
+```
+
+![Alt text](pics/022_azure_vars.png?raw=true "azure vars")
+
 In VSCode add the next sections to the 02_azure.yml playbook
+
+[Ansible Module systemd](https://docs.ansible.com/ansible/latest/modules/systemd_module.html)
+[Ansible Module firewalld](https://docs.ansible.com/ansible/latest/modules/firewalld_module.html)
+[Ansible Module template](https://docs.ansible.com/ansible/latest/modules/template_module.html)
 
 ```ansible
   - name: Enable Apache
     systemd:
       name: httpd
-      state: enabled
+      enabled: yes
+      state: started
 
   - name: Allow http in firewall
     firewalld:
+      service: http
+      permanent: true
+      state: enabled
+      immediate: yes
+    notify:
+      - reload firewall
   
   - name: Add index.html
     template:
+      src: index.html.j2
+      dest: /var/www/html/index.html
+      owner: root
+      group: named
+      mode: 0660
 
-
+  handlers:
+  - name: reload firewall
+    service:
+      name: firewalld
+      state: reload
 ```
 
-![Alt text](pics/020_azure_httpd.png?raw=true "azure config httpd playbook")
+![Alt text](pics/023_azure_firewall.png?raw=true "azure config httpd playbook")
 
 In VSCode create a new jinja file index.html.j2
 
 ```html
 <html>
-<header><title></title></header>
+<header><title>{{ websiteheader }}</title></header>
 <body>
+<h1>Welcome to {{ websiteheader }}</h1>
 
+<h3>This site was created with Ansible by {{ websiteauthor }}
 
 </body>
 </html>
 ```
 
-![Alt text](pics/020_azure_httpd.png?raw=true "azure config httpd playbook")
+![Alt text](pics/024_azure_template.png?raw=true "azure template")
 
 Save and commit to Git
 
@@ -525,4 +558,4 @@ ansible-playbook 02_azure.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/021_azure_httpd_run.png?raw=true "azure install httpd playbook run")
+![Alt text](pics/025_azure_firewall_run.png?raw=true "azure configure httpd playbook run")
