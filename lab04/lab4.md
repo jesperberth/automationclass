@@ -415,6 +415,8 @@ Use git to get the new azure playbook
 
 Change url to your own repository
 
+Note: Task Copy SSH ID, need attention, type "yes" and password when asked
+
 __Type:__
 
 ```bash
@@ -437,6 +439,7 @@ In VSCode add the next sections to the 02_azure.yml playbook
 
 ```ansible
 - hosts: webserver
+  become: yes
   vars:
   tasks:
   - name: Install Apache
@@ -463,6 +466,63 @@ git clone https://github.com/jesperberth/ansibleclass.git
 
 cd ansibleclass
 
-ansible-playbook 02_azure.yml
+ansible-playbook 02_azure.yml --ask-become-pass
 
 ```
+
+![Alt text](pics/021_azure_httpd_run.png?raw=true "azure install httpd playbook run")
+
+In VSCode add the next sections to the 02_azure.yml playbook
+
+```ansible
+  - name: Enable Apache
+    systemd:
+      name: httpd
+      state: enabled
+
+  - name: Allow http in firewall
+    firewalld:
+  
+  - name: Add index.html
+    template:
+
+
+```
+
+![Alt text](pics/020_azure_httpd.png?raw=true "azure config httpd playbook")
+
+In VSCode create a new jinja file index.html.j2
+
+```html
+<html>
+<header><title></title></header>
+<body>
+
+
+</body>
+</html>
+```
+
+![Alt text](pics/020_azure_httpd.png?raw=true "azure config httpd playbook")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+Change url to your own repository
+
+__Type:__
+
+```bash
+
+git clone https://github.com/jesperberth/ansibleclass.git
+
+cd ansibleclass
+
+ansible-playbook 02_azure.yml --ask-become-pass
+
+```
+
+![Alt text](pics/021_azure_httpd_run.png?raw=true "azure install httpd playbook run")
