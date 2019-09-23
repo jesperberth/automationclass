@@ -510,14 +510,13 @@ In VSCode add the next sections to the 02_azure.yml playbook
       src: index.html.j2
       dest: /var/www/html/index.html
       owner: root
-      group: named
-      mode: 0660
+      group: root
 
   handlers:
   - name: reload firewall
     service:
       name: firewalld
-      state: reload
+      state: reloaded
 ```
 
 ![Alt text](pics/023_azure_firewall.png?raw=true "azure config httpd playbook")
