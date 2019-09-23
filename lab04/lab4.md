@@ -559,3 +559,11 @@ ansible-playbook 02_azure.yml --ask-become-pass
 ```
 
 ![Alt text](pics/025_azure_firewall_run.png?raw=true "azure configure httpd playbook run")
+
+Check the result in a browser
+
+```code
+http://<your webserver ip>
+```
+
+![Alt text](pics/026_webserver.png?raw=true "webserver")
