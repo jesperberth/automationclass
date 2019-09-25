@@ -3,10 +3,13 @@
    connection: local
    gather_facts: yes
    vars:
-    vmwhostname: vcenter.ansible.local
-    vmwusername: administrator@vsphere.local
-    vmwpassword: Only4Demo!
-    esxihostname: esxi.ansible.local
+    vmwhostname: "vcenter.ansible.local"
+    vmwusername: "administrator@vsphere.local"
+    esxihostname: "esxi.ansible.local"
+   vars_prompt:
+    - name: vmwpassword
+      prompt: "Type the password of your vmware admin account"
+      private: no
    tasks:
 #  Generate SSH Key for User
    - name: Generate SSH keys

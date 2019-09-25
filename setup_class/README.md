@@ -84,11 +84,11 @@ sudo dnf update -y
 
 sudo dnf install python3-pip git -y
 
-pip3 install pip==9.0.3 --user
+pip3 install pip --user
 
 pip3 install ansible --user
 pip3 install pyvmomi --user
-pip3 install pyfortiapi --user
+pip3 install fortiosapi --user  
 
 ssh-keygen
 
@@ -130,5 +130,7 @@ Now deploy the storage server, ansible server, and make esxi configurations
 ```bash
 
 ansible-playbook 02_class_setup.yml
+
+ansible-playbook 03_class_network_setup.yml
 
 ```
