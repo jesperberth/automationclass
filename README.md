@@ -75,6 +75,6 @@ Use Ansible in the Cloud (Microsoft Azure)
 
 Use Ansible to manage your network infrastructure (Fortinet)
 
-### Lab 5: [Vmware Playbooks](lab06/lab6.md)
+### Lab 6: [Vmware Playbooks](lab06/lab6.md)
 
 Use Ansible to manage Vmware VSphere
