@@ -160,3 +160,158 @@ ansible-playbook 02_forti_address.yml
 ```
 
 ![Alt text](pics/013_azure_net_playbook_run.png?raw=true "address playbook run")
+
+## Task 4: Create firewall policies on the fortigate firewall
+
+[Ansible module fortios_firewall_policy](https://docs.ansible.com/ansible/latest/modules/fortios_firewall_policy_module.html#fortios-firewall-policy-module)
+
+We will create 3 firewall policies 
+- switch to vlan_10x - service HTTP, SSH
+- vlan_10x to switch - service ALL
+- vlan_10x to Wan - service HTTP, HTTPS, SSH, DNS, ICMP_ALL
+
+In VSCode
+
+create a new playbook file 03_forti_firewall_policy.yml and add below
+
+__Note:__
+
+You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "dstaddr" and "srcaddr" on all three policies
+
+```ansible
+---
+- hosts: localhost
+  vars:
+   host: "10.172.10.1"
+   username: "userxx"
+   vdom: "root"
+   ssl_verify: "False"
+  vars_prompt:
+  - name: password
+    prompt: "Type the password of your fortigate admin account"
+    private: no.
+  tasks:
+  - name: Configure firewall interface switch -> vlan_10x
+    fortios_firewall_policy:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_policy:
+        action: "accept"
+        name: "switch to vlan_10x"
+        srcintf: 
+         - 
+           name: "switch"
+        dstintf: 
+         - 
+           name: "vlan_10x"
+        srcaddr: 
+         - 
+           name: "switch address"
+        dstaddr: 
+         - 
+           name: "vlan_10x address"
+        schedule: "always"
+        service: 
+         - 
+           name: "HTTP"
+         -
+           name: "SSH"
+        fsso: "disable"
+        status: enable
+        policyid: 10xx
+  - name: Configure firewall interface vlan_10x -> switch
+    fortios_firewall_policy:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_policy:
+        action: "accept"
+        name: "vlan_10x to switch"
+        srcintf: 
+         - 
+           name: "vlan_10x"
+        dstintf: 
+         - 
+           name: "switch"
+        srcaddr: 
+         - 
+           name: "vlan_10x address"
+        dstaddr: 
+         - 
+           name: "switch address"
+        schedule: "always"
+        service: 
+         - 
+           name: "ALL"
+        fsso: "disable"
+        status: enable
+        policyid: 10xx
+  - name: Configure firewall interface vlan_10x -> wan1
+    fortios_firewall_policy:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_policy:
+        action: "accept"
+        name: "vlan_10x to wan1"
+        srcintf: 
+         - 
+           name: "vlan_10x"
+        dstintf: 
+         - 
+           name: "wan1"
+        srcaddr: 
+         - 
+           name: "vlan_10x address"
+        dstaddr: 
+         - 
+           name: "all"
+        schedule: "always"
+        service: 
+         - 
+           name: "HTTP"
+         -
+           name: "HTTPS"
+         - 
+           name: "DNS"
+         - 
+           name: "SSH"
+         - 
+           name: "ALL_ICMP"
+        fsso: "disable"
+        status: enable
+        policyid: 10xx
+
+```
+
+![Alt text](pics/012_azure_net_playbook.png?raw=true "firewall policy playbook")
+
+Save and commit to Git
+
+Log on to server "ansibleserver.ansible.local" using ssh
+
+Use git to get the new network playbook
+
+__Type:__
+
+```bash
+
+git pull
+
+cd ansibleclass
+
+ansible-playbook 03_forti_firewall_policy.yml
+
+```
+
+![Alt text](pics/013_azure_net_playbook_run.png?raw=true "firewall policy playbook run")
