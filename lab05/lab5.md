@@ -1,8 +1,8 @@
-# Lab 05: Network
+# Lab 5: Network
 
-In this session we configure a Fortigate firewall with address objects, vlan interface and firewall policies.
+In this session we will configure a Fortigate firewall with a new vlan interface, an address objects and three firewall policies.
 
-The network is to be used in Lab 6
+The network is to be used in Lab 6 Vmware playbook
 
 ## Task 1: Prepare ansibleserver
 
