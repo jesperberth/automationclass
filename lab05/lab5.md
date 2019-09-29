@@ -1,4 +1,4 @@
-# Lesson 05: Network
+# Lab 05: Network
 
 In this session we configure a Fortigate firewall with address objects, vlan interface and firewall policies.
 
@@ -12,7 +12,7 @@ Use your "userxx" account and password
 
 We need to install ansible and python modules for fortios
 
-Until ansible 2.9 is released, we need to use devel version
+<span style="color:red">Until ansible 2.9 is released, we need to use devel version</span>
 
 __Type:__
 
