@@ -10,7 +10,7 @@
      prompt: "Type the password of your fortigate admin account"
      private: no
   tasks:
-  - name: Configure admin users.
+  - name: Configure admin users
     fortios_system_admin:
       host:  "{{ host }}"
       username: "{{ username }}"

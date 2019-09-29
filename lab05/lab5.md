@@ -1,22 +1,21 @@
 # Lesson 05: Network
 
-In this session we will use Visual Studio Code and modules to work with ansible playbooks and create two playbooks, one for linux and one for windows
+In this session we configure a Fortigate firewall with address objects, vlan interface and firewall policies
 
 ## Prepare
 
-## Task 1: Setup Visual Studio Code
+## Task 1: Prepare ansibleserver
 
-Logon to ansible2.demo.local with ssh
+Logon to ansibleserver.ansible.local with ssh
 
 Use your "userxx" account and password
 
-We need to python modules for fortios
+We need to install ansible and python modules for fortios
+
+Until ansible 2.9 is released, we need to use devel version
 
 ``` bash
-
+pip3 install git+https://github.com/ansible/ansible.git@devel --user
 pip3 install fortiosapi --user
-pip3 install pip-tools --user
-pip3 install netaddr --user
-pip3 install pyfg --user
 
 ```

@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  vars:
+   host: "10.172.10.1"
+   username: "admin"
+   password: "Only4Demo!"
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Add User Vlan address object
+    fortios_firewall_address:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_address:
+        name: "vlan_101 address"
+        subnet: "10.172.101.0/24"
+        associated_interface: "vlan_101"
+        type: "Interface Subnet"

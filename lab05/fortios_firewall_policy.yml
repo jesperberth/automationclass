@@ -1,0 +1,59 @@
+---
+- hosts: localhost
+  vars:
+   host: "10.172.10.1"
+   username: "admin"
+   password: "Only4Demo!"
+   vdom: "root"
+   ssl_verify: "False"
+  #vars_prompt:
+  # - name: vpassword
+  #   prompt: "Type the password of your fortigate admin account"
+  #   private: no.
+  tasks:
+  - name: Configure interface
+    fortios_firewall_policy:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_policy:
+        action: "accept"
+        name: "switch to vlan_101"
+        srcintf: "switch"
+        dstintf: "vlan_101"
+        srcaddr: "switch address"
+        dstaddr: "vlan_101 address"
+        schedule: "always"
+        service: "ALL"
+        fsso: "disable"
+
+
+       
+
+
+#edit 2
+#        set name "switch to vlan_24"
+#        set uuid 342b9a12-d93e-51e9-9d2e-815898e2953f
+#        set srcintf "switch"
+#       set dstintf "vlan_24"
+#        set srcaddr "switch address"
+#        set dstaddr "vlan_24 address"
+#        set action accept
+#        set schedule "always"
+#        set service "ALL"
+#        set fsso disable
+#    next
+#    edit 3
+#        set name "vlan_24 to switch"
+#        set uuid 5e9f1d64-d93e-51e9-ba7f-116c16468921
+#        set srcintf "vlan_24"
+#        set dstintf "switch"
+#        set srcaddr "vlan_24 address"
+#        set dstaddr "vlan_24 address"
+#        set action accept
+#        set schedule "always"
+#        set service "ALL"
+#        set fsso disable
