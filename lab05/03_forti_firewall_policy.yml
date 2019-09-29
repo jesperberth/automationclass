@@ -3,13 +3,12 @@
   vars:
    host: "10.172.10.1"
    username: "admin"
-   password: "Only4Demo!"
    vdom: "root"
    ssl_verify: "False"
-  #vars_prompt:
-  # - name: vpassword
-  #   prompt: "Type the password of your fortigate admin account"
-  #   private: no.
+  vars_prompt:
+  - name: password
+    prompt: "Type the password of your fortigate admin account"
+    private: no.
   tasks:
   - name: Configure firewall interface switch -> vlan_101
     fortios_firewall_policy:

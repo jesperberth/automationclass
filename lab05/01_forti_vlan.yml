@@ -2,14 +2,13 @@
 - hosts: localhost
   vars:
    host: "10.172.10.1"
-   username: "admin"
-   password: "Only4Demo!"
+   username: "userxx"
    vdom: "root"
    ssl_verify: "False"
-  #vars_prompt:
-  # - name: vpassword
-  #   prompt: "Type the password of your fortigate admin account"
-  #   private: no
+  vars_prompt:
+  - name: password
+    prompt: "Type the password of your fortigate admin account"
+    private: no
   tasks:
   - name: Configure interface
     fortios_system_interface:
