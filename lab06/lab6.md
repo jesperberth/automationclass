@@ -208,7 +208,23 @@ In the vmware webconsole check under virtual machines that your vm is created
 
 ## Task 4: Configure webserver
 
-[Ansible Vmware Guest](https://docs.ansible.com/ansible/latest/modules/vmware_guest_module.html#vmware-guest-module)
+[Ansible Module user](https://docs.ansible.com/ansible/latest/modules/user_module.html)
+
+[Ansible Module set_fact](https://docs.ansible.com/ansible/latest/modules/set_fact_module.html)
+
+[Ansible Module debug](https://docs.ansible.com/ansible/latest/modules/debug_module.html)
+
+[Ansible Module add_host](https://docs.ansible.com/ansible/latest/modules/add_host_module.html?highlight=add_host)
+
+[Ansible Module shell](https://docs.ansible.com/ansible/latest/modules/shell_module.html?highlight=shell)
+
+[Ansible Module dnf](https://docs.ansible.com/ansible/latest/modules/dnf_module.html)
+
+[Ansible Module systemd](https://docs.ansible.com/ansible/latest/modules/systemd_module.html)
+
+[Ansible Module firewalld]()https://docs.ansible.com/ansible/latest/modules/firewalld_module.html
+
+[Ansible Module template](https://docs.ansible.com/ansible/latest/modules/template_module.html)
 
 In VSCode
 
@@ -252,33 +268,38 @@ add below task to the file 01_vmware.yml
      websiteheader: "Ansible Playbook in vmware"
      websiteauthor: "Ansible trainee"
    tasks:
+   - name: Install Apache
+     dnf:
+      name: httpd
+      state: latest
+
    - name: Enable Apache
-    systemd:
+     systemd:
       name: httpd
       enabled: yes
       state: started
 
-  - name: Allow http in firewall
-    firewalld:
+   - name: Allow http in firewall
+     firewalld:
       service: http
       permanent: true
       state: enabled
       immediate: yes
-    notify:
-      - reload firewall
+     notify:
+       - reload firewall
   
-  - name: Add index.html
-    template:
-      src: index.html.j2
-      dest: /var/www/html/index.html
-      owner: root
-      group: root
+   - name: Add index.html
+     template:
+       src: index.html.j2
+       dest: /var/www/html/index.html
+       owner: root
+       group: root
 
-  handlers:
-  - name: reload firewall
-    service:
-      name: firewalld
-      state: reloaded
+   handlers:
+   - name: reload firewall
+     service:
+       name: firewalld
+       state: reloaded
 ```
 
 ![Alt text](pics/10_configure_vm.png?raw=true "configure vm playbook")
