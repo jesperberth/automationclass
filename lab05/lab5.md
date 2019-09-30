@@ -123,7 +123,7 @@ You need to change the "username" and "name", "subnet" and "associated_interface
   vars_prompt:
   - name: password
     prompt: "Type the password of your fortigate admin account"
-    private: no.
+    private: no
   tasks:
   - name: Add User Vlan address object
     fortios_firewall_address:
@@ -134,10 +134,9 @@ You need to change the "username" and "name", "subnet" and "associated_interface
       https: "False"
       state: "present"
       firewall_address:
-        name: "vlan_10x address"
+        name: "vlan_10x Subnet"
         subnet: "10.172.10x.0/24"
         associated_interface: "vlan_10x"
-        type: "Interface Subnet"
 ```
 
 ![Alt text](pics/004_forti_address_playbook.png?raw=true "address playbook")
