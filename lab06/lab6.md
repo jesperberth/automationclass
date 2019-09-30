@@ -222,7 +222,7 @@ In the vmware webconsole check under virtual machines that your vm is created
 
 [Ansible Module systemd](https://docs.ansible.com/ansible/latest/modules/systemd_module.html)
 
-[Ansible Module firewalld]()https://docs.ansible.com/ansible/latest/modules/firewalld_module.html
+[Ansible Module firewalld](https://docs.ansible.com/ansible/latest/modules/firewalld_module.html)
 
 [Ansible Module template](https://docs.ansible.com/ansible/latest/modules/template_module.html)
 
