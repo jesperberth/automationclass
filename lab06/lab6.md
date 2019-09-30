@@ -281,7 +281,7 @@ add below task to the file 01_vmware.yml
       state: reloaded
 ```
 
-![Alt text](pics/07_add_vm.png?raw=true "configure vm playbook")
+![Alt text](pics/10_configure_vm.png?raw=true "configure vm playbook")
 
 Save and commit to Git
 
@@ -300,7 +300,7 @@ ansible-playbook 01_vmware.yml
 
 ```
 
-![Alt text](pics/08_add_vm_run.png?raw=true "add vm playbook run")
+![Alt text](pics/11_configure_vm_run.png?raw=true "configure vm playbook run")
 
 Check the result in a browser
 
@@ -308,4 +308,4 @@ Check the result in a browser
 http://<your webserver ip>
 ```
 
-![Alt text](pics/09_website.png?raw=true "website")
+![Alt text](pics/12_website.png?raw=true "website")
