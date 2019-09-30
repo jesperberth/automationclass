@@ -12,7 +12,8 @@ Use your "userxx" account and password
 
 We need to install ansible and python modules for fortios
 
-__Until ansible 2.9 is released, we need to use devel version__
+__Important:__
+Until ansible 2.9 is released, we need to use devel version
 
 __Type:__
 

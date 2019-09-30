@@ -18,15 +18,17 @@ pip3 install pyvmomi --user
 ansible --version
 ```
 
+![Alt text](pics/00_install_pyvmomi.png?raw=true "nfs playbook")
+
 ## Task 2: Add NFS storage to ESXi host
 
 [Ansible VMware Datastore](https://docs.ansible.com/ansible/latest/modules/vmware_host_datastore_module.html#vmware-host-datastore-module)
 
 In VSCode
 
-create a new playbook file 01_vmware_NFS.yml and add below
+create a new playbook file 01_vmware.yml and add below
 
-__Note:__
+Change "username", "nfs_user", "portgroup_name" and "vlan_id"
 
 ```ansible
 ---
@@ -34,50 +36,56 @@ __Note:__
   vars:
     hostname: "vcenter.ansible.local"
     esxihostname: "esxi.ansible.local"
-    username: "userxx"
+    username: "userxx@vsphere.local"
     password: "Password1!"
-    nfs_user: "NFS_userx"
+    nfs_user: "userxx"
+    portgroup_name: "vlan10x"
+    vlan_id: "10x"
   tasks:
   - name: Add NFS Storage ESXi
     vmware_host_datastore:
       hostname: "{{ hostname }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      esxi_hostname: "{{ esxi.ansible.local }}"
-      datastore_name: "{{ nfs_user }}"
-      datastore_type: nfs
-      nfs_server: storage.ansible.local
-      nfs_path: "/storage/{{ username }}"
-      nfs_ro: no
-      state: present
-      validate_certs: False
-    delegate_to: localhost
+      esxi_hostname: "{{ esxihostname }}"
+      datastore_name: "datastore_{{ nfs_user }}"
+      datastore_type: "nfs"
+      nfs_server: "storage.ansible.local"
+      nfs_path: "/storage/{{ nfs_user }}"
+      nfs_ro: "no"
+      state: "present"
+      validate_certs: "False"
+    delegate_to: "localhost"
 ```
 
 ![Alt text](pics/01_add_nfs_to_vmware.png?raw=true "nfs playbook")
 
-__Type:__
+Save and commit to Git
 
-```bash
-Hit Esc-key
+Log on to server "ansibleserver.ansible.local" using ssh
 
-wq (: for a command w for write and q for quit vi)
-```
+Use git to get the new network playbook
 
-Let's run the playbook
+Change url to your own repository
 
 __Type:__
 
 ```bash
+cd ansibleclass
+
 git pull
 
-ansible-playbook 01_vmware_NFS.yml.yml
+ansible-playbook 01_vmware.yml
 
 ```
 
 ![Alt text](pics/02_add_nfs_to_vmware_play.png?raw=true "nfs playbook run")
 
-In the vmware host webconsole check under storage that your nfs share is connected
+Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local)
+
+Use your userxx@vsphere.local and password
+
+In the vmware webconsole check under storage that your nfs share is connected
 
 ![Alt text](pics/03_add_nfs_to_vmware_connect.png?raw=true "nfs vmware")
 
@@ -85,59 +93,51 @@ In the vmware host webconsole check under storage that your nfs share is connect
 
 [Ansible VMware PortGroup](https://docs.ansible.com/ansible/latest/modules/vmware_portgroup_module.html#vmware-portgroup-module)
 
-__Type:__
+In VSCode
 
-```bash
-vi add_portgroup_to_vmware.yml
+add below task to the file 01_vmware.yml
 
-i for insert
-
----
-- hosts: localhost
-  vars:
-    hostname: 192.168.130.242
-    username: userx
-    password: P@s$w0rd!
-    portgroup_name: vlan101
-    vlan_id: 101
-  tasks:
+```ansible
   - name: Add a PortGroup to VMware vSwitch
     vmware_portgroup:
       hostname: "{{ hostname }}"
       username: "{{ username }}"
       password: "{{ password }}"
       validate_certs: False
-      switch_name: user_vswitch
-      esxi_hostname: esxi.arrowdemo.local
+      switch_name: "VM Network"
+      esxi_hostname: "{{ esxihostname }}"
       portgroup_name: "{{ portgroup_name }}"
       vlan_id: "{{ vlan_id }}"
     delegate_to: localhost
 
 ```
 
-__Type:__
-
-```bash
-Hit Esc-key
-
-:wq (: for a command w for write and q for quit vi)
-```
-
 ![Alt text](pics/04_add_portgroup_to_vmware.png?raw=true "portgroup playbook")
 
-Let's run the playbook
+Save and commit to Git
+
+Log on to server "ansibleserver.ansible.local" using ssh
+
+Use git to get the new network playbook
 
 __Type:__
 
 ```bash
+cd ansibleclass
 
-ansible-playbook add_portgroup_to_vmware.yml
+git pull
+
+ansible-playbook 01_vmware.yml
 
 ```
 
 ![Alt text](pics/05_add_portgroup_to_vmware_run.png?raw=true "portgroup playbook run")
 
-In the vmware host webconsole check under networking/port groups that your vlan is created
+Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local)
+
+Use your userxx@vsphere.local and password
+
+In the vmware webconsole check under networking/port groups that your vlan is created
 
 ![Alt text](pics/06_add_portgroup_to_vmware_created.png?raw=true "nfs vmware")
 
