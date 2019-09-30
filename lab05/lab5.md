@@ -46,7 +46,8 @@ You need to change the "username" and "vlan name", "vlan id" and "IP"
   vars:
    host: "10.172.10.1"
    username: "userxx"
-   vdom: "root"
+   vlanid: "xxx"
+   vdom:"root"
    ssl_verify: "False"
   vars_prompt:
    - name: password
@@ -62,12 +63,12 @@ You need to change the "username" and "vlan name", "vlan id" and "IP"
       https: "False"
       state: "present"
       system_interface:
-        name: "vlan_10x"
+        name: "vlan_{{ vlanid }}"
         allowaccess: "ping"
         mode: "static"
-        ip: "10.172.10x.1/24"
+        ip: "10.172.{{ vlanid }}.1/24"
         type: "vlan"
-        vlanid: "10x"
+        vlanid: "{{ vlanid }}"
         role: "lan"
         interface: "switch"
         status: "up"
@@ -118,6 +119,7 @@ You need to change the "username" and "name", "subnet" and "associated_interface
   vars:
    host: "10.172.10.1"
    username: "userxx"
+   vlanid: "xxx"
    vdom: "root"
    ssl_verify: "False"
   vars_prompt:
@@ -134,9 +136,9 @@ You need to change the "username" and "name", "subnet" and "associated_interface
       https: "False"
       state: "present"
       firewall_address:
-        name: "vlan_10x address"
-        subnet: "10.172.10x.0/24"
-        associated_interface: "vlan_10x"
+        name: "vlan_{{ vlanid }} address"
+        subnet: "10.172.{{ vlanid }}.0/24"
+        associated_interface: "vlan_{{ vlanid }}"
 ```
 
 ![Alt text](pics/004_forti_address_playbook.png?raw=true "address playbook")
@@ -177,7 +179,7 @@ create a new playbook file 03_forti_firewall_policy.yml and add below
 
 __Note:__
 
-You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "dstaddr" and "srcaddr" on all three policies
+You need to change the "username" and "vlanid"
 
 ```ansible
 ---
@@ -185,6 +187,7 @@ You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "
   vars:
    host: "10.172.10.1"
    username: "userxx"
+   vlanid: "xxx"
    vdom: "root"
    ssl_verify: "False"
   vars_prompt:
@@ -202,19 +205,19 @@ You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "
       state: "present"
       firewall_policy:
         action: "accept"
-        name: "switch to vlan_10x"
+        name: "switch to vlan_{{ vlanid }}"
         srcintf:
          -
            name: "switch"
         dstintf:
          -
-           name: "vlan_10x"
+           name: "vlan_{{ vlanid }}"
         srcaddr:
          -
            name: "switch address"
         dstaddr:
          -
-           name: "vlan_10x address"
+           name: "vlan_{{ vlanid }} address"
         schedule: "always"
         service:
          -
@@ -223,7 +226,7 @@ You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "
            name: "SSH"
         fsso: "disable"
         status: enable
-        policyid: 10xx
+        policyid: "{{ vlanid }}1"
   - name: Configure firewall interface vlan_10x -> switch
     fortios_firewall_policy:
       host:  "{{ host }}"
@@ -234,16 +237,16 @@ You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "
       state: "present"
       firewall_policy:
         action: "accept"
-        name: "vlan_10x to switch"
+        name: "vlan_{{ vlanid }} to switch"
         srcintf:
          -
-           name: "vlan_10x"
+           name: "vlan_{{ vlanid }}"
         dstintf:
          -
            name: "switch"
         srcaddr:
          -
-           name: "vlan_10x address"
+           name: "vlan_{{ vlanid }} address"
         dstaddr:
          -
            name: "switch address"
@@ -253,7 +256,7 @@ You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "
            name: "ALL"
         fsso: "disable"
         status: enable
-        policyid: 10xx
+        policyid: "{{ vlanid }}2"
   - name: Configure firewall interface vlan_10x -> wan1
     fortios_firewall_policy:
       host:  "{{ host }}"
@@ -264,16 +267,16 @@ You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "
       state: "present"
       firewall_policy:
         action: "accept"
-        name: "vlan_10x to wan1"
+        name: "vlan_{{ vlanid }} to wan1"
         srcintf:
          -
-           name: "vlan_10x"
+           name: "vlan_{{ vlanid }}"
         dstintf:
          -
            name: "wan1"
         srcaddr:
          -
-           name: "vlan_10x address"
+           name: "vlan_{{ vlanid }} address"
         dstaddr:
          -
            name: "all"
@@ -291,7 +294,8 @@ You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "
            name: "ALL_ICMP"
         fsso: "disable"
         status: enable
-        policyid: 10xx
+        policyid: "{{ vlanid }}3"
+        nat: "enable"
 ```
 
 ![Alt text](pics/006_forti_fw_policy_playbook.png?raw=true "firewall policy playbook")
