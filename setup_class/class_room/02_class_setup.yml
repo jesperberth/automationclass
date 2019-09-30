@@ -403,6 +403,11 @@
         [ansibleserver]
         ansibleserver.ansible.local
 
+  - name: Install Git
+    dnf:
+      name: git
+      state: present
+
   - name: Install pip
     pip:
       name: pip
