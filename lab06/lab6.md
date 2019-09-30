@@ -66,8 +66,6 @@ Log on to server "ansibleserver.ansible.local" using ssh
 
 Use git to get the new network playbook
 
-Change url to your own repository
-
 __Type:__
 
 ```bash
@@ -144,3 +142,74 @@ In the vmware webconsole check under networking/port groups that your vlan is cr
 ## Task 3: Add a VM to ESXi host
 
 [Ansible Vmware Guest](https://docs.ansible.com/ansible/latest/modules/vmware_guest_module.html#vmware-guest-module)
+
+In VSCode
+
+add below task to the file 01_vmware.yml
+
+Change the following
+
+- "name"
+- "datastore"
+- "name" on the second disk
+- "name" for the network
+- "register"
+
+```ansible
+
+  - name: Clone fedora 30 to userxx webserver
+    vmware_guest:
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: "False"
+      name: "webserver_{{ nfsuser }}"
+      template: "_TEMP_fedora30"
+      datacenter: "Datacenter"
+      folder: "/"
+      state: "poweredon"
+      hardware:
+        memory_mb: "1024"
+        num_cpus: "1"
+      disk:
+      - size_gb: "16"
+        type: "thin"
+        datastore: "datastore1"
+      - size_gb: "2"
+        type: "thin"
+        datastore: "datastore_{{ nfsuser }}"
+      networks:
+      - name: "{{ portgroup_name }}"
+      wait_for_ip_address: "yes"
+    register: "webserver_{{ nfsuser }}"
+
+```
+
+![Alt text](pics/07_add_vm.png?raw=true "add vm playbook")
+
+Save and commit to Git
+
+Log on to server "ansibleserver.ansible.local" using ssh
+
+Use git to get the new network playbook
+
+__Type:__
+
+```bash
+cd ansibleclass
+
+git pull
+
+ansible-playbook 01_vmware.yml
+
+```
+
+![Alt text](pics/08_add_vm_run.png?raw=true "add vm playbook run")
+
+Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local)
+
+Use your userxx@vsphere.local and password
+
+In the vmware webconsole check under virtual machines that your vm is created
+
+![Alt text](pics/09_add_vm_vmware_created.png?raw=true "add vm in vmware")
