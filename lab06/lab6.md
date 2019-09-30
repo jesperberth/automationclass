@@ -1,26 +1,18 @@
-# Lesson 06: Ansible VMware
+# Lab 6: Ansible VMware
 
-In this session we will use ansible to manage a vmware esxi host, adding NFS storage, PortGroup to a virtual switch
-
-## Prepare
-
-``` bash
-
-
-```
+In this session we will use ansible to manage a vmware esxi host, adding NFS storage, PortGroup to a virtual switch a virtual machine from template and install http inside the virtual machine.
 
 ## Task 1: Install Ansible on ansible2.demo.local
 
-Logon to ansible2.demo.local with ssh
+Logon to ansibleserver.ansible.local with ssh
 
 Use your "userxx" account and password
 
-We need to install ansible and the python modules for vmware
+We need to install the python modules for vmware
 
 __Type:__
 
 ```bash
-pip3 install ansible --user
 pip3 install pyvmomi --user
 
 ansible --version
@@ -30,26 +22,20 @@ ansible --version
 
 [Ansible VMware Datastore](https://docs.ansible.com/ansible/latest/modules/vmware_host_datastore_module.html#vmware-host-datastore-module)
 
-In your browser logon to the esxi host
+In VSCode
 
-esxi.demo.local or ip 10.172.10.10 with you userxx
+create a new playbook file 01_vmware_NFS.yml and add below
 
-Logon to ansible2.demo.local with ssh
+__Note:__
 
-__Type:__
-
-```bash
-vi add_nfs_to_vmware.yml
-
-i for insert
-
+```ansible
 ---
 - hosts: localhost
   vars:
-    hostname: 192.168.130.242
-    username: userx
-    password: P@s$w0rd!
-    nfs_user: NFS_userx
+    hostname: "vcenter.ansible.local"
+    username: "userxx"
+    password: "Password1!"
+    nfs_user: "NFS_userx"
   tasks:
   - name: Add NFS Storage ESXi
     vmware_host_datastore:
@@ -59,7 +45,7 @@ i for insert
       esxi_hostname: esxi.arrowdemo.local
       datastore_name: "{{ nfs_user }}"
       datastore_type: nfs
-      nfs_server: 192.168.130.251
+      nfs_server: storage.ansible.local
       nfs_path: "/storage/{{ username }}"
       nfs_ro: no
       state: present
@@ -83,8 +69,9 @@ Let's run the playbook
 __Type:__
 
 ```bash
+git pull
 
-ansible-playbook add_nfs_to_vmware.yml
+ansible-playbook 01_vmware_NFS.yml.yml
 
 ```
 
