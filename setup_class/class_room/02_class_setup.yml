@@ -359,8 +359,8 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
     # created with:
-    # python -c 'import crypt; print crypt.crypt("This is my Password", "$1$SomeSalt$")'
-    password: $1$SomeSalt$UqddPX3r4kH3UL5jq5/ZI.
+    # python -c 'import crypt; print crypt.crypt("Password1!", "$1$SomeSalt$")'
+    password: $1$SomeSalt$RbNzd0Xe5890jjO0C0bJS1
   tasks:
 # Create local users
   - name: Create Users
