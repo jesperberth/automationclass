@@ -252,33 +252,38 @@ add below task to the file 01_vmware.yml
      websiteheader: "Ansible Playbook in vmware"
      websiteauthor: "Ansible trainee"
    tasks:
+   - name: Install Apache
+     dnf:
+       name: httpd
+       state: latest
+
    - name: Enable Apache
-    systemd:
+     systemd:
       name: httpd
       enabled: yes
       state: started
 
-  - name: Allow http in firewall
-    firewalld:
-      service: http
-      permanent: true
-      state: enabled
-      immediate: yes
-    notify:
-      - reload firewall
+   - name: Allow http in firewall
+     firewalld:
+       service: http
+       permanent: true
+       state: enabled
+       immediate: yes
+     notify:
+       - reload firewall
   
-  - name: Add index.html
-    template:
-      src: index.html.j2
-      dest: /var/www/html/index.html
-      owner: root
-      group: root
+   - name: Add index.html
+     template:
+       src: index.html.j2
+       dest: /var/www/html/index.html
+       owner: root
+       group: root
 
-  handlers:
-  - name: reload firewall
-    service:
-      name: firewalld
-      state: reloaded
+   handlers:
+   - name: reload firewall
+     service:
+       name: firewalld
+       state: reloaded
 ```
 
 ![Alt text](pics/10_configure_vm.png?raw=true "configure vm playbook")
