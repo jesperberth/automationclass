@@ -270,13 +270,8 @@ add below task to the file 01_vmware.yml
    tasks:
    - name: Install Apache
      dnf:
-<<<<<<< HEAD
       name: httpd
       state: latest
-=======
-       name: httpd
-       state: latest
->>>>>>> 50b5e3bd198b752038fcf0fdb3025e887fc22b0f
 
    - name: Enable Apache
      systemd:
@@ -286,17 +281,10 @@ add below task to the file 01_vmware.yml
 
    - name: Allow http in firewall
      firewalld:
-<<<<<<< HEAD
       service: http
       permanent: true
       state: enabled
       immediate: yes
-=======
-       service: http
-       permanent: true
-       state: enabled
-       immediate: yes
->>>>>>> 50b5e3bd198b752038fcf0fdb3025e887fc22b0f
      notify:
        - reload firewall
   
