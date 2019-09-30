@@ -33,6 +33,7 @@ __Note:__
 - hosts: localhost
   vars:
     hostname: "vcenter.ansible.local"
+    esxihostname: "esxi.ansible.local"
     username: "userxx"
     password: "Password1!"
     nfs_user: "NFS_userx"
@@ -42,7 +43,7 @@ __Note:__
       hostname: "{{ hostname }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      esxi_hostname: esxi.arrowdemo.local
+      esxi_hostname: "{{ esxi.ansible.local }}"
       datastore_name: "{{ nfs_user }}"
       datastore_type: nfs
       nfs_server: storage.ansible.local
@@ -51,7 +52,6 @@ __Note:__
       state: present
       validate_certs: False
     delegate_to: localhost
-
 ```
 
 ![Alt text](pics/01_add_nfs_to_vmware.png?raw=true "nfs playbook")

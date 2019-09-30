@@ -403,6 +403,6 @@
         [ansibleserver]
         ansibleserver.ansible.local
 
-  - name: Install pip 9.0.3
+  - name: Install pip
     pip:
-      name: pip==9.0.3
+      name: pip
