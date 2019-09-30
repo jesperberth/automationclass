@@ -315,3 +315,5 @@ ansible-playbook 03_forti_firewall_policy.yml
 ```
 
 ![Alt text](pics/006_forti_fw_policy_playbook_run.png?raw=true "firewall policy playbook run")
+
+[Vmware Playbooks](../lab06/lab6.md)

@@ -570,3 +570,5 @@ http://<your webserver ip>
 ```
 
 ![Alt text](pics/026_webserver.png?raw=true "webserver")
+
+[Network Playbooks](../lab05/lab5.md)

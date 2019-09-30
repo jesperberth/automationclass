@@ -302,6 +302,10 @@ ansible-playbook 01_vmware.yml
 
 ![Alt text](pics/08_add_vm_run.png?raw=true "add vm playbook run")
 
-Open your browser and go to [<you vm ip>](http://10.172.xxx.2)
+Check the result in a browser
+
+```code
+http://<your webserver ip>
+```
 
 ![Alt text](pics/09_website.png?raw=true "website")
