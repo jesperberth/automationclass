@@ -134,7 +134,7 @@ You need to change the "username" and "name", "subnet" and "associated_interface
       https: "False"
       state: "present"
       firewall_address:
-        name: "vlan_10x Subnet"
+        name: "vlan_10x address"
         subnet: "10.172.10x.0/24"
         associated_interface: "vlan_10x"
 ```
@@ -188,9 +188,9 @@ You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "
    vdom: "root"
    ssl_verify: "False"
   vars_prompt:
-  - name: password
-    prompt: "Type the password of your fortigate admin account"
-    private: no.
+   - name: password
+     prompt: "Type the password of your fortigate admin account"
+     private: no
   tasks:
   - name: Configure firewall interface switch -> vlan_10x
     fortios_firewall_policy:
@@ -292,7 +292,6 @@ You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "
         fsso: "disable"
         status: enable
         policyid: 10xx
-
 ```
 
 ![Alt text](pics/006_forti_fw_policy_playbook.png?raw=true "firewall policy playbook")
