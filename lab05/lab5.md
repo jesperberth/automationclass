@@ -74,7 +74,7 @@ You need to change the "username" and "vlan name", "vlan id" and "IP"
         vdom: "root"
 ```
 
-![Alt text](pics/012_azure_net_playbook.png?raw=true "vlan playbook")
+![Alt text](pics/002_forti_vlan_playbook.png?raw=true "vlan playbook")
 
 Save and commit to Git
 
@@ -96,7 +96,7 @@ ansible-playbook 01_forti_vlan.yml
 
 ```
 
-![Alt text](pics/013_azure_net_playbook_run.png?raw=true "vlan playbook run")
+![Alt text](pics/003_forti_vlan_playbook_run.png?raw=true "vlan playbook run")
 
 ## Task 3: Create address objects on the fortigate firewall
 
@@ -140,7 +140,7 @@ You need to change the "username" and "name", "subnet" and "associated_interface
         type: "Interface Subnet"
 ```
 
-![Alt text](pics/012_azure_net_playbook.png?raw=true "address playbook")
+![Alt text](pics/004_forti_address_playbook.png?raw=true "address playbook")
 
 Save and commit to Git
 
@@ -160,13 +160,14 @@ ansible-playbook 02_forti_address.yml
 
 ```
 
-![Alt text](pics/013_azure_net_playbook_run.png?raw=true "address playbook run")
+![Alt text](pics/005_forti_fw_address_playbook_run.png?raw=true "address playbook run")
 
 ## Task 4: Create firewall policies on the fortigate firewall
 
 [Ansible module fortios_firewall_policy](https://docs.ansible.com/ansible/latest/modules/fortios_firewall_policy_module.html#fortios-firewall-policy-module)
 
-We will create 3 firewall policies 
+We will create 3 firewall policies
+
 - switch to vlan_10x - service HTTP, SSH
 - vlan_10x to switch - service ALL
 - vlan_10x to Wan - service HTTP, HTTPS, SSH, DNS, ICMP_ALL
@@ -203,21 +204,21 @@ You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "
       firewall_policy:
         action: "accept"
         name: "switch to vlan_10x"
-        srcintf: 
-         - 
+        srcintf:
+         -
            name: "switch"
-        dstintf: 
-         - 
+        dstintf:
+         -
            name: "vlan_10x"
-        srcaddr: 
-         - 
+        srcaddr:
+         -
            name: "switch address"
-        dstaddr: 
-         - 
+        dstaddr:
+         -
            name: "vlan_10x address"
         schedule: "always"
-        service: 
-         - 
+        service:
+         -
            name: "HTTP"
          -
            name: "SSH"
@@ -235,21 +236,21 @@ You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "
       firewall_policy:
         action: "accept"
         name: "vlan_10x to switch"
-        srcintf: 
-         - 
+        srcintf:
+         -
            name: "vlan_10x"
-        dstintf: 
-         - 
+        dstintf:
+         -
            name: "switch"
-        srcaddr: 
-         - 
+        srcaddr:
+         -
            name: "vlan_10x address"
-        dstaddr: 
-         - 
+        dstaddr:
+         -
            name: "switch address"
         schedule: "always"
-        service: 
-         - 
+        service:
+         -
            name: "ALL"
         fsso: "disable"
         status: enable
@@ -265,29 +266,29 @@ You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "
       firewall_policy:
         action: "accept"
         name: "vlan_10x to wan1"
-        srcintf: 
-         - 
+        srcintf:
+         -
            name: "vlan_10x"
-        dstintf: 
-         - 
+        dstintf:
+         -
            name: "wan1"
-        srcaddr: 
-         - 
+        srcaddr:
+         -
            name: "vlan_10x address"
-        dstaddr: 
-         - 
+        dstaddr:
+         -
            name: "all"
         schedule: "always"
-        service: 
-         - 
+        service:
+         -
            name: "HTTP"
          -
            name: "HTTPS"
-         - 
+         -
            name: "DNS"
-         - 
+         -
            name: "SSH"
-         - 
+         -
            name: "ALL_ICMP"
         fsso: "disable"
         status: enable
@@ -295,7 +296,7 @@ You need to change the "username" and "name", "vlan id", "dstintf", "srcintf", "
 
 ```
 
-![Alt text](pics/012_azure_net_playbook.png?raw=true "firewall policy playbook")
+![Alt text](pics/006_forti_fw_policy_playbook.png?raw=true "firewall policy playbook")
 
 Save and commit to Git
 
@@ -315,4 +316,4 @@ ansible-playbook 03_forti_firewall_policy.yml
 
 ```
 
-![Alt text](pics/013_azure_net_playbook_run.png?raw=true "firewall policy playbook run")
+![Alt text](pics/006_forti_fw_policy_playbook_run.png?raw=true "firewall policy playbook run")

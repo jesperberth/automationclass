@@ -64,7 +64,7 @@ Save and commit to Git
 
 Log on to server "ansibleserver.ansible.local" using ssh
 
-Use git to get the new network playbook
+Use git to get the playbook
 
 __Type:__
 
@@ -116,7 +116,7 @@ Save and commit to Git
 
 Log on to server "ansibleserver.ansible.local" using ssh
 
-Use git to get the new network playbook
+Use git to get the playbook
 
 __Type:__
 
@@ -147,14 +147,6 @@ In VSCode
 
 add below task to the file 01_vmware.yml
 
-Change the following
-
-- "name"
-- "datastore"
-- "name" on the second disk
-- "name" for the network
-- "register"
-
 ```ansible
 
   - name: Clone fedora 30 to userxx webserver
@@ -163,7 +155,7 @@ Change the following
       username: "{{ username }}"
       password: "{{ password }}"
       validate_certs: "False"
-      name: "webserver_{{ nfsuser }}"
+      name: "webserver_{{ nfs_user }}"
       template: "_TEMP_fedora30"
       datacenter: "Datacenter"
       folder: "/"
@@ -177,11 +169,11 @@ Change the following
         datastore: "datastore1"
       - size_gb: "2"
         type: "thin"
-        datastore: "datastore_{{ nfsuser }}"
+        datastore: "datastore_{{ nfs_user }}"
       networks:
       - name: "{{ portgroup_name }}"
       wait_for_ip_address: "yes"
-    register: "webserver_{{ nfsuser }}"
+    register: "webserver_{{ nfs_user }}"
 
 ```
 
@@ -191,7 +183,7 @@ Save and commit to Git
 
 Log on to server "ansibleserver.ansible.local" using ssh
 
-Use git to get the new network playbook
+Use git to get the playbook
 
 __Type:__
 
@@ -213,3 +205,65 @@ Use your userxx@vsphere.local and password
 In the vmware webconsole check under virtual machines that your vm is created
 
 ![Alt text](pics/09_add_vm_vmware_created.png?raw=true "add vm in vmware")
+
+## Task 4: Configure webserver
+
+[Ansible Vmware Guest](https://docs.ansible.com/ansible/latest/modules/vmware_guest_module.html#vmware-guest-module)
+
+In VSCode
+
+add below task to the file 01_vmware.yml
+
+```ansible
+# Prepare ansible for webserver
+   - name: IP address info webserver
+     debug:
+       msg: "{{ webserver.instance.ipv4 }}"
+
+   - name: Set Fact storagevm_ip_fact
+     set_fact:
+      webserver_ip_fact: "{{ storagevm.instance.ipv4 }}"
+
+   - name: IP address info
+     debug:
+       msg: "{{ webserver_ip_fact }}"
+
+   - name: add storagevm to ansible in memory host file
+     add_host:
+      name: "{{ webserver_ip_fact }}"
+      groups: webserver
+
+   - name: Copy SSH ID
+     shell: |
+      ssh-copy-id "{{ ansible_user_id }}@{{ webserver_ip_fact }}"
+
+-  hosts: storagetmp
+   become: yes
+   tasks:
+   - name: Install Apache
+     dnf:
+      name: httpd
+      state: latest
+
+```
+
+![Alt text](pics/07_add_vm.png?raw=true "configure vm playbook")
+
+Save and commit to Git
+
+Log on to server "ansibleserver.ansible.local" using ssh
+
+Use git to get the playbook
+
+__Type:__
+
+```bash
+cd ansibleclass
+
+git pull
+
+ansible-playbook 01_vmware.yml
+
+```
+
+![Alt text](pics/08_add_vm_run.png?raw=true "add vm playbook run")
