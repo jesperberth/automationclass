@@ -216,35 +216,69 @@ add below task to the file 01_vmware.yml
 
 ```ansible
 # Prepare ansible for webserver
+   - name: Generate SSH keys
+     user:
+       name: "{{ ansible_user_id }}"
+       generate_ssh_key: yes
+       ssh_key_bits: 2048
+       ssh_key_file: .ssh/id_rsa
+
    - name: IP address info webserver
      debug:
        msg: "{{ webserver.instance.ipv4 }}"
 
-   - name: Set Fact storagevm_ip_fact
+   - name: Set Fact webserver_ip_fact
      set_fact:
-      webserver_ip_fact: "{{ storagevm.instance.ipv4 }}"
+      webserver_ip_fact: "{{ webserver.instance.ipv4 }}"
 
    - name: IP address info
      debug:
        msg: "{{ webserver_ip_fact }}"
 
-   - name: add storagevm to ansible in memory host file
+   - name: add webserver to ansible in memory host file
      add_host:
       name: "{{ webserver_ip_fact }}"
       groups: webserver
 
    - name: Copy SSH ID
      shell: |
-      ssh-copy-id "{{ ansible_user_id }}@{{ webserver_ip_fact }}"
+      ssh-copy-id "root@{{ webserver_ip_fact }}"
 
--  hosts: storagetmp
-   become: yes
+-  hosts: webserver
+   remote_user: "root"
+   become: "yes"
+   vars:
+     ansible_python_interpreter: /usr/bin/python3
+     websiteheader: "Ansible Playbook in vmware"
+     websiteauthor: "Ansible trainee"
    tasks:
-   - name: Install Apache
-     dnf:
+   - name: Enable Apache
+    systemd:
       name: httpd
-      state: latest
+      enabled: yes
+      state: started
 
+  - name: Allow http in firewall
+    firewalld:
+      service: http
+      permanent: true
+      state: enabled
+      immediate: yes
+    notify:
+      - reload firewall
+  
+  - name: Add index.html
+    template:
+      src: index.html.j2
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+
+  handlers:
+  - name: reload firewall
+    service:
+      name: firewalld
+      state: reloaded
 ```
 
 ![Alt text](pics/07_add_vm.png?raw=true "configure vm playbook")
@@ -267,3 +301,7 @@ ansible-playbook 01_vmware.yml
 ```
 
 ![Alt text](pics/08_add_vm_run.png?raw=true "add vm playbook run")
+
+Open your browser and go to [<you vm ip>](http://10.172.xxx.2)
+
+![Alt text](pics/09_website.png?raw=true "website")
