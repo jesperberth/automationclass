@@ -264,7 +264,7 @@ ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=ye
 
 Connect to server3 using RDP, you can get the link in the Azure Portal
 
-User name is <username> as entered when we created the lab environement 
+User name is __username__ as entered when we created the lab environement 
 
 We need to enable Windows Remote Management on the server
 
@@ -298,6 +298,10 @@ pip3 install pywinrm --user
 ![Alt text](pics/019_install_pywinrm.png?raw=true "enable winRm")
 
 Yes the password is in clear text, we will look into this later
+
+__Note:__
+
+Change ansible_user and ansible_password to your username and password
 
 __Type:__
 
