@@ -232,9 +232,9 @@ ssh server1
 ls
 ```
 
-```bash
-
 is the file testfile.txt there?
+
+```bash
 
 exit
 ```

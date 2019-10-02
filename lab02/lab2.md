@@ -125,7 +125,7 @@ Write the following in the text pane
       state: touch
 ```
 
-Click the version control button in the left panel, write a comment and click "Ctrl + Enter" to commit the changes
+Click the Source control button in the left panel, write a comment and click "Ctrl + Enter" to commit the changes
 
 ![Alt text](pics/017_code_git_commit.png?raw=true "git commit in VSCode")
 
