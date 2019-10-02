@@ -46,13 +46,13 @@ Username cannot be root/administrator
 Password must meet complexity requirements, 3 of 4 types and minumum 12 characters
 
 ``` bash
-git clone https://github.com/jesperberth/automationclass/
 cd clouddrive
+git clone https://github.com/jesperberth/automationclass/
 cd automationclass
 cd setup_class
 cd azure_class_playbooks
 
-ansible-playbook 01_azure_class_setup.yml
+ansible-playbook 00_azure_class_setup.yml
 ```
 
 ### Lab 1: [Install Ansible](lab01/lab1.md)
