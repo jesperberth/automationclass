@@ -26,5 +26,5 @@ function CreateUser {
     #New-AzStorageAccount -Name $uniqname -ResourceGroupName $rgname -Location $location -SkuName Standard_LRS -Kind StorageV2
 }
 $email = Read-Host -Prompt 'Input email'
-$name = = Read-Host -Prompt 'Input name'
+$name = Read-Host -Prompt 'Input name'
 CreateUser
