@@ -127,8 +127,6 @@ secret=xxxxxxxxxxxxxxxxx
 tenant=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
-![Alt text](pics/009_azure_credfile.png?raw=true "azure credentials file")
-
 __Type:__
 
 ```bash
