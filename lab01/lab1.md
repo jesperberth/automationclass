@@ -137,9 +137,10 @@ __Type:__
 
 ```bash
 ansible linuxservers -m ping
+```
 
 when it asks "Are you sure you want to continue connecting (yes/no)?" type yes
-```
+
 
 ![Alt text](pics/009_connect_error.png?raw=true "Connect Error")
 
