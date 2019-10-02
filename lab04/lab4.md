@@ -11,6 +11,7 @@ In Azure Cloud Shell(Bash)
 ``` bash
 cd clouddrive
 cd automationclass
+cd setup_class
 cd azure_class_playbooks
 
 ansible-playbook 04_azure_lab4_start.yml
@@ -62,13 +63,15 @@ Click "Certificates & Secrets" and "New client secret"
 
 ![Alt text](pics/005_azure_app_client_secret.png?raw=true "new secret")
 
-Copy the "Tenant ID" and "Client ID" save them in a text file for now
+Copy the "Client Secret" save it in the text file
 
 ![Alt text](pics/006_azure_app_client_secret_value.png?raw=true "secret value")
 
 We need to assign rights to the application
 
-In the left pane go to "Subscribtions" and select the one we are working in now
+In the left pane go to "All Services"
+
+In the right pane select "Subscribtions"
 
 Click "Access Control IAM"
 
