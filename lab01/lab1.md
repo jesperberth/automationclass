@@ -117,8 +117,10 @@ sudo vi /etc/ansible/hosts
 In vi __type:__
 
 ```bash
-i (for input)
+i (hit i to toggle input)
+```
 
+```bash
 [linuxservers]
 server1
 ```
@@ -179,6 +181,10 @@ hit enter again
 ![Alt text](pics/011_ssh_keygen.png?raw=true "SSH Connect")
 
 We need to copy the public key to server1
+
+__Note:__
+
+Change jesbe to your username
 
 __Type:__
 
