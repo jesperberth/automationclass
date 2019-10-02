@@ -44,7 +44,7 @@ __Type:__
   tasks:
   - name: Set timezone
     timezone:
-      name: {{ timezone }}
+      name: "{{ timezone }}"
 ```
 
 Save the file
