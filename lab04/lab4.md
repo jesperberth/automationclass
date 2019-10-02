@@ -75,6 +75,10 @@ In the right pane select "Subscribtions"
 
 ![Alt text](pics/006_azure_subscribtion.png?raw=true "secret value")
 
+Select the Subscribtion, only one should be available
+
+![Alt text](pics/006_azure_select_subscribtion.png?raw=true "secret value")
+
 Click "Access Control IAM"
 
 Click "Add" Select "Add role assignment"
