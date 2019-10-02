@@ -88,6 +88,8 @@ ansible localhost -m file -a "path=/home/jesbe/testfile.txt state=touch"
 
 change jesbe with your username
 
+The ansible command:
+
 ansible __hosts__ -m __module__ -a __module arguments__
 
 __hosts__ can be localhost or a group from the hostfile or all
