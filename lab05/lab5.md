@@ -117,7 +117,7 @@ create a new playbook file 02_forti_address.yml and add below
 
 __Note:__
 
-You need to change the "username" and "name", "subnet" and "associated_interface"
+You need to change the "username" and "vlanid"
 
 ```ansible
 ---

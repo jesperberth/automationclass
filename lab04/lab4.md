@@ -245,9 +245,9 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 02_azure.yml
 
@@ -317,9 +317,9 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 02_azure.yml
 
@@ -366,9 +366,9 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 02_azure.yml
 
@@ -435,9 +435,9 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 02_azure.yml
 
@@ -476,9 +476,9 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 02_azure.yml --ask-become-pass
 
@@ -563,9 +563,9 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 02_azure.yml --ask-become-pass
 
