@@ -172,7 +172,9 @@ __Type:__
 
 ```bash
 ssh-keygen
+```
 
+```bash
 hit enter on key-path
 hit enter for empty passphrase
 hit enter again
@@ -260,7 +262,9 @@ ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=ye
 
 ## Task 4: Connect Windows Host
 
-Connect to server3 using RDP
+Connect to server3 using RDP, you can get the link in the Azure Portal
+
+User name is <username> as entered when we created the lab environement 
 
 We need to enable Windows Remote Management on the server
 
