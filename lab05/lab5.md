@@ -44,7 +44,7 @@ create a new playbook file 01_forti_vlan.yml and add below
 
 __Note:__
 
-You need to change the "username" and "vlan name", "vlan id" and "IP"
+You need to change the "username" and  "vlan id"
 
 ```ansible
 ---
