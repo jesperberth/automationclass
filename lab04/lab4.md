@@ -173,7 +173,7 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
+git pull
 
 cd ansibleclass
 
