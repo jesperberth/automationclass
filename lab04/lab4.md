@@ -173,9 +173,9 @@ __Type:__
 
 ```bash
 
-git pull
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 01_azure.yml
 
