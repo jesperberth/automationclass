@@ -157,6 +157,10 @@ Lets test the playbook
 
 Clone the git repository
 
+__Note:__
+
+Change to your repository
+
 __Type:__
 
 ```bash
