@@ -8,6 +8,12 @@ The network is to be used in Lab 6 Vmware playbook
 
 Logon to ansibleserver.ansible.local with ssh
 
+```bash
+
+userxx@ansibleserver.ansible.local
+
+```
+
 Use your "userxx" account and password
 
 We need to install ansible and python modules for fortios
@@ -47,7 +53,7 @@ You need to change the "username" and "vlan name", "vlan id" and "IP"
    host: "10.172.10.1"
    username: "userxx"
    vlanid: "xxx"
-   vdom:"root"
+   vdom: "root"
    ssl_verify: "False"
   vars_prompt:
    - name: password
