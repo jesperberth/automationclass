@@ -91,7 +91,7 @@ __Type:__
   tasks:
   - name: Set timezone
     timezone:
-      name: {{ timezone }}
+      name: "{{ timezone }}"
 ```
 
 Save the file
@@ -134,7 +134,7 @@ Using a filter will help a bit
 __Type:__
 
 ```ansible
-ansible linuxservers -m setup -a "filter=*.ipv4"
+ansible linuxservers -m setup -a "filter=*ipv4"
 ```
 
 ![Alt text](pics/006_ansible_facts_filter.png?raw=true "facts")
