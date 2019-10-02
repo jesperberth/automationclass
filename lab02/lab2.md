@@ -54,7 +54,9 @@ Make Sure you tick __"Initialize this repository with a README"__
 
 Click "Create repository"
 
-Select "Public" - it's 
+Select "Public" - it's default
+
+Make sure you select "Initialize this repository with a repository"
 
 ![Alt text](pics/007_newrepo_github.png?raw=true "Create Repo")
 
