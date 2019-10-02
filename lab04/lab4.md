@@ -99,11 +99,12 @@ Copy the "Subscribtion ID" to the text file
 
 Log on to server "ansible" using ssh
 
-We will create the authentication file
+We will create the authentication file, you must start in your home dir
 
 __Type:__
 
 ```bash
+cd
 mkdir .azure
 vi .azure/credentials
 
