@@ -230,6 +230,9 @@ ansible linuxservers -m file -a "path=/home/jesbe/testfile.txt state=touch"
 ssh server1
 
 ls
+```
+
+```bash
 
 is the file testfile.txt there?
 
