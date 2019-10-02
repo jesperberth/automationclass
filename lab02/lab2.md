@@ -54,6 +54,8 @@ Make Sure you tick __"Initialize this repository with a README"__
 
 Click "Create repository"
 
+Select "Public" - it's 
+
 ![Alt text](pics/007_newrepo_github.png?raw=true "Create Repo")
 
 Your new repository is created with an empty README.md file
