@@ -145,7 +145,7 @@ In VSCode
 
 create a new playbook file 01_azure.yml
 
-add the following text to the file, change the name of the resource group to "webserver_userxx"
+add the following text to the file, change the name of the resource group to "webserver_userxx" - where userxx is the username on the printout
 
 ```ansible
 ---
