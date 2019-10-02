@@ -216,6 +216,10 @@ ansible linuxservers -m ping
 
 Lets test a few ansible commands
 
+__Note:__
+
+Change jesbe to your username
+
 __Type:__
 
 ```bash
