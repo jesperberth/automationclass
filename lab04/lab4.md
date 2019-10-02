@@ -116,8 +116,10 @@ In vi __type:__
 Use the vaules you collected from the Azure portal
 
 ```bash
-i (for input)
+i (to toggle input)
+```
 
+```bash
 [default]
 subscription_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 client_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
