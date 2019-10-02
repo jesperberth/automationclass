@@ -73,6 +73,8 @@ In the left pane go to "All Services"
 
 In the right pane select "Subscribtions"
 
+![Alt text](pics/006_azure_subscribtion.png?raw=true "secret value")
+
 Click "Access Control IAM"
 
 Click "Add" Select "Add role assignment"
