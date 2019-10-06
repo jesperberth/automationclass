@@ -99,11 +99,12 @@ Copy the "Subscribtion ID" to the text file
 
 Log on to server "ansible" using ssh
 
-We will create the authentication file
+We will create the authentication file, you must start in your home dir
 
 __Type:__
 
 ```bash
+cd
 mkdir .azure
 vi .azure/credentials
 
@@ -116,16 +117,16 @@ In vi __type:__
 Use the vaules you collected from the Azure portal
 
 ```bash
-i (for input)
+i (to toggle input)
+```
 
+```bash
 [default]
 subscription_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 client_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 secret=xxxxxxxxxxxxxxxxx
 tenant=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
-
-![Alt text](pics/009_azure_credfile.png?raw=true "azure credentials file")
 
 __Type:__
 
@@ -173,9 +174,9 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 01_azure.yml
 
@@ -244,9 +245,9 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 02_azure.yml
 
@@ -316,9 +317,9 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 02_azure.yml
 
@@ -365,9 +366,9 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 02_azure.yml
 
@@ -434,9 +435,9 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 02_azure.yml
 
@@ -475,9 +476,9 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 02_azure.yml --ask-become-pass
 
@@ -562,9 +563,9 @@ __Type:__
 
 ```bash
 
-git clone https://github.com/jesperberth/ansibleclass.git
-
 cd ansibleclass
+
+git pull
 
 ansible-playbook 02_azure.yml --ask-become-pass
 

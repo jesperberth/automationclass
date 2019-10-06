@@ -102,7 +102,7 @@ add below task to the file 01_vmware.yml
       username: "{{ username }}"
       password: "{{ password }}"
       validate_certs: False
-      switch_name: "VM Network"
+      switch_name: "vSwitch0"
       esxi_hostname: "{{ esxihostname }}"
       portgroup_name: "{{ portgroup_name }}"
       vlan_id: "{{ vlan_id }}"
