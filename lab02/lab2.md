@@ -10,8 +10,7 @@ In Azure Cloud Shell(Bash)
 
 ``` bash
 cd clouddrive
-cd automationclass
-cd setup_class
+cd automationclass_setup
 cd azure_class_playbooks
 
 ansible-playbook 02_azure_lab2_start.yml

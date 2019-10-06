@@ -6,20 +6,20 @@
 
 #### Environment
 
-5 servers - made available in Azure - (use setup_class/azure_class_playbooks/00_azure_class_setup.yml to deploy)
+5 servers - made available in Azure
 
 3 - Running Red Hat Enterprise Linux 8
 Accessible with ssh and http/https
 
 * ansible - 10.1.0.4
-* server1 - 10.1.0.6
-* server2 - 10.1.0.7
+* server1 - 10.1.0.5
+* server2 - 10.1.0.6
 
 2 - Running Windows Server 2019 with GUI
 Accessible with winRM and RDP
 
-* server3 - 10.1.0.8
-* server4 - 10.1.0.9
+* server3 - 10.1.0.7
+* server4 - 10.1.0.8
 
 #### Software on your client
 
@@ -47,9 +47,11 @@ Password must meet complexity requirements, 3 of 4 types and minumum 12 characte
 
 ``` bash
 cd clouddrive
-git clone https://github.com/jesperberth/automationclass/
-cd automationclass
-cd setup_class
+
+git clone https://github.com/jesperberth/automationclass_setup/
+
+cd automationclass_setup
+
 cd azure_class_playbooks
 
 ansible-playbook 00_azure_class_setup.yml
