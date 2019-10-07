@@ -77,3 +77,7 @@ ansible-playbook 00_azure_class_setup.yml
 The playbook will create all resources needed for the Automation class - Lab 01 -> Lab 04
 
 ![Alt text](pics/11_lab_ready.png?raw=true "Labs are ready")
+
+Go back to the lab guide
+
+[Lab Guide](README.md)
