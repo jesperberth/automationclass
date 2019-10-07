@@ -29,33 +29,9 @@ Accessible with winRM and RDP
 * RDP client
 * Webbrowser
 
-## Lessons
+[Prepare Labs](prepare.md)
 
-### Prepare
-
-In Azure Cloud Shell(Bash)
-
-Note:
-
-You need to type the name of your allocated Azure Resource Group
-
-Type a uniq name for your dns string
-
-Username cannot be root/administrator
-
-Password must meet complexity requirements, 3 of 4 types and minumum 12 characters
-
-``` bash
-cd clouddrive
-
-git clone https://github.com/jesperberth/automationclass_setup/
-
-cd automationclass_setup
-
-cd azure_class_playbooks
-
-ansible-playbook 00_azure_class_setup.yml
-```
+## Labs
 
 ### Lab 1: [Install Ansible](lab01/lab1.md)
 
