@@ -16,17 +16,23 @@ Accept the invitation from "Team RedHat"
 
 ![Alt text](pics/03_microsoft_accept.png?raw=true "Accept")
 
+Take a note of your Resource Group, save it in notepad, we will need it later
+
+In the right Pane, Click on Resource groups, your RG will be the one resampling your email
+
+![Alt text](pics/04_resource_group.png?raw=true "Resource Group")
+
 In the top blue bar, click the "powershell" icon marked with red
 
-![Alt text](pics/04_start_cloud_shell.png?raw=true "Cloud Shell")
+![Alt text](pics/05_start_cloud_shell.png?raw=true "Cloud Shell")
 
 Select "Bash"
 
-![Alt text](pics/05_start_cloud_shell_bash.png?raw=true "Cloud Shell bash")
+![Alt text](pics/06_start_cloud_shell_bash.png?raw=true "Cloud Shell bash")
 
 Select "Show advanced settings"
 
-![Alt text](pics/06_start_cloud_shell_advanced.png?raw=true "Cloud Shell advanced")
+![Alt text](pics/07_start_cloud_shell_advanced.png?raw=true "Cloud Shell advanced")
 
 Set Cloud Shell region to "North Europe"
 
@@ -36,11 +42,11 @@ Storage account: Select Use existing your storage account will be selected, as y
 
 File Share: Create new, give it same name as your storage account
 
-![Alt text](pics/07_start_cloud_shell_advanced_set.png?raw=true "Cloud Shell storage")
+![Alt text](pics/08_start_cloud_shell_bash.png?raw=true "Cloud Shell storage")
 
 Cloud shell is now ready
 
-![Alt text](pics/07_start_cloud_shell_advanced_set.png?raw=true "Cloud Shell storage")
+![Alt text](pics/09_start_cloud_shell_ready.png?raw=true "Cloud Shell storage")
 
 In Azure Cloud Shell(Bash)
 
@@ -65,3 +71,9 @@ cd azure_class_playbooks
 
 ansible-playbook 00_azure_class_setup.yml
 ```
+
+![Alt text](pics/10_git_pull.png?raw=true "Git Pull - ansible-playbook")
+
+The playbook will create all resources needed for the Automation class - Lab 01 -> Lab 04
+
+![Alt text](pics/11_lab_ready.png?raw=true "Labs are ready")
