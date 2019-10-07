@@ -56,7 +56,7 @@ You need to type the name of your allocated Azure Resource Group
 
 Type a uniq name for your dns string ()
 
-Username cannot be root/administrator
+Username cannot be root/administrator/admin
 
 Password must meet complexity requirements, 3 of 4 types and minumum 12 characters
 
