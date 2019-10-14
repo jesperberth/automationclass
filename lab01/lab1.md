@@ -110,6 +110,8 @@ __Type:__
 ```bash
 cd
 
+pwd
+
 vi .ansible.cfg
 ```
 
@@ -129,7 +131,7 @@ i (hit i to toggle input)
 inventory = /home/jesbe/ansible-hosts
 ```
 
-![Alt text](pics/007_ansible_cfg_set_inventory.png?raw=true "set ansible inventory")
+![Alt text](pics/008_ansible_cfg_set_inventory.png?raw=true "set ansible inventory")
 
 __Type:__
 
