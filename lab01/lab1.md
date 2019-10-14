@@ -103,17 +103,41 @@ __module arguments__ arguments for module if needed, here path=/home/jesbe/testf
 
 Log on to server "ansible" using ssh
 
+Lets create a configuration file for ansible in your root dir
+
 __Type:__
 
 ```bash
-sudo mkdir /etc/ansible
+cd
 
-sudo vi /etc/ansible/hosts
+vi .ansible.cfg
 ```
 
-![Alt text](pics/007_mkdir_ansible.png?raw=true "mkdir ansible")
+![Alt text](pics/007_ansible_cfg.png?raw=true "ansible config")
+
+__Note:__
+
+Change jesbe in the path with your username
 
 In vi __type:__
+
+```bash
+i (hit i to toggle input)
+```
+
+```bash
+inventory = /home/jesbe/ansible-hosts
+```
+
+![Alt text](pics/007_ansible_cfg_set_inventory.png?raw=true "set ansible inventory")
+
+__Type:__
+
+```bash
+vi ansible-hosts
+```
+
+In vi __Type:__
 
 ```bash
 i (hit i to toggle input)
@@ -308,7 +332,7 @@ Change ansible_user and ansible_password to your username and password
 __Type:__
 
 ```bash
-sudo vi /etc/ansible/hosts
+vi ansible-hosts
 
 i (for input)
 

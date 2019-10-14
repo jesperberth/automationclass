@@ -255,7 +255,9 @@ We will add server 2 to the inventory
 __Type:__
 
 ```bash
-sudo vi /etc/ansible/hosts
+cd
+
+vi ansible-hosts
 
 ```
 
