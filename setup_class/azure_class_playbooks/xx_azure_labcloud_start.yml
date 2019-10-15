@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    location: northeurope
+    domain_sub: automationfunsantaz
+    virtual_network_name: automationNetwork
+    subnet: Servers
+
+  vars_prompt:
+    - name: resource_group
+      prompt: "Type the name of your Azure Resource Group"
+      private: no
+
+  tasks:
+  # Start All Virtual Machines
+  - name: Start VM ansible
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "ansible"
+      state: present
+      started: true
+      

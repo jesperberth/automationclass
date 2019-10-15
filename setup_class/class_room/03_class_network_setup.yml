@@ -1,0 +1,41 @@
+---
+- hosts: localhost
+  vars:
+   host: "10.172.10.1"
+   username: "admin"
+   user_password: "Password1!"
+   vdom: "root"
+   ssl_verify: "False"
+  vars_prompt:
+   - name: password
+     prompt: "Type the password of your fortigate admin account"
+     private: no
+  tasks:
+  - name: Configure admin users
+    fortios_system_admin:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_admin:
+        accprofile: "super_admin"
+        name: "{{ item.name }}"
+        password: "{{ user_password }}"
+        vdom:
+        - name: "{{ vdom }}"
+        wildcard: enable
+    loop:
+          - { 'name': 'user1' }
+          - { 'name': 'user2' }
+          - { 'name': 'user3' }
+          - { 'name': 'user4' }
+          - { 'name': 'user5' }
+          - { 'name': 'user6' }
+          - { 'name': 'user7' }
+          - { 'name': 'user8' }
+          - { 'name': 'user9' }
+          - { 'name': 'user10' }
+          - { 'name': 'user11' }
+          - { 'name': 'user12' }

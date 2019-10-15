@@ -1,0 +1,413 @@
+---
+-  hosts: localhost
+   connection: local
+   gather_facts: yes
+   vars:
+    vmwhostname: "vcenter.ansible.local"
+    vmwusername: "administrator@vsphere.local"
+    esxihostname: "esxi.ansible.local"
+   vars_prompt:
+    - name: vmwpassword
+      prompt: "Type the password of your vmware admin account"
+      private: no
+   tasks:
+#  Generate SSH Key for User
+   - name: Generate SSH keys
+     user:
+       name: "{{ ansible_user_id }}"
+       generate_ssh_key: yes
+       ssh_key_bits: 2048
+       ssh_key_file: .ssh/id_rsa
+
+   - name: Change NFS.MaxVolumes setting for an ESXi host
+     vmware_host_config_manager:
+       hostname: "{{ vmwhostname }}"
+       username: "{{ vmwusername }}"
+       password: "{{ vmwpassword }}"
+       validate_certs: False
+       esxi_hostname: "{{ esxihostname }}"
+       options:
+         'NFS.MaxVolumes': '16'
+         'NFS41.MaxVolumes': '16'
+
+   - name: Clone fedora 30 to storage.ansible.local
+     vmware_guest:
+       hostname: "{{ vmwhostname }}"
+       username: "{{ vmwusername }}"
+       password: "{{ vmwpassword }}"
+       validate_certs: False
+       name: storage.ansible.local
+       template: _TEMP_fedora30
+       datacenter: Datacenter
+       folder: /Admin
+       state: poweredon
+       hardware:
+         memory_mb: 4096
+         num_cpus: 2
+       disk:
+       - size_gb: 16
+         type: thin
+         datastore: datastore1
+       - size_gb: 120
+         type: thin
+         datastore: datastore1
+       wait_for_ip_address: yes
+     register: storagevm
+
+   - name: Clone fedora 30 to ansibleserver.ansible.local
+     vmware_guest:
+       hostname: "{{ vmwhostname }}"
+       username: "{{ vmwusername }}"
+       password: "{{ vmwpassword }}"
+       validate_certs: False
+       name: ansibleserver.ansible.local
+       template: _TEMP_fedora30
+       datacenter: Datacenter
+       folder: /Admin
+       state: poweredon
+       hardware:
+         memory_mb: 8192
+         num_cpus: 4
+       disk:
+       - size_gb: 16
+         type: thin
+         datastore: datastore1
+       wait_for_ip_address: yes
+     register: ansiblevm
+
+# Prepare ansible for storage.ansible.local
+   - name: IP address info storage.ansible.local
+     debug:
+       msg: "{{ storagevm.instance.ipv4 }}"
+
+   - name: Set Fact storagevm_ip_fact
+     set_fact:
+      storagevm_ip_fact: "{{ storagevm.instance.ipv4 }}"
+
+   - name: IP address info
+     debug:
+       msg: "{{ storagevm_ip_fact }}"   
+
+   - name: add storagevm to ansible in memory host file
+     add_host:
+      name: "{{ storagevm_ip_fact }}"
+      groups: storagetmp
+     when: storagevm_ip_fact != "10.172.10.12"
+
+   - name: Copy SSH ID
+     shell: |
+      ssh-copy-id "{{ ansible_user_id }}@{{ storagevm_ip_fact }}"
+
+-  hosts: storagetmp
+   become: yes
+   vars:
+     storagevm_ip_fact: "{{ hostvars['localhost']['storagevm_ip_fact'] }}"
+   tasks:
+   - name: IP address info
+     debug:
+       msg: "{{ storagevm_ip_fact }}"  
+   
+   - name: configure network
+     shell: |
+      nmcli connection modify ens192 -ipv4.addresses "{{ ansible_default_ipv4.address }}/24"
+      nmcli connection modify ens192 ipv4.addresses "10.172.10.12/24"
+      nmcli connection modify ens192 ipv4.gateway "10.172.10.1"
+      nmcli connection modify ens192 ipv4.dns "10.172.10.2"
+      nmcli connection modify ens192 ipv4.method manual
+      shutdown -r +1
+     when: storagevm_ip_fact != "10.172.10.12"
+
+# Prepare ansible for ansibleserver.ansible.local
+-  hosts: localhost
+   connection: local
+   gather_facts: yes
+   vars:
+   tasks:
+   - name: IP address info ansibleserver.ansible.local
+     debug:
+       msg: "{{ ansiblevm.instance.ipv4 }}"
+
+   - name: Set Fact ansiblevm_ip_fact
+     set_fact:
+      ansiblevm_ip_fact: "{{ ansiblevm.instance.ipv4 }}"
+
+   - name: IP address info
+     debug:
+       msg: "{{ ansiblevm_ip_fact }}"   
+
+   - name: add ansiblevm to ansible in memory host file
+     add_host:
+      name: "{{ ansiblevm_ip_fact }}"
+      groups: ansibletmp
+     when: ansiblevm_ip_fact != "10.172.10.9"
+
+   - name: Copy SSH ID
+     shell: |
+      ssh-copy-id "{{ ansible_user_id }}@{{ ansiblevm_ip_fact }}"
+
+-  hosts: ansibletmp
+   become: yes
+   vars:
+     ansiblevm_ip_fact: "{{ hostvars['localhost']['ansiblevm_ip_fact'] }}"
+   tasks:
+   - name: IP address info
+     debug:
+       msg: "{{ ansiblevm_ip_fact }}"  
+   
+   - name: configure network
+     shell: |
+      nmcli connection modify ens192 -ipv4.addresses "{{ ansible_default_ipv4.address }}/24"
+      nmcli connection modify ens192 ipv4.addresses "10.172.10.9/24"
+      nmcli connection modify ens192 ipv4.gateway "10.172.10.1"
+      nmcli connection modify ens192 ipv4.dns "10.172.10.2"
+      nmcli connection modify ens192 ipv4.method manual
+      shutdown -r +1
+     when: ansiblevm_ip_fact != "10.172.10.9"
+
+-  hosts: localhost
+   vars:
+   tasks:
+   - name: remove ssh knownhost storagetmp
+     known_hosts:
+       path: ~/.ssh/known_hosts
+       name: "{{ storagevm.instance.ipv4 }}"
+       state: absent
+     when: storagevm_ip_fact != "10.172.10.12"
+
+   - name: remove ssh knownhost ansibletmp
+     known_hosts:
+       path: ~/.ssh/known_hosts
+       name: "{{ ansiblevm.instance.ipv4 }}"
+       state: absent
+     when: storagevm_ip_fact != "10.172.10.9"
+
+   - name: pause for 2 minutes
+     pause:
+       minutes: 2    
+     when: storagevm_ip_fact != "10.172.10.12"
+
+   - name: pause for 2 minutes
+     pause:
+       minutes: 2    
+     when: ansiblevm_ip_fact != "10.172.10.9"
+ 
+- hosts: storage
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+# Setup /dev/sdb
+    - name: create partion /dev/sdb
+      parted:
+       device: /dev/sdb
+       number: 1
+       flags: [ lvm ]
+       state: present
+    
+    - name: create volume group vg.data
+      lvg:
+       vg: vg.data
+       pvs: /dev/sdb1
+
+    - name: create logical data disk on vg.data
+      lvol:
+       vg: vg.data
+       lv: lv.data{{ item.name }}
+       size: 5g
+       state: present
+      loop:
+          - { 'name': 'user1' }
+          - { 'name': 'user2' }
+          - { 'name': 'user3' }
+          - { 'name': 'user4' }
+          - { 'name': 'user5' }
+          - { 'name': 'user6' }
+          - { 'name': 'user7' }
+          - { 'name': 'user8' }
+          - { 'name': 'user9' }
+          - { 'name': 'user10' }
+          - { 'name': 'user11' }
+          - { 'name': 'user12' }
+
+    - name: create filesystem xfs on lv.data
+      filesystem:
+       fstype: xfs
+       dev: /dev/mapper/vg.data-lv.data{{ item.name }}
+      loop:
+          - { 'name': 'user1' }
+          - { 'name': 'user2' }
+          - { 'name': 'user3' }
+          - { 'name': 'user4' }
+          - { 'name': 'user5' }
+          - { 'name': 'user6' }
+          - { 'name': 'user7' }
+          - { 'name': 'user8' }
+          - { 'name': 'user9' }
+          - { 'name': 'user10' }     
+          - { 'name': 'user11' }
+          - { 'name': 'user12' }  
+    
+    - name: create /storage directory for lv.data mountpoint
+      file:
+       path: /storage
+       state: directory
+
+    - name: Create directorys for export
+      file:
+       path: "/storage/{{ item.name }}"
+       state: directory
+      loop:
+          - { 'name': 'user1' }
+          - { 'name': 'user2' }
+          - { 'name': 'user3' }
+          - { 'name': 'user4' }
+          - { 'name': 'user5' }
+          - { 'name': 'user6' }
+          - { 'name': 'user7' }
+          - { 'name': 'user8' }
+          - { 'name': 'user9' }
+          - { 'name': 'user10' }     
+          - { 'name': 'user11' }
+          - { 'name': 'user12' }  
+    
+    - name: add fstab entry
+      mount: 
+       name: /storage/{{ item.name }}
+       src: /dev/mapper/vg.data-lv.data{{ item.name }}
+       fstype: xfs 
+       opts: defaults
+       state: present
+      loop:
+          - { 'name': 'user1' }
+          - { 'name': 'user2' }
+          - { 'name': 'user3' }
+          - { 'name': 'user4' }
+          - { 'name': 'user5' }
+          - { 'name': 'user6' }
+          - { 'name': 'user7' }
+          - { 'name': 'user8' }
+          - { 'name': 'user9' }
+          - { 'name': 'user10' }
+          - { 'name': 'user11' }
+          - { 'name': 'user12' }      
+    
+    - name: mount disk
+      shell: mount -a
+      args:
+       warn: false
+
+    - name: Install nfs
+      dnf:
+       name: nfs-utils
+       state: present
+    
+    - name: Create exports
+      blockinfile:
+       path: /etc/exports
+       block: |
+          /storage/user1 10.172.1.0/24(rw,no_root_squash)
+          /storage/user2 10.172.1.0/24(rw,no_root_squash)
+          /storage/user3 10.172.1.0/24(rw,no_root_squash)
+          /storage/user4 10.172.1.0/24(rw,no_root_squash)
+          /storage/user5 10.172.1.0/24(rw,no_root_squash)
+          /storage/user6 10.172.1.0/24(rw,no_root_squash)
+          /storage/user7 10.172.1.0/24(rw,no_root_squash)
+          /storage/user8 10.172.1.0/24(rw,no_root_squash)
+          /storage/user9 10.172.1.0/24(rw,no_root_squash)
+          /storage/user10 10.172.1.0/24(rw,no_root_squash)
+          /storage/user11 10.172.1.0/24(rw,no_root_squash)
+          /storage/user12 10.172.1.0/24(rw,no_root_squash)
+
+    - name: Start rpcbind
+      systemd:
+       name: rpcbind
+       state: started
+       enabled: yes
+
+    - name: Start nfs-server
+      systemd:
+       name: nfs-server
+       state: started
+       enabled: yes
+
+    - name: Allow nfs in firewall
+      firewalld:
+        zone: FedoraServer
+        service: nfs
+        permanent: yes
+        state: enabled
+
+    - name: Allow rpc-bind in firewall
+      firewalld:
+        zone: FedoraServer
+        service: rpc-bind
+        permanent: yes
+        state: enabled
+
+    - name: Allow mountd in firewall
+      firewalld:
+        zone: FedoraServer
+        service: mountd
+        permanent: yes
+        state: enabled
+
+    - name: firewalld reload
+      command: firewall-cmd --reload
+
+- hosts: ansibleserver
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    # created with:
+    # python -c 'import crypt; print crypt.crypt("Password1!", "$1$SomeSalt$")'
+    password: $1$SomeSalt$RbNzd0Xe5890jjO0C0bJS1
+  tasks:
+# Create local users
+  - name: Create Users
+    user:
+      name: "{{ item.name }}"
+      password: "{{ item.pw }}"
+    loop:
+        - { 'name': 'user1', 'pw': '{{ password }}'}
+        - { 'name': 'user2', 'pw': '{{ password }}'}
+        - { 'name': 'user3', 'pw': '{{ password }}'}
+        - { 'name': 'user4', 'pw': '{{ password }}'}
+        - { 'name': 'user5', 'pw': '{{ password }}'}
+        - { 'name': 'user6', 'pw': '{{ password }}'}        
+        - { 'name': 'user7', 'pw': '{{ password }}'}
+        - { 'name': 'user8', 'pw': '{{ password }}'}
+        - { 'name': 'user9', 'pw': '{{ password }}'}
+        - { 'name': 'user10', 'pw': '{{ password }}'}
+
+# Create Ansible Hosts file
+  - name: Create Ansible dir
+    file:
+      path: /etc/ansible
+      state: directory
+  
+  - name: Touch Ansible hosts file
+    file:
+      path: /etc/ansible/hosts
+      state: touch
+
+  - name: Add servers to Ansible hosts file
+    blockinfile:
+      path: /etc/ansible/hosts
+      block: |
+        [storage]
+        storage.ansible.local
+        [esxi]
+        esxi.ansible.local
+        [vcenter]
+        vcenter.ansible.local
+        [ansibleserver]
+        ansibleserver.ansible.local
+
+  - name: Install Git
+    dnf:
+      name: git
+      state: present
+
+  - name: Install pip
+    pip:
+      name: pip

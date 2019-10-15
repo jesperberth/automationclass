@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  vars:
+    user: jesbe
+    storagehost: 192.168.130.251
+  tasks:
+ 
+#  Generate SSH Key for User
+   - name: Generate SSH keys
+     user:
+       name: "{{ user }}"
+       generate_ssh_key: yes
+       ssh_key_bits: 2048
+       ssh_key_file: .ssh/id_rsa
+
+   - name: Copy SSH ID
+     shell: ssh-copy-id "{{ user }}@{{ storagehost }}"

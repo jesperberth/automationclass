@@ -1,0 +1,330 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    location: northeurope
+    virtual_network_name: automationNetwork
+    subnet: Servers
+
+  vars_prompt:
+    - name: resource_group
+      prompt: "Type the name of your Azure Resource Group"
+      private: no
+    - name: domain_sub
+      prompt: "Type a uniq name for servers Domain Name"
+      private: no
+    - name: adminUser
+      prompt: "Type the name of your root/administrator account"
+      private: no
+    - name: adminPassword
+      prompt: "Type the password of your root/administrator account"
+      private: no
+
+  tasks:
+  - name: Create a virtual network
+    azure_rm_virtualnetwork:
+      resource_group: "{{ resource_group }}"
+      name: "{{ virtual_network_name }}"
+      address_prefixes_cidr: "10.1.0.0/16"
+      tags:
+          purpose: testing
+          delete: allow
+  
+  - name: Create a subnet
+    azure_rm_subnet:
+      resource_group: "{{ resource_group }}"
+      virtual_network_name: "{{ virtual_network_name }}"
+      name: "{{ subnet }}"
+      address_prefix_cidr: "10.1.0.0/24"
+
+  - name: Create a public ip address ansible
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: public_ip_ansible
+      allocation_method: static
+      domain_name: "ansible{{ domain_sub }}"
+
+  - name: Create a public ip address server1
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: server1_public_ip
+      allocation_method: static
+      domain_name: "server1{{ domain_sub }}"
+
+  - name: Create a public ip address server2
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: server2_public_ip
+      allocation_method: static
+      domain_name: "server2{{ domain_sub }}"
+
+  - name: Create a public ip address server3
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: server3_public_ip
+      allocation_method: static
+      domain_name: "server3{{ domain_sub }}"
+
+  - name: Create a public ip address server4
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: server4_public_ip
+      allocation_method: static
+      domain_name: "server4{{ domain_sub }}"
+
+  - name: Create Security Group for ansible
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "ansible_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 100
+            direction: Inbound
+
+  - name: Create Security Group for server1
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "server1_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 100
+            direction: Inbound
+
+  - name: Create Security Group for server2
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "server2_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 100
+            direction: Inbound
+
+  - name: Create Security Group for server3
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "server3_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_RDP
+            protocol: Tcp
+            destination_port_range: 3389
+            access: Allow
+            priority: 100
+            direction: Inbound
+
+  - name: Create Security Group for server4
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "server4_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_RDP
+            protocol: Tcp
+            destination_port_range: 3389
+            access: Allow
+            priority: 100
+            direction: Inbound
+
+  - name: Create a network interface for ansible
+    azure_rm_networkinterface:
+      name: "ansible_nic01"
+      resource_group: "{{ resource_group }}"
+      virtual_network: "{{ virtual_network_name }}"
+      subnet_name: "{{ subnet }}"
+      security_group: "ansible_securitygroup"
+      ip_configurations:
+        - name: "ansible_nic01_ipconfig"
+          public_ip_address_name: "ansible_public_ip"
+          primary: True
+ 
+  - name: Create a network interface for server1
+    azure_rm_networkinterface:
+      name: "server1_nic01"
+      resource_group: "{{ resource_group }}"
+      virtual_network: "{{ virtual_network_name }}"
+      subnet_name: "{{ subnet }}"
+      security_group: "server1_securitygroup"
+      ip_configurations:
+        - name: "server1_nic01_ipconfig"
+          public_ip_address_name: "server1_public_ip"
+          primary: True
+
+  - name: Create a network interface for server2
+    azure_rm_networkinterface:
+      name: "server2_nic01"
+      resource_group: "{{ resource_group }}"
+      virtual_network: "{{ virtual_network_name }}"
+      subnet_name: "{{ subnet }}"
+      security_group: "server2_securitygroup"
+      ip_configurations:
+        - name: "server2_nic01_ipconfig"
+          public_ip_address_name: "server2_public_ip"
+          primary: True
+
+  - name: Create a network interface for server3
+    azure_rm_networkinterface:
+      name: "server3_nic01"
+      resource_group: "{{ resource_group }}"
+      virtual_network: "{{ virtual_network_name }}"
+      subnet_name: "{{ subnet }}"
+      security_group: "server3_securitygroup"
+      ip_configurations:
+        - name: "server3_nic01_ipconfig"
+          public_ip_address_name: "server3_public_ip"
+          primary: True
+
+  - name: Create a network interface for server4
+    azure_rm_networkinterface:
+      name: "server4_nic01"
+      resource_group: "{{ resource_group }}"
+      virtual_network: "{{ virtual_network_name }}"
+      subnet_name: "{{ subnet }}"
+      security_group: "server4_securitygroup"
+      ip_configurations:
+        - name: "server4_nic01_ipconfig"
+          public_ip_address_name: "server4_public_ip"
+          primary: True
+
+  # Create Virtual Machine ansible       
+  - name: Create a VM ansible
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "ansible"
+      os_type: Linux
+      admin_username: "{{ adminUser }}"
+      admin_password: "{{ adminPassword }}"
+      managed_disk_type: Standard_LRS
+      state: present 
+      image:
+        offer: RHEL
+        publisher: RedHat
+        sku: 8
+        version: latest
+      vm_size: Standard_A1_v2
+      network_interfaces: "ansible_nic01"
+
+  # Create Virtual Machine server1       
+  - name: Create a VM server1
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "server1"
+      os_type: Linux
+      admin_username: "{{ adminUser }}"
+      admin_password: "{{ adminPassword }}"
+      managed_disk_type: Standard_LRS
+      state: present 
+      image:
+        offer: RHEL
+        publisher: RedHat
+        sku: 8
+        version: latest
+      vm_size: Standard_A1_v2
+      network_interfaces: "server1_nic01"
+
+  # Create Virtual Machine server2       
+  - name: Create a VM server2
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "server2"
+      os_type: Linux
+      admin_username: "{{ adminUser }}"
+      admin_password: "{{ adminPassword }}"
+      managed_disk_type: Standard_LRS
+      state: present 
+      image:
+        offer: RHEL
+        publisher: RedHat
+        sku: 8
+        version: latest
+      vm_size: Standard_A1_v2
+      network_interfaces: "server2_nic01"
+
+# Create Virtual Machine server3      
+  - name: Create a VM server3
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "server3"
+      os_type: Windows
+      admin_username: "{{ adminUser }}"
+      admin_password: "{{ adminPassword }}"
+      managed_disk_type: Standard_LRS
+      state: present
+      image:
+        offer: WindowsServer
+        publisher: MicrosoftWindowsServer
+        sku: 2019-Datacenter
+        version: latest
+      vm_size: Standard_A1_v2
+      network_interfaces: "server3_nic01"
+
+# Create Virtual Machine server4      
+  - name: Create a VM server4
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "server4"
+      os_type: Windows
+      admin_username: "{{ adminUser }}"
+      admin_password: "{{ adminPassword }}"
+      managed_disk_type: Standard_LRS
+      state: present
+      image:
+        offer: WindowsServer
+        publisher: MicrosoftWindowsServer
+        sku: 2019-Datacenter
+        version: latest
+      vm_size: Standard_A1_v2
+      network_interfaces: "server4_nic01"
+
+# Stop All Virtual Machines
+  - name: Stop VM ansible
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      allocated: no
+      name: "ansible"
+      state: present
+      started: false
+  
+  - name: Stop VM server1
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      allocated: no
+      name: "server1"
+      state: present
+      started: false
+  
+  - name: Stop VM server2
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      allocated: no
+      name: "server2"
+      state: present
+      started: false
+
+  - name: Stop VM server3
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      allocated: no
+      name: "server3"
+      state: present
+      started: false
+
+  - name: Stop VM server4
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      allocated: no
+      name: "server4"
+      state: present
+      started: false
+                     
