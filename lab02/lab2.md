@@ -248,7 +248,7 @@ ansible-playbook 01_linux.yml --ask-become-pass
 
 ![Alt text](pics/028_run_playbook_secondtask_idempodent.png?raw=true "Run playbook")
 
-## Task 4: Add server two and run the playbook
+## Task 5: Add server two and run the playbook
 
 We will add server 2 to the inventory
 
