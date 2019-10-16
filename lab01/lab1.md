@@ -128,6 +128,7 @@ i (hit i to toggle input)
 ```
 
 ```bash
+[ defaults ]
 inventory = /home/jesbe/ansible-hosts
 ```
 
