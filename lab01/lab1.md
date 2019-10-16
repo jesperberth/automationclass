@@ -171,7 +171,6 @@ ansible linuxservers -m ping
 
 when it asks "Are you sure you want to continue connecting (yes/no)?" type yes
 
-
 ![Alt text](pics/009_connect_error.png?raw=true "Connect Error")
 
 Connection will fail, as ansible expects passwordless ssh connections to be established before running
@@ -291,26 +290,9 @@ ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=ye
 
 ## Task 4: Connect Windows Host
 
-Connect to server3 using RDP, you can get the link in the Azure Portal
+Windows Servers can be connected in different ways, we will use ansible_messageencryption, but Certificate encryption is available, use this link to setup certificates
 
-User name is __username__ as entered when we created the lab environement 
-
-We need to enable Windows Remote Management on the server
-
-Start a powershell console with elevated rights (Run As Administrator) and run the following commands
-
-__Type:__
-
-```powershell
-$url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
-$file = "$env:temp\ConfigureRemotingForAnsible.ps1"
-
-(New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
-
-powershell.exe -ExecutionPolicy ByPass -File $file
-```
-
-![Alt text](pics/018_enable_winrm.png?raw=true "enable winRm")
+[Windows Certificate Lab](lab1_win_cert.md)
 
 Lets add the windows server to our ansible hosts file
 
@@ -326,7 +308,7 @@ pip3 install pywinrm --user
 
 ![Alt text](pics/019_install_pywinrm.png?raw=true "enable winRm")
 
-Yes the password is in clear text, we will look into this later
+Yes the password is in clear text, you can encrypt the password with ansible-vault
 
 __Note:__
 
@@ -345,9 +327,10 @@ server3
 [windowsservers:vars]
 ansible_user=jesbe
 ansible_password=SomeThingSimple8
-ansible_port=5986
+ansible_port=5985
 ansible_connection=winrm
-ansible_winrm_server_cert_validation=ignore
+ansible_winrm_transport=ntlm
+ansible_winrm_message_encryption=always
 ```
 
 __Type:__
