@@ -158,7 +158,7 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-![Alt text](pics/008_edit_hostfile.png?raw=true "Edit ansible hostfile")
+![Alt text](pics/009_edit_hostfile.png?raw=true "Edit ansible hostfile")
 
 Lets ping our remote host server1
 
