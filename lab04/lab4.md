@@ -145,7 +145,7 @@ In VSCode
 
 create a new playbook file 01_azure.yml
 
-add the following text to the file, change the name of the resource group to "webserver_userxx" - where userxx is the username on the printout
+add the following text to the file, change the name of the resource group to __"webserver_userxx"__ - where userxx is the username on the printout
 
 ```ansible
 ---
@@ -191,7 +191,7 @@ In VSCode
 
 create a new playbook file 02_azure.yml
 
-add the following text to the file, change the name of any vars with _userxx to your number
+add the following text to the file, change the name of any vars with __userxx__ to your number
 
 ```ansible
 ---
@@ -485,7 +485,7 @@ ansible-playbook 02_azure.yml --ask-become-pass
 
 ![Alt text](pics/021_azure_httpd_run.png?raw=true "azure install httpd playbook run")
 
-In VSCode add these two variables to the webserver play, change the value to your desire
+In VSCode add these two variables to the webserver play, __change the value to your desire__
 
 ```ansible
   vars:
