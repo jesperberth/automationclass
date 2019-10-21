@@ -1,8 +1,8 @@
-# Lab 6: Ansible VMware
+# Lab 6: Ansible Vmware
 
 In this session we will use ansible to manage a vmware esxi host, adding NFS storage, PortGroup to a virtual switch a virtual machine from template and install http inside the virtual machine.
 
-## Task 1: Install Ansible on ansible2.demo.local
+## Task 1: Install Ansible on ansibleserver.ansible.local
 
 Logon to ansibleserver.ansible.local with ssh
 
