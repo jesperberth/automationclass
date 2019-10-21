@@ -4,7 +4,7 @@ In this session we will configure a Fortigate firewall with a new vlan interface
 
 The network is to be used in Lab 6 Vmware playbook
 
-## Task 1: Prepare ansibleserver
+## Task 1: Install Ansible on ansibleserver.ansible.local
 
 Logon to ansibleserver.ansible.local with ssh
 

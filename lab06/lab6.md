@@ -2,7 +2,7 @@
 
 In this session we will use ansible to manage a vmware esxi host, adding NFS storage, PortGroup to a virtual switch a virtual machine from template and install http inside the virtual machine.
 
-## Task 1: Install Ansible on ansibleserver.ansible.local
+## Task 1: Prepare ansibleserver for vmware
 
 Logon to ansibleserver.ansible.local with ssh
 
@@ -87,7 +87,7 @@ In the vmware webconsole check under storage that your nfs share is connected
 
 ![Alt text](pics/03_add_nfs_to_vmware_connect.png?raw=true "nfs vmware")
 
-## Task 2: Add Network portgroup to ESXi host
+## Task 4: Add Network portgroup to ESXi host
 
 [Ansible VMware PortGroup](https://docs.ansible.com/ansible/latest/modules/vmware_portgroup_module.html#vmware-portgroup-module)
 
@@ -206,7 +206,7 @@ In the vmware webconsole check under virtual machines that your vm is created
 
 ![Alt text](pics/09_add_vm_vmware_created.png?raw=true "add vm in vmware")
 
-## Task 4: Configure webserver
+## Task 5: Configure webserver
 
 [Ansible Module user](https://docs.ansible.com/ansible/latest/modules/user_module.html)
 
