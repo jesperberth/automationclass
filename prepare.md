@@ -78,6 +78,20 @@ The playbook will create all resources needed for the Automation class - Lab 01 
 
 ![Alt text](pics/11_lab_ready.png?raw=true "Labs are ready")
 
+## SSH Clients
+
+Putty is a well known ssh client for most platforms
+
+[Download Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
+
+Windows 10 has openSSH preinstalled, just open a CMD or Powershell consol and type ssh user@hostname
+
+Recomended for Windows
+
+Download Microsoft Powershell Core 6
+
+[Download Powershell Core](https://github.com/PowerShell/PowerShell/releases/tag/v6.2.3)
+
 Go back to the lab guide
 
 [Lab Guide](README.md)

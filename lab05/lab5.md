@@ -24,7 +24,7 @@ Until ansible 2.9 is released, we need to use devel version
 __Type:__
 
 ``` bash
-pip3 install git+https://github.com/ansible/ansible.git@devel --user
+pip3 install ansible==2.9.0rc4 --user
 pip3 install fortiosapi --user
 
 ansible --version
