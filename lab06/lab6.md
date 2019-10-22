@@ -173,7 +173,7 @@ add below task to the file 01_vmware.yml
       networks:
       - name: "{{ portgroup_name }}"
       wait_for_ip_address: "yes"
-    register: "webserver_{{ nfs_user }}"
+    register: "webserver"
 
 ```
 
