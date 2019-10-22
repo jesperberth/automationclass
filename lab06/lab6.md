@@ -317,7 +317,7 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 01_vmware.yml
+ansible-playbook 01_vmware.yml --ask-become-pass
 
 ```
 
