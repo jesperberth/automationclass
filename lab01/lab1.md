@@ -121,6 +121,14 @@ i (hit i to toggle input)
 inventory = /home/jesbe/ansible-hosts
 ```
 
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
 ![Alt text](pics/008_ansible_cfg_set_inventory.png?raw=true "set ansible inventory")
 
 __Type:__
