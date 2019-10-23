@@ -131,6 +131,8 @@ Hit Esc-key
 
 ![Alt text](pics/008_ansible_cfg_set_inventory.png?raw=true "set ansible inventory")
 
+Create the Ansible Hosts file
+
 __Type:__
 
 ```bash
