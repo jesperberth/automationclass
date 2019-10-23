@@ -308,6 +308,8 @@ Log on to server "ansibleserver.ansible.local" using ssh
 
 Use git to get the playbook
 
+__Note:__ Become password is "Only4Demo!"
+
 __Type:__
 
 ```bash
