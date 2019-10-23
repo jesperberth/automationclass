@@ -1,0 +1,129 @@
+---
+- hosts: localhost
+  vars:
+    hostname: "vcenter.ansible.local"
+    esxihostname: "esxi.ansible.local"
+    username: "userxx@vsphere.local"
+    password: "Password1!"
+    nfs_user: "userxx"
+    portgroup_name: "vlan10x"
+    vlan_id: "10x"
+  tasks:
+  - name: Add NFS Storage ESXi
+    vmware_host_datastore:
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      esxi_hostname: "{{ esxihostname }}"
+      datastore_name: "datastore_{{ nfs_user }}"
+      datastore_type: "nfs"
+      nfs_server: "storage.ansible.local"
+      nfs_path: "/storage/{{ nfs_user }}"
+      nfs_ro: "no"
+      state: "present"
+      validate_certs: "False"
+    delegate_to: "localhost"
+  - name: Add a PortGroup to VMware vSwitch
+    vmware_portgroup:
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: False
+      switch_name: "vSwitch0"
+      esxi_hostname: "{{ esxihostname }}"
+      portgroup_name: "{{ portgroup_name }}"
+      vlan_id: "{{ vlan_id }}"
+    delegate_to: localhost
+  - name: Clone fedora 30 to userxx webserver
+    vmware_guest:
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: "False"
+      name: "webserver_{{ nfs_user }}"
+      template: "_TEMP_fedora30"
+      datacenter: "Datacenter"
+      folder: "/"
+      state: "poweredon"
+      hardware:
+        memory_mb: "1024"
+        num_cpus: "1"
+      disk:
+      - size_gb: "16"
+        type: "thin"
+        datastore: "datastore1"
+      - size_gb: "2"
+        type: "thin"
+        datastore: "datastore_{{ nfs_user }}"
+      networks:
+      - name: "{{ portgroup_name }}"
+      wait_for_ip_address: "yes"
+    register: "webserver"
+  - name: Generate SSH keys
+    user:
+      name: "{{ ansible_user_id }}"
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: .ssh/id_rsa
+
+  - name: IP address info webserver
+    debug:
+      msg: "{{ webserver.instance.ipv4 }}"
+
+  - name: Set Fact webserver_ip_fact
+    set_fact:
+     webserver_ip_fact: "{{ webserver.instance.ipv4 }}"
+
+  - name: IP address info
+    debug:
+      msg: "{{ webserver_ip_fact }}"
+
+  - name: add webserver to ansible in memory host file
+    add_host:
+     name: "{{ webserver_ip_fact }}"
+     groups: webserver
+
+  - name: Copy SSH ID
+    shell: |
+     ssh-copy-id "root@{{ webserver_ip_fact }}"
+
+- hosts: webserver
+  remote_user: "root"
+  become: "yes"
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    websiteheader: "Ansible Playbook in vmware"
+    websiteauthor: "Ansible trainee"
+  tasks:
+  - name: Install Apache
+    dnf:
+     name: httpd
+     state: latest
+
+  - name: Enable Apache
+    systemd:
+     name: httpd
+     enabled: yes
+     state: started
+
+  - name: Allow http in firewall
+    firewalld:
+     service: http
+     permanent: true
+     state: enabled
+     immediate: yes
+    notify:
+      - reload firewall
+
+  - name: Add index.html
+    template:
+      src: index.html.j2
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+
+  handlers:
+  - name: reload firewall
+    service:
+      name: firewalld
+      state: reloaded
