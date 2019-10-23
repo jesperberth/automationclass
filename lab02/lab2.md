@@ -127,6 +127,21 @@ Now Sync the changes Push/Pull, in the blue bar at the bottom, 0 up, 1 down it w
 
 The first time you will be prompted for github credentials
 
+__NOTE:__
+
+If you get an error stating "You are missing user.name and user.email"
+
+Open Powershell on your desktop
+
+```bash
+cd "to your git directory you are working in"
+
+git config user.name "Full Name"
+git config user.email "email@address.com"
+```
+
+and try again
+
 ![Alt text](pics/019_code_git_sync_login.png?raw=true "git login in VSCode")
 
 Open the Git Hub repository, the 01_linux.yml is now added, note the comment right of the filename
