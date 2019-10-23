@@ -4,18 +4,7 @@ In this session we will install and use Visual Studio Code with a few plugins to
 
 ## Prepare
 
-We need to start servers, ansible, server1 and server2
-
-In Azure Cloud Shell(Bash)
-
-``` bash
-cd clouddrive
-cd automationclass_setup
-cd azure_class_playbooks
-
-ansible-playbook 02_azure_lab2_start.yml
-
-```
+We will need the servers, ansible, server1 and server2 to be up and running - by default they are started after creation
 
 ## Task 1: Setup Visual Studio Code and GIT
 

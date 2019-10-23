@@ -4,17 +4,7 @@ Use Variables, prompts, facts, conditions and handlers in Playbooks
 
 ## Prepare
 
-We need to start servers, ansible, server1, server2 and server3
-
-In Azure Cloud Shell(Bash)
-
-``` bash
-cd clouddrive
-cd automationclass_setup
-cd azure_class_playbooks
-
-ansible-playbook 03_azure_lab3_start.yml
-```
+We will need the servers, ansible, server1, server2 and server3 to be up and running - by default they are started after creation
 
 ## Task 1: Using variables in a playbook
 

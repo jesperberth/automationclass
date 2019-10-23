@@ -4,18 +4,7 @@ In this session we will use ansible to setup and manage resources in Azure to de
 
 ## Prepare
 
-We need to start servers, ansible
-
-In Azure Cloud Shell(Bash)
-
-``` bash
-cd clouddrive
-cd automationclass_setup
-cd azure_class_playbooks
-
-ansible-playbook 04_azure_lab4_start.yml
-
-```
+We will need the server, ansible to be up and running - by default they are started after creation
 
 ## Task 1: Create credentials for Azure
 

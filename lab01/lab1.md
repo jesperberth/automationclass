@@ -4,18 +4,7 @@ In this session we will install ansible on server ansible, and connect to linux 
 
 ## Prepare
 
-We need to start servers, ansible, server1 and server3
-
-In Azure Cloud Shell(Bash)
-
-``` bash
-cd clouddrive
-cd automationclass_setup
-cd azure_class_playbooks
-
-ansible-playbook 01_azure_lab1_start.yml
-
-```
+We will need the servers, ansible, server1 and server3 to be up and running - by default they are started after creation
 
 ## Task 1: Install Ansible
 
