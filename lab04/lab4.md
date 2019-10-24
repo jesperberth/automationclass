@@ -134,7 +134,7 @@ In VSCode
 
 create a new playbook file 01_azure.yml
 
-add the following text to the file, change the name of the resource group to __"webserver_userxx"__ - where userxx is the username on the printout
+add the following text to the file, change the name of the resource group to __"webserver_userx"__ - where userx is the username on the printout
 
 ```ansible
 ---
@@ -143,7 +143,7 @@ add the following text to the file, change the name of the resource group to __"
   tasks:
   - name: Create resource group
     azure_rm_resourcegroup:
-      name: webserver_userxx
+      name: webserver_userx
       location: northeurope
     register: rg
   - debug:
@@ -180,7 +180,7 @@ In VSCode
 
 create a new playbook file 02_azure.yml
 
-add the following text to the file, change the name of any vars with __userxx__ to your number
+add the following text to the file, change the name of any vars with __userx__ to your number
 
 ```ansible
 ---
@@ -188,10 +188,10 @@ add the following text to the file, change the name of any vars with __userxx__ 
   connection: local
   vars:
     location: northeurope
-    virtual_network_name: webserver_userxx
+    virtual_network_name: webserver_userx
     subnet: Webserver
-    resource_group: webserver_userxx
-    domain_sub: domainuserxx
+    resource_group: webserver_userx
+    domain_sub: domainuserx
 
   vars_prompt:
     - name: adminUser
