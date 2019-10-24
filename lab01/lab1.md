@@ -292,6 +292,10 @@ ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=ye
 
 Windows Servers can be connected in different ways, we will use ansible_messageencryption, but Certificate encryption is available, use this link to setup certificates
 
+__Note:__
+
+Dont use the Certificate lab in this class
+
 [Windows Certificate Lab](lab1_win_cert.md)
 
 Lets add the windows server to our ansible hosts file
