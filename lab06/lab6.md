@@ -6,7 +6,7 @@ In this session we will use ansible to manage a vmware esxi host, adding NFS sto
 
 Logon to ansibleserver.ansible.local with ssh
 
-Use your "userxx" account and password
+Use your "userx" account and password
 
 We need to install the python modules for vmware
 
@@ -36,9 +36,9 @@ Change "username", "nfs_user", "portgroup_name" and "vlan_id"
   vars:
     hostname: "vcenter.ansible.local"
     esxihostname: "esxi.ansible.local"
-    username: "userxx@vsphere.local"
+    username: "userx@vsphere.local"
     password: "Password1!"
-    nfs_user: "userxx"
+    nfs_user: "userx"
     portgroup_name: "vlan10x"
     vlan_id: "10x"
   tasks:
@@ -81,7 +81,7 @@ ansible-playbook 01_vmware.yml
 
 Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local)
 
-Use your userxx@vsphere.local and password
+Use your userx@vsphere.local and password
 
 In the vmware webconsole check under storage that your nfs share is connected
 
@@ -133,7 +133,7 @@ ansible-playbook 01_vmware.yml
 
 Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local)
 
-Use your userxx@vsphere.local and password
+Use your userx@vsphere.local and password
 
 In the vmware webconsole check under networking/port groups that your vlan is created
 
@@ -148,8 +148,7 @@ In VSCode
 add below task to the file 01_vmware.yml
 
 ```ansible
-
-  - name: Clone fedora 30 to userxx webserver
+  - name: Clone fedora 30 to userx webserver
     vmware_guest:
       hostname: "{{ hostname }}"
       username: "{{ username }}"
@@ -173,8 +172,7 @@ add below task to the file 01_vmware.yml
       networks:
       - name: "{{ portgroup_name }}"
       wait_for_ip_address: "yes"
-    register: "webserver_{{ nfs_user }}"
-
+    register: "webserver"
 ```
 
 ![Alt text](pics/07_add_vm.png?raw=true "add vm playbook")
@@ -200,7 +198,7 @@ ansible-playbook 01_vmware.yml
 
 Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local)
 
-Use your userxx@vsphere.local and password
+Use your userx@vsphere.local and password
 
 In the vmware webconsole check under virtual machines that your vm is created
 
@@ -232,74 +230,74 @@ add below task to the file 01_vmware.yml
 
 ```ansible
 # Prepare ansible for webserver
-   - name: Generate SSH keys
-     user:
-       name: "{{ ansible_user_id }}"
-       generate_ssh_key: yes
-       ssh_key_bits: 2048
-       ssh_key_file: .ssh/id_rsa
+  - name: Generate SSH keys
+    user:
+      name: "{{ ansible_user_id }}"
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: .ssh/id_rsa
 
-   - name: IP address info webserver
-     debug:
-       msg: "{{ webserver.instance.ipv4 }}"
+  - name: IP address info webserver
+    debug:
+      msg: "{{ webserver.instance.ipv4 }}"
 
-   - name: Set Fact webserver_ip_fact
-     set_fact:
-      webserver_ip_fact: "{{ webserver.instance.ipv4 }}"
+  - name: Set Fact webserver_ip_fact
+    set_fact:
+     webserver_ip_fact: "{{ webserver.instance.ipv4 }}"
 
-   - name: IP address info
-     debug:
-       msg: "{{ webserver_ip_fact }}"
+  - name: IP address info
+    debug:
+      msg: "{{ webserver_ip_fact }}"
 
-   - name: add webserver to ansible in memory host file
-     add_host:
-      name: "{{ webserver_ip_fact }}"
-      groups: webserver
+  - name: add webserver to ansible in memory host file
+    add_host:
+     name: "{{ webserver_ip_fact }}"
+     groups: webserver
 
-   - name: Copy SSH ID
-     shell: |
-      ssh-copy-id "root@{{ webserver_ip_fact }}"
+  - name: Copy SSH ID
+    shell: |
+     ssh-copy-id "root@{{ webserver_ip_fact }}"
 
--  hosts: webserver
-   remote_user: "root"
-   become: "yes"
-   vars:
-     ansible_python_interpreter: /usr/bin/python3
-     websiteheader: "Ansible Playbook in vmware"
-     websiteauthor: "Ansible trainee"
-   tasks:
-   - name: Install Apache
-     dnf:
-      name: httpd
-      state: latest
+- hosts: webserver
+  remote_user: "root"
+  become: "yes"
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    websiteheader: "Ansible Playbook in vmware"
+    websiteauthor: "Ansible trainee"
+  tasks:
+  - name: Install Apache
+    dnf:
+     name: httpd
+     state: latest
 
-   - name: Enable Apache
-     systemd:
-      name: httpd
-      enabled: yes
-      state: started
+  - name: Enable Apache
+    systemd:
+     name: httpd
+     enabled: yes
+     state: started
 
-   - name: Allow http in firewall
-     firewalld:
-      service: http
-      permanent: true
-      state: enabled
-      immediate: yes
-     notify:
-       - reload firewall
-  
-   - name: Add index.html
-     template:
-       src: index.html.j2
-       dest: /var/www/html/index.html
-       owner: root
-       group: root
+  - name: Allow http in firewall
+    firewalld:
+     service: http
+     permanent: true
+     state: enabled
+     immediate: yes
+    notify:
+      - reload firewall
 
-   handlers:
-   - name: reload firewall
-     service:
-       name: firewalld
-       state: reloaded
+  - name: Add index.html
+    template:
+      src: index.html.j2
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+
+  handlers:
+  - name: reload firewall
+    service:
+      name: firewalld
+      state: reloaded
 ```
 
 ![Alt text](pics/10_configure_vm.png?raw=true "configure vm playbook")
@@ -310,6 +308,8 @@ Log on to server "ansibleserver.ansible.local" using ssh
 
 Use git to get the playbook
 
+__Note:__ Become password is "Only4Demo!"
+
 __Type:__
 
 ```bash
@@ -317,7 +317,7 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 01_vmware.yml
+ansible-playbook 01_vmware.yml --ask-become-pass
 
 ```
 

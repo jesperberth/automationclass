@@ -10,11 +10,11 @@ Logon to ansibleserver.ansible.local with ssh
 
 ```bash
 
-userxx@ansibleserver.ansible.local
+userx@ansibleserver.ansible.local
 
 ```
 
-Use your "userxx" account and password
+Use your "userx" account and password
 
 We need to install ansible and python modules for fortios
 
@@ -51,7 +51,7 @@ You need to change the "username" and  "vlan id"
 - hosts: localhost
   vars:
    host: "10.172.10.1"
-   username: "userxx"
+   username: "userx"
    vlanid: "xxx"
    vdom: "root"
    ssl_verify: "False"
@@ -124,7 +124,7 @@ You need to change the "username" and "vlanid"
 - hosts: localhost
   vars:
    host: "10.172.10.1"
-   username: "userxx"
+   username: "userx"
    vlanid: "xxx"
    vdom: "root"
    ssl_verify: "False"
@@ -192,7 +192,7 @@ You need to change the "username" and "vlanid"
 - hosts: localhost
   vars:
    host: "10.172.10.1"
-   username: "userxx"
+   username: "userx"
    vlanid: "xxx"
    vdom: "root"
    ssl_verify: "False"

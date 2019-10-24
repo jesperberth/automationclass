@@ -4,18 +4,7 @@ In this session we will install and use Visual Studio Code with a few plugins to
 
 ## Prepare
 
-We need to start servers, ansible, server1 and server2
-
-In Azure Cloud Shell(Bash)
-
-``` bash
-cd clouddrive
-cd automationclass_setup
-cd azure_class_playbooks
-
-ansible-playbook 02_azure_lab2_start.yml
-
-```
+We will need the servers, ansible, server1 and server2 to be up and running - by default they are started after creation
 
 ## Task 1: Setup Visual Studio Code and GIT
 
@@ -137,6 +126,21 @@ Now Sync the changes Push/Pull, in the blue bar at the bottom, 0 up, 1 down it w
 ![Alt text](pics/018_code_git_sync.png?raw=true "git sync in VSCode")
 
 The first time you will be prompted for github credentials
+
+__NOTE:__
+
+If you get an error stating "You are missing user.name and user.email"
+
+Open Powershell on your desktop
+
+```bash
+cd "to your git directory you are working in"
+
+git config user.name "Full Name"
+git config user.email "email@address.com"
+```
+
+and try again
 
 ![Alt text](pics/019_code_git_sync_login.png?raw=true "git login in VSCode")
 
