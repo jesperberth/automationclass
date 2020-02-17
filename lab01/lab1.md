@@ -104,13 +104,13 @@ __Type:__
 ansible localhost -m file -a "path=/home/jesbe/testfile.txt state=touch"
 ```
 
-change jesbe with your username
+change __jesbe__ with your username
 
 The ansible command:
 
 ansible __hosts__ -m __module__ -a __module arguments__
 
-__hosts__ can be localhost or a group from the hostfile or all
+__hosts__ can be localhost or a group from the inventory file or all
 
 __module__ any ansible module, here file
 
@@ -323,11 +323,9 @@ Windows Servers can be connected in different ways, we will use ansible_messagee
 
 __Note:__
 
-Dont use the Certificate lab in this class
+! ! ! Dont use the Certificate lab in this class ! ! !
 
-[Windows Certificate Lab](lab1_win_cert.md)
-
-Lets add the windows server to our ansible hosts file
+[Don't use for this lab - Windows Certificate Lab](lab1_win_cert.md)
 
 Log on to server "ansible" using ssh
 
@@ -336,16 +334,23 @@ We need to install pywinrm before being able to connect to windows servers from 
 __Type:__
 
 ```bash
-pip3 install pywinrm --user
+pip install pywinrm
 ```
 
 ![Alt text](pics/019_install_pywinrm.png?raw=true "enable winRm")
+
+Lets add the windows server to our ansible hosts file
 
 Yes the password is in clear text, you can encrypt the password with ansible-vault
 
 __Note:__
 
 Change ansible_user and ansible_password to your username and password
+
+Add below the first group, linuxservers
+
+[linuxservers]
+server1
 
 __Type:__
 
