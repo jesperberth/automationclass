@@ -28,11 +28,11 @@ In the top blue bar, click the "powershell" icon marked with red
 
 Select "Bash"
 
-![Alt text](pics/06_start_cloud_shell_bash.png?raw=true "Cloud Shell bash")
+![Alt text](pics/06_start_cloud_shell_advanced.png?raw=true "Cloud Shell bash")
 
 Select "Show advanced settings"
 
-![Alt text](pics/07_start_cloud_shell_advanced.png?raw=true "Cloud Shell advanced")
+![Alt text](pics/07_start_cloud_shell_advanced_set.png?raw=true "Cloud Shell advanced")
 
 Set Cloud Shell region to "North Europe"
 
