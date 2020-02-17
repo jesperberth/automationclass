@@ -52,7 +52,7 @@ Your new repository is created with an empty README.md file
 
 ![Alt text](pics/008_newrepo_created_github.png?raw=true "New Repo")
 
-## Task 2: Create Git Repository
+## Task 2: Clone Git Repository
 
 We need to create a simple folder structure for keeping our files
 
@@ -155,7 +155,7 @@ We need to install git
 __Type:__
 
 ```bash
-sudo dnf install git
+sudo dnf install git -y
 ```
 
 ![Alt text](pics/021_install_git.png?raw=true "install git")
@@ -220,7 +220,6 @@ Pull the updated git repository
 __Type:__
 
 ```bash
-cd ansibleclass
 git pull
 ```
 
@@ -245,8 +244,6 @@ The "Create File" task will be changed every time as we use the touch command on
 __Type:__
 
 ```bash
-ls
-
 ansible-playbook 01_linux.yml --ask-become-pass
 ```
 
@@ -295,7 +292,7 @@ ansible-playbook 01_linux.yml --ask-become-pass
 
 ![Alt text](pics/030_2_server_play.png?raw=true "Run playbook")
 
-If server2 fails, did you copy your ssh key, "ssh-copy-id server" and run the playbook again
+If server2 fails, did you copy your ssh key? "ssh-copy-id user@server2" and run the playbook again
 
 Next Lab
 
