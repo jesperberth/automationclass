@@ -353,10 +353,7 @@ __Note:__
 
 Change ansible_user and ansible_password to your username and password
 
-Add below the first group, linuxservers
-
-[linuxservers]
-server1
+Add after the first group, linuxservers
 
 __Type:__
 
