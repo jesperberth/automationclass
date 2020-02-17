@@ -42,7 +42,7 @@ virtualenv ansible
 
 To activate our virtualenv ansible run the following
 
-which python is just to check that were using the correct python
+which python - is just to check that were using the correct python
 
 __Type:__
 
@@ -264,7 +264,13 @@ __Type:__
 
 ```bash
 exit
+```
 
+Ping linuxservers
+
+__Type:__
+
+```bash
 ansible linuxservers -m ping
 ```
 
