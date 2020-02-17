@@ -42,6 +42,8 @@ virtualenv ansible
 
 To activate our virtualenv ansible run the following
 
+which python is just to check that were using the correct python
+
 __Type:__
 
 ```bash
@@ -59,7 +61,7 @@ If you need to exit the virtualenv, you type "deactivate"
 __Type:__
 
 ```bash
-pip3 install ansible --user
+pip install ansible
 ```
 
 ![Alt text](pics/003_install_ansible.png?raw=true "Install Ansible")
