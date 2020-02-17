@@ -20,7 +20,7 @@ Note: Sudo Password is equal to your user account password
 sudo dnf install -y python3-pip virtualenv
 ```
 
-![Alt text](pics/001_install_pip3.png?raw=true "Install Python3 PIP3")
+![Alt text](pics/001_install_pip3.png?raw=true "Install Python3 PIP3 and Virtualenv")
 
 __Type:__
 
@@ -29,6 +29,32 @@ sudo pip3 install --upgrade pip
 ```
 
 ![Alt text](pics/002_install_pip3_upgrade.png?raw=true "Upgrade PIP")
+
+Lets create a Python virtualenv for our ansible installation
+
+__Type:__
+
+```bash
+virtualenv ansible
+```
+
+![Alt text](pics/003_create_virtualenv.png?raw=true "create virtualenv Ansible")
+
+To activate our virtualenv ansible run the following
+
+__Type:__
+
+```bash
+source ansible/bin/activate
+
+which python
+```
+
+Note: That when you are in a virtualenv, the name of the environment will be in the beginning of you command prompt like (ansible)
+
+If you need to exit the virtualenv, you type "deactivate"
+
+![Alt text](pics/003_activate_virtualenv.png?raw=true "active virtualenv Ansible")
 
 __Type:__
 
