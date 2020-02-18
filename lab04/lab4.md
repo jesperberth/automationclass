@@ -15,7 +15,7 @@ Install ansible azure module
 __Type:__
 
 ```bash
-pip3 install ansible[azure] --user
+pip install ansible[azure]
 
 ```
 
@@ -134,17 +134,22 @@ In VSCode
 
 create a new playbook file 01_azure.yml
 
-add the following text to the file, change the name of the resource group to __"webserver_userx"__ - where userx is the username on the printout
+ add the following text to the file, change the name of the variable user to your username
 
 ```ansible
 ---
 - hosts: localhost
   connection: local
+  vars:
+    user: write your username here
   tasks:
   - name: Create resource group
     azure_rm_resourcegroup:
-      name: webserver_userx
+      name: "webserver_{{ user }}"
       location: northeurope
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
     register: rg
   - debug:
       var: rg
