@@ -198,7 +198,7 @@ add the following text to the file, change the name of any vars with __userx__ t
     subnet: Webserver
     resource_group: "webserver_{{ user }}"
     domain_sub: "domain{{ user }}"
-    ssh_public_key: "paste your public key here"
+    ssh_public_key: "{{lookup('file', '~/.ssh/id_rsa.pub') }}"
 
   tasks:
   - name: Create a virtual network
@@ -260,6 +260,7 @@ In VSCode add the next sections to the 02_azure.yml playbook
       tags:
           solution: "webserver_{{ user }}"
           delete: ansibletraining
+    register: webserver_pub_ip
 
   - name: Create Security Group for webserver
     azure_rm_securitygroup:
@@ -337,7 +338,7 @@ In VSCode add the next sections to the 02_azure.yml playbook
       os_type: Linux
       admin_username: "{{ user }}"
       ssh_public_keys:
-        - path: ~/.ssh/authorized_keys
+        - path: "/home/{{ user }}/.ssh/authorized_keys"
           key_data: "{{ ssh_public_key }}"
       managed_disk_type: Standard_LRS
       state: present
@@ -348,6 +349,14 @@ In VSCode add the next sections to the 02_azure.yml playbook
         version: latest
       vm_size: Standard_A1_v2
       network_interfaces: "webserver_nic01"
+    return: webserver
+
+  - name: Show webserver public ip
+    debug:
+      msg: "{{ webserver_pub_ip.state.ip_address }}"
+
+  - name: tell the host about our servers it might want to ssh to
+    shell: "ssh-keyscan -t ecdsa {{ webserver_pub_ip.state.ip_address }}  >> /home/{{ user }}/.ssh/known_hosts"
 ```
 
 ![Alt text](pics/016_azure_vm.png?raw=true "azure vm playbook")
