@@ -239,7 +239,7 @@ ansible-playbook 02_azure.yml
 
 ```
 
-![Alt text](pics/013_azure_net_playbook_run.png?raw=true "azure net playbook")
+![Alt text](pics/013_azure_net_playbook_run.png?raw=true "azure net playbook run")
 
 ## Task 3: Create Public Ip, NIC and Security Group in Azure
 
