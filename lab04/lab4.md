@@ -173,6 +173,8 @@ ansible-playbook 01_azure.yml
 
 ```
 
+![Alt text](pics/011_azure_play_run.png?raw=true "azure play run")
+
 ## Task 2: Create Network in Azure
 
 [Ansible Module azure_rm_virtualnetwork](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualnetwork_module.html#azure-rm-virtualnetwork-module)
