@@ -2,7 +2,6 @@
 
 Use Variables, prompts, facts, conditions and handlers in Playbooks
 
-
 ## Prepare
 
 We will need the servers, ansible, server1, server2 and server3 to be up and running - by default they are started after creation
