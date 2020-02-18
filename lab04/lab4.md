@@ -193,18 +193,11 @@ add the following text to the file, change the name of any vars with __userx__ t
   connection: local
   vars:
     location: northeurope
-    virtual_network_name: webserver_userx
+    user: write your username here
+    virtual_network_name: "webserver_{{ user }}"
     subnet: Webserver
-    resource_group: webserver_userx
-    domain_sub: domainuserx
-
-  vars_prompt:
-    - name: adminUser
-      prompt: "Type the name of your root/administrator account"
-      private: no
-    - name: adminPassword
-      prompt: "Type the password of your root/administrator account"
-      private: no
+    resource_group: "webserver_{{ user }}"
+    domain_sub: "domain{{ user }}"
 
   tasks:
   - name: Create a virtual network
@@ -213,8 +206,8 @@ add the following text to the file, change the name of any vars with __userx__ t
       name: "{{ virtual_network_name }}"
       address_prefixes_cidr: "10.99.0.0/16"
       tags:
-          purpose: production
-          delete: not_allowed
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
   
   - name: Create a subnet
     azure_rm_subnet:
@@ -332,8 +325,10 @@ In VSCode add the next sections to the 02_azure.yml playbook
       resource_group: "{{ resource_group }}"
       name: "webserver"
       os_type: Linux
-      admin_username: "{{ adminUser }}"
-      admin_password: "{{ adminPassword }}"
+      admin_username: "{{ user }}"
+      ssh_public_keys:
+        - path: ~/.ssh/authorized_keys
+          key_data: < insert yor ssh public key here... >
       managed_disk_type: Standard_LRS
       state: present
       image:
@@ -408,7 +403,7 @@ In VSCode add the next sections to the 02_azure.yml playbook
 
   - name: Copy SSH ID
     shell: |
-      ssh-copy-id "{{ adminUser }}@{{ webserver_ip_fact }}"
+      ssh-copy-id "{{ user }}@{{ webserver_ip_fact }}"
 
 ```
 
