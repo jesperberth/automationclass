@@ -256,6 +256,9 @@ In VSCode add the next sections to the 02_azure.yml playbook
       name: public_ip_webserver
       allocation_method: static
       domain_name: "webserver{{ domain_sub }}"
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
 
   - name: Create Security Group for webserver
     azure_rm_securitygroup:
@@ -275,6 +278,9 @@ In VSCode add the next sections to the 02_azure.yml playbook
             access: Allow
             priority: 101
             direction: Inbound
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
 
   - name: Create a network interface for webserver
     azure_rm_networkinterface:
@@ -287,6 +293,9 @@ In VSCode add the next sections to the 02_azure.yml playbook
         - name: "webserver_nic01_ipconfig"
           public_ip_address_name: "public_ip_webserver"
           primary: True
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
 ```
 
 ![Alt text](pics/014_azure_network.png?raw=true "azure nic playbook")
