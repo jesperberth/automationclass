@@ -198,6 +198,7 @@ add the following text to the file, change the name of any vars with __userx__ t
     subnet: Webserver
     resource_group: "webserver_{{ user }}"
     domain_sub: "domain{{ user }}"
+    ssh_public_key: "paste your public key here"
 
   tasks:
   - name: Create a virtual network
@@ -337,7 +338,7 @@ In VSCode add the next sections to the 02_azure.yml playbook
       admin_username: "{{ user }}"
       ssh_public_keys:
         - path: ~/.ssh/authorized_keys
-          key_data: < insert yor ssh public key here... >
+          key_data: "{{ ssh_public_key }}"
       managed_disk_type: Standard_LRS
       state: present
       image:
