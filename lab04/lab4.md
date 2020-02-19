@@ -248,6 +248,8 @@ ansible-playbook 02_azure.yml
 
 [Ansible Module azure_rm_securitygroup](https://docs.ansible.com/ansible/latest/modules/azure_rm_securitygroup_module.html#azure-rm-securitygroup-module)
 
+[Ansible Module azure_rm_networkinterface](https://docs.ansible.com/ansible/latest/modules/azure_rm_networkinterface_module.html#azure-rm-networkinterface-module)
+
 In VSCode add the next sections to the 02_azure.yml playbook
 
 ```ansible
@@ -326,6 +328,8 @@ ansible-playbook 02_azure.yml
 
 [Ansible Module azure_rm_virtualmachine](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualmachine_module.html#azure-rm-virtualmachine-module)
 
+[Ansible Module shell](https://docs.ansible.com/ansible/latest/modules/shell_module.html#shell-module)
+
 Add the virtualmachine task to the 02_azure.yml playbook
 
 In VSCode add the next sections to the 02_azure.yml playbook
@@ -384,60 +388,44 @@ ansible-playbook 02_azure.yml
 
 ![Alt text](pics/017_azure_vm_run.png?raw=true "azure vm playbook run")
 
-## Task 4: Install Apache Webserver and create the site
+The new webserver is now deployed in Azure and we are able to ssh keyless to the webserver
 
-We need to collect the public ip address for webserver and add it to the in memory hosts file, and copy the ssh id to the new machine
+## Task 4: Create an ansible dynamic inventory for Azure RM
 
-[Ansible Module azure_rm_publicipaddress_facts](https://docs.ansible.com/ansible/latest/modules/azure_rm_publicipaddress_facts_module.html#azure-rm-publicipaddress-facts-module)
+We can either add the webserver in the ansible-hosts file or use an Inventory plugin
 
-[Ansible Module set_fact](https://docs.ansible.com/ansible/latest/modules/set_fact_module.html)
+The Azure Resource Manager inventory plugin is part of ansible and can return a dynamic inventory grouped on tags
 
-[Ansible Module debug](https://docs.ansible.com/ansible/latest/modules/debug_module.html)
+[Azure Resource Manager inventory plugin](https://docs.ansible.com/ansible/latest/plugins/inventory/azure_rm.html)
 
-[Ansible Module add_host](https://docs.ansible.com/ansible/latest/modules/add_host_module.html?highlight=add_host)
+In VSCode create a new file webserver.azure_rm.yml
 
-[Ansible Module shell](https://docs.ansible.com/ansible/latest/modules/shell_module.html?highlight=shell)
+Note: The inventory file must end with .azure_rm.yml
 
-In VSCode add the next sections to the 02_azure.yml playbook
+Change __webserver_jesbe__ to your Resoucegroup name
 
 ```ansible
-  - name: Get facts for webserver Public IP
-    azure_rm_publicipaddress_facts:
-      resource_group: "{{ resource_group }}"
-      name: "public_ip_webserver"
-    register: "public_ip_facts_webserver"
-  
-  - name: Set Fact webserver_ip_fact
-    set_fact:
-      webserver_ip_fact: "{{ item.ip_address }}"
-    loop: "{{ public_ip_facts_webserver.publicipaddresses }}"
-  
-  - name: print webserver public ip
-    debug:
-     msg: "{{ webserver_ip_fact }}"
-  
-  - name: add webserver to ansible host file
-    add_host:
-      name: "{{ webserver_ip_fact }}"
-      groups: webserver
-
-  - name: Copy SSH ID
-    shell: |
-      ssh-copy-id "{{ user }}@{{ webserver_ip_fact }}"
+plugin: azure_rm
+auth_source: auto
+include_vm_resource_groups:
+- webserver_jesbe
+keyed_groups:
+- prefix: tag
+  key: tags
 
 ```
 
-![Alt text](pics/018_azure_get_ip.png?raw=true "azure get ip playbook")
+![Alt text](pics/018_azure_inventory.png?raw=true "vscode create inventory file")
 
 Save and commit to Git
 
 Log on to server "ansible" using ssh
 
-Use git to get the new azure playbook
+Use git to get the new azure inventory
 
 Change url to your own repository
 
-Note: Task Copy SSH ID, need attention, type "yes" and password when asked
+And run a test against Azure
 
 __Type:__
 
@@ -447,11 +435,17 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 02_azure.yml
+ansible-inventory -i ./webserver.azure_rm.yml --graph
+
+ansible-inventory -i ./webserver.azure_rm.yml --list
 
 ```
 
-![Alt text](pics/019_azure_get_ip_run.png?raw=true "azure get ip playbook run")
+![Alt text](pics/019_azure_inventory_run.png?raw=true "azure inventory run")
+
+If we add another server in the Resource Group it will be included in the inventory
+
+## Task 5: Install Apache Webserver and create the site - using ansible Azure dynamic inventory
 
 Install apache webserver, setup the static website, allow http trafic on the local firewall
 
