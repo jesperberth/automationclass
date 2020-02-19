@@ -443,6 +443,10 @@ ansible-inventory -i ./webserver.azure_rm.yml --list
 
 ![Alt text](pics/019_azure_inventory_run.png?raw=true "azure inventory run")
 
+![Alt text](pics/002_azure_inventory_run_list.png?raw=true "azure inventory run list")
+
+--list will give a lot more information
+
 If we add another server in the Resource Group it will be included in the inventory
 
 ## Task 5: Install Apache Webserver and create the site - using ansible Azure dynamic inventory
