@@ -185,15 +185,15 @@ In VSCode
 
 create a new playbook file 02_azure.yml
 
-add the following text to the file, change the name of any vars with __userx__ to your number
+add the following text to the file, change the first variable "user" to your username, it will be used for creating resources and a login to the webserver
 
 ```ansible
 ---
 - hosts: localhost
   connection: local
   vars:
-    location: northeurope
     user: write your username here
+    location: northeurope
     virtual_network_name: "webserver_{{ user }}"
     subnet: Webserver
     resource_group: "webserver_{{ user }}"
