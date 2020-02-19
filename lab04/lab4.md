@@ -185,7 +185,7 @@ In VSCode
 
 create a new playbook file 02_azure.yml
 
-add the following text to the file, change the first variable "user" to your username, it will be used for creating resources and a login to the webserver
+add the following text to the file, change the first variable __"user"__ to your username, it will be used for creating resources and a login to the webserver
 
 ```ansible
 ---
@@ -337,6 +337,7 @@ In VSCode add the next sections to the 02_azure.yml playbook
       name: "webserver"
       os_type: Linux
       admin_username: "{{ user }}"
+      ssh_password_enabled: false
       ssh_public_keys:
         - path: "/home/{{ user }}/.ssh/authorized_keys"
           key_data: "{{ ssh_public_key }}"
@@ -356,6 +357,11 @@ In VSCode add the next sections to the 02_azure.yml playbook
 
   - name: tell the host about our servers it might want to ssh to
     shell: "ssh-keyscan -t ecdsa {{ webserver_pub_ip.state.ip_address }}  >> /home/{{ user }}/.ssh/known_hosts"
+
+  - name: add webserver to ansible host file
+    add_host:
+      name: "{{ webserver_pub_ip.state.ip_address }}"
+      groups: webserver
 ```
 
 ![Alt text](pics/016_azure_vm.png?raw=true "azure vm playbook")
