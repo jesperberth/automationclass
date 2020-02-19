@@ -469,7 +469,7 @@ In VSCode create a new file 01_webserver_azure.yml
 Change the websiteauthor to your name
 
 ```ansible
-- hosts: all
+- hosts: tag_solution_webserver_jesbe
   become: yes
   vars:
     websiteheader: "Ansible Playbook"
