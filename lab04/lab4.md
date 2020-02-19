@@ -354,6 +354,9 @@ In VSCode add the next sections to the 02_azure.yml playbook
         version: latest
       vm_size: Standard_A1_v2
       network_interfaces: "webserver_nic01"
+    tags:
+        solution: "webserver_{{ user }}"
+        delete: ansibletraining
 
   - name: Show webserver public ip
     debug:
@@ -408,7 +411,7 @@ Change __webserver_jesbe__ to your Resoucegroup name
 plugin: azure_rm
 auth_source: auto
 include_vm_resource_groups:
-- webserver_jesbe
+- '*'
 keyed_groups:
 - prefix: tag
   key: tags
@@ -445,7 +448,7 @@ ansible-inventory -i ./webserver.azure_rm.yml --list
 
 ![Alt text](pics/020_azure_inventory_run_list.png?raw=true "azure inventory run list")
 
---list will give a lot more information
+--list will give a lot more information, --graph will consolidate output in a more viewable way
 
 If we add another server in the Resource Group it will be included in the inventory
 
@@ -506,7 +509,7 @@ Change the websiteauthor to your name
       state: reloaded
 ```
 
-![Alt text](pics/020_azure_httpd.png?raw=true "azure install httpd playbook")
+![Alt text](pics/021_webserver_playbook.png?raw=true "azure install httpd playbook")
 
 In VSCode create a new jinja file index.html.j2
 
@@ -522,7 +525,7 @@ In VSCode create a new jinja file index.html.j2
 </html>
 ```
 
-![Alt text](pics/024_azure_template.png?raw=true "azure template")
+![Alt text](pics/022_webserver_template.png?raw=true "azure template")
 
 Save and commit to Git
 
@@ -532,7 +535,7 @@ Use git to get the new azure playbook
 
 Change url to your own repository
 
-Run the new playbook
+Run the new playbook with the dynamic inventory
 
 __Type:__
 
@@ -542,9 +545,11 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 01_webserver_azure.yml
+ansible-playbook 01_webserver_azure.yml -i ./webserver.azure_rm.yml
 
 ```
+
+![Alt text](pics/023_webserver_run.png?raw=true "webserver playbook run")
 
 Check the result in a browser
 
