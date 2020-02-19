@@ -557,6 +557,6 @@ Check the result in a browser
 http://<your webserver ip>
 ```
 
-![Alt text](pics/026_webserver.png?raw=true "webserver")
+![Alt text](pics/024_webserver_site.png?raw=true "webserver site")
 
 [Network Playbooks](../lab05/lab5.md)
