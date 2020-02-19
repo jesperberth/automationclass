@@ -443,7 +443,7 @@ ansible-inventory -i ./webserver.azure_rm.yml --list
 
 ![Alt text](pics/019_azure_inventory_run.png?raw=true "azure inventory run")
 
-![Alt text](pics/002_azure_inventory_run_list.png?raw=true "azure inventory run list")
+![Alt text](pics/020_azure_inventory_run_list.png?raw=true "azure inventory run list")
 
 --list will give a lot more information
 
