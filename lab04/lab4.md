@@ -355,13 +355,9 @@ In VSCode add the next sections to the 02_azure.yml playbook
     debug:
       msg: "{{ webserver_pub_ip.state.ip_address }}"
 
-  - name: tell the host about our servers it might want to ssh to
+  - name: Add webserver to ssh known_hosts
     shell: "ssh-keyscan -t ecdsa {{ webserver_pub_ip.state.ip_address }}  >> /home/{{ user }}/.ssh/known_hosts"
 
-  - name: add webserver to ansible host file
-    add_host:
-      name: "{{ webserver_pub_ip.state.ip_address }}"
-      groups: webserver
 ```
 
 ![Alt text](pics/016_azure_vm.png?raw=true "azure vm playbook")
