@@ -455,61 +455,28 @@ Install apache webserver, setup the static website, allow http trafic on the loc
 
 [Ansible Module dnf](https://docs.ansible.com/ansible/latest/modules/dnf_module.html)
 
-In VSCode add the next sections to the 02_azure.yml playbook
+[Ansible Module systemd](https://docs.ansible.com/ansible/latest/modules/systemd_module.html)
+
+[Ansible Module firewalld](https://docs.ansible.com/ansible/latest/modules/firewalld_module.html)
+
+[Ansible Module template](https://docs.ansible.com/ansible/latest/modules/template_module.html)
+
+In VSCode create a new file 01_webserver_azure.yml
+
+Change the websiteauthor to your name
 
 ```ansible
-- hosts: webserver
+- hosts: all
   become: yes
   vars:
+    websiteheader: "Ansible Playbook"
+    websiteauthor: "Jesper Berth"
   tasks:
   - name: Install Apache
     dnf:
       name: httpd
       state: latest
-```
 
-![Alt text](pics/020_azure_httpd.png?raw=true "azure install httpd playbook")
-
-Save and commit to Git
-
-Log on to server "ansible" using ssh
-
-Use git to get the new azure playbook
-
-Change url to your own repository
-
-__Type:__
-
-```bash
-
-cd ansibleclass
-
-git pull
-
-ansible-playbook 02_azure.yml --ask-become-pass
-
-```
-
-![Alt text](pics/021_azure_httpd_run.png?raw=true "azure install httpd playbook run")
-
-In VSCode add these two variables to the webserver play, __change the value to your desire__
-
-```ansible
-  vars:
-    websiteheader: "Ansible Playbook"
-    websiteauthor: "Jesper Berth"
-
-```
-
-![Alt text](pics/022_azure_vars.png?raw=true "azure vars")
-
-In VSCode add the next sections to the 02_azure.yml playbook
-
-[Ansible Module systemd](https://docs.ansible.com/ansible/latest/modules/systemd_module.html)
-[Ansible Module firewalld](https://docs.ansible.com/ansible/latest/modules/firewalld_module.html)
-[Ansible Module template](https://docs.ansible.com/ansible/latest/modules/template_module.html)
-
-```ansible
   - name: Enable Apache
     systemd:
       name: httpd
@@ -539,7 +506,7 @@ In VSCode add the next sections to the 02_azure.yml playbook
       state: reloaded
 ```
 
-![Alt text](pics/023_azure_firewall.png?raw=true "azure config httpd playbook")
+![Alt text](pics/020_azure_httpd.png?raw=true "azure install httpd playbook")
 
 In VSCode create a new jinja file index.html.j2
 
@@ -565,6 +532,8 @@ Use git to get the new azure playbook
 
 Change url to your own repository
 
+Run the new playbook
+
 __Type:__
 
 ```bash
@@ -573,11 +542,9 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 02_azure.yml --ask-become-pass
+ansible-playbook 01_webserver_azure.yml
 
 ```
-
-![Alt text](pics/025_azure_firewall_run.png?raw=true "azure configure httpd playbook run")
 
 Check the result in a browser
 
