@@ -320,6 +320,8 @@ Test the inventory
 __type:__
 
 ```bash
+cd
+
 ansible-inventory -i webserver.vmware.yml --graph
 ```
 
@@ -403,6 +405,18 @@ Use your userx@vsphere.local and password
 ![Alt text](pics/17_show_tag_in_vmware.png?raw=true "show tags")
 
 You should see your own tag on your Webserver
+
+Test your inventory again
+
+__Type:__
+
+```bash
+cd
+
+ansible-inventory -i webserver.vmware.yml --graph
+```
+
+![Alt text](pics/18_show_tag_in_inventory.png?raw=true "show tags in inventory")
 
 ## Task 7: Configure webserver
 
