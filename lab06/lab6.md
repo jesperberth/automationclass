@@ -435,6 +435,7 @@ cd
 
 ansible-inventory -i webserver.vmware.yml --graph
 ```
+
 Look for @tag_userx
 
 ![Alt text](pics/18_show_tag_in_inventory.png?raw=true "show tags in inventory")
@@ -527,3 +528,5 @@ http://<your webserver ip>
 ```
 
 ![Alt text](pics/12_website.png?raw=true "website")
+
+[Ansible Exercise](../lab07/lab7.md)
