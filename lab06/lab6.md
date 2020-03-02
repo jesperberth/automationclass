@@ -249,7 +249,7 @@ ansible-playbook 01_vmware.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/11_configure_vm_run.png?raw=true "configure vm playbook run")
+![Alt text](pics/11_add_webserver_ssh_run.png?raw=true "configure vm playbook run")
 
 ## Task 6: Configure webserver
 
