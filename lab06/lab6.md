@@ -245,13 +245,166 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 01_vmware.yml --ask-become-pass
+ansible-playbook 01_vmware.yml
 
 ```
 
 ![Alt text](pics/11_add_webserver_ssh_run.png?raw=true "configure vm playbook run")
 
-## Task 6: Configure webserver
+## Task 6: Configure Dynamic Inventory for Vmware
+
+[Ansible Vmware Inventory](https://docs.ansible.com/ansible/latest/scenario_guides/vmware_scenarios/vmware_inventory.html)
+
+In this task we will configure Dymanic Inventory for Vmware
+
+To support tags in Vmware we need to install Vmware Automation SDK
+
+[Vmware Automation SDK](https://github.com/vmware/vsphere-automation-sdk-python#installing-required-python-packages)
+
+Logon to ansibleserver.ansible.local with ssh
+
+Use your "userx" account and password
+
+__Type:__
+
+```bash
+cd
+
+pip install --upgrade pip setuptools
+
+pip install --upgrade git+https://github.com/vmware/vsphere-automation-sdk-python.git
+
+```
+
+![Alt text](pics/12_install_vmware_sdk.png?raw=true "install vmware sdk")
+
+Create the inventory file in your root directory, the inventory file must end with .vmware.yml
+
+```bash
+cd
+
+vi webserver.vmware.yml
+
+```
+
+In vi __type:__
+
+Change __userx__
+
+```bash
+i (to toggle input)
+```
+
+```bash
+plugin: vmware_vm_inventory
+strict: False
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+validate_certs: False
+with_tags: True
+```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](pics/13_create_inventoryfile.png?raw=true "create inventory file")
+
+Test the inventory
+
+__type:__
+
+```bash
+ansible-inventory -i webserver.vmware.yml --graph
+```
+
+![Alt text](pics/14_run_inventoryfile.png?raw=true "run inventory file")
+
+Try change --graph to --list, the output will change
+
+We need to add a tag to our VM to use in the inventory
+
+[Ansible Module vmware_tag_manager](https://docs.ansible.com/ansible/latest/modules/vmware_tag_manager_module.html)
+
+In VSCode
+
+add below task to the file 01_vmware.yml
+
+```ansible
+  - name: Create a category
+    vmware_category:
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      category_name: "Cat_{{ nfs_user }}"
+      category_description: "Category for {{ nfs_user }}"
+      category_cardinality: 'multiple'
+      state: present
+    register: category
+
+  - name: Create a tag
+    vmware_tag:
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      category_id: "{{ category.category_results.category_id }}"
+      tag_name: "tag_{{ nfs_user }}"
+      tag_description: "Belongs to {{ nfs_user }}"
+      state: present
+    delegate_to: localhost
+
+  - name: Add tags to webserver
+    vmware_tag_manager:
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      tag_names:
+        - "tag_{{ nfs_user }}"
+      object_name: "webserver_{{ nfs_user }}"
+      object_type: VirtualMachine
+      state: add
+    delegate_to: localhost
+
+```
+
+![Alt text](pics/15_add_tags.png?raw=true "add tags")
+
+Save and commit to Git
+
+Log on to server "ansibleserver.ansible.local" using ssh
+
+Use git to get the playbook
+
+__Type:__
+
+```bash
+cd ansibleclass
+
+git pull
+
+ansible-playbook 01_vmware.yml
+
+```
+
+![Alt text](pics/16_add_tags_run.png?raw=true "add tags run")
+
+Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local)
+
+Use your userx@vsphere.local and password
+
+![Alt text](pics/17_show_tag_in_vmware.png?raw=true "show tags")
+
+You should see your own tag on your Webserver
+
+## Task 7: Configure webserver
 
 [Ansible Module dnf](https://docs.ansible.com/ansible/latest/modules/dnf_module.html)
 
