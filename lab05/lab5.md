@@ -65,7 +65,7 @@ create a new playbook file 01_forti_vlan.yml and add below
 
 __Note:__
 
-You need to change the "username" and  "vlan id"
+You need to change the __"username"__ and  __"vlan id"__
 
 ```ansible
 ---
@@ -138,7 +138,7 @@ create a new playbook file 02_forti_address.yml and add below
 
 __Note:__
 
-You need to change the "username" and "vlanid"
+You need to change the __"username"__ and __"vlanid"__
 
 ```ansible
 ---
@@ -206,7 +206,7 @@ create a new playbook file 03_forti_firewall_policy.yml and add below
 
 __Note:__
 
-You need to change the "username" and "vlanid"
+You need to change the __"username"__ and __"vlanid"__
 
 ```ansible
 ---
