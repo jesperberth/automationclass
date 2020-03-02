@@ -203,7 +203,7 @@ In the vmware webconsole check under virtual machines that your vm is created
 
 ![Alt text](pics/09_add_vm_vmware_created.png?raw=true "add vm in vmware")
 
-## Task 4: Prepare ssh for webserver
+## Task 5: Prepare ssh for webserver
 
 [Ansible Module set_fact](https://docs.ansible.com/ansible/latest/modules/set_fact_module.html)
 
@@ -251,7 +251,7 @@ ansible-playbook 01_vmware.yml --ask-become-pass
 
 ![Alt text](pics/11_configure_vm_run.png?raw=true "configure vm playbook run")
 
-## Task 5: Configure webserver
+## Task 6: Configure webserver
 
 [Ansible Module dnf](https://docs.ansible.com/ansible/latest/modules/dnf_module.html)
 
