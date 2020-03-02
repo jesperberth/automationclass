@@ -47,7 +47,7 @@ Lets install the python modules for ansible and fortios
 __Type:__
 
 ``` bash
-pip install ansibl
+pip install ansible
 pip install fortiosapi
 ```
 

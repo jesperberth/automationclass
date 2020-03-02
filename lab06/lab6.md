@@ -13,9 +13,8 @@ We need to install the python modules for vmware
 __Type:__
 
 ```bash
-pip3 install pyvmomi --user
+pip install pyvmomi
 
-ansible --version
 ```
 
 ![Alt text](pics/00_install_pyvmomi.png?raw=true "nfs playbook")
@@ -28,7 +27,7 @@ In VSCode
 
 create a new playbook file 01_vmware.yml and add below
 
-Change "username", "nfs_user", "portgroup_name" and "vlan_id"
+Change __"username"__, __"nfs_user"__, __"portgroup_name"__ and __"vlan_id"__
 
 ```ansible
 ---
@@ -148,14 +147,14 @@ In VSCode
 add below task to the file 01_vmware.yml
 
 ```ansible
-  - name: Clone fedora 30 to userx webserver
+  - name: Clone fedora 31 to userx webserver
     vmware_guest:
       hostname: "{{ hostname }}"
       username: "{{ username }}"
       password: "{{ password }}"
       validate_certs: "False"
       name: "webserver_{{ nfs_user }}"
-      template: "_TEMP_fedora30"
+      template: "_TEMP_fedora31"
       datacenter: "Datacenter"
       folder: "/"
       state: "poweredon"
@@ -204,17 +203,55 @@ In the vmware webconsole check under virtual machines that your vm is created
 
 ![Alt text](pics/09_add_vm_vmware_created.png?raw=true "add vm in vmware")
 
-## Task 5: Configure webserver
-
-[Ansible Module user](https://docs.ansible.com/ansible/latest/modules/user_module.html)
-
 [Ansible Module set_fact](https://docs.ansible.com/ansible/latest/modules/set_fact_module.html)
 
 [Ansible Module debug](https://docs.ansible.com/ansible/latest/modules/debug_module.html)
 
-[Ansible Module add_host](https://docs.ansible.com/ansible/latest/modules/add_host_module.html?highlight=add_host)
-
 [Ansible Module shell](https://docs.ansible.com/ansible/latest/modules/shell_module.html?highlight=shell)
+
+In VSCode
+
+add below task to the file 01_vmware.yml
+
+```ansible
+# Prepare ansible for webserver
+  - name: Set Fact webserver_ip_fact
+    set_fact:
+     webserver_ip_fact: "{{ webserver.instance.ipv4 }}"
+
+  - name: IP address info
+    debug:
+      msg: "{{ webserver_ip_fact }}"
+
+  - name: Add ansibleserver to ssh known_hosts
+    shell: "ssh-keyscan -t ecdsa {{ webserver_ip_fact }}  >> /home/{{ ansible_user_id }}/.ssh/known_hosts"
+
+```
+
+![Alt text](pics/10_add_webserver_ssh.png?raw=true "add vm in vmware")
+
+Save and commit to Git
+
+Log on to server "ansibleserver.ansible.local" using ssh
+
+Use git to get the playbook
+
+__Note:__ Become password is "Only4Demo!"
+
+__Type:__
+
+```bash
+cd ansibleclass
+
+git pull
+
+ansible-playbook 01_vmware.yml --ask-become-pass
+
+```
+
+![Alt text](pics/11_configure_vm_run.png?raw=true "configure vm playbook run")
+
+## Task 5: Configure webserver
 
 [Ansible Module dnf](https://docs.ansible.com/ansible/latest/modules/dnf_module.html)
 
@@ -224,40 +261,8 @@ In the vmware webconsole check under virtual machines that your vm is created
 
 [Ansible Module template](https://docs.ansible.com/ansible/latest/modules/template_module.html)
 
-In VSCode
-
-add below task to the file 01_vmware.yml
-
 ```ansible
-# Prepare ansible for webserver
-  - name: Generate SSH keys
-    user:
-      name: "{{ ansible_user_id }}"
-      generate_ssh_key: yes
-      ssh_key_bits: 2048
-      ssh_key_file: .ssh/id_rsa
-
-  - name: IP address info webserver
-    debug:
-      msg: "{{ webserver.instance.ipv4 }}"
-
-  - name: Set Fact webserver_ip_fact
-    set_fact:
-     webserver_ip_fact: "{{ webserver.instance.ipv4 }}"
-
-  - name: IP address info
-    debug:
-      msg: "{{ webserver_ip_fact }}"
-
-  - name: add webserver to ansible in memory host file
-    add_host:
-     name: "{{ webserver_ip_fact }}"
-     groups: webserver
-
-  - name: Copy SSH ID
-    shell: |
-     ssh-copy-id "root@{{ webserver_ip_fact }}"
-
+---
 - hosts: webserver
   remote_user: "root"
   become: "yes"
