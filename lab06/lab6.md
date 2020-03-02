@@ -203,6 +203,8 @@ In the vmware webconsole check under virtual machines that your vm is created
 
 ![Alt text](pics/09_add_vm_vmware_created.png?raw=true "add vm in vmware")
 
+## Task 4: Prepare ssh for webserver
+
 [Ansible Module set_fact](https://docs.ansible.com/ansible/latest/modules/set_fact_module.html)
 
 [Ansible Module debug](https://docs.ansible.com/ansible/latest/modules/debug_module.html)
@@ -235,8 +237,6 @@ Save and commit to Git
 Log on to server "ansibleserver.ansible.local" using ssh
 
 Use git to get the playbook
-
-__Note:__ Become password is "Only4Demo!"
 
 __Type:__
 
