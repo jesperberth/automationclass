@@ -329,7 +329,25 @@ ansible-inventory -i webserver.vmware.yml --graph
 
 Try change --graph to --list, the output will change
 
-We need to add a tag to our VM to use in the inventory
+The result list groups all servers in as inventory groups
+
+@all, @Fedora64Guest, @poweredon
+
+You can target all of these groups in a playbook
+
+- hosts: Fedora64Guest
+
+But that will result in a lot of webservers
+
+The dynamic inventory module supports custom vmware tags
+
+We need to add our own tag to our VM to use in the inventory
+
+"tag_userx"
+
+[Ansible Module vmware_category](https://docs.ansible.com/ansible/latest/modules/vmware_category_module.html#vmware-category-module)
+
+[Ansible Module vmware_tag](https://docs.ansible.com/ansible/latest/modules/vmware_tag_module.html)
 
 [Ansible Module vmware_tag_manager](https://docs.ansible.com/ansible/latest/modules/vmware_tag_manager_module.html)
 
@@ -402,9 +420,11 @@ Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local)
 
 Use your userx@vsphere.local and password
 
-![Alt text](pics/17_show_tag_in_vmware.png?raw=true "show tags")
+Click on your vm and locate the Tags settings in the right pane
 
-You should see your own tag on your Webserver
+You should have a tag "tag_userx"
+
+![Alt text](pics/17_show_tag_in_vmware.png?raw=true "show tags")
 
 Test your inventory again
 
@@ -415,6 +435,7 @@ cd
 
 ansible-inventory -i webserver.vmware.yml --graph
 ```
+Look for @tag_userx
 
 ![Alt text](pics/18_show_tag_in_inventory.png?raw=true "show tags in inventory")
 
@@ -428,15 +449,21 @@ ansible-inventory -i webserver.vmware.yml --graph
 
 [Ansible Module template](https://docs.ansible.com/ansible/latest/modules/template_module.html)
 
+In VSCode
+
+create a new playbook file webserver_vmware.yml and add below
+
+Change the __tag_userx__
+
 ```ansible
 ---
-- hosts: webserver
-  remote_user: "root"
+- hosts: tag_userx
+  remote_user: "user"
   become: "yes"
   vars:
-    ansible_python_interpreter: /usr/bin/python3
     websiteheader: "Ansible Playbook in vmware"
     websiteauthor: "Ansible trainee"
+
   tasks:
   - name: Install Apache
     dnf:
@@ -480,8 +507,6 @@ Log on to server "ansibleserver.ansible.local" using ssh
 
 Use git to get the playbook
 
-__Note:__ Become password is "Only4Demo!"
-
 __Type:__
 
 ```bash
@@ -489,7 +514,7 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 01_vmware.yml --ask-become-pass
+ansible-playbook webserver_vmware.yml -i ../webserver.vmware.yml --ask-become-pass
 
 ```
 
