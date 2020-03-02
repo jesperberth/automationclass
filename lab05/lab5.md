@@ -18,19 +18,40 @@ Use your "userx" account and password
 
 We need to install ansible and python modules for fortios
 
-__Important:__
-Until ansible 2.9 is released, we need to use devel version
+Lets create a Python virtualenv for our ansible installation
+
+__Type:__
+
+```bash
+virtualenv ansible
+```
+
+![Alt text](pics/001_setup_virtenv.png?raw=true "setup virtualenv")
+
+To activate our virtualenv ansible run the following
+
+which python - is just to check that were using the correct python
+
+__Type:__
+
+```bash
+source ansible/bin/activate
+
+which python
+```
+
+![Alt text](pics/002_activate_virtenv.png?raw=true "activate virtualenv")
+
+Lets install the python modules for ansible and fortios
 
 __Type:__
 
 ``` bash
-pip3 install ansible==2.9.0rc4 --user
-pip3 install fortiosapi --user
-
-ansible --version
+pip install ansibl
+pip install fortiosapi
 ```
 
-![Alt text](pics/001_install_pip_azure.png?raw=true "install ansible devel")
+![Alt text](pics/003_install_pip_azure.png?raw=true "install ansible")
 
 ## Task 2: Create a VLAN on the fortigate firewall
 
