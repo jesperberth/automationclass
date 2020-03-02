@@ -86,7 +86,7 @@ In the vmware webconsole check under storage that your nfs share is connected
 
 ![Alt text](pics/03_add_nfs_to_vmware_connect.png?raw=true "nfs vmware")
 
-## Task 4: Add Network portgroup to ESXi host
+## Task 3: Add Network portgroup to ESXi host
 
 [Ansible VMware PortGroup](https://docs.ansible.com/ansible/latest/modules/vmware_portgroup_module.html#vmware-portgroup-module)
 
@@ -138,7 +138,7 @@ In the vmware webconsole check under networking/port groups that your vlan is cr
 
 ![Alt text](pics/06_add_portgroup_to_vmware_created.png?raw=true "nfs vmware")
 
-## Task 3: Add a VM to ESXi host
+## Task 4: Add a VM to ESXi host
 
 [Ansible Vmware Guest](https://docs.ansible.com/ansible/latest/modules/vmware_guest_module.html#vmware-guest-module)
 
