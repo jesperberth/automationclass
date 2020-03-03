@@ -26,6 +26,8 @@ Look for the dns_servers
 
 Create a new website in azure, with two Red Hat linux servers, an Azure loadbalancer and The Tomato Monkey website running
 
-Git repo: https://github.com/jesperberth/tomato-monkey
+[Tomato Monkey Git repo](https://github.com/jesperberth/tomato-monkey)
+
+[Ansible module Azure_rm_virtualnetwork](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualnetwork_module.html)
 
 [Ansible module azure_rm_loadbalancer](https://docs.ansible.com/ansible/latest/modules/azure_rm_loadbalancer_module.html)

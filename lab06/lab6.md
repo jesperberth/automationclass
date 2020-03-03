@@ -337,7 +337,7 @@ You can target all of these groups in a playbook
 
 - hosts: Fedora64Guest
 
-But that will result in a lot of webservers
+Then all servers running fedora 64bit will end up being configured with our webserver config
 
 The dynamic inventory module supports custom vmware tags
 
@@ -440,6 +440,20 @@ Look for @tag_userx
 
 ![Alt text](pics/18_show_tag_in_inventory.png?raw=true "show tags in inventory")
 
+Lets test the tag before changing the webserver
+
+Change the __tag_userx__
+
+__Type:__
+
+```bash
+cd
+
+ansible -i webserver.vmware.yml tag_userx -u user
+```
+
+![Alt text](pics/18_test_tag_inventory.png?raw=true "test tags in inventory")
+
 ## Task 7: Configure webserver
 
 [Ansible Module dnf](https://docs.ansible.com/ansible/latest/modules/dnf_module.html)
@@ -495,18 +509,20 @@ Change the __tag_userx__
 
   handlers:
   - name: reload firewall
-    service:
+    systemd:
       name: firewalld
       state: reloaded
 ```
 
-![Alt text](pics/10_configure_vm.png?raw=true "configure vm playbook")
+![Alt text](pics/19_configure_webserver.png?raw=true "configure webserver playbook")
 
 Save and commit to Git
 
 Log on to server "ansibleserver.ansible.local" using ssh
 
 Use git to get the playbook
+
+Become pass: __On the whiteboard__
 
 __Type:__
 
@@ -519,7 +535,7 @@ ansible-playbook webserver_vmware.yml -i ../webserver.vmware.yml --ask-become-pa
 
 ```
 
-![Alt text](pics/11_configure_vm_run.png?raw=true "configure vm playbook run")
+![Alt text](pics/20_configure_vm_run.png?raw=true "configure vm playbook run")
 
 Check the result in a browser
 
@@ -527,6 +543,6 @@ Check the result in a browser
 http://<your webserver ip>
 ```
 
-![Alt text](pics/12_website.png?raw=true "website")
+![Alt text](pics/21_website.png?raw=true "website")
 
 [Ansible Exercise](../lab07/lab7.md)
