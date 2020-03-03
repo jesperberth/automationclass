@@ -16,11 +16,15 @@ Log in with your user and password
 
 Take a tour around in the UI
 
+## Task 2: Create Project, inventory and Credential
+
 In the left pane, click Projects
 
 Click on the Green Plus sign to create a new project
 
-Type a Name: userx_project
+Type
+
+Name: userx_project
 
 Organization: Training
 
@@ -33,6 +37,20 @@ Update Revision on Launch: Checked
 Leave the rest, click __Save__
 
 ![Alt text](pics/02_ansible_tower_create_project.png?raw=true "Create a project")
+
+In the left pane, click Inventory
+
+Click on the Green Plus sign to create a new inventory
+
+Type
+
+Name: userx_inventory
+
+Organization: Training
+
+Leave the rest, click __Save__
+
+![Alt text](pics/03_ansible_tower_create_inventory.png?raw=true "Create an inventory")
 
 Lab done
 
