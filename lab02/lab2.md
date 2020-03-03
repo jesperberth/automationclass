@@ -296,6 +296,140 @@ ansible-playbook 01_linux.yml --ask-become-pass
 
 If server2 fails, did you copy your ssh key? "ssh-copy-id user@server2" and run the playbook again
 
-Next Lab
+## Task 6: Ansible-vault
+
+In this lab we will work with ansible-vault to encrypt sensitive data as passwords
+
+First we need to remove the password for the windows servers in the ansible-hosts file
+
+```bash
+cd
+
+vi ansible-hosts
+
+```
+
+In vi go to the line ansible_password=SomeThingSimple8
+
+__type:__
+
+in vi dd will remove the line
+
+```bash
+dd
+
+[windowsservers:vars]
+ansible_user=jesbe
+ansible_password=SomeThingSimple8   <--------- Make sure the marker is at this line
+ansible_port=5985
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+ansible_winrm_message_encryption=always
+```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](pics/031_remove_password.png?raw=true "remove password")
+
+Next lets create an encryptet var file for ansible
+
+__Type:__
+
+```bash
+cd
+
+ansible-vault create winpassword.yml
+
+```
+
+You will be promptet for a password and to confirm the password
+
+![Alt text](pics/032_create_vault.png?raw=true "create vault")
+
+ansible-vault will open your default editor - in our case its vi
+
+In vi __type:__
+
+```bash
+i (for input)
+
+---
+
+ansible_password: SomeThingSimple8   <------ Type your Windows password here
+
+```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](pics/033_create_vault_save.png?raw=true "edit vault")
+
+Try to cat the file
+
+__Type:__
+
+```bash
+
+cat winpassword.yml
+
+```
+
+![Alt text](pics/034_cat_vault.png?raw=true "cat vault")
+
+To change the content of an encryptet file use ansible-vault edit filename
+
+Lets create a playbook to use the encryptet var file
+
+In VSCode
+
+Create a new file 01_vault.yml
+
+![Alt text](pics/035_vault_playbook.png?raw=true "vault playbook")
+
+__Type:__
+
+```ansible
+---
+- hosts: windowsservers
+  vars:
+  vars_files:
+    - ~/winpassword.yml
+  tasks:
+  - name: Install IIS (Web-Server only)
+    win_feature:
+      name: Web-Server
+      state: present
+```
+
+Save the file
+
+Notice that Git detects the changed file, do a commit add a comment "Vault" and Sync to Git
+
+On server ansible do a git pull and run the playbook
+
+```bash
+
+cd ansibleclass
+
+git pull
+
+ansible-playbook 01_vault.yml --ask-vault-pass
+
+```
+
+![Alt text](pics/036_vault_playbook_run.png?raw=true "vault playbook run")
+
+Lab done
 
 [Work with Playbooks](../lab03/lab3.md)
