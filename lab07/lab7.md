@@ -72,7 +72,7 @@ Microsoft Azure Resource Manager
 
 From the Azure Lab - Lab 04 find the credentials you used
 
-Hint: On server ansible cat ~/.azure/credentials
+__Hint:__ On server ansible cat ~/.azure/credentials
 
 Type
 
@@ -85,6 +85,18 @@ Client Secret: xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
 Tenant ID: xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
 
 ![Alt text](pics/05_ansible_tower_create_credential_filled.png?raw=true "Create credential")
+
+## Task 3: Create Template
+
+In VSCode
+
+Create a copy of 01_azure.yml -> 01_azure_tower.yml
+
+Change the variable user:
+
+to username-tower eg. "user1-tower"
+
+![Alt text](pics/06_ansible_tower_playbook.png?raw=true "Create credential")
 
 Lab done
 
