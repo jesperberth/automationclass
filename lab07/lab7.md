@@ -52,6 +52,40 @@ Leave the rest, click __Save__
 
 ![Alt text](pics/03_ansible_tower_create_inventory.png?raw=true "Create an inventory")
 
+In the left pane, click credentials
+
+Click on the Green Plus sign to create a new Credential
+
+Type
+
+Name: userx_credential
+
+Organization: Training
+
+Click on the "Credential Type
+
+![Alt text](pics/04_ansible_tower_create_credential.png?raw=true "select credential type")
+
+And select
+
+Microsoft Azure Resource Manager
+
+From the Azure Lab - Lab 04 find the credentials you used
+
+Hint: On server ansible cat ~/.azure/credentials
+
+Type
+
+Subscribtion: xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
+
+Client ID: xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
+
+Client Secret: xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
+
+Tenant ID: xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
+
+![Alt text](pics/05_ansible_tower_create_credential_filled.png?raw=true "Create credential")
+
 Lab done
 
 [Ansible Exercise](../lab08/lab8.md)
