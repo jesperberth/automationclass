@@ -98,6 +98,32 @@ to username-tower eg. "user1-tower"
 
 ![Alt text](pics/06_ansible_tower_playbook.png?raw=true "Create credential")
 
+In Tower go to project and refresh your project, this will do a "git pull"
+
+![Alt text](pics/07_ansible_tower_refresh.png?raw=true "Refresh project")
+
+In the left pane, click Templates
+
+Click on the Green Plus sign to create a new Template select the __Job template__ type
+
+Type
+
+Name: userx_resourcegroup
+
+Job Type: Run
+
+Inventory: Select your own inventory
+
+Project: Select your own project
+
+Playbook: 01_azure_tower.yml
+
+Credentials: Select credential type "Microsoft Azure Resource Manager" and your own credentials
+
+Leave the reset as default and click __Save__
+
+![Alt text](pics/08_ansible_tower_refresh.png?raw=true "Create template")
+
 Lab done
 
 [Ansible Exercise](../lab08/lab8.md)
