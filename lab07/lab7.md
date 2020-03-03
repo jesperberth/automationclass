@@ -124,6 +124,10 @@ Leave the reset as default and click __Save__
 
 ![Alt text](pics/08_ansible_tower_template.png?raw=true "Create template")
 
+Click on the "Launch" button and wait a minute to see the result
+
+![Alt text](pics/09_ansible_tower_template_run.png?raw=true "Run template")
+
 Lab done
 
 [Ansible Exercise](../lab08/lab8.md)
