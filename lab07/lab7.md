@@ -122,7 +122,7 @@ Credentials: Select credential type "Microsoft Azure Resource Manager" and your 
 
 Leave the reset as default and click __Save__
 
-![Alt text](pics/08_ansible_tower_refresh.png?raw=true "Create template")
+![Alt text](pics/08_ansible_tower_template.png?raw=true "Create template")
 
 Lab done
 
