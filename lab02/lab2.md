@@ -20,6 +20,8 @@ In VSCode
 
 Get extention "Ansible" from Microsoft
 
+Get extention "indent one space" from Alexander
+
 ![Alt text](pics/003_vscode_install_ansible.png?raw=true "Install extention in VSCode")
 
 Download and install GIT [Download Git](https://git-scm.com/downloads)
@@ -38,13 +40,11 @@ Lets create a new Repository, click the green "New" in the top left corner
 
 Give you repository a name "ansibleclass"
 
-Make Sure you tick __"Initialize this repository with a README"__
-
 Click "Create repository"
 
-Select "Public" - it's default
+Select "Public" - it's default - __for the purpose of these labs keep it public__
 
-Make sure you select "Initialize this repository with a repository"
+Make Sure you tick __"Initialize this repository with a README"__
 
 ![Alt text](pics/007_newrepo_github.png?raw=true "Create Repo")
 
@@ -78,6 +78,8 @@ In VSCode
 
 Click (Windows: Ctrl + Shift + P) (Mac: Command + Shift + P)
 This will open the VSCode command Palette
+
+Write "Git Clone"
 
 ![Alt text](pics/011_git_clone.png?raw=true "VSCode Command")
 

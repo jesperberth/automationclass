@@ -545,6 +545,6 @@ http://<your webserver ip>
 
 ![Alt text](pics/21_website.png?raw=true "website")
 
-lab done
+Lab done
 
-[Ansible Exercise](../lab07/lab7.md)
+[Ansible Automation](../lab07/lab7.md)

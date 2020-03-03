@@ -56,3 +56,11 @@ Use Ansible to manage your network infrastructure (Fortinet)
 ### Lab 6: [Vmware Playbooks](lab06/lab6.md)
 
 Use Ansible to manage Vmware VSphere
+
+### Lab 7: [Ansible Automation](lab07/lab7.md)
+
+Use Ansible to manage Vmware VSphere
+
+### Lab 8: [Ansible Exercise](lab08/lab8.md)
+
+Use Ansible to manage Vmware VSphere
