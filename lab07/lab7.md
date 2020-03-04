@@ -360,6 +360,15 @@ Click on Start
 ![Alt text](pics/23_work_step3.png?raw=true "Create workflow template step 3")
 
 ![Alt text](pics/24_work_step1.png?raw=true "Create workflow template step 4")
+
+Click Survey to add the two vars we deleted in the playbook  websiteheader: and websiteauthor: 
+
+![Alt text](pics/25_survey1.png?raw=true "Create survey 1")
+
+![Alt text](pics/26_survey2.png?raw=true "Create survey 2")
+
+Click __Save__
+
 Lab done
 
 [Ansible Exercise](../lab08/lab8.md)
