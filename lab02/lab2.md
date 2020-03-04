@@ -298,6 +298,8 @@ If server2 fails, did you copy your ssh key? "ssh-copy-id user@server2" and run 
 
 ## Task 6: Ansible-vault
 
+[Ansible Vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html)
+
 In this lab we will work with ansible-vault to encrypt sensitive data as passwords
 
 First we need to remove the password for the windows servers in the ansible-hosts file
