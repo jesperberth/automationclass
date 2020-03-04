@@ -286,6 +286,8 @@ Organization: Training
 
 Credential Type: Machine
 
+Username: __webuserx__ <---- Change to your username
+
 SSH Private Key: --- the key you copied ---
 
 Leave the rest as default and click Save
