@@ -252,6 +252,88 @@ Scroll down and click on the Sync button to the right, the gray cloud to the lef
 
 ![Alt text](pics/15_azure_inventory_sync.png?raw=true "azure inventory sync")
 
+## Task 6: Create Webserver credential
+
+We need the __private__ ssh key from server ansible
+
+Log on to server "ansible" using ssh
+
+and retrive your public key
+
+__Type:__
+
+```bash
+
+cd
+
+cat ~/.ssh/id_rsa
+
+```
+
+Mark the key and copy it to the clipboard, you will need it when we create the next Job Template
+
+![Alt text](pics/16_ssh_key.png?raw=true "cat private key")
+
+Create a new credential matching the webservers public key
+
+Click on Credentials in the left pane
+
+Click on the green + to create a new credential
+
+Name: userx_webserver
+
+Organization: Training
+
+Credential Type: Machine
+
+SSH Private Key: --- the key you copied ---
+
+Leave the rest as default and click Save
+
+![Alt text](pics/17_create_ssh_cred.png?raw=true "create cred")
+
+## Task 7: Create Webserver Template
+
+In VSCode
+
+Create a copy of 01_webserver_azure.yml -> 01_webserver_azure_tower.yml
+
+Change the hosts: to match your webuserx
+
+- hosts: tag_solution_webserver_webuserx
+
+Remove both vars:
+
+websiteheader: "Ansible Playbook"
+websiteauthor: "Some Name"
+
+![Alt text](pics/18_webserver_playbook.png?raw=true "playbook")
+
+Save and commit
+
+Go to your project and sync
+
+In the left pane, click Templates
+
+Click on the Green Plus sign to create a new Template select the __Job template__ type
+
+Type
+
+Name: userx_webserver_install
+
+Job Type: Run
+
+Inventory: Select your own inventory
+
+Project: Select your own project
+
+Playbook: 01_webserver_azure_tower.yml
+
+Credentials: Select credential type "Machine" and your own credentials
+
+Leave the rest as default and click __Save__
+
+![Alt text](pics/19_webserver_template_create.png?raw=true "Create template")
 
 Lab done
 
