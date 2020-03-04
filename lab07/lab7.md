@@ -92,11 +92,11 @@ In VSCode
 
 Create a copy of 01_azure.yml -> 01_azure_tower.yml
 
-Change the variable user:
+Change the variable user: - We already have a Resource Group called Webserver_userx so you need to change it
 
-to username-tower eg. "user1-tower"
+to __webuserx eg. "webuser1"__
 
-![Alt text](pics/06_ansible_tower_playbook.png?raw=true "Create credential")
+![Alt text](pics/06_ansible_tower_playbook.png?raw=true "Tower playbook")
 
 In Tower go to project and refresh your project, this will do a "git pull"
 
@@ -120,13 +120,95 @@ Playbook: 01_azure_tower.yml
 
 Credentials: Select credential type "Microsoft Azure Resource Manager" and your own credentials
 
-Leave the reset as default and click __Save__
+Leave the rest as default and click __Save__
 
 ![Alt text](pics/08_ansible_tower_template.png?raw=true "Create template")
 
 Click on the "Launch" button and wait a minute to see the result
 
 ![Alt text](pics/09_ansible_tower_template_run.png?raw=true "Run template")
+
+## Task 4: Create Webserver template
+
+In VSCode
+
+Create a copy of 02_azure.yml -> 02_azure_tower.yml
+
+Change the variable user: - We already have a Resource Group called Webserver_userx so you need to change it
+
+to __webuserx eg. "webuser1"__
+
+Remove the following lines from the playbook:
+
+First line is under the vars section
+
+```bash
+ssh_public_key: "{{lookup('file', '~/.ssh/id_rsa.pub') }}"
+```
+
+and the two last lines in the playbook
+
+```bash
+
+  - name: Add webserver to ssh known_hosts
+    shell: "ssh-keyscan -t ecdsa {{ webserver_pub_ip.state.ip_address }}  >> /home/{{ user }}/.ssh/known_hosts"
+```
+
+Save and Commit
+
+![Alt text](pics/10_ansible_tower_playbook_webserver.png?raw=true "Tower playbook")
+
+In Tower go to project and refresh your project, this will do a "git pull"
+
+![Alt text](pics/07_ansible_tower_refresh.png?raw=true "Refresh project")
+
+We need the public ssh key from server ansible
+
+Log on to server "ansible" using ssh
+
+and retrive your public key
+
+__Type:__
+
+```bash
+
+cd
+
+cat ~/.ssh/id_rsa.pub
+
+```
+
+Mark the key and copy it to the clipboard, you will need it when we create the next Job Template
+
+![Alt text](pics/08_cat_public_key.png?raw=true "cat public key")
+
+In the left pane, click Templates
+
+Click on the Green Plus sign to create a new Template select the __Job template__ type
+
+Type
+
+Name: userx_webserver
+
+Job Type: Run
+
+Inventory: Select your own inventory
+
+Project: Select your own project
+
+Playbook: 02_azure_tower.yml
+
+Credentials: Select credential type "Microsoft Azure Resource Manager" and your own credentials
+
+In the Extra Vars: add the ssh_public_key make sure you have " before and after the key
+
+```bash
+---
+ssh_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCl/myugJcFI/2XmWcLd5P+tKVtbsGf83G/POHH3vc4p3fyLaGKUqaX8YBOLohJ5XFB9t25Tg8wZleCsbDm0s081jx4tdvudRhdqUMbA+n3oHRB3SHD7BLm7d13VgGlM6SCxnkIgrePFaSWsX+J5kk3rhxpo0LEEiGDgTdUDYz3wNypEBsal+eoFp1WHXArnkbl6FkEhOC8iZSJY2KKsJlv6xFXN1NlM/KWkgFdlB+tWps49Cl44IAMHgcjku+Xx+00trgWX89isK54MHWUXHTTPzOykaagLQXcwZZmZvy/84qdDBcRhehSwg7LxHAMjFEYCSpAE78AWoBNpB3lhR0r jesbe@ansible"
+
+```
+
+Leave the rest as default and click __Save__
 
 Lab done
 
