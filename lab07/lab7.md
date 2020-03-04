@@ -335,6 +335,31 @@ Leave the rest as default and click __Save__
 
 ![Alt text](pics/19_webserver_template_create.png?raw=true "Create template")
 
+## Task 8: Create Workflow template
+
+In the left pane, click Templates
+
+Click on the Green Plus sign to create a new Template select the __Workflow template__ type
+
+Name: Userx
+
+Organization: Training
+
+Inventory: Select your own inventory
+
+Leave the rest as default and click __Save__
+
+![Alt text](pics/20_workflow_create.png?raw=true "Create workflow template")
+
+The window changes to the workflow Visualizer
+
+Click on Start
+
+![Alt text](pics/21_work_step1.png?raw=true "Create workflow template step 1")
+
+![Alt text](pics/23_work_step3.png?raw=true "Create workflow template step 3")
+
+![Alt text](pics/24_work_step1.png?raw=true "Create workflow template step 4")
 Lab done
 
 [Ansible Exercise](../lab08/lab8.md)
