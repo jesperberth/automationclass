@@ -248,6 +248,11 @@ Click Save
 
 ![Alt text](pics/14_azure_inventory.png?raw=true "azure inventory")
 
+Scroll down and click on the Sync button to the right, the gray cloud to the left should turn green
+
+![Alt text](pics/15_azure_inventory_sync.png?raw=true "azure inventory sync")
+
+
 Lab done
 
 [Ansible Exercise](../lab08/lab8.md)
