@@ -224,6 +224,30 @@ Wait for template to finish
 
 ![Alt text](pics/13_launch_template_run.png?raw=true "launch template")
 
+## Task 5: Create Dynamic Inventory
+
+Change the Inventory to a dynamic azure inventory
+
+In the left pane click on Inventory
+
+Select your own inventory userx_inventory
+
+Click on the Source button on the top
+
+Click on the Green + to create a new source
+
+Name: Azure
+
+Source: Microsoft Azure Resource Manager
+
+Credential: userx_azure
+
+Leave the rest as default
+
+Click Save
+
+![Alt text](pics/14_azure_inventory.png?raw=true "azure inventory")
+
 Lab done
 
 [Ansible Exercise](../lab08/lab8.md)
