@@ -361,7 +361,7 @@ Click on Start
 
 ![Alt text](pics/24_work_step4.png?raw=true "Create workflow template step 4")
 
-Click Survey to add the two vars we deleted in the playbook  websiteheader: and websiteauthor: 
+Click Survey to add the two vars we deleted in the playbook  websiteheader: and websiteauthor:
 
 ![Alt text](pics/25_survey_1.png?raw=true "Create survey 1")
 
