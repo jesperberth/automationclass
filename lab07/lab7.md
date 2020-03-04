@@ -300,7 +300,7 @@ Create a copy of 01_webserver_azure.yml -> 01_webserver_azure_tower.yml
 
 Change the hosts: to match your webuserx
 
-- hosts: tag_solution_webserver_webuserx
+- hosts: solution_webserver_webuserx
 
 Remove both vars:
 
