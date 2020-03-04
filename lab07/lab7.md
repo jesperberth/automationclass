@@ -214,6 +214,16 @@ Leave the rest as default and click __Save__
 
 ![Alt text](pics/11_ansible_tower_webserver_template.png?raw=true "template")
 
+In the left pane click on Templates
+
+Locate your userx_webserver template and click on the Rocket to lauch it
+
+![Alt text](pics/12_launch_template.png?raw=true "launch template")
+
+Wait for template to finish
+
+![Alt text](pics/13_launch_template_run.png?raw=true "launch template")
+
 Lab done
 
 [Ansible Exercise](../lab08/lab8.md)
