@@ -182,6 +182,8 @@ Mark the key and copy it to the clipboard, you will need it when we create the n
 
 ![Alt text](pics/08_cat_public_key.png?raw=true "cat public key")
 
+Back in the Tower UI
+
 In the left pane, click Templates
 
 Click on the Green Plus sign to create a new Template select the __Job template__ type
@@ -209,6 +211,8 @@ ssh_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCl/myugJcFI/2XmWcLd5P+tKV
 ```
 
 Leave the rest as default and click __Save__
+
+![Alt text](pics/11_ansible_tower_webserver_template.png?raw=true "template")
 
 Lab done
 
