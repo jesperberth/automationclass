@@ -238,7 +238,7 @@ Click on the Source button on the top
 
 Click on the Green + to create a new source
 
-Name: Azure
+Name: Azure_userx
 
 Source: Microsoft Azure Resource Manager
 
