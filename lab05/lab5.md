@@ -110,7 +110,9 @@ Log on to server "ansibleserver.ansible.local" using ssh
 
 Use git to get the new network playbook
 
-Change url to your own repository
+Change url to your own github repository
+
+Hint: On Github.com click on the Green Get Link button
 
 __Type:__
 

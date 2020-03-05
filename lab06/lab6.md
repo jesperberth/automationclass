@@ -449,7 +449,7 @@ __Type:__
 ```bash
 cd
 
-ansible -i webserver.vmware.yml tag_userx -u user
+ansible -i webserver.vmware.yml tag_userx -m ping -u user
 ```
 
 ![Alt text](pics/18_test_tag_inventory.png?raw=true "test tags in inventory")
