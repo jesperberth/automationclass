@@ -287,9 +287,9 @@ vi webserver.vmware.yml
 
 ```
 
-In vi __type:__
+In vi __type:__ below
 
-Change __userx__
+Change __username__
 
 ```bash
 i (to toggle input)
@@ -298,9 +298,9 @@ i (to toggle input)
 ```bash
 plugin: vmware_vm_inventory
 strict: False
-      hostname: "{{ hostname }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
+hostname: "vcenter.ansible.local"
+username: "userx@vsphere.local"
+password: "Password1!"
 validate_certs: False
 with_tags: True
 ```
