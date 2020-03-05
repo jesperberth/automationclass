@@ -25,6 +25,7 @@ Accessible with winRM and RDP
 
 * VSCode (or other IDE) [Download vscode](https://code.visualstudio.com/download)
 * Git [Download Git](https://git-scm.com/downloads)
+* Optional: Powershell Core 7 [Download Powershell Core](https://github.com/PowerShell/PowerShell)
 * ssh client
 * RDP client
 * Webbrowser

@@ -354,10 +354,10 @@ In VSCode add the next sections to the 02_azure.yml playbook
         version: latest
       vm_size: Standard_A1_v2
       network_interfaces: "webserver_nic01"
-    tags:
-        solution: "webserver_{{ user }}"
-        delete: ansibletraining
-
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
+  
   - name: Show webserver public ip
     debug:
       msg: "{{ webserver_pub_ip.state.ip_address }}"

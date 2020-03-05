@@ -86,7 +86,7 @@ Tenant ID: xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
 
 ![Alt text](pics/05_ansible_tower_create_credential_filled.png?raw=true "Create credential")
 
-## Task 3: Create Template
+## Task 3: Create Azure RM Template
 
 In VSCode
 
@@ -128,7 +128,7 @@ Click on the "Launch" button and wait a minute to see the result
 
 ![Alt text](pics/09_ansible_tower_template_run.png?raw=true "Run template")
 
-## Task 4: Create Webserver template
+## Task 4: Create Azure Webserver template
 
 In VSCode
 
@@ -224,7 +224,7 @@ Wait for template to finish
 
 ![Alt text](pics/13_launch_template_run.png?raw=true "launch template")
 
-## Task 5: Create Dynamic Inventory
+## Task 5: Create Azure Dynamic Inventory
 
 Change the Inventory to a dynamic azure inventory
 
