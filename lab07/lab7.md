@@ -148,7 +148,7 @@ First line is under the vars section
 ssh_public_key: "{{lookup('file', '~/.ssh/id_rsa.pub') }}"
 ```
 
-and the two last lines in the playbook
+and __Remove__ the two last lines in the playbook
 
 ```bash
 
@@ -372,6 +372,32 @@ Click Survey to add the two vars we deleted in the playbook  websiteheader: and 
 ![Alt text](pics/26_survey_2.png?raw=true "Create survey 2")
 
 Click __Save__
+
+## Task 9: Run Workflow template
+
+In the left pane click Templates, click on the Rocket to Launch
+
+![Alt text](pics/27_run_workflow.png?raw=true "Launch workflow")
+
+Fill out the survey
+
+![Alt text](pics/28_run_workflow_survey.png?raw=true "Launch workflow survey")
+
+Click Launch on the result page
+
+![Alt text](pics/29_run_workflow_survey_result.png?raw=true "Launch workflow survey result")
+
+Wait for the workflow to finish
+
+![Alt text](pics/30_workflow_result.png?raw=true "Launch workflow result")
+
+Go check the new website, get the ip from the "Details" in userx_webserver Template
+
+![Alt text](pics/30_workflow_result_details.png?raw=true "Launch workflow result Details")
+
+Get the ip
+
+![Alt text](pics/31_workflow_result_details_ip.png?raw=true "Get IP")
 
 Lab done
 
