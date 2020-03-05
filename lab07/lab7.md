@@ -84,6 +84,8 @@ Client Secret: xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
 
 Tenant ID: xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
 
+Leave the rest as default and click __Save__
+
 ![Alt text](pics/05_ansible_tower_create_credential_filled.png?raw=true "Create credential")
 
 ## Task 3: Create Azure RM Template
