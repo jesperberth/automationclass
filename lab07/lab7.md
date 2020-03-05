@@ -246,7 +246,7 @@ Credential: userx_azure
 
 Leave the rest as default
 
-Click Save
+Click __Save__
 
 ![Alt text](pics/14_azure_inventory.png?raw=true "azure inventory")
 
@@ -292,7 +292,7 @@ Username: __webuserx__ <---- Change to your username
 
 SSH Private Key: --- the key you copied ---
 
-Leave the rest as default and click Save
+Leave the rest as default and click __Save__
 
 ![Alt text](pics/17_create_ssh_cred.png?raw=true "create cred")
 
