@@ -399,6 +399,12 @@ Get the ip
 
 ![Alt text](pics/31_workflow_result_details_ip.png?raw=true "Get IP")
 
+Open your webbrowser
+
+```bash
+http://<your ip>
+```
+
 Lab done
 
 [Ansible Exercise](../lab08/lab8.md)
