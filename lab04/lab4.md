@@ -405,8 +405,6 @@ In VSCode create a new file webserver.azure_rm.yml
 
 Note: The inventory file must end with .azure_rm.yml
 
-Change __webserver_jesbe__ to your Resoucegroup name
-
 ```ansible
 plugin: azure_rm
 auth_source: auto
