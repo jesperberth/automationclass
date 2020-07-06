@@ -184,6 +184,7 @@ __Type:__
 
 ```bash
 cd ansibleclass
+
 ls
 
 ansible-playbook 01_linux.yml --ask-become-pass
@@ -346,7 +347,7 @@ __Type:__
 ```bash
 cd
 
-ansible-vault create winpassword.yml
+ansible-vault create secret.yml
 
 ```
 
@@ -363,7 +364,7 @@ i (for input)
 
 ---
 
-ansible_password: SomeThingSimple8   <------ Type your Windows password here
+windows_password: SomeThingSimple8   <------ Type your Windows password here
 
 ```
 
@@ -383,13 +384,25 @@ __Type:__
 
 ```bash
 
-cat winpassword.yml
+cat secret.yml
 
 ```
 
 ![Alt text](pics/034_cat_vault.png?raw=true "cat vault")
 
 To change the content of an encryptet file use ansible-vault edit filename
+
+You will need to type your password again ..
+
+__Type:__
+
+```bash
+
+ansible-vault edit secret.yml
+
+```
+
+![Alt text](pics/034_edit_vault.png?raw=true "edit vault")
 
 Lets create a playbook to use the encryptet var file
 
@@ -404,9 +417,12 @@ __Type:__
 ```ansible
 ---
 - hosts: windowsservers
-  vars:
+  collections:
+   - ansible.windows
   vars_files:
-    - ~/winpassword.yml
+    - ~/secret.yml
+  vars:
+    ansible_password: "{{ windows_password }}"
   tasks:
   - name: Install IIS (Web-Server only)
     win_feature:

@@ -393,3 +393,53 @@ ansible windowsservers -m win_ping
 Next Lab
 
 [Ansible Playbooks](../lab02/lab2.md)
+
+## Task 5: Ansible Collections
+
+In ansible 2.10 and forward, most modules will be delivered from collections via [Ansible Galaxy](https://galaxy.ansible.com)
+
+[Ansible Galaxy](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html)
+
+We need to create the roles and collections folder in .ansible
+
+__Type:__
+
+```bash
+cd
+
+mkdir .ansible/roles
+
+mkdir .ansible/collections
+```
+
+![Alt text](pics/022_ansible_roles_dir.png?raw=true "create roles dir")
+
+List existing collections (should be none)
+
+__Type:__
+
+```bash
+
+ansible-galaxy collection list
+
+```
+
+![Alt text](pics/023_ansible_collection_list.png?raw=true "list collections")
+
+Lets install the ansible Windows Collection, we need it in the next lab
+
+List installed collections after
+
+__Note:__ --pre is appended as 2.10 is still in Beta
+
+__Type:__
+
+```bash
+
+ansible-galaxy collection install ansible.windows --pre
+
+ansible-galaxy collection list
+
+```
+
+![Alt text](pics/024_ansible_collection_install.png?raw=true "install collection")
