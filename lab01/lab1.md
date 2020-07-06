@@ -2,7 +2,9 @@
 
 In this session we will install ansible on server ansible, and connect to linux - server1 and windows - server3
 
-Ansible is a Python based program, we will install python in a Python Virtuelenv, in which we can isolate the python version and modules from the system.  
+We will use server ansible to run the first part of the training
+
+Ansible is a Python based program, we will install python in a Python Virtuelenv, in which we can isolate the python version and modules from the system python.  
 
 ## Prepare
 
@@ -61,7 +63,7 @@ If you need to exit the virtualenv, you type "deactivate"
 __Type:__
 
 ```bash
-pip install ansible
+pip install ansible==2.10.0a2
 ```
 
 ![Alt text](pics/003_install_ansible.png?raw=true "Install Ansible")
