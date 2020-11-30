@@ -104,6 +104,65 @@ Type: Etc/UTC with - lower and upper case
 
 ![Alt text](pics/004_vars_prompt_run.png?raw=true "run playbook prompt")
 
+Lets try the same scenario with a vars file 
+
+In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
+
+Name it "linux_vars.yml"
+
+![Alt text](pics/05_vars_file.png?raw=true "playbook in VSCode")
+
+![Alt text](pics/06_vars_file2.png?raw=true "playbook in VSCode")
+
+Write the following in the text pane
+
+__Type:__
+
+```ansible
+---
+timezone: "Europe/Copenhagen"
+
+```
+
+![Alt text](pics/07_vars_file_play.png?raw=true "playbook in VSCode")
+
+And change the 03_linux.yml to use the vars file
+
+__Type:__
+
+```ansible
+---
+- hosts: linuxservers
+  become: yes
+
+  vars_file:
+      - linux_vars.yml
+
+  tasks:
+  - name: Set timezone
+    timezone:
+      name: "{{ timezone }}"
+```
+
+Save the file
+
+Notice that Git detects the changed file, do a commit add a comment "Vars file" and Sync to Git
+
+On server ansible do a git pull and run the playbook
+
+__Type:__
+
+```ansible
+cd ansibleclass
+
+git pull
+
+ansible-playbook 03_linux.yml --ask-become-pass
+
+```
+
+![Alt text](pics/08_vars_file_run.png?raw=true "run playbook prompt")
+
 ## Task 2: Facts
 
 Ansible facts
