@@ -79,7 +79,7 @@ If you need to exit the virtualenv, you type "deactivate"
 __Type:__
 
 ```bash
-pip install ansible==2.10.0a2
+pip install ansible
 ```
 
 ![Alt text](pics/003_install_ansible.png?raw=true "Install Ansible")
@@ -414,7 +414,7 @@ Next Lab
 
 In ansible 2.10 and forward, most modules will be delivered from collections via [Ansible Galaxy](https://galaxy.ansible.com)
 
-[Ansible Galaxy](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html)
+[Ansible Galaxy Docs](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html)
 
 We need to create the roles and collections folder in .ansible
 
@@ -446,13 +446,11 @@ Lets install the ansible Windows Collection, we need it in the next lab
 
 List installed collections after
 
-__Note:__ --pre is appended as 2.10 is still in Beta
-
 __Type:__
 
 ```bash
 
-ansible-galaxy collection install ansible.windows --pre
+ansible-galaxy collection install ansible.windows
 
 ansible-galaxy collection list
 

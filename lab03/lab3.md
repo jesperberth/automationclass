@@ -10,13 +10,11 @@ We will need the servers, ansible, server1, server2 and server3 to be up and run
 
 [ansible docs](https://docs.ansible.com/ansible/2.5/user_guide/playbooks_variables.html)
 
-[ansible tímezone](https://docs.ansible.com/ansible/latest/modules/timezone_module.html)
+[ansible timezone](https://docs.ansible.com/ansible/latest/modules/timezone_module.html)
 
 In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
 
 Name it "02_linux.yml"
-
-![Alt text](pics/001_timezone.png?raw=true "playbook in VSCode")
 
 Write the following in the text pane
 
@@ -40,6 +38,8 @@ Save the file
 
 Notice that Git detects the changed file, do a commit add a comment "Variables" and Sync to Git
 
+![Alt text](pics/001_timezone.png?raw=true "playbook in VSCode")
+
 On server ansible do a git pull and run the playbook
 
 __Type:__
@@ -60,8 +60,6 @@ Now lets make a variable with a prompt
 In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
 
 Name it "03_linux.yml"
-
-![Alt text](pics/003_vars_prompt.png?raw=true "playbook in VSCode")
 
 Write the following in the text pane
 
@@ -87,6 +85,8 @@ Save the file
 
 Notice that Git detects the changed file, do a commit add a comment "Prompt" and Sync to Git
 
+![Alt text](pics/003_vars_prompt.png?raw=true "playbook in VSCode")
+
 On server ansible do a git pull and run the playbook
 
 __Type:__
@@ -104,15 +104,11 @@ Type: Etc/UTC with - lower and upper case
 
 ![Alt text](pics/004_vars_prompt_run.png?raw=true "run playbook prompt")
 
-Lets try the same scenario with a vars file 
+Lets try the same scenario with a vars file
 
 In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
 
 Name it "linux_vars.yml"
-
-![Alt text](pics/05_vars_file.png?raw=true "playbook in VSCode")
-
-![Alt text](pics/06_vars_file2.png?raw=true "playbook in VSCode")
 
 Write the following in the text pane
 
@@ -124,7 +120,7 @@ timezone: "Europe/Copenhagen"
 
 ```
 
-![Alt text](pics/07_vars_file_play.png?raw=true "playbook in VSCode")
+![Alt text](pics/06_vars_file2.png?raw=true "playbook in VSCode")
 
 And change the 03_linux.yml to use the vars file
 
@@ -147,6 +143,8 @@ __Type:__
 Save the file
 
 Notice that Git detects the changed file, do a commit add a comment "Vars file" and Sync to Git
+
+![Alt text](pics/07_vars_file_play.png?raw=true "playbook in VSCode")
 
 On server ansible do a git pull and run the playbook
 
