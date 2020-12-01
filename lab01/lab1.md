@@ -424,10 +424,6 @@ ansible windowsservers -m win_ping
 
 ![Alt text](pics/021_ansible_win_ping.png?raw=true "win_ping")
 
-Next Lab
-
-[Ansible Playbooks](../lab02/lab2.md)
-
 ## Task 5: Ansible Collections
 
 In ansible 2.10 and forward, most modules will be delivered from collections via [Ansible Galaxy](https://galaxy.ansible.com)
@@ -475,3 +471,7 @@ ansible-galaxy collection list
 ```
 
 ![Alt text](pics/024_ansible_collection_install.png?raw=true "install collection")
+
+Next Lab
+
+[Ansible Playbooks](../lab02/lab2.md)
