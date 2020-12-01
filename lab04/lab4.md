@@ -34,6 +34,8 @@ ansible-galaxy collection install azure.azcollection
 ```
 ![Alt text](pics/002_download_requirements_pip_azure.png?raw=true "install azure")
 
+![Alt text](pics/002_run_requirements_pip_azure.png?raw=true "install azure")
+
 ![Alt text](pics/001_install_pip_azure.png?raw=true "install azure")
 
 ## Task 2: Create credentials for Azure

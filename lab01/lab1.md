@@ -30,6 +30,24 @@ In the Windows Terminal, Powershell or CMD write ssh __username@ansible-vm-ip__ 
 
 ![Alt text](pics/000_azure_ssh.png?raw=true "ssh")
 
+We need some aditional storage for /home
+
+Note: Sudo Password is equal to your user account password
+
+__Type:__
+
+```bash
+
+wget https://raw.githubusercontent.com/jesperberth/automationclass_setup/dev/azure_class_playbooks/add_disk_home.sh
+
+chmod +x add_disk_home.sh
+
+sudo ./add_disk_home.sh
+
+```
+
+![Alt text](pics/001_add_disk.png?raw=true "add disk")
+
 __Type:__
 
 Note: Sudo Password is equal to your user account password
