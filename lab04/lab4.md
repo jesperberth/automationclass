@@ -6,20 +6,39 @@ In this session we will use ansible to setup and manage resources in Azure to de
 
 We will need the server, ansible to be up and running - by default they are started after creation
 
-## Task 1: Create credentials for Azure
+## Task 1: Install requirements for Azure
 
 Log on to server "ansible" using ssh
 
-Install ansible azure module
+Install ansible azure collection
+
+Before installtion the collection we need to install several python modules, the requirements file is on the github project page
+
+[https://github.com/ansible-collections/azure](https://github.com/ansible-collections/azure)
+
+We will use wget 
+
+https://github.com/ansible-collections/azure/blob/dev/requirements-azure.txt
 
 __Type:__
 
 ```bash
-pip install ansible[azure]
+cd
+
+wget https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
+
+pip install -r requirements-azure.txt
+
+ansible-galaxy collection install azure.azcollection
 
 ```
+![Alt text](pics/002_download_requirements_pip_azure.png?raw=true "install azure")
+
+![Alt text](pics/002_run_requirements_pip_azure.png?raw=true "install azure")
 
 ![Alt text](pics/001_install_pip_azure.png?raw=true "install azure")
+
+## Task 2: Create credentials for Azure
 
 We need to register an azure application to enable ansible automation
 
@@ -34,6 +53,8 @@ In the top click "New registration"
 Type a Name, Call it "ansible-yourname" so its possible to ID it later
 
 Select the:
+
+__Note:__ The Tenant name will be different than AzureADFS
 
 "Accounts in this organizational directory only (AzureADFS only - Single tenant)"
 

@@ -1,16 +1,52 @@
 # Lab 1: Install Ansible
 
-In this session we will install ansible on server ansible, and connect to linux - server1 and windows - server3
+In this session we will install ansible on server __ansible__, and connect to linux - __server1__ and windows - __server3__
 
-Ansible is a Python based program, we will install python in a Python Virtuelenv, in which we can isolate the python version and modules from the system.  
+We will use server __ansible__ to run the first part of the training
+
+Ansible is a Python based program, we will install python in a Python Virtuelenv, in which we can isolate the python version and modules from the system python.  
 
 ## Prepare
 
-We will need the servers, ansible, server1 and server3 to be up and running - by default they are started after creation
+We will need the servers, __ansible, server1__ and __server3__ to be up and running - by default they are started after creation
 
 ## Task 1: Install Ansible
 
-Log on to server "ansible" using ssh
+Log on to server __ansible__ using ssh
+
+On the Azure portal click Virtual Machines
+
+![Alt text](pics/000_azure_portal.png?raw=true "Azure Portal")
+
+Click on the ansible server
+
+![Alt text](pics/000_azure_portal_vm.png?raw=true "Azure Portal VMs")
+
+Get the ansible servers external ip, click on the "Copy to ClipBoard"
+
+![Alt text](pics/000_azure_portal_vm_ip.png?raw=true "Azure Portal VM ip")
+
+In the Windows Terminal, Powershell or CMD write ssh __username@ansible-vm-ip__ hit enter
+
+![Alt text](pics/000_azure_ssh.png?raw=true "ssh")
+
+We need some aditional storage for /home
+
+Note: Sudo Password is equal to your user account password
+
+__Type:__
+
+```bash
+
+wget https://raw.githubusercontent.com/jesperberth/automationclass_setup/dev/azure_class_playbooks/add_disk_home.sh
+
+chmod +x add_disk_home.sh
+
+sudo ./add_disk_home.sh
+
+```
+
+![Alt text](pics/001_add_disk.png?raw=true "add disk")
 
 __Type:__
 
@@ -325,13 +361,7 @@ ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=ye
 
 ## Task 4: Connect Windows Host
 
-Windows Servers can be connected in different ways, we will use ansible_messageencryption, but Certificate encryption is available, use this link to setup certificates
-
-__Note:__
-
-! ! ! Dont use the Certificate lab in this class ! ! !
-
-[Don't use for this lab - Windows Certificate Lab](lab1_win_cert.md)
+Windows Servers can be connected in different ways, we will use ansible_messageencryption, but Certificate encryption is available, but requires more work 
 
 Log on to server "ansible" using ssh
 
@@ -393,6 +423,54 @@ ansible windowsservers -m win_ping
 ```
 
 ![Alt text](pics/021_ansible_win_ping.png?raw=true "win_ping")
+
+## Task 5: Ansible Collections
+
+In ansible 2.10 and forward, most modules will be delivered from collections via [Ansible Galaxy](https://galaxy.ansible.com)
+
+[Ansible Galaxy Docs](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html)
+
+We need to create the roles and collections folder in .ansible
+
+__Type:__
+
+```bash
+cd
+
+mkdir .ansible/roles
+
+mkdir .ansible/collections
+```
+
+![Alt text](pics/022_ansible_roles_dir.png?raw=true "create roles dir")
+
+List existing collections (should be none)
+
+__Type:__
+
+```bash
+
+ansible-galaxy collection list
+
+```
+
+![Alt text](pics/023_ansible_collection_list.png?raw=true "list collections")
+
+Lets install the ansible Windows Collection, we need it in the next lab
+
+List installed collections after
+
+__Type:__
+
+```bash
+
+ansible-galaxy collection install ansible.windows
+
+ansible-galaxy collection list
+
+```
+
+![Alt text](pics/024_ansible_collection_install.png?raw=true "install collection")
 
 Next Lab
 

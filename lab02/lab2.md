@@ -22,6 +22,8 @@ Get extention "Ansible" from Microsoft
 
 Get extention "indent one space" from Alexander
 
+Get extention "Trailing Spaces" from Shardul Mahadik
+
 ![Alt text](pics/003_vscode_install_ansible.png?raw=true "Install extention in VSCode")
 
 Download and install GIT [Download Git](https://git-scm.com/downloads)
@@ -53,6 +55,18 @@ Your new repository is created with an empty README.md file
 ![Alt text](pics/008_newrepo_created_github.png?raw=true "New Repo")
 
 ## Task 2: Clone Git Repository
+
+We need to configure git with a Name and email to track the changes you are making
+
+Open Powershell on your desktop
+
+```bash
+git config --global user.name "Full Name"
+git config --glibal user.email "email@address.com"
+git config --list
+```
+
+![Alt text](pics/009_git_config.png?raw=true "Git Config")
 
 We need to create a simple folder structure for keeping our files
 
@@ -95,6 +109,32 @@ Click "Yes" to Open the repository
 
 ![Alt text](pics/014_git_in_vscode.png?raw=true "Git repo is now in VSCode")
 
+Enable ansible extention for our project folder
+
+Create a new folder .vscode (the . is important)
+
+![Alt text](pics/014_vscode_create_folder.png?raw=true "create .vscode")
+
+In the new folder .vscode create a new file settings.yml
+
+![Alt text](pics/014_vscode_create_settings.png?raw=true "create settings.yml")
+
+Copy this config into the file and save
+
+```json
+{
+"files.associations": {
+        "**/*.yml": "ansible"
+    }
+}
+```
+
+![Alt text](pics/014_vscode_add_settings.png?raw=true "add settings.yml")
+
+We don't wont the settings.yml file to be synced with github so we add it to .gitignore
+
+![Alt text](pics/014_vscode_git_ignore.png?raw=true "git ignore")
+
 ## Task 3: Create the first playbook
 
 In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
@@ -129,24 +169,9 @@ Now Sync the changes Push/Pull, in the blue bar at the bottom, 0 up, 1 down it w
 
 The first time you will be prompted for github credentials
 
-__NOTE:__
-
-If you get an error stating "You are missing user.name and user.email"
-
-Open Powershell on your desktop
-
-```bash
-cd "to your git directory you are working in"
-
-git config user.name "Full Name"
-git config user.email "email@address.com"
-```
-
-and try again
-
 ![Alt text](pics/019_code_git_sync_login.png?raw=true "git login in VSCode")
 
-Open the Git Hub repository, the 01_linux.yml is now added, note the comment right of the filename
+Open the Git Hub repository, the 01_linux.yml is now added, note the comment next to the filename
 
 ![Alt text](pics/020_github_new.png?raw=true "github new file")
 
@@ -184,6 +209,7 @@ __Type:__
 
 ```bash
 cd ansibleclass
+
 ls
 
 ansible-playbook 01_linux.yml --ask-become-pass
@@ -346,7 +372,7 @@ __Type:__
 ```bash
 cd
 
-ansible-vault create winpassword.yml
+ansible-vault create secret.yml
 
 ```
 
@@ -363,7 +389,7 @@ i (for input)
 
 ---
 
-ansible_password: SomeThingSimple8   <------ Type your Windows password here
+windows_password: SomeThingSimple8   <------ Type your Windows password here
 
 ```
 
@@ -383,13 +409,25 @@ __Type:__
 
 ```bash
 
-cat winpassword.yml
+cat secret.yml
 
 ```
 
 ![Alt text](pics/034_cat_vault.png?raw=true "cat vault")
 
 To change the content of an encryptet file use ansible-vault edit filename
+
+You will need to type your password again ..
+
+__Type:__
+
+```bash
+
+ansible-vault edit secret.yml
+
+```
+
+![Alt text](pics/034_edit_vault.png?raw=true "edit vault")
 
 Lets create a playbook to use the encryptet var file
 
@@ -404,9 +442,12 @@ __Type:__
 ```ansible
 ---
 - hosts: windowsservers
-  vars:
+  collections:
+   - ansible.windows
   vars_files:
-    - ~/winpassword.yml
+    - ~/secret.yml
+  vars:
+    ansible_password: "{{ windows_password }}"
   tasks:
   - name: Install IIS (Web-Server only)
     win_feature:
