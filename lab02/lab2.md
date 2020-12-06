@@ -473,6 +473,55 @@ ansible-playbook 01_vault.yml --ask-vault-pass
 
 ![Alt text](pics/036_vault_playbook_run.png?raw=true "vault playbook run")
 
+## Task 7: Ansible Inventory yaml
+
+Another option for the inventory is using a yaml file instead of the ini format, the yaml file will give us some other options for the vault
+
+Lets create a new ansible-hosts.yml
+
+Copy the following inventory to ansible-hosts.yml
+
+```ansible
+
+linuxservers:
+        hosts:
+                server1:
+                server2:
+windowsservers:
+        hosts:
+                server3:
+                server4:
+        vars:
+                ansible_user: jesbe
+                ansible_port: 5985
+                ansible_connection: winrm
+                ansible_winrm_transport: ntlm
+                ansible_winrm_message_encryption: always
+
+```
+
+__Type:__
+
+```bash
+
+cd
+
+vi ansible-hosts.yml
+
+i (for input)
+
+```
+
+You can do a copy/paste of the inventory
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
 Lab done
 
 [Work with Playbooks](../lab03/lab3.md)
