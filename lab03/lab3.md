@@ -230,7 +230,7 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 04_linux_win.yml
+ansible-playbook 04_linux_win.yml --ask-vault-pass
 
 ```
 
