@@ -558,6 +558,46 @@ ansible linuxservers -m ping
 
 ![Alt text](pics/039_ansible_yaml_test.png?raw=true "test yaml inventory")
 
+## Task 8: Ansible Vault - Yaml inventory
+
+In this task we will encrypt the password for the windows servers and place it in the new yaml inventory file
+
+Encrypt you password 
+
+__Type:__
+
+```bash
+
+ansible-vault encrypt_string 'SomeThingSimple8' --name ansible_password
+
+```
+
+![Alt text](pics/040_ansible_vault_string.png?raw=true "Encrypt string")
+
+```bash
+
+copy the string
+
+![Alt text](pics/041_ansible_vault_string_copy.png?raw=true "Encrypt string copy")
+
+cd
+
+vi ansible-hosts.yml
+
+i (for input)
+
+
+
+```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
 Lab done
 
 [Work with Playbooks](../lab03/lab3.md)
