@@ -586,9 +586,9 @@ vi ansible-hosts.yml
 
 i (for input)
 
-
-
 ```
+
+Save the inventory file
 
 __Type:__
 
@@ -597,6 +597,18 @@ Hit Esc-key
 
 :wq (: for a command w for write and q for quit vi)
 ```
+
+![Alt text](pics/042_inventory_encrypt.png?raw=true "inventory encryptet string")
+
+Lets do a test with win_ping
+
+```bash
+
+ansible windowsservers -m win_ping --ask-vault-pass
+
+```
+
+![Alt text](pics/043_win_ping.png?raw=true "win ping")
 
 Lab done
 
