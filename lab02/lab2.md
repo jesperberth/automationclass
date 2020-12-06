@@ -524,6 +524,40 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
+Lets change ansible.cfg to use the new inventory, you just need to add the .yml to the inventory line
+
+```bash
+
+cd
+
+vi .ansible.cfg
+
+i (for input)
+
+inventory = /home/jesbe/ansible-hosts.yml 
+
+```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](pics/038_ansible_cfg.png?raw=true "config")
+
+Do a ping test to check if we are using the new inventory
+
+```bash
+
+ansible linuxservers -m ping
+
+```
+
+![Alt text](pics/039_ansible_yaml_test.png?raw=true "test yaml inventory")
+
 Lab done
 
 [Work with Playbooks](../lab03/lab3.md)
