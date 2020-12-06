@@ -473,6 +473,143 @@ ansible-playbook 01_vault.yml --ask-vault-pass
 
 ![Alt text](pics/036_vault_playbook_run.png?raw=true "vault playbook run")
 
+## Task 7: Ansible Inventory yaml
+
+Another option for the inventory is using a yaml file instead of the ini format, the yaml file will give us some other options for the vault
+
+Lets create a new ansible-hosts.yml
+
+Copy the following inventory to ansible-hosts.yml
+
+```ansible
+
+linuxservers:
+        hosts:
+                server1:
+                server2:
+windowsservers:
+        hosts:
+                server3:
+                server4:
+        vars:
+                ansible_user: jesbe
+                ansible_port: 5985
+                ansible_connection: winrm
+                ansible_winrm_transport: ntlm
+                ansible_winrm_message_encryption: always
+
+```
+
+__Type:__
+
+```bash
+
+cd
+
+vi ansible-hosts.yml
+
+i (for input)
+
+```
+
+You can do a copy/paste of the inventory
+
+![Alt text](pics/037_yaml_inventory.png?raw=true "yaml inventory")
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+Lets change ansible.cfg to use the new inventory, you just need to add the .yml to the inventory line
+
+```bash
+
+cd
+
+vi .ansible.cfg
+
+i (for input)
+
+inventory = /home/jesbe/ansible-hosts.yml 
+
+```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](pics/038_ansible_cfg.png?raw=true "config")
+
+Do a ping test to check if we are using the new inventory
+
+```bash
+
+ansible linuxservers -m ping
+
+```
+
+![Alt text](pics/039_ansible_yaml_test.png?raw=true "test yaml inventory")
+
+## Task 8: Ansible Vault - Yaml inventory
+
+In this task we will encrypt the password for the windows servers and place it in the new yaml inventory file
+
+Encrypt you password 
+
+__Type:__
+
+```bash
+
+ansible-vault encrypt_string 'SomeThingSimple8' --name ansible_password
+
+```
+
+![Alt text](pics/040_ansible_vault_string.png?raw=true "Encrypt string")
+
+Copy the string
+
+```bash
+
+cd
+
+vi ansible-hosts.yml
+
+i (for input)
+
+```
+
+![Alt text](pics/041_ansible_vault_string_copy.png?raw=true "Encrypt string copy")
+
+Save the inventory file
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](pics/042_inventory_encrypt.png?raw=true "inventory encryptet string")
+
+Lets do a test with win_ping
+
+```bash
+
+ansible windowsservers -m win_ping --ask-vault-pass
+
+```
+
+![Alt text](pics/043_win_ping.png?raw=true "win ping")
+
 Lab done
 
 [Work with Playbooks](../lab03/lab3.md)
