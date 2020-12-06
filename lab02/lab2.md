@@ -514,6 +514,8 @@ i (for input)
 
 You can do a copy/paste of the inventory
 
+![Alt text](pics/037_yaml_inventory.png?raw=true "yaml inventory")
+
 __Type:__
 
 ```bash
