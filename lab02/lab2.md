@@ -574,11 +574,9 @@ ansible-vault encrypt_string 'SomeThingSimple8' --name ansible_password
 
 ![Alt text](pics/040_ansible_vault_string.png?raw=true "Encrypt string")
 
+Copy the string
+
 ```bash
-
-copy the string
-
-![Alt text](pics/041_ansible_vault_string_copy.png?raw=true "Encrypt string copy")
 
 cd
 
@@ -587,6 +585,8 @@ vi ansible-hosts.yml
 i (for input)
 
 ```
+
+![Alt text](pics/041_ansible_vault_string_copy.png?raw=true "Encrypt string copy")
 
 Save the inventory file
 
