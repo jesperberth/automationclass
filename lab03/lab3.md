@@ -242,7 +242,7 @@ We will create a short playbook to test a handler
 
 First task will do an dnf update on both server1 and server2 and notify the reboot handler
 
-In VSCode create a new file 05_linux.yml
+In VSCode create a new file "05_linux.yml"
 
 __Type:__
 
@@ -250,7 +250,7 @@ __Type:__
 ---
 - hosts: linuxservers
   become: yes
-  
+
   tasks:
   - name: dnf update
     dnf:
