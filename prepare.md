@@ -69,6 +69,8 @@ cd automationclass_setup
 
 cd azure_class_playbooks
 
+ansible-galaxy install -r requirements.yml
+
 ansible-playbook 00_azure_class_setup.yml
 ```
 
