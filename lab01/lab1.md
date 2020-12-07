@@ -38,7 +38,7 @@ __Type:__
 
 ```bash
 
-wget https://raw.githubusercontent.com/jesperberth/automationclass_setup/dev/azure_class_playbooks/add_disk_home.sh
+wget https://raw.githubusercontent.com/jesperberth/automationclass_setup/master/azure_class_playbooks/add_disk_home.sh
 
 chmod +x add_disk_home.sh
 
