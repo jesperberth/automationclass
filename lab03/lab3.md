@@ -131,7 +131,7 @@ __Type:__
 - hosts: linuxservers
   become: yes
 
-  vars_file:
+  vars_files:
       - linux_vars.yml
 
   tasks:
