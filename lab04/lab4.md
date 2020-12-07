@@ -155,7 +155,7 @@ In VSCode
 
 create a new playbook file 01_azure.yml
 
- add the following text to the file, change the name of the variable user to your username
+ add the following text to the file, change the name of the variable __user to your username__
 
 ```ansible
 ---
