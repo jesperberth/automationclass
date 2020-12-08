@@ -242,7 +242,7 @@ Name: Azure_userx
 
 Source: Microsoft Azure Resource Manager
 
-Credential: userx_azure
+Credential: userx_credential
 
 Leave the rest as default
 
