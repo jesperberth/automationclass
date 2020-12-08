@@ -252,9 +252,12 @@ __Type:__
   become: yes
 
   tasks:
-  - name: dnf update
+  - name: Install Webserver
     dnf:
-      name: "*"
+      name:
+        - httpd
+        - mariadb
+        - php
       state: latest
     notify:
       - reboot server

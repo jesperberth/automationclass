@@ -230,7 +230,7 @@ add the following text to the file, change the first variable __"user"__ to your
       tags:
           solution: "webserver_{{ user }}"
           delete: ansibletraining
-  
+
   - name: Create a subnet
     azure_rm_subnet:
       resource_group: "{{ resource_group }}"
@@ -378,7 +378,7 @@ In VSCode add the next sections to the 02_azure.yml playbook
       tags:
           solution: "webserver_{{ user }}"
           delete: ansibletraining
-  
+
   - name: Show webserver public ip
     debug:
       msg: "{{ webserver_pub_ip.state.ip_address }}"
@@ -513,7 +513,7 @@ Change the websiteauthor to your name
       immediate: yes
     notify:
       - reload firewall
-  
+
   - name: Add index.html
     template:
       src: index.html.j2
