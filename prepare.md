@@ -2,19 +2,13 @@
 
 ## Login to Azure Portal
 
-You have recieved an email from Microsoft "You're invited to the Team Redhat organization"
+Login to Azure
 
-Click on the "Get Started" button
+In your browser go to [http://portal.azure.com](http://portal.azure.com)
 
-![Alt text](pics/01_invite_mail.png?raw=true "Invitation")
+__Note:__ Run the browser in Incognito/Private mode to avoid issues with cashed credentials
 
-On the Microsoft login screen select "Personal Account" and login with your email and password
-
-![Alt text](pics/02_microsoft_login.png?raw=true "Login")
-
-Accept the invitation from "Team RedHat"
-
-![Alt text](pics/03_microsoft_accept.png?raw=true "Accept")
+![Alt text](pics/01_azure_login.png?raw=true "Azure login")
 
 Take a note of your Resource Group, save it in notepad, we will need it later
 
