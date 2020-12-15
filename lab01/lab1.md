@@ -142,6 +142,10 @@ Log on to server "ansible" using ssh
 
 Lets create a configuration file for ansible in your root dir
 
+We will use it to control our ansible environment
+
+[Ansible Configuration file](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-configuration-settings-locations)
+
 __Type:__
 
 ```bash
@@ -156,7 +160,7 @@ vi .ansible.cfg
 
 __Note:__
 
-Change jesbe in the path with your username
+Change __jesbe__ in the path with your username
 
 In vi __type:__
 
@@ -258,7 +262,7 @@ We need to copy the public key to server1
 
 __Note:__
 
-Change jesbe to your username
+Change __jesbe__ to your username
 
 __Type:__
 
@@ -453,6 +457,32 @@ ansible-galaxy collection list
 ```
 
 ![Alt text](pics/024_ansible_collection_install.png?raw=true "install collection")
+
+You can list all installed modules with ansible-doc -l and filter out from collection ansible-doc -l ansible.windows for modules in the collection we just installed
+
+__Type:__
+
+```bash
+
+ansible-doc -l
+
+ansible-doc -l ansible.windows
+
+```
+
+![Alt text](pics/025_ansible-doc.png?raw=true "ansible-doc -l")
+
+You can get the documentation for a single module with ansible-doc <modulename>
+
+__Type:__
+
+```bash
+
+ansible-doc ansible.windows.win_feature
+
+```
+
+![Alt text](pics/026_ansible-doc-winfeature.png?raw=true "ansible-doc -l")
 
 Next Lab
 
