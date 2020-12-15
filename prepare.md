@@ -81,17 +81,21 @@ The playbook will create all resources needed for the Automation class - Lab 01 
 
 ## SSH Clients
 
-Putty is a well known ssh client for most platforms
+We will use ssh to connect to the ansible server
 
-[Download Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
+### Windows
 
 Windows 10 has openSSH preinstalled, just open a CMD or Powershell consol and type ssh user@hostname
 
-Recomended for Windows
+As an option you can install Windows Terminal, which will add tabs and many other options
 
-Download Microsoft Powershell Core 6
+[Download Windows Terminal](https://github.com/microsoft/terminal)
 
-[Download Powershell Core](https://github.com/PowerShell/PowerShell/releases/tag/v6.2.3)
+![Alt text](pics/12_winterminal.png?raw=true "Windows Terminal SSH")
+
+Putty is a well known ssh client for most platforms
+
+[Download Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
 
 Go back to the lab guide
 
