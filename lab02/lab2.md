@@ -147,8 +147,6 @@ In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECL
 
 Name it "01_linux.yml"
 
-![Alt text](pics/016_code_playbook.png?raw=true "playbook in VSCode")
-
 Write the following in the text pane
 
 ```ansible
@@ -163,9 +161,21 @@ Write the following in the text pane
       state: touch
 ```
 
-Click the Source control button in the left panel, write a comment and click "Ctrl + Enter" to commit the changes
+Save the file (Ctrl + S)
 
-![Alt text](pics/017_code_git_commit.png?raw=true "git commit in VSCode")
+Click the Source control button in the left panel.
+
+Notice that there are three changes waiting
+
+* .gitignore
+* 01_linux.yml
+* settings.yml
+
+We need to commit the changes before .gitignore will ignore settings.yml
+
+![Alt text](pics/016_code_playbook.png?raw=true "playbook in VSCode")
+
+Write a comment __"First Playbook__" and click "Ctrl + Enter" to commit the changes
 
 Now Sync the changes Push/Pull, in the blue bar at the bottom, 0 up, 1 down it will start the sync process
 
