@@ -449,8 +449,6 @@ In VSCode
 
 Create a new file 01_vault.yml
 
-![Alt text](pics/035_vault_playbook.png?raw=true "vault playbook")
-
 __Type:__
 
 ```ansible
@@ -473,6 +471,8 @@ Save the file
 
 Notice that Git detects the changed file, do a commit add a comment "Vault" and Sync to Git
 
+![Alt text](pics/035_vault_playbook.png?raw=true "vault playbook")
+
 On server ansible do a git pull and run the playbook
 
 ```bash
@@ -494,6 +494,12 @@ Another option for the inventory is using a yaml file instead of the ini format,
 Lets create a new ansible-hosts.yml
 
 Copy the following inventory to ansible-hosts.yml
+
+__Note:__
+
+We need to set an option in vi before pasteing the configuration
+
+
 
 ```ansible
 
@@ -522,9 +528,18 @@ cd
 
 vi ansible-hosts.yml
 
-i (for input)
+Hit Esc-key
 
+:set paste
+
+Hit Esc-key
+
+i (to toggle insert)
 ```
+
+![Alt text](pics/037_set_paste.png?raw=true "vi paste")
+
+Note that it now writes -- INSERT (paste) -- in the bottom
 
 You can do a copy/paste of the inventory
 
@@ -548,7 +563,7 @@ vi .ansible.cfg
 
 i (for input)
 
-inventory = /home/jesbe/ansible-hosts.yml 
+inventory = /home/jesbe/ansible-hosts.yml
 
 ```
 
