@@ -530,7 +530,7 @@ vi ansible-hosts.yml
 
 Hit Esc-key
 
-:set paste
+:set paste <Hit Enter>
 
 Hit Esc-key
 
@@ -591,7 +591,7 @@ ansible linuxservers -m ping
 
 In this task we will encrypt the password for the windows servers and place it in the new yaml inventory file
 
-Encrypt you password 
+Encrypt you password
 
 __Type:__
 
@@ -605,17 +605,27 @@ ansible-vault encrypt_string 'SomeThingSimple8' --name ansible_password
 
 Copy the string
 
+![Alt text](pics/041_ansible_vault_string_copy.png?raw=true "Encrypt string copy")
+
+Paste the encryptet string into ansible-hosts.yml
+
+When copied you might need to indent the lines with spaces so it placed under the first S in password, se the picture
+
 ```bash
 
 cd
 
 vi ansible-hosts.yml
 
-i (for input)
+Hit Esc-key
+
+:set paste <Hit Enter>
+
+Hit Esc-key
+
+i (to toggle insert)
 
 ```
-
-![Alt text](pics/041_ansible_vault_string_copy.png?raw=true "Encrypt string copy")
 
 Save the inventory file
 
