@@ -561,7 +561,6 @@ __Type:__
 ```ansible
 
 ---
----
 - hosts: linuxservers
   become: yes
 
