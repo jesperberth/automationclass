@@ -525,6 +525,8 @@ ansible-galaxy install jesperberth.el_httpd
 
 ```
 
+![Alt text](pics/20_install_role.png?raw=true "install role")
+
 In VSCode
 
 create a new playbook file 02_vmware.yml and add below
