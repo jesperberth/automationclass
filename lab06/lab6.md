@@ -226,7 +226,7 @@ add below task to the file 01_vmware.yml
 
 Save and commit to Git
 
-Log on to server "ansibleserver.ansible.local" using ssh
+Log on to server "ansible.ansible.local" using ssh
 
 Use git to get the playbook
 
@@ -264,7 +264,7 @@ In VSCode
 add below task to the file 01_vmware.yml
 
 ```ansible
-# Prepare ansible for webserver
+
   - name: Set Fact webserver_ip_fact
     set_fact:
      webserver_ip_fact: "{{ webserver.instance.ipv4 }}"
@@ -282,7 +282,7 @@ add below task to the file 01_vmware.yml
 
 Save and commit to Git
 
-Log on to server "ansibleserver.ansible.local" using ssh
+Log on to server "ansible.ansible.local" using ssh
 
 Use git to get the playbook
 
@@ -305,13 +305,13 @@ ansible-playbook 01_vmware.yml
 
 In this task we will configure Dymanic Inventory for Vmware
 
-To support tags in Vmware we need to install Vmware Automation SDK
+To support tags in Vmware we need to install Vmware Automation SDK - this SDK is not OpenSource and cannot be in the pypi repo so we need to install from github
 
 [Vmware Automation SDK](https://github.com/vmware/vsphere-automation-sdk-python#installing-required-python-packages)
 
-Logon to ansibleserver.ansible.local with ssh
+Logon to ansible.ansible.local with ssh
 
-Use your "userx" account and password
+Username "user" and password
 
 __Type:__
 
@@ -344,13 +344,20 @@ i (to toggle input)
 ```
 
 ```bash
-plugin: vmware_vm_inventory
-strict: False
+plugin: community.vmware.vmware_vm_inventory
+strict: True
 hostname: "vcenter.ansible.local"
-username: "userx@vsphere.local"
-password: "Password1!"
+username: "administrator@vsphere.local"
+password: "Passw0rd!"
 validate_certs: False
-with_tags: True
+with_tags: yes
+hostnames:
+- config.name
+keyed_groups:
+- key: 'tags'
+  separator: ''
+filters:
+- summary.runtime.powerState == "poweredOn"
 ```
 
 __Type:__
@@ -391,7 +398,7 @@ The dynamic inventory module supports custom vmware tags
 
 We need to add our own tag to our VM to use in the inventory
 
-"tag_userx"
+"tag_webserver"
 
 [Ansible Module vmware_category](https://docs.ansible.com/ansible/latest/modules/vmware_category_module.html#vmware-category-module)
 
@@ -410,7 +417,7 @@ add below task to the file 01_vmware.yml
       username: "{{ username }}"
       password: "{{ password }}"
       validate_certs: no
-      category_name: "Cat_{{ nfs_user }}"
+      category_name: "cat_webserver"
       category_description: "Category for {{ nfs_user }}"
       category_cardinality: 'multiple'
       state: present
@@ -423,7 +430,7 @@ add below task to the file 01_vmware.yml
       password: "{{ password }}"
       validate_certs: no
       category_id: "{{ category.category_results.category_id }}"
-      tag_name: "tag_{{ nfs_user }}"
+      tag_name: "tag_webserver"
       tag_description: "Belongs to {{ nfs_user }}"
       state: present
     delegate_to: localhost
@@ -435,8 +442,8 @@ add below task to the file 01_vmware.yml
       password: "{{ password }}"
       validate_certs: no
       tag_names:
-        - "tag_{{ nfs_user }}"
-      object_name: "webserver_{{ nfs_user }}"
+        - "tag_webserver"
+      object_name: "webserver"
       object_type: VirtualMachine
       state: add
     delegate_to: localhost
@@ -464,13 +471,13 @@ ansible-playbook 01_vmware.yml
 
 ![Alt text](pics/16_add_tags_run.png?raw=true "add tags run")
 
-Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local)
+Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local/ui)
 
-Use your userx@vsphere.local and password
+Use your administrator@vsphere.local and password
 
 Click on your vm and locate the Tags settings in the right pane
 
-You should have a tag "tag_userx"
+You should have a tag "tag_webserver"
 
 ![Alt text](pics/17_show_tag_in_vmware.png?raw=true "show tags")
 
@@ -484,20 +491,18 @@ cd
 ansible-inventory -i webserver.vmware.yml --graph
 ```
 
-Look for @tag_userx
+Look for @tag_webserver
 
 ![Alt text](pics/18_show_tag_in_inventory.png?raw=true "show tags in inventory")
 
 Lets test the tag before changing the webserver
-
-Change the __tag_userx__
 
 __Type:__
 
 ```bash
 cd
 
-ansible -i webserver.vmware.yml tag_userx -m ping -u user
+ansible -i webserver.vmware.yml tag_webserver -m ping -u user
 ```
 
 ![Alt text](pics/18_test_tag_inventory.png?raw=true "test tags in inventory")
@@ -512,42 +517,32 @@ ansible -i webserver.vmware.yml tag_userx -m ping -u user
 
 [Ansible Module template](https://docs.ansible.com/ansible/latest/modules/template_module.html)
 
+First we need to install the el_httpd role
+
+```bash
+
+ansible-galaxy install jesperberth.el_httpd
+
+```
+
 In VSCode
 
-create a new playbook file webserver_vmware.yml and add below
+create a new playbook file 02_vmware.yml and add below
 
-Change the __tag_userx__
 
 ```ansible
 ---
-- hosts: tag_userx
+- hosts: tag_webserver
   remote_user: "user"
   become: "yes"
   vars:
     websiteheader: "Ansible Playbook in vmware"
     websiteauthor: "Ansible trainee"
 
+  roles:
+  - jesperberth.el_httpd
+
   tasks:
-  - name: Install Apache
-    dnf:
-     name: httpd
-     state: latest
-
-  - name: Enable Apache
-    systemd:
-     name: httpd
-     enabled: yes
-     state: started
-
-  - name: Allow http in firewall
-    firewalld:
-     service: http
-     permanent: true
-     state: enabled
-     immediate: yes
-    notify:
-      - reload firewall
-
   - name: Add index.html
     template:
       src: index.html.j2
@@ -555,18 +550,13 @@ Change the __tag_userx__
       owner: root
       group: root
 
-  handlers:
-  - name: reload firewall
-    systemd:
-      name: firewalld
-      state: reloaded
 ```
 
 ![Alt text](pics/19_configure_webserver.png?raw=true "configure webserver playbook")
 
 Save and commit to Git
 
-Log on to server "ansibleserver.ansible.local" using ssh
+Log on to server "ansible.ansible.local" using ssh
 
 Use git to get the playbook
 
@@ -579,7 +569,7 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook webserver_vmware.yml -i ../webserver.vmware.yml --ask-become-pass
+ansible-playbook 02_vmware.yml -i ../webserver.vmware.yml --ask-become-pass
 
 ```
 
