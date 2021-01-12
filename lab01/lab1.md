@@ -4,7 +4,7 @@ In this session we will install ansible on server __ansible__, and connect to li
 
 We will use server __ansible__ to run the first part of the training
 
-Ansible is a Python based program, we will install python in a Python Virtuelenv, in which we can isolate the python version and modules from the system python.  
+Ansible is a Python based program, we will install python in a Python Virtuelenv, in which we can isolate the python version and modules from the system python.
 
 ## Prepare
 

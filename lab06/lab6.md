@@ -1,33 +1,77 @@
 # Lab 6: Ansible Vmware
 
-In this session we will use ansible to manage a vmware esxi host, adding NFS storage, PortGroup to a virtual switch a virtual machine from template and install http inside the virtual machine.
+In this session we will use ansible to manage a vmware esxi host, adding NFS storage, create a virtual machine from template and install http inside the virtual machine.
+
+We will use the present SOAP based SDK to manage Vmware and guests, and we will take a sneak peak on the new REST API based module which will replace the SOAP modules
 
 ## Task 1: Prepare ansibleserver for vmware
 
-Logon to ansibleserver.ansible.local with ssh
+Logon to ansible.ansible.local with ssh
 
-Use your "userx" account and password
+Username is __"user"__
 
-We need to install the python modules for vmware
+Create a new Python Virtualenv
+
+We need to install the python modules for vmware for the SOAP SDK
+
+Lets create a Python virtualenv for our ansible installation
 
 __Type:__
 
 ```bash
+
+virtualenv ansible
+
+```
+
+![Alt text](pics/003_create_virtualenv.png?raw=true "create virtualenv Ansible")
+
+To activate our virtualenv ansible run the following
+
+which python - is just to check that were using the correct python
+
+__Type:__
+
+```bash
+
+source ansible/bin/activate
+
+which python
+```
+
+Note: That when you are in a virtualenv, the name of the environment will be in the beginning of you command prompt like (ansible)
+
+If you need to exit the virtualenv, you type "deactivate"
+
+![Alt text](pics/003_activate_virtualenv.png?raw=true "active virtualenv Ansible")
+
+__Type:__
+
+```bash
+pip install ansible
+```
+
+![Alt text](pics/003_install_ansible.png?raw=true "Install Ansible")
+
+__Type:__
+
+```bash
+
 pip install pyvmomi
 
 ```
 
-![Alt text](pics/00_install_pyvmomi.png?raw=true "nfs playbook")
+![Alt text](pics/00_install_pyvmomi.png?raw=true "install pyvmomi")
 
 ## Task 2: Add NFS storage to ESXi host
 
 [Ansible VMware Datastore](https://docs.ansible.com/ansible/latest/modules/vmware_host_datastore_module.html#vmware-host-datastore-module)
 
+First we will add a NFS share to our esxi host, the storage is exoported from our ansible server
+
 In VSCode
 
 create a new playbook file 01_vmware.yml and add below
-
-Change __"username"__, __"nfs_user"__, __"portgroup_name"__ and __"vlan_id"__
 
 ```ansible
 ---
@@ -35,11 +79,12 @@ Change __"username"__, __"nfs_user"__, __"portgroup_name"__ and __"vlan_id"__
   vars:
     hostname: "vcenter.ansible.local"
     esxihostname: "esxi.ansible.local"
-    username: "userx@vsphere.local"
-    password: "Password1!"
-    nfs_user: "userx"
-    portgroup_name: "vlan10x"
-    vlan_id: "10x"
+    username: "administrator@vsphere.local"
+    password: "Passw0rd!"
+    nfs_user: "user"
+    portgroup_name: "webserver"
+    vlan_id: "1"
+
   tasks:
   - name: Add NFS Storage ESXi
     vmware_host_datastore:
@@ -49,7 +94,7 @@ Change __"username"__, __"nfs_user"__, __"portgroup_name"__ and __"vlan_id"__
       esxi_hostname: "{{ esxihostname }}"
       datastore_name: "datastore_{{ nfs_user }}"
       datastore_type: "nfs"
-      nfs_server: "storage.ansible.local"
+      nfs_server: "ansible.ansible.local"
       nfs_path: "/storage/{{ nfs_user }}"
       nfs_ro: "no"
       state: "present"
@@ -61,16 +106,19 @@ Change __"username"__, __"nfs_user"__, __"portgroup_name"__ and __"vlan_id"__
 
 Save and commit to Git
 
-Log on to server "ansibleserver.ansible.local" using ssh
+Log on to server "ansible.ansible.local" using ssh
 
-Use git to get the playbook
+Use git to clone the repository
+
+__Change__ to your own repo
 
 __Type:__
 
 ```bash
-cd ansibleclass
 
-git pull
+git clone https://github.com/jesperberth/ansibleclass.git
+
+cd ansibleclass
 
 ansible-playbook 01_vmware.yml
 
@@ -78,9 +126,9 @@ ansible-playbook 01_vmware.yml
 
 ![Alt text](pics/02_add_nfs_to_vmware_play.png?raw=true "nfs playbook run")
 
-Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local)
+Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local/ui)
 
-Use your userx@vsphere.local and password
+Use administrator@vsphere.local and password
 
 In the vmware webconsole check under storage that your nfs share is connected
 
@@ -104,7 +152,6 @@ add below task to the file 01_vmware.yml
       switch_name: "vSwitch0"
       esxi_hostname: "{{ esxihostname }}"
       portgroup_name: "{{ portgroup_name }}"
-      vlan_id: "{{ vlan_id }}"
     delegate_to: localhost
 
 ```
@@ -113,7 +160,7 @@ add below task to the file 01_vmware.yml
 
 Save and commit to Git
 
-Log on to server "ansibleserver.ansible.local" using ssh
+Log on to server "ansible.ansible.local" using ssh
 
 Use git to get the playbook
 
@@ -130,13 +177,13 @@ ansible-playbook 01_vmware.yml
 
 ![Alt text](pics/05_add_portgroup_to_vmware_run.png?raw=true "portgroup playbook run")
 
-Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local)
+Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local/ui)
 
-Use your userx@vsphere.local and password
+Use your administrator@vsphere.local and password
 
 In the vmware webconsole check under networking/port groups that your vlan is created
 
-![Alt text](pics/06_add_portgroup_to_vmware_created.png?raw=true "nfs vmware")
+![Alt text](pics/06_add_portgroup_to_vmware_created.png?raw=true "portgroup vmware")
 
 ## Task 4: Add a VM to ESXi host
 
@@ -147,14 +194,14 @@ In VSCode
 add below task to the file 01_vmware.yml
 
 ```ansible
-  - name: Clone fedora 31 to userx webserver
+  - name: Clone fedora 33 to webserver
     vmware_guest:
       hostname: "{{ hostname }}"
       username: "{{ username }}"
       password: "{{ password }}"
       validate_certs: "False"
-      name: "webserver_{{ nfs_user }}"
-      template: "_TEMP_fedora31"
+      name: "webserver"
+      template: "Temp_fedora33"
       datacenter: "Datacenter"
       folder: "/"
       state: "poweredon"
@@ -170,6 +217,7 @@ add below task to the file 01_vmware.yml
         datastore: "datastore_{{ nfs_user }}"
       networks:
       - name: "{{ portgroup_name }}"
+        connected: "yes"
       wait_for_ip_address: "yes"
     register: "webserver"
 ```
@@ -195,9 +243,9 @@ ansible-playbook 01_vmware.yml
 
 ![Alt text](pics/08_add_vm_run.png?raw=true "add vm playbook run")
 
-Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local)
+Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local/ui)
 
-Use your userx@vsphere.local and password
+Use your administrator@vsphere.local and password
 
 In the vmware webconsole check under virtual machines that your vm is created
 
