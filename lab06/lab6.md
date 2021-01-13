@@ -417,8 +417,8 @@ add below task to the file 01_vmware.yml
       username: "{{ username }}"
       password: "{{ password }}"
       validate_certs: no
-      category_name: "cat_webserver"
-      category_description: "Category for {{ nfs_user }}"
+      category_name: "ansible_managed"
+      category_description: "Category for Ansible"
       category_cardinality: 'multiple'
       state: present
     register: category
@@ -431,7 +431,19 @@ add below task to the file 01_vmware.yml
       validate_certs: no
       category_id: "{{ category.category_results.category_id }}"
       tag_name: "tag_webserver"
-      tag_description: "Belongs to {{ nfs_user }}"
+      tag_description: "Web Server"
+      state: present
+    delegate_to: localhost
+
+  - name: Create a tag
+    vmware_tag:
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      category_id: "{{ category.category_results.category_id }}"
+      tag_name: "tag_dbserver"
+      tag_description: "Database Server"
       state: present
     delegate_to: localhost
 
@@ -454,7 +466,7 @@ add below task to the file 01_vmware.yml
 
 Save and commit to Git
 
-Log on to server "ansibleserver.ansible.local" using ssh
+Log on to server "ansible.ansible.local" using ssh
 
 Use git to get the playbook
 
@@ -585,6 +597,19 @@ http://<your webserver ip>
 
 ![Alt text](pics/21_website.png?raw=true "website")
 
+## Task 8: Use REST API to manage Vmware
+
+[Vmware REST API](https://github.com/ansible-collections/vmware.vmware_rest)
+
+First we need to install the vmware collection and one python module
+
+```bash
+
+ansible-galaxy collection install vmware.vmware_rest
+
+pip install aiohttp
+
+```
 Lab done
 
 [Ansible Automation](../lab07/lab7.md)
