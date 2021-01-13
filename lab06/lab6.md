@@ -194,14 +194,14 @@ In VSCode
 add below task to the file 01_vmware.yml
 
 ```ansible
-  - name: Clone fedora 33 to webserver
+  - name: Clone Centos 8 to webserver
     vmware_guest:
       hostname: "{{ hostname }}"
       username: "{{ username }}"
       password: "{{ password }}"
       validate_certs: "False"
       name: "webserver"
-      template: "Temp_fedora33"
+      template: "Temp_Centos8"
       datacenter: "Datacenter"
       folder: "/"
       state: "poweredon"
