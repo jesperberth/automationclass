@@ -4,6 +4,40 @@ In this session we will use ansible to manage a vmware esxi host, adding NFS sto
 
 We will use the present SOAP based SDK to manage Vmware and guests, and we will take a sneak peak on the new REST API based module which will replace the SOAP modules
 
+## Login vmware lab
+
+In your browser go to [https://vclass.dk](https://vclass.dk)
+
+Username and password will be given by the instructor
+
+![Alt text](pics/001_vclass_login.png?raw=true "vclass login")
+
+Click Detect Receiver
+
+![Alt text](pics/002_vclass_login_detect.png?raw=true "vclass login detect")
+
+Click Open to Launch the Citrix Workspace Launcher
+
+![Alt text](pics/003_vclass_login_open_plugin.png?raw=true "vclass login open plugin")
+
+Start VMWare vSphere Client
+
+![Alt text](pics/004_vclass.png?raw=true "vclass")
+
+Login with arrow\<username> and the password
+
+![Alt text](pics/005_vsphere_client.png?raw=true "vsphere client")
+
+Go to VMs and Templates
+
+![Alt text](pics/006_vsphere_client_vms.png?raw=true "vsphere client vms")
+
+Select the Workstation VM, right click and select Open Console
+
+![Alt text](pics/007_vsphere_workstation.png?raw=true "vsphere client vms")
+
+
+
 ## Task 1: Prepare ansibleserver for vmware
 
 Logon to ansible.ansible.local with ssh

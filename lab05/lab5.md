@@ -1,4 +1,4 @@
-# Lesson 04: Ansible Cloud
+# Lesson 05: Ansible Cloud
 
 In this session we will use ansible to setup and manage resources in Azure to deploy a virtual machine with a webserver installed and running
 
@@ -94,7 +94,7 @@ Click "Add" Select "Add role assignment"
 
 Under "Role" select "Contributor"
 
-In the Select box, search for the application name
+In the Select box, search for the application name __ansible-userx__
 
 Select your application and click Save
 
@@ -155,7 +155,7 @@ In VSCode
 
 create a new playbook file 01_azure.yml
 
- add the following text to the file, change the name of the variable __user to your username__
+  add the following text to the file, change the name of the variable __user to your initials__ use the same as you use to login to ansible server
 
 ```ansible
 ---
@@ -206,7 +206,7 @@ In VSCode
 
 create a new playbook file 02_azure.yml
 
-add the following text to the file, change the first variable __"user"__ to your username, it will be used for creating resources and a login to the webserver
+add the following text to the file, change the first variable __"user"__ to your initials, use the same as in previous task, it will be used for creating resources and a login to the webserver
 
 ```ansible
 ---
@@ -488,6 +488,7 @@ In VSCode create a new file 01_webserver_azure.yml
 Change the websiteauthor to your name
 
 ```ansible
+---
 - hosts: tag_solution_webserver_jesbe
   become: yes
   vars:
@@ -506,7 +507,7 @@ Change the websiteauthor to your name
       state: started
 
   - name: Allow http in firewall
-    firewalld:
+    ansible.posix.firewalld:
       service: http
       permanent: true
       state: enabled
@@ -578,4 +579,6 @@ http://<your webserver ip>
 
 ![Alt text](pics/024_webserver_site.png?raw=true "webserver site")
 
-[Network Playbooks](../lab05/lab5.md)
+Lab Done
+
+[Vmware Playbooks](../lab06/lab6.md)
