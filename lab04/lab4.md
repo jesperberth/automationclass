@@ -178,13 +178,13 @@ In VSCode open the roles/webserver/tasks/main.yml add the following
   ansible.builtin.package:
     name: "{{ package }}"
     state: latest
+  notify: httpd restart
 
 - name: Enable httpd service
   ansible.builtin.systemd:
     name: httpd
     state: started
     enabled: yes
-  register: httpd_status
 
 - name: Configure firewall
   ansible.posix.firewalld:
@@ -309,7 +309,7 @@ In VSCode add the following to index.php
 
 ```php
 <?PHP
-echo "Welcome to your new webserver";
+echo "Welcome to your new webserver: ";
 echo gethostname();
 ?>
 
@@ -318,6 +318,8 @@ echo gethostname();
 ![Alt text](pics/014_vscode_index_php.png?raw=true "vscode index.php")
 
 And finally lets create a playbook to run it all
+
+First we use our role to install and configure httpd and php next we have a simple task that copies our php file
 
 Create a new file 02_roles.yml add the following
 
@@ -355,6 +357,12 @@ git pull
 ansible-playbook 02_roles.yml --ask-become-pass
 
 ```
+
+![Alt text](pics/016_vscode_roles_run.png?raw=true "vscode roles run")
+
+Go to the azure portal and get the external ip of server1 or server2 and type it in your browser
+
+![Alt text](pics/01_webpage.png?raw=true "webpage")
 
 Lab done
 
