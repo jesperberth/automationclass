@@ -2,37 +2,29 @@
 
 ## Login to Azure Portal
 
-You have recieved an email from Microsoft "You're invited to the Team Redhat organization"
+Login to Azure
 
-Click on the "Get Started" button
+In your browser go to [http://portal.azure.com](http://portal.azure.com)
 
-![Alt text](pics/01_invite_mail.png?raw=true "Invitation")
+__Note:__ Run the browser in Incognito/Private mode to avoid issues with cashed credentials
 
-On the Microsoft login screen select "Personal Account" and login with your email and password
-
-![Alt text](pics/02_microsoft_login.png?raw=true "Login")
-
-Accept the invitation from "Team RedHat"
-
-![Alt text](pics/03_microsoft_accept.png?raw=true "Accept")
-
-Take a note of your Resource Group, save it in notepad, we will need it later
-
-In the right Pane, Click on Resource groups, your RG will be the one resampling your email
-
-![Alt text](pics/04_resource_group.png?raw=true "Resource Group")
+![Alt text](pics/01_azure_login.png?raw=true "Azure login")
 
 In the top blue bar, click the "powershell" icon marked with red
 
 ![Alt text](pics/05_start_cloud_shell.png?raw=true "Cloud Shell")
 
+Select Bash
+
+![Alt text](pics/05_start_cloud_shell_bash.png?raw=true "Cloud Shell Bash")
+
 Select "Show advanced settings"
 
 ![Alt text](pics/06_start_cloud_shell_advanced.png?raw=true "Cloud Shell bash")
 
-Set Cloud Shell region to "North Europe"
+Set Cloud Shell region to __"North Europe"__
 
-Resource group: Select Use existing and set it to your Resource group
+Resource group: Select Use existing and set it to your Resource group __userx-ansible__
 
 Storage account: Select Use existing your storage account will be selected, as you only have one
 
@@ -40,25 +32,32 @@ File Share: Create new, give it same name as your storage account
 
 ![Alt text](pics/07_start_cloud_shell_advanced_set.png?raw=true "Cloud Shell advanced")
 
-Select "Bash"
-
-![Alt text](pics/08_start_cloud_shell_bash.png?raw=true "Cloud Shell storage")
-
 Cloud shell is now ready
 
 ![Alt text](pics/09_start_cloud_shell_ready.png?raw=true "Cloud Shell storage")
 
 In Azure Cloud Shell(Bash)
 
-Note:
+__Note:__
 
 You need to type the name of your allocated Azure Resource Group
 
-Type a uniq name for your dns string ()
+Username cannot be __root/administrator/admin/user/guest/owner/adm__
 
-Username cannot be root/administrator/admin
+__Use your initials as username__
 
-Password must meet complexity requirements, 3 of 4 types and minumum 12 characters
+Password must be complex
+
+Be between 12 and 123 characters
+
+* Have lower characters
+* Have upper characters
+* Have a digit
+* Have a special character (Regex match [\W_])
+
+__Note:__
+
+Password will be visible on the screen
 
 ``` bash
 cd clouddrive
@@ -67,7 +66,7 @@ git clone https://github.com/jesperberth/automationclass_setup/
 
 cd automationclass_setup
 
-cd azure_class_playbooks
+cd azure
 
 ansible-galaxy install -r requirements.yml
 
@@ -82,17 +81,21 @@ The playbook will create all resources needed for the Automation class - Lab 01 
 
 ## SSH Clients
 
-Putty is a well known ssh client for most platforms
+We will use ssh to connect to the ansible server
 
-[Download Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
+### Windows
 
 Windows 10 has openSSH preinstalled, just open a CMD or Powershell consol and type ssh user@hostname
 
-Recomended for Windows
+As an option you can install Windows Terminal, which will add tabs and many other options
 
-Download Microsoft Powershell Core 6
+[Download Windows Terminal](https://github.com/microsoft/terminal)
 
-[Download Powershell Core](https://github.com/PowerShell/PowerShell/releases/tag/v6.2.3)
+![Alt text](pics/12_winterminal.png?raw=true "Windows Terminal SSH")
+
+Putty is a well known ssh client for most platforms
+
+[Download Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
 
 Go back to the lab guide
 

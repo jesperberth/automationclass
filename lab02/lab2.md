@@ -62,7 +62,7 @@ Open Powershell on your desktop
 
 ```bash
 git config --global user.name "Full Name"
-git config --glibal user.email "email@address.com"
+git config --global user.email "email@address.com"
 git config --list
 ```
 
@@ -115,7 +115,7 @@ Create a new folder .vscode (the . is important)
 
 ![Alt text](pics/014_vscode_create_folder.png?raw=true "create .vscode")
 
-In the new folder .vscode create a new file settings.yml
+In the new folder .vscode create a new file settings.yml, make sure the folder arrow points down
 
 ![Alt text](pics/014_vscode_create_settings.png?raw=true "create settings.yml")
 
@@ -133,6 +133,10 @@ Copy this config into the file and save
 
 We don't wont the settings.yml file to be synced with github so we add it to .gitignore
 
+Go to the source control button in the left menu
+
+Right click on the settings.yml file
+
 ![Alt text](pics/014_vscode_git_ignore.png?raw=true "git ignore")
 
 ## Task 3: Create the first playbook
@@ -142,8 +146,6 @@ In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECL
 ![Alt text](pics/015_code_newfile.png?raw=true "new file in VSCode")
 
 Name it "01_linux.yml"
-
-![Alt text](pics/016_code_playbook.png?raw=true "playbook in VSCode")
 
 Write the following in the text pane
 
@@ -159,9 +161,21 @@ Write the following in the text pane
       state: touch
 ```
 
-Click the Source control button in the left panel, write a comment and click "Ctrl + Enter" to commit the changes
+Save the file (Ctrl + S)
 
-![Alt text](pics/017_code_git_commit.png?raw=true "git commit in VSCode")
+Click the Source control button in the left panel.
+
+Notice that there are three changes waiting
+
+* .gitignore
+* 01_linux.yml
+* settings.yml
+
+We need to commit the changes before .gitignore will ignore settings.yml
+
+![Alt text](pics/016_code_playbook.png?raw=true "playbook in VSCode")
+
+Write a comment __"First Playbook__" and click "Ctrl + Enter" to commit the changes
 
 Now Sync the changes Push/Pull, in the blue bar at the bottom, 0 up, 1 down it will start the sync process
 
@@ -435,8 +449,6 @@ In VSCode
 
 Create a new file 01_vault.yml
 
-![Alt text](pics/035_vault_playbook.png?raw=true "vault playbook")
-
 __Type:__
 
 ```ansible
@@ -459,6 +471,8 @@ Save the file
 
 Notice that Git detects the changed file, do a commit add a comment "Vault" and Sync to Git
 
+![Alt text](pics/035_vault_playbook.png?raw=true "vault playbook")
+
 On server ansible do a git pull and run the playbook
 
 ```bash
@@ -480,6 +494,12 @@ Another option for the inventory is using a yaml file instead of the ini format,
 Lets create a new ansible-hosts.yml
 
 Copy the following inventory to ansible-hosts.yml
+
+__Note:__
+
+We need to set an option in vi before pasteing the configuration
+
+
 
 ```ansible
 
@@ -508,9 +528,18 @@ cd
 
 vi ansible-hosts.yml
 
-i (for input)
+Hit Esc-key
 
+:set paste <Hit Enter>
+
+Hit Esc-key
+
+i (to toggle insert)
 ```
+
+![Alt text](pics/037_set_paste.png?raw=true "vi paste")
+
+Note that it now writes -- INSERT (paste) -- in the bottom
 
 You can do a copy/paste of the inventory
 
@@ -534,7 +563,7 @@ vi .ansible.cfg
 
 i (for input)
 
-inventory = /home/jesbe/ansible-hosts.yml 
+inventory = /home/jesbe/ansible-hosts.yml
 
 ```
 
@@ -562,7 +591,7 @@ ansible linuxservers -m ping
 
 In this task we will encrypt the password for the windows servers and place it in the new yaml inventory file
 
-Encrypt you password 
+Encrypt you password
 
 __Type:__
 
@@ -576,17 +605,27 @@ ansible-vault encrypt_string 'SomeThingSimple8' --name ansible_password
 
 Copy the string
 
+![Alt text](pics/041_ansible_vault_string_copy.png?raw=true "Encrypt string copy")
+
+Paste the encryptet string into ansible-hosts.yml
+
+When copied you might need to indent the lines with spaces so it placed under the first S in password, se the picture
+
 ```bash
 
 cd
 
 vi ansible-hosts.yml
 
-i (for input)
+Hit Esc-key
+
+:set paste <Hit Enter>
+
+Hit Esc-key
+
+i (to toggle insert)
 
 ```
-
-![Alt text](pics/041_ansible_vault_string_copy.png?raw=true "Encrypt string copy")
 
 Save the inventory file
 
