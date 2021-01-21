@@ -62,7 +62,7 @@ Open Powershell on your desktop
 
 ```bash
 git config --global user.name "Full Name"
-git config --glibal user.email "email@address.com"
+git config --global user.email "email@address.com"
 git config --list
 ```
 
