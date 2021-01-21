@@ -20,23 +20,17 @@ Click Open to Launch the Citrix Workspace Launcher
 
 ![Alt text](pics/003_vclass_login_open_plugin.png?raw=true "vclass login open plugin")
 
-Start VMWare vSphere Client
+Start the Remote Desktop clientxxx
 
 ![Alt text](pics/004_vclass.png?raw=true "vclass")
 
-Login with arrow\<username> and the password
+You will get a Windows 10 Desktop with Windows Terminal and Google Chrome installed
 
-![Alt text](pics/005_vsphere_client.png?raw=true "vsphere client")
+![Alt text](pics/005_desktop.png?raw=true "desktop")
 
-Go to VMs and Templates
+Launch the Windows Terminal you should be able to run ssh from it
 
-![Alt text](pics/006_vsphere_client_vms.png?raw=true "vsphere client vms")
-
-Select the Workstation VM, right click and select Open Console
-
-![Alt text](pics/007_vsphere_workstation.png?raw=true "vsphere client vms")
-
-
+![Alt text](pics/006_ssh.png?raw=true "ssh")
 
 ## Task 1: Prepare ansibleserver for vmware
 
@@ -160,7 +154,7 @@ ansible-playbook 01_vmware.yml
 
 ![Alt text](pics/02_add_nfs_to_vmware_play.png?raw=true "nfs playbook run")
 
-Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local/ui)
+Open Vcenter in a browser [https://vcenter.ansible.local/ui](https://vcenter.ansible.local/ui)
 
 Use administrator@vsphere.local and password
 
@@ -215,7 +209,7 @@ Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local/
 
 Use your administrator@vsphere.local and password
 
-In the vmware webconsole check under networking/port groups that your vlan is created
+ In the vmware webconsole check under networking/port groups that your vSwitch webserver is created
 
 ![Alt text](pics/06_add_portgroup_to_vmware_created.png?raw=true "portgroup vmware")
 
@@ -251,7 +245,7 @@ add below task to the file 01_vmware.yml
         datastore: "datastore_{{ nfs_user }}"
       networks:
       - name: "{{ portgroup_name }}"
-        connected: "yes"
+        connected: true
       wait_for_ip_address: "yes"
     register: "webserver"
 ```
@@ -379,7 +373,7 @@ i (to toggle input)
 
 ```bash
 plugin: community.vmware.vmware_vm_inventory
-strict: True
+strict: False
 hostname: "vcenter.ansible.local"
 username: "administrator@vsphere.local"
 password: "Passw0rd!"
@@ -418,15 +412,7 @@ ansible-inventory -i webserver.vmware.yml --graph
 
 Try change --graph to --list, the output will change
 
-The result list groups all servers in as inventory groups
-
-@all, @Fedora64Guest, @poweredon
-
-You can target all of these groups in a playbook
-
-- hosts: Fedora64Guest
-
-Then all servers running fedora 64bit will end up being configured with our webserver config
+Alot more information is then available for each vm
 
 The dynamic inventory module supports custom vmware tags
 
@@ -608,8 +594,6 @@ Log on to server "ansible.ansible.local" using ssh
 
 Use git to get the playbook
 
-Become pass: __On the whiteboard__
-
 __Type:__
 
 ```bash
@@ -644,6 +628,9 @@ ansible-galaxy collection install vmware.vmware_rest
 pip install aiohttp
 
 ```
+
+![Alt text](pics/22_install_collection.png?raw=true "install vmware collection")
+
 Lab done
 
 [Ansible Automation](../lab07/lab7.md)
