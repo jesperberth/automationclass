@@ -631,6 +631,60 @@ pip install aiohttp
 
 ![Alt text](pics/22_install_collection.png?raw=true "install vmware collection")
 
+Create a new file 03_vmware.yml
+
+The vmware_rest module uses environment variables to define vmware user/password
+
+```ansible
+
+---
+- hosts: localhost
+  vars:
+
+  vars_prompt:
+    - name: password
+      prompt: Password
+      private: no
+
+  environment:
+    VMWARE_USER: administrator@vsphere.local
+    VMWARE_HOST: vcenter.ansible.local
+    VMWARE_VALIDATE_CERTS: no
+    VMWARE_PASSWORD: "{{ password }}"
+
+  tasks:
+  - name: Collect the list of the existing VM
+    vmware.vmware_rest.vcenter_vm_info:
+    register: existing_vms
+    until: existing_vms is not failed
+
+  - name: Show All Vms
+    debug:
+      msg: "{{ existing_vms }}"
+
+```
+
+Save and Commit
+
+![Alt text](pics/23_test_vmware_rest.png?raw=true "vmware rest collection")
+
+Log on to server "ansible.ansible.local" using ssh
+
+Use git to get the playbook
+
+__Type:__
+
+```bash
+cd ansibleclass
+
+git pull
+
+ansible-playbook 03_vmware.yml
+
+```
+
+![Alt text](pics/24_test_vmware_rest_run.png?raw=true "vmware rest collection run")
+
 Lab done
 
 [Ansible Automation](../lab07/lab7.md)
