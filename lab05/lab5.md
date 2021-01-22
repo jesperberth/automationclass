@@ -507,7 +507,7 @@ Change the websiteauthor to your name
       state: started
 
   - name: Allow http in firewall
-    ansible.posix.firewalld:
+    firewalld:
       service: http
       permanent: true
       state: enabled
