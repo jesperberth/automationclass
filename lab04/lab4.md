@@ -105,6 +105,10 @@ __Type:__
 ```bash
 cd
 
+git config --global user.email "you@example.com"
+
+git config --global user.name "Your Name"
+
 git config --global credential.helper 'cache --timeout=3600'
 
 ```
@@ -151,7 +155,7 @@ git add .
 
 git commit -m "Adding roles"
 
-git push origin master
+git push origin main
 
 
 ```

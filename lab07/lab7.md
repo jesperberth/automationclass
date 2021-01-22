@@ -24,15 +24,15 @@ Click on the Green Plus sign to create a new project
 
 Type
 
-Name: userx_project
+__Name:__ userx_project
 
-Organization: Training
+__Organization:__ Training
 
-SCM Type: Git
+__SCM Type:__ Git
 
-SCM URL: paste your github repo url
+__SCM URL:__ paste your github repo url
 
-Update Revision on Launch: Checked
+__Update Revision on Launch:__ Checked
 
 Leave the rest, click __Save__
 
@@ -44,9 +44,9 @@ Click on the Green Plus sign to create a new inventory
 
 Type
 
-Name: userx_inventory
+__Name:__ userx_inventory
 
-Organization: Training
+__Organization:__ Training
 
 Leave the rest, click __Save__
 
@@ -58,9 +58,9 @@ Click on the Green Plus sign to create a new Credential
 
 Type
 
-Name: userx_credential
+__Name:__ userx_credential
 
-Organization: Training
+__Organization:__ Training
 
 Click on the "Credential Type
 
@@ -76,13 +76,13 @@ __Hint:__ On server ansible cat ~/.azure/credentials
 
 Type
 
-Subscribtion: xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
+__Subscribtion:__ xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
 
-Client ID: xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
+__Client ID:__ xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
 
-Client Secret: xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
+__Client Secret:__ xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
 
-Tenant ID: xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
+__Tenant ID:__ xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
 
 Leave the rest as default and click __Save__
 
@@ -112,17 +112,17 @@ Click on the Green Plus sign to create a new Template select the __Job template_
 
 Type
 
-Name: userx_resourcegroup
+__Name:__ userx_resourcegroup
 
-Job Type: Run
+__Job Type:__ Run
 
-Inventory: Select your own inventory
+__Inventory:__ Select your own inventory
 
-Project: Select your own project
+__Project:__ Select your own project
 
-Playbook: 01_azure_tower.yml
+__Playbook:__ 01_azure_tower.yml
 
-Credentials: Select credential type "Microsoft Azure Resource Manager" and your own credentials
+__Credentials:__ Select credential type "Microsoft Azure Resource Manager" and your own credentials
 
 Leave the rest as default and click __Save__
 
@@ -194,19 +194,19 @@ Click on the Green Plus sign to create a new Template select the __Job template_
 
 Type
 
-Name: userx_webserver
+__Name:__ userx_webserver
 
-Job Type: Run
+__Job Type:__ Run
 
-Inventory: Select your own inventory
+__Inventory:__ Select your own inventory
 
-Project: Select your own project
+__Project:__ Select your own project
 
-Playbook: 02_azure_tower.yml
+__Playbook:__ 02_azure_tower.yml
 
-Credentials: Select credential type "Microsoft Azure Resource Manager" and your own credentials
+__Credentials:__ Select credential type "Microsoft Azure Resource Manager" and your own credentials
 
-In the Extra Vars: add the ssh_public_key make sure you have " before and after the key
+__In the Extra Vars:__ add the ssh_public_key make sure you have " before and after the key
 
 ```bash
 ---
@@ -240,11 +240,15 @@ Click on the Source button on the top
 
 Click on the Green + to create a new source
 
-Name: Azure_userx
+__Name:__ Azure_userx
 
-Source: Microsoft Azure Resource Manager
+__Source:__ Microsoft Azure Resource Manager
 
-Credential: userx_credential
+__Credential:__ userx_credential
+
+__Overwrite:__ Checked
+
+__Updata on Launch:__ Checked
 
 Leave the rest as default
 
@@ -284,15 +288,15 @@ Click on Credentials in the left pane
 
 Click on the green + to create a new credential
 
-Name: userx_webserver
+__Name:__ userx_webserver
 
-Organization: Training
+__Organization:__ Training
 
 Credential Type: Machine
 
-Username: __webuserx__ <---- Change to your username
+__Username:__ __webuserx__ <---- Change to your username
 
-SSH Private Key: --- the key you copied ---
+__SSH Private Key:__ --- the key you copied ---
 
 Leave the rest as default and click __Save__
 
@@ -325,17 +329,17 @@ Click on the Green Plus sign to create a new Template select the __Job template_
 
 Type
 
-Name: userx_webserver_install
+__Name:__ userx_webserver_install
 
-Job Type: Run
+__Job Type:__ Run
 
-Inventory: Select your own inventory
+__Inventory:__ Select your own inventory
 
-Project: Select your own project
+__Project:__ Select your own project
 
-Playbook: 01_webserver_azure_tower.yml
+__Playbook:__ 01_webserver_azure_tower.yml
 
-Credentials: Select credential type "Machine" and your own credentials
+__Credentials:__ Select credential type "Machine" and your own credentials
 
 Leave the rest as default and click __Save__
 
@@ -347,11 +351,11 @@ In the left pane, click Templates
 
 Click on the Green Plus sign to create a new Template select the __Workflow template__ type
 
-Name: Userx
+__Name:__ Userx
 
-Organization: Training
+__Organization:__ Training
 
-Inventory: Select your own inventory
+__Inventory:__ Select your own inventory
 
 Leave the rest as default and click __Save__
 
@@ -361,15 +365,67 @@ The window changes to the workflow Visualizer
 
 Click on Start
 
+__Select:__ Template
+
+__Select:__ userx_resourcegroup
+
+Press the __Select__ Button
+
 ![Alt text](pics/21_work_step1.png?raw=true "Create workflow template step 1")
+
+Click on the green + on the new userx_resourcegroup
+
+__Select:__ Template
+
+__Select:__ userx_webserver
+
+Press the __Select__ Button
 
 ![Alt text](pics/23_work_step3.png?raw=true "Create workflow template step 3")
 
-![Alt text](pics/24_work_step4.png?raw=true "Create workflow template step 4")
+Click on the green + on the new userx_webserver
+
+__Select:__ Inventory Sync
+
+__Select:__ Azure_userx
+
+Press the __Select__ Button
+
+![Alt text](pics/24_work_step4.png?raw=true "Create workflow template step 3")
+
+Click on the green + on the new Azure_userx
+
+__Select:__ Template
+
+__Select:__ userx_webserver_install
+
+Press the __Select__ Button
+
+Press the __Save__ Button
+
+![Alt text](pics/25_work_step5.png?raw=true "Create workflow template step 4")
 
 Click Survey to add the two vars we deleted in the playbook  websiteheader: and websiteauthor:
 
+__Prompt:__ Web Site Name
+
+__Answer variable name:__ websiteheader
+
+__Answer Type:__ Text
+
+Press the __Add__ Button
+
 ![Alt text](pics/25_survey_1.png?raw=true "Create survey 1")
+
+__Prompt:__ Web Site author
+
+__Answer variable name:__ websiteauthor
+
+__Answer Type:__ Text
+
+Press the __Add__ Button
+
+Press the __Save__ Button
 
 ![Alt text](pics/26_survey_2.png?raw=true "Create survey 2")
 
