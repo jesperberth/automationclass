@@ -232,6 +232,8 @@ Wait for template to finish
 
 Change the Inventory to a dynamic azure inventory
 
+Eventhoug Ansible Tower has an Dynamic Inventory, we will use the on created earlier as it will give us the tags
+
 In the left pane click on Inventory
 
 Select your own inventory userx_inventory
@@ -242,9 +244,13 @@ Click on the Green + to create a new source
 
 __Name:__ Azure_userx
 
-__Source:__ Microsoft Azure Resource Manager
+__Source:__ Sourced from a Project
 
 __Credential:__ userx_credential
+
+__Project:__ userx_project
+
+__Inventory File:__ webserver.azure_rm.yml
 
 __Overwrite:__ Checked
 
@@ -310,7 +316,7 @@ Create a copy of 01_webserver_azure.yml -> 01_webserver_azure_tower.yml
 
 Change the hosts: to match your webuserx
 
-- hosts: solution_webserver_webuserx
+- hosts: tag_solution_webserver_webuserx
 
 Remove both vars:
 
