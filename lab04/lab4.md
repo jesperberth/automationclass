@@ -229,12 +229,16 @@ Open handlers/main.yml and add the following
 ```ansible
 
 ---
----
 # handlers file for webserver
 - name: firewall reload
   ansible.builtin.systemd:
     name: firewalld
     state: reloaded
+
+- name: httpd restart
+  ansible.builtin.systemd:
+    name: httpd
+    state: restarted
 
 ```
 
