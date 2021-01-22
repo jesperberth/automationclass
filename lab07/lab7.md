@@ -98,6 +98,8 @@ Change the variable user: - We already have a Resource Group called Webserver_us
 
 to __webuserx eg. "webuser1"__
 
+Save and Commit
+
 ![Alt text](pics/06_ansible_tower_playbook.png?raw=true "Tower playbook")
 
 In Tower go to project and refresh your project, this will do a "git pull"
