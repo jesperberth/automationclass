@@ -196,7 +196,7 @@ ansible-playbook 01_azure.yml
 
 ![Alt text](pics/011_azure_play_run.png?raw=true "azure play run")
 
-## Task 2: Create Network in Azure
+## Task 3: Create Network in Azure
 
 [Ansible Module azure_rm_virtualnetwork](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualnetwork_module.html#azure-rm-virtualnetwork-module)
 
@@ -263,7 +263,7 @@ ansible-playbook 02_azure.yml
 
 ![Alt text](pics/013_azure_net_playbook_run.png?raw=true "azure net playbook run")
 
-## Task 3: Create Public Ip, NIC and Security Group in Azure
+## Task 4: Create Public Ip, NIC and Security Group in Azure
 
 [Ansible Module azure_rm_publicipaddress](https://docs.ansible.com/ansible/latest/modules/azure_rm_publicipaddress_module.html#azure-rm-publicipaddress-module)
 
@@ -414,7 +414,7 @@ ansible-playbook 02_azure.yml
 
 The new webserver is now deployed in Azure and we are able to ssh keyless to the webserver
 
-## Task 4: Create an ansible dynamic inventory for Azure RM
+## Task 5: Create an ansible dynamic inventory for Azure RM
 
 We can either add the webserver in the ansible-hosts file or use an Inventory plugin
 
@@ -471,7 +471,7 @@ ansible-inventory -i ./webserver.azure_rm.yml --list
 
 If we add another server in the Resource Group it will be included in the inventory
 
-## Task 5: Install Apache Webserver and create the site - using ansible Azure dynamic inventory
+## Task 6: Install Apache Webserver and create the site - using ansible Azure dynamic inventory
 
 Install apache webserver, setup the static website, allow http trafic on the local firewall
 
