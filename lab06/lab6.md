@@ -32,7 +32,7 @@ Launch the Windows Terminal you should be able to run ssh from it
 
 ![Alt text](pics/006_ssh.png?raw=true "ssh")
 
-## Task 1: Prepare ansibleserver for vmware
+## Task 1: Prepare ansible for vmware
 
 Logon to ansible.ansible.local with ssh
 
