@@ -36,17 +36,17 @@ If you have a github account login, otherwise create a new account
 
 ![Alt text](pics/005_create_github.png?raw=true "Create GitHub Account")
 
-Lets create a new Repository, click the green "New" in the top left corner
+Lets create a new Repository, click the green "New" in the top right corner
 
 ![Alt text](pics/006_login_github.png?raw=true "Login GitHub")
 
 Give you repository a name "ansibleclass"
 
-Click "Create repository"
-
 Select "Public" - it's default - __for the purpose of these labs keep it public__
 
 Make Sure you tick __"Initialize this repository with a README"__
+
+Click "Create repository"
 
 ![Alt text](pics/007_newrepo_github.png?raw=true "Create Repo")
 
@@ -82,7 +82,7 @@ code .
 
 ![Alt text](pics/009_start_code.png?raw=true "Start VSCode")
 
-On your "ansbleclass" repository page
+On your "ansibleclass" repository page
 
 Click the "Clone or Download" to retrieve the URL for the repository
 
