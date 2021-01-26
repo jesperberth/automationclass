@@ -553,6 +553,8 @@ First we need to install the el_httpd role
 
 ```bash
 
+cd
+
 ansible-galaxy install jesperberth.el_httpd
 
 ```
