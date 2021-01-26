@@ -624,6 +624,7 @@ http://<your webserver ip>
 First we need to install the vmware collection and one python module
 
 ```bash
+cd
 
 ansible-galaxy collection install vmware.vmware_rest
 
