@@ -18,8 +18,6 @@ Start VSCode
 
 In VSCode
 
-Get extention "Ansible" from Microsoft
-
 Get extention "indent one space" from Alexander
 
 Get extention "Trailing Spaces" from Shardul Mahadik
