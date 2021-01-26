@@ -646,7 +646,7 @@ The vmware_rest module uses environment variables to define vmware user/password
 
   vars_prompt:
     - name: password
-      prompt: Password
+      prompt: VCenter Password
       private: no
 
   environment:
