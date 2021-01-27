@@ -487,6 +487,8 @@ In VSCode create a new file 01_webserver_azure.yml
 
 Change the websiteauthor to your name
 
+And change the __- hosts: tag_solution_webserver_jesbe__ so it matches your initials
+
 ```ansible
 ---
 - hosts: tag_solution_webserver_jesbe
