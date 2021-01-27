@@ -363,12 +363,17 @@ vi webserver.vmware.yml
 
 ```
 
-In vi __type:__ below
-
-Change __username__
+In vi paste below
 
 ```bash
-i (to toggle input)
+Hit Esc-key
+
+:set paste <Hit Enter>
+
+Hit Esc-key
+
+i (to toggle insert)
+
 ```
 
 ```bash
