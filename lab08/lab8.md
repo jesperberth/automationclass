@@ -1,6 +1,6 @@
-# Lab 8: Ansible Automation Platform - Ansible Tower
+# Lab 8: Ansible Automation Platform - AWX / Ansible Tower
 
-In this session we will use Red Hat Ansible Automation Platform to orchestrate our ansible playbooks
+In this session we will use AWX / Ansible Tower to orchestrate our ansible playbooks
 
 ## Prepare
 
@@ -104,7 +104,7 @@ Create a copy of 01_azure.yml -> 01_azure_tower.yml
 
 Change the variable user: - We already have a Resource Group called Webserver_userx so you need to change it
 
-to __webuserx eg. "webuser1"__
+to __your initials eg. "jesbe"__
 
 Save and Commit
 
