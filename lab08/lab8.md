@@ -116,21 +116,21 @@ In Tower go to project and refresh your project, this will do a "git pull"
 
 In the left pane, click Templates
 
-Click on the Green Plus sign to create a new Template select the __Job template__ type
+Click on Add to create a new Template select the __Add Job template__ type
 
 Type
 
-__Name:__ resourcegroup
+__Name:__ Resourcegroup
 
 __Job Type:__ Run
 
-__Inventory:__ Select your own inventory
+__Inventory:__ Inventory
 
-__Project:__ Select your own project
+__Project:__ Project
 
 __Playbook:__ 01_azure_tower.yml
 
-__Credentials:__ Select credential type "Microsoft Azure Resource Manager" and your own credentials
+__Credentials:__ Select credential type "Microsoft Azure Resource Manager" and Azure Credentials
 
 Leave the rest as default and click __Save__
 
