@@ -18,7 +18,7 @@ On the Azure portal click Virtual Machines
 
 ![Alt text](pics/000_azure_portal.png?raw=true "Azure Portal")
 
-Select your Resource Group
+Select your Resource Group, it's named __ansible-initials__
 
 ![Alt text](pics/000_azure_portal_resourcegroup.png?raw=true "Azure Portal")
 
