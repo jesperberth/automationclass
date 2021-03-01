@@ -32,11 +32,11 @@ Leave the rest, click __Save__
 
 In the left pane, click Projects
 
-Click on the Green Plus sign to create a new project
+Click Add to create a new project
 
 Type
 
-__Name:__ project
+__Name:__ Project
 
 __Organization:__ Default
 
@@ -52,11 +52,11 @@ Leave the rest, click __Save__
 
 In the left pane, click Inventory
 
-Click on the Green Plus sign to create a new inventory
+Click Add to create a new inventory, select Add Inventory
 
 Type
 
-__Name:__ inventory
+__Name:__ Inventory
 
 __Organization:__ Default
 
@@ -66,19 +66,15 @@ Leave the rest, click __Save__
 
 In the left pane, click credentials
 
-Click on the Green Plus sign to create a new Credential
+Click on Add to create a new Credential
 
 Type
 
-__Name:__ credential
+__Name:__ Azure Credential
 
 __Organization:__ Default
 
-Click on the "Credential Type
-
-![Alt text](pics/04_ansible_tower_create_credential.png?raw=true "select credential type")
-
-And select
+Click on the "Credential Type and select
 
 Microsoft Azure Resource Manager
 
