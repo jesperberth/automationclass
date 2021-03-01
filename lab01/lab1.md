@@ -371,7 +371,7 @@ Yes the password is in clear text, you can encrypt the password with ansible-vau
 
 __Note:__
 
-Change ansible_user and ansible_password to your username and password
+Change __ansible_user__ and __ansible_password__ to your username and password
 
 Add after the first group, linuxservers
 
@@ -448,15 +448,13 @@ ansible-galaxy collection list
 
 Lets install the ansible Windows Collection, we need it in the next lab
 
-List installed collections after
+ansible.windows is already installed from the standard ansible package, but a new version is available
 
 __Type:__
 
 ```bash
 
 ansible-galaxy collection install ansible.windows
-
-ansible-galaxy collection list
 
 ```
 
