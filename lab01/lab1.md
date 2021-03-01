@@ -18,6 +18,10 @@ On the Azure portal click Virtual Machines
 
 ![Alt text](pics/000_azure_portal.png?raw=true "Azure Portal")
 
+Select your Resource Group
+
+![Alt text](pics/000_azure_portal_resourcegroup.png?raw=true "Azure Portal")
+
 Click on the ansible server
 
 ![Alt text](pics/000_azure_portal_vm.png?raw=true "Azure Portal VMs")
