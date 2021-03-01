@@ -608,4 +608,4 @@ ansible-playbook 02_loop.yml --ask-become-pass
 
 Lab done
 
-[Roles](../lab04/lab4.md)
+[Ansible Linting](../lab04/lab4.md)

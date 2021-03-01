@@ -1,396 +1,140 @@
-# Lab 6: Ansible Vmware
+# Lesson 05: Ansible Cloud
 
-In this session we will use ansible to manage a vmware esxi host, adding NFS storage, create a virtual machine from template and install http inside the virtual machine.
+In this session we will use ansible to setup and manage resources in Azure to deploy a virtual machine with a webserver installed and running
 
-We will use the present SOAP based SDK to manage Vmware and guests, and we will take a sneak peak on the new REST API based module which will replace the SOAP modules
+## Prepare
 
-## Login vmware lab
+We will need the server, ansible to be up and running - by default they are started after creation
 
-In your browser go to [https://vclass.dk](https://vclass.dk)
+## Task 1: Install requirements for Azure
 
-Username and password will be given by the instructor
+Log on to server "ansible" using ssh
 
-![Alt text](pics/001_vclass_login.png?raw=true "vclass login")
+Install ansible azure collection
 
-Click Detect Receiver
+Before installtion the collection we need to install several python modules, the requirements file is on the github project page
 
-![Alt text](pics/002_vclass_login_detect.png?raw=true "vclass login detect")
+[https://github.com/ansible-collections/azure](https://github.com/ansible-collections/azure)
 
-Click Open to Launch the Citrix Workspace Launcher
+We will use wget 
 
-![Alt text](pics/003_vclass_login_open_plugin.png?raw=true "vclass login open plugin")
-
-Start the Remote Desktop clientxxx
-
-![Alt text](pics/004_vclass.png?raw=true "vclass")
-
-You will get a Windows 10 Desktop with Windows Terminal and Google Chrome installed
-
-![Alt text](pics/005_desktop.png?raw=true "desktop")
-
-Launch the Windows Terminal you should be able to run ssh from it
-
-![Alt text](pics/006_ssh.png?raw=true "ssh")
-
-## Task 1: Prepare ansible for vmware
-
-Logon to ansible.ansible.local with ssh
-
-Username is __"user"__
-
-Create a new Python Virtualenv
-
-We need to install the python modules for vmware for the SOAP SDK
-
-Lets create a Python virtualenv for our ansible installation
-
-__Type:__
-
-```bash
-
-virtualenv ansible
-
-```
-
-![Alt text](pics/003_create_virtualenv.png?raw=true "create virtualenv Ansible")
-
-To activate our virtualenv ansible run the following
-
-which python - is just to check that were using the correct python
-
-__Type:__
-
-```bash
-
-source ansible/bin/activate
-
-which python
-```
-
-Note: That when you are in a virtualenv, the name of the environment will be in the beginning of you command prompt like (ansible)
-
-If you need to exit the virtualenv, you type "deactivate"
-
-![Alt text](pics/003_activate_virtualenv.png?raw=true "active virtualenv Ansible")
-
-__Type:__
-
-```bash
-pip install ansible
-```
-
-![Alt text](pics/003_install_ansible.png?raw=true "Install Ansible")
-
-__Type:__
-
-```bash
-
-pip install pyvmomi
-
-```
-
-![Alt text](pics/00_install_pyvmomi.png?raw=true "install pyvmomi")
-
-## Task 2: Add NFS storage to ESXi host
-
-[Ansible VMware Datastore](https://docs.ansible.com/ansible/latest/modules/vmware_host_datastore_module.html#vmware-host-datastore-module)
-
-First we will add a NFS share to our esxi host, the storage is exoported from our ansible server
-
-In VSCode
-
-create a new playbook file 01_vmware.yml and add below
-
-```ansible
----
-- hosts: localhost
-  vars:
-    hostname: "vcenter.ansible.local"
-    esxihostname: "esxi.ansible.local"
-    username: "administrator@vsphere.local"
-    password: "Passw0rd!"
-    nfs_user: "user"
-    portgroup_name: "webserver"
-    vlan_id: "1"
-
-  tasks:
-  - name: Add NFS Storage ESXi
-    vmware_host_datastore:
-      hostname: "{{ hostname }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-      esxi_hostname: "{{ esxihostname }}"
-      datastore_name: "datastore_{{ nfs_user }}"
-      datastore_type: "nfs"
-      nfs_server: "ansible.ansible.local"
-      nfs_path: "/storage/{{ nfs_user }}"
-      nfs_ro: "no"
-      state: "present"
-      validate_certs: "False"
-    delegate_to: "localhost"
-```
-
-![Alt text](pics/01_add_nfs_to_vmware.png?raw=true "nfs playbook")
-
-Save and commit to Git
-
-Log on to server "ansible.ansible.local" using ssh
-
-Use git to clone the repository
-
-__Change__ to your own repo
-
-__Type:__
-
-```bash
-
-git clone https://github.com/jesperberth/ansibleclass.git
-
-cd ansibleclass
-
-ansible-playbook 01_vmware.yml
-
-```
-
-![Alt text](pics/02_add_nfs_to_vmware_play.png?raw=true "nfs playbook run")
-
-Open Vcenter in a browser [https://vcenter.ansible.local/ui](https://vcenter.ansible.local/ui)
-
-Use administrator@vsphere.local and password
-
-In the vmware webconsole check under storage that your nfs share is connected
-
-![Alt text](pics/03_add_nfs_to_vmware_connect.png?raw=true "nfs vmware")
-
-## Task 3: Add Network portgroup to ESXi host
-
-[Ansible VMware PortGroup](https://docs.ansible.com/ansible/latest/modules/vmware_portgroup_module.html#vmware-portgroup-module)
-
-In VSCode
-
-add below task to the file 01_vmware.yml
-
-```ansible
-  - name: Add a PortGroup to VMware vSwitch
-    vmware_portgroup:
-      hostname: "{{ hostname }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-      validate_certs: False
-      switch_name: "vSwitch0"
-      esxi_hostname: "{{ esxihostname }}"
-      portgroup_name: "{{ portgroup_name }}"
-    delegate_to: localhost
-
-```
-
-![Alt text](pics/04_add_portgroup_to_vmware.png?raw=true "portgroup playbook")
-
-Save and commit to Git
-
-Log on to server "ansible.ansible.local" using ssh
-
-Use git to get the playbook
-
-__Type:__
-
-```bash
-cd ansibleclass
-
-git pull
-
-ansible-playbook 01_vmware.yml
-
-```
-
-![Alt text](pics/05_add_portgroup_to_vmware_run.png?raw=true "portgroup playbook run")
-
-Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local/ui)
-
-Use your administrator@vsphere.local and password
-
- In the vmware webconsole check under networking/port groups that your vSwitch webserver is created
-
-![Alt text](pics/06_add_portgroup_to_vmware_created.png?raw=true "portgroup vmware")
-
-## Task 4: Add a VM to ESXi host
-
-[Ansible Vmware Guest](https://docs.ansible.com/ansible/latest/modules/vmware_guest_module.html#vmware-guest-module)
-
-In VSCode
-
-add below task to the file 01_vmware.yml
-
-```ansible
-  - name: Clone Centos 8 to webserver
-    vmware_guest:
-      hostname: "{{ hostname }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-      validate_certs: "False"
-      name: "webserver"
-      template: "Temp_Centos8"
-      datacenter: "Datacenter"
-      folder: "/"
-      state: "poweredon"
-      hardware:
-        memory_mb: "1024"
-        num_cpus: "1"
-      disk:
-      - size_gb: "16"
-        type: "thin"
-        datastore: "datastore1"
-      - size_gb: "2"
-        type: "thin"
-        datastore: "datastore_{{ nfs_user }}"
-      networks:
-      - name: "{{ portgroup_name }}"
-        connected: true
-      wait_for_ip_address: "yes"
-    register: "webserver"
-```
-
-![Alt text](pics/07_add_vm.png?raw=true "add vm playbook")
-
-Save and commit to Git
-
-Log on to server "ansible.ansible.local" using ssh
-
-Use git to get the playbook
-
-__Type:__
-
-```bash
-cd ansibleclass
-
-git pull
-
-ansible-playbook 01_vmware.yml
-
-```
-
-![Alt text](pics/08_add_vm_run.png?raw=true "add vm playbook run")
-
-Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local/ui)
-
-Use your administrator@vsphere.local and password
-
-In the vmware webconsole check under virtual machines that your vm is created
-
-![Alt text](pics/09_add_vm_vmware_created.png?raw=true "add vm in vmware")
-
-## Task 5: Prepare ssh for webserver
-
-[Ansible Module set_fact](https://docs.ansible.com/ansible/latest/modules/set_fact_module.html)
-
-[Ansible Module debug](https://docs.ansible.com/ansible/latest/modules/debug_module.html)
-
-[Ansible Module shell](https://docs.ansible.com/ansible/latest/modules/shell_module.html?highlight=shell)
-
-In VSCode
-
-add below task to the file 01_vmware.yml
-
-```ansible
-
-  - name: Set Fact webserver_ip_fact
-    set_fact:
-     webserver_ip_fact: "{{ webserver.instance.ipv4 }}"
-
-  - name: IP address info
-    debug:
-      msg: "{{ webserver_ip_fact }}"
-
-  - name: Add ansibleserver to ssh known_hosts
-    shell: "ssh-keyscan -t ecdsa {{ webserver_ip_fact }}  >> /home/{{ ansible_user_id }}/.ssh/known_hosts"
-
-```
-
-![Alt text](pics/10_add_webserver_ssh.png?raw=true "add vm in vmware")
-
-Save and commit to Git
-
-Log on to server "ansible.ansible.local" using ssh
-
-Use git to get the playbook
-
-__Type:__
-
-```bash
-cd ansibleclass
-
-git pull
-
-ansible-playbook 01_vmware.yml
-
-```
-
-![Alt text](pics/11_add_webserver_ssh_run.png?raw=true "configure vm playbook run")
-
-## Task 6: Configure Dynamic Inventory for Vmware
-
-[Ansible Vmware Inventory](https://docs.ansible.com/ansible/latest/scenario_guides/vmware_scenarios/vmware_inventory.html)
-
-In this task we will configure Dymanic Inventory for Vmware
-
-To support tags in Vmware we need to install Vmware Automation SDK - this SDK is not OpenSource and cannot be in the pypi repo so we need to install from github
-
-[Vmware Automation SDK](https://github.com/vmware/vsphere-automation-sdk-python#installing-required-python-packages)
-
-Logon to ansible.ansible.local with ssh
-
-Username "user" and password
+https://github.com/ansible-collections/azure/blob/dev/requirements-azure.txt
 
 __Type:__
 
 ```bash
 cd
 
-pip install --upgrade pip setuptools
+wget https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
 
-pip install --upgrade git+https://github.com/vmware/vsphere-automation-sdk-python.git
+pip install -r requirements-azure.txt
+
+ansible-galaxy collection install azure.azcollection
 
 ```
+![Alt text](pics/002_download_requirements_pip_azure.png?raw=true "install azure")
 
-![Alt text](pics/12_install_vmware_sdk.png?raw=true "install vmware sdk")
+![Alt text](pics/002_run_requirements_pip_azure.png?raw=true "install azure")
 
-Create the inventory file in your root directory, the inventory file must end with .vmware.yml
+![Alt text](pics/001_install_pip_azure.png?raw=true "install azure")
+
+## Task 2: Create credentials for Azure
+
+We need to register an azure application to enable ansible automation
+
+In your browser log on to [https://portal.azure.com](https://portal.azure.com)
+
+In the left pane, click "Azure Active Directory" and "App Registrations"
+
+In the top click "New registration"
+
+![Alt text](pics/002_azure_app_registration.png?raw=true "new azure app")
+
+Type a Name, Call it "ansible-yourname" so its possible to ID it later
+
+Select the:
+
+__Note:__ The Tenant name will be different than AzureADFS
+
+"Accounts in this organizational directory only (AzureADFS only - Single tenant)"
+
+Should be default
+
+Click Register
+
+![Alt text](pics/003_azure_app_registration_name.png?raw=true "register azure app")
+
+Copy the "Tenant ID" and "Client ID" save them in a text file for now
+
+![Alt text](pics/004_azure_app_tenent_id.png?raw=true "get tenant id client id")
+
+Click "Certificates & Secrets" and "New client secret"
+
+![Alt text](pics/005_azure_app_client_secret.png?raw=true "new secret")
+
+Copy the "Client Secret" save it in the text file
+
+![Alt text](pics/006_azure_app_client_secret_value.png?raw=true "secret value")
+
+We need to assign rights to the application
+
+In the left pane go to "All Services"
+
+In the right pane select "Subscribtions"
+
+![Alt text](pics/006_azure_subscribtion.png?raw=true "secret value")
+
+Select the Subscribtion, only one should be available
+
+![Alt text](pics/006_azure_select_subscribtion.png?raw=true "secret value")
+
+Click "Access Control IAM"
+
+Click "Add" Select "Add role assignment"
+
+Under "Role" select "Contributor"
+
+In the Select box, search for the application name __ansible-userx__
+
+Select your application and click Save
+
+![Alt text](pics/007_azure_assign_rights.png?raw=true "azure role assignment")
+
+Still in the Subscribtion pane, click the "Overview"
+
+Copy the "Subscribtion ID" to the text file
+
+![Alt text](pics/008_azure_sub_id.png?raw=true "azure sub id")
+
+Log on to server "ansible" using ssh
+
+We will create the authentication file, you must start in your home dir
+
+__Type:__
 
 ```bash
 cd
-
-vi webserver.vmware.yml
-
-```
-
-In vi paste below
-
-```bash
-Hit Esc-key
-
-:set paste <Hit Enter>
-
-Hit Esc-key
-
-i (to toggle insert)
+mkdir .azure
+vi .azure/credentials
 
 ```
 
+![Alt text](pics/009_azure_credfile.png?raw=true "azure credentials")
+
+In vi __type:__
+
+Use the vaules you collected from the Azure portal
+
 ```bash
-plugin: community.vmware.vmware_vm_inventory
-strict: False
-hostname: "vcenter.ansible.local"
-username: "administrator@vsphere.local"
-password: "Passw0rd!"
-validate_certs: False
-with_tags: yes
-hostnames:
-- config.name
-keyed_groups:
-- key: 'tags'
-  separator: ''
-filters:
-- summary.runtime.powerState == "poweredOn"
+i (to toggle input)
+```
+
+```bash
+[default]
+subscription_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+client_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+secret=xxxxxxxxxxxxxxxxx
+tenant=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
 __Type:__
@@ -401,150 +145,335 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-![Alt text](pics/13_create_inventoryfile.png?raw=true "create inventory file")
+![Alt text](pics/010_azure_credfile_input.png?raw=true "azure credentials file input")
 
-Test the inventory
+Lets test the connection to azure by creating a small playbook
 
-__type:__
-
-```bash
-cd
-
-ansible-inventory -i webserver.vmware.yml --graph
-```
-
-![Alt text](pics/14_run_inventoryfile.png?raw=true "run inventory file")
-
-Try change --graph to --list, the output will change
-
-Alot more information is then available for each vm
-
-The dynamic inventory module supports custom vmware tags
-
-We need to add our own tag to our VM to use in the inventory
-
-"tag_webserver"
-
-[Ansible Module vmware_category](https://docs.ansible.com/ansible/latest/modules/vmware_category_module.html#vmware-category-module)
-
-[Ansible Module vmware_tag](https://docs.ansible.com/ansible/latest/modules/vmware_tag_module.html)
-
-[Ansible Module vmware_tag_manager](https://docs.ansible.com/ansible/latest/modules/vmware_tag_manager_module.html)
+[Ansible Module azure_rm_resourcegroup](https://docs.ansible.com/ansible/latest/modules/azure_rm_resourcegroup_module.html#azure-rm-resourcegroup-module)
 
 In VSCode
 
-add below task to the file 01_vmware.yml
+create a new playbook file 01_azure.yml
+
+  add the following text to the file, change the name of the variable __user to your initials__ use the same as you use to login to ansible server
 
 ```ansible
-  - name: Create a category
-    vmware_category:
-      hostname: "{{ hostname }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-      validate_certs: no
-      category_name: "ansible_managed"
-      category_description: "Category for Ansible"
-      category_cardinality: 'multiple'
-      state: present
-    register: category
-
-  - name: Create a tag
-    vmware_tag:
-      hostname: "{{ hostname }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-      validate_certs: no
-      category_id: "{{ category.category_results.category_id }}"
-      tag_name: "tag_webserver"
-      tag_description: "Web Server"
-      state: present
-    delegate_to: localhost
-
-  - name: Create a tag
-    vmware_tag:
-      hostname: "{{ hostname }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-      validate_certs: no
-      category_id: "{{ category.category_results.category_id }}"
-      tag_name: "tag_dbserver"
-      tag_description: "Database Server"
-      state: present
-    delegate_to: localhost
-
-  - name: Add tags to webserver
-    vmware_tag_manager:
-      hostname: "{{ hostname }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-      validate_certs: no
-      tag_names:
-        - "tag_webserver"
-      object_name: "webserver"
-      object_type: VirtualMachine
-      state: add
-    delegate_to: localhost
-
+---
+- hosts: localhost
+  connection: local
+  vars:
+    user: write your username here
+  tasks:
+  - name: Create resource group
+    azure_rm_resourcegroup:
+      name: "webserver_{{ user }}"
+      location: northeurope
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
+    register: rg
+  - debug:
+      var: rg
 ```
 
-![Alt text](pics/15_add_tags.png?raw=true "add tags")
+![Alt text](pics/011_azure_play.png?raw=true "azure play")
 
-Save and commit to Git
+Log on to server "ansible" using ssh
 
-Log on to server "ansible.ansible.local" using ssh
-
-Use git to get the playbook
+Use git to get the new azure playbook
 
 __Type:__
 
 ```bash
+
 cd ansibleclass
 
 git pull
 
-ansible-playbook 01_vmware.yml
+ansible-playbook 01_azure.yml
 
 ```
 
-![Alt text](pics/16_add_tags_run.png?raw=true "add tags run")
+![Alt text](pics/011_azure_play_run.png?raw=true "azure play run")
 
-Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local/ui)
+## Task 3: Create Network in Azure
 
-Use your administrator@vsphere.local and password
+[Ansible Module azure_rm_virtualnetwork](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualnetwork_module.html#azure-rm-virtualnetwork-module)
 
-Click on your vm and locate the Tags settings in the right pane
+[Ansible Module azure_rm_subnet](https://docs.ansible.com/ansible/latest/modules/azure_rm_subnet_module.html#azure-rm-subnet-module)
 
-You should have a tag "tag_webserver"
+In VSCode
 
-![Alt text](pics/17_show_tag_in_vmware.png?raw=true "show tags")
+create a new playbook file 02_azure.yml
 
-Test your inventory again
+add the following text to the file, change the first variable __"user"__ to your initials, use the same as in previous task, it will be used for creating resources and a login to the webserver
+
+```ansible
+---
+- hosts: localhost
+  connection: local
+  vars:
+    user: write your username here
+    location: northeurope
+    virtual_network_name: "webserver_{{ user }}"
+    subnet: Webserver
+    resource_group: "webserver_{{ user }}"
+    domain_sub: "domain{{ user }}"
+    ssh_public_key: "{{lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+  tasks:
+  - name: Create a virtual network
+    azure_rm_virtualnetwork:
+      resource_group: "{{ resource_group }}"
+      name: "{{ virtual_network_name }}"
+      address_prefixes_cidr: "10.99.0.0/16"
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
+
+  - name: Create a subnet
+    azure_rm_subnet:
+      resource_group: "{{ resource_group }}"
+      virtual_network_name: "{{ virtual_network_name }}"
+      name: "{{ subnet }}"
+      address_prefix_cidr: "10.99.0.0/24"
+```
+
+![Alt text](pics/012_azure_net_playbook.png?raw=true "azure net playbook")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+Change url to your own repository
 
 __Type:__
 
 ```bash
-cd
 
-ansible-inventory -i webserver.vmware.yml --graph
+cd ansibleclass
+
+git pull
+
+ansible-playbook 02_azure.yml
+
 ```
 
-Look for @tag_webserver
+![Alt text](pics/013_azure_net_playbook_run.png?raw=true "azure net playbook run")
 
-![Alt text](pics/18_show_tag_in_inventory.png?raw=true "show tags in inventory")
+## Task 4: Create Public Ip, NIC and Security Group in Azure
 
-Lets test the tag before changing the webserver
+[Ansible Module azure_rm_publicipaddress](https://docs.ansible.com/ansible/latest/modules/azure_rm_publicipaddress_module.html#azure-rm-publicipaddress-module)
+
+[Ansible Module azure_rm_securitygroup](https://docs.ansible.com/ansible/latest/modules/azure_rm_securitygroup_module.html#azure-rm-securitygroup-module)
+
+[Ansible Module azure_rm_networkinterface](https://docs.ansible.com/ansible/latest/modules/azure_rm_networkinterface_module.html#azure-rm-networkinterface-module)
+
+In VSCode add the next sections to the 02_azure.yml playbook
+
+```ansible
+  - name: Create a public ip address for webserver
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: public_ip_webserver
+      allocation_method: static
+      domain_name: "webserver{{ domain_sub }}"
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
+    register: webserver_pub_ip
+
+  - name: Create Security Group for webserver
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "webserver_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 100
+            direction: Inbound
+          - name: Allow_HTTP
+            protocol: Tcp
+            destination_port_range: 80
+            access: Allow
+            priority: 101
+            direction: Inbound
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
+
+  - name: Create a network interface for webserver
+    azure_rm_networkinterface:
+      name: "webserver_nic01"
+      resource_group: "{{ resource_group }}"
+      virtual_network: "{{ virtual_network_name }}"
+      subnet_name: "{{ subnet }}"
+      security_group: "webserver_securitygroup"
+      ip_configurations:
+        - name: "webserver_nic01_ipconfig"
+          public_ip_address_name: "public_ip_webserver"
+          primary: True
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
+```
+
+![Alt text](pics/014_azure_network.png?raw=true "azure nic playbook")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+Change url to your own repository
 
 __Type:__
 
 ```bash
-cd
 
-ansible -i webserver.vmware.yml tag_webserver -m ping -u user
+cd ansibleclass
+
+git pull
+
+ansible-playbook 02_azure.yml
+
 ```
 
-![Alt text](pics/18_test_tag_inventory.png?raw=true "test tags in inventory")
+![Alt text](pics/015_azure_network_run.png?raw=true "azure nic playbook run")
 
-## Task 7: Configure webserver
+[Ansible Module azure_rm_virtualmachine](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualmachine_module.html#azure-rm-virtualmachine-module)
+
+[Ansible Module shell](https://docs.ansible.com/ansible/latest/modules/shell_module.html#shell-module)
+
+Add the virtualmachine task to the 02_azure.yml playbook
+
+In VSCode add the next sections to the 02_azure.yml playbook
+
+```ansible
+  - name: Create a VM webserver
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "webserver"
+      os_type: Linux
+      admin_username: "{{ user }}"
+      ssh_password_enabled: false
+      ssh_public_keys:
+        - path: "/home/{{ user }}/.ssh/authorized_keys"
+          key_data: "{{ ssh_public_key }}"
+      managed_disk_type: Standard_LRS
+      state: present
+      image:
+        offer: RHEL
+        publisher: RedHat
+        sku: 8
+        version: latest
+      vm_size: Standard_A1_v2
+      network_interfaces: "webserver_nic01"
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
+
+  - name: Show webserver public ip
+    debug:
+      msg: "{{ webserver_pub_ip.state.ip_address }}"
+
+  - name: Add webserver to ssh known_hosts
+    shell: "ssh-keyscan -t ecdsa {{ webserver_pub_ip.state.ip_address }}  >> /home/{{ user }}/.ssh/known_hosts"
+
+```
+
+![Alt text](pics/016_azure_vm.png?raw=true "azure vm playbook")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+Change url to your own repository
+
+__Type:__
+
+```bash
+
+cd ansibleclass
+
+git pull
+
+ansible-playbook 02_azure.yml
+
+```
+
+![Alt text](pics/017_azure_vm_run.png?raw=true "azure vm playbook run")
+
+The new webserver is now deployed in Azure and we are able to ssh keyless to the webserver
+
+## Task 5: Create an ansible dynamic inventory for Azure RM
+
+We can either add the webserver in the ansible-hosts file or use an Inventory plugin
+
+The Azure Resource Manager inventory plugin is part of ansible and can return a dynamic inventory grouped on tags
+
+[Azure Resource Manager inventory plugin](https://docs.ansible.com/ansible/latest/plugins/inventory/azure_rm.html)
+
+In VSCode create a new file webserver.azure_rm.yml
+
+Note: The inventory file must end with .azure_rm.yml
+
+```ansible
+plugin: azure_rm
+auth_source: auto
+include_vm_resource_groups:
+- '*'
+keyed_groups:
+- prefix: tag
+  key: tags
+
+```
+
+![Alt text](pics/018_azure_inventory.png?raw=true "vscode create inventory file")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure inventory
+
+Change url to your own repository
+
+And run a test against Azure
+
+__Type:__
+
+```bash
+
+cd ansibleclass
+
+git pull
+
+ansible-inventory -i ./webserver.azure_rm.yml --graph
+
+ansible-inventory -i ./webserver.azure_rm.yml --list
+
+```
+
+![Alt text](pics/019_azure_inventory_run.png?raw=true "azure inventory run")
+
+![Alt text](pics/020_azure_inventory_run_list.png?raw=true "azure inventory run list")
+
+--list will give a lot more information, --graph will consolidate output in a more viewable way
+
+If we add another server in the Resource Group it will be included in the inventory
+
+## Task 6: Install Apache Webserver and create the site - using ansible Azure dynamic inventory
+
+Install apache webserver, setup the static website, allow http trafic on the local firewall
 
 [Ansible Module dnf](https://docs.ansible.com/ansible/latest/modules/dnf_module.html)
 
@@ -554,36 +483,40 @@ ansible -i webserver.vmware.yml tag_webserver -m ping -u user
 
 [Ansible Module template](https://docs.ansible.com/ansible/latest/modules/template_module.html)
 
-First we need to install the el_httpd role
+In VSCode create a new file 01_webserver_azure.yml
 
-```bash
+Change the websiteauthor to your name
 
-cd
-
-ansible-galaxy install jesperberth.el_httpd
-
-```
-
-![Alt text](pics/20_install_role.png?raw=true "install role")
-
-In VSCode
-
-create a new playbook file 02_vmware.yml and add below
-
+And change the __- hosts: tag_solution_webserver_jesbe__ so it matches your initials
 
 ```ansible
 ---
-- hosts: tag_webserver
-  remote_user: "user"
-  become: "yes"
+- hosts: tag_solution_webserver_jesbe
+  become: yes
   vars:
-    websiteheader: "Ansible Playbook in vmware"
-    websiteauthor: "Ansible trainee"
-
-  roles:
-  - jesperberth.el_httpd
-
+    websiteheader: "Ansible Playbook"
+    websiteauthor: "Jesper Berth"
   tasks:
+  - name: Install Apache
+    dnf:
+      name: httpd
+      state: latest
+
+  - name: Enable Apache
+    systemd:
+      name: httpd
+      enabled: yes
+      state: started
+
+  - name: Allow http in firewall
+    firewalld:
+      service: http
+      permanent: true
+      state: enabled
+      immediate: yes
+    notify:
+      - reload firewall
+
   - name: Add index.html
     template:
       src: index.html.j2
@@ -591,28 +524,54 @@ create a new playbook file 02_vmware.yml and add below
       owner: root
       group: root
 
+  handlers:
+  - name: reload firewall
+    service:
+      name: firewalld
+      state: reloaded
 ```
 
-![Alt text](pics/19_configure_webserver.png?raw=true "configure webserver playbook")
+![Alt text](pics/021_webserver_playbook.png?raw=true "azure install httpd playbook")
+
+In VSCode create a new jinja file index.html.j2
+
+```html
+<html>
+<header><title>{{ websiteheader }}</title></header>
+<body>
+<h1>Welcome to {{ websiteheader }}</h1>
+
+<h3>This site was created with Ansible by {{ websiteauthor }}
+
+</body>
+</html>
+```
+
+![Alt text](pics/022_webserver_template.png?raw=true "azure template")
 
 Save and commit to Git
 
-Log on to server "ansible.ansible.local" using ssh
+Log on to server "ansible" using ssh
 
-Use git to get the playbook
+Use git to get the new azure playbook
+
+Change url to your own repository
+
+Run the new playbook with the dynamic inventory
 
 __Type:__
 
 ```bash
+
 cd ansibleclass
 
 git pull
 
-ansible-playbook 02_vmware.yml -i ../webserver.vmware.yml --ask-become-pass
+ansible-playbook 01_webserver_azure.yml -i ./webserver.azure_rm.yml
 
 ```
 
-![Alt text](pics/20_configure_vm_run.png?raw=true "configure vm playbook run")
+![Alt text](pics/023_webserver_run.png?raw=true "webserver playbook run")
 
 Check the result in a browser
 
@@ -620,79 +579,8 @@ Check the result in a browser
 http://<your webserver ip>
 ```
 
-![Alt text](pics/21_website.png?raw=true "website")
+![Alt text](pics/024_webserver_site.png?raw=true "webserver site")
 
-## Task 8: Use REST API to manage Vmware
+Lab Done
 
-[Vmware REST API](https://github.com/ansible-collections/vmware.vmware_rest)
-
-First we need to install the vmware collection and one python module
-
-```bash
-cd
-
-ansible-galaxy collection install vmware.vmware_rest
-
-pip install aiohttp
-
-```
-
-![Alt text](pics/22_install_collection.png?raw=true "install vmware collection")
-
-Create a new file 03_vmware.yml
-
-The vmware_rest module uses environment variables to define vmware user/password
-
-```ansible
-
----
-- hosts: localhost
-  vars:
-
-  vars_prompt:
-    - name: password
-      prompt: VCenter Password
-      private: no
-
-  environment:
-    VMWARE_USER: administrator@vsphere.local
-    VMWARE_HOST: vcenter.ansible.local
-    VMWARE_VALIDATE_CERTS: no
-    VMWARE_PASSWORD: "{{ password }}"
-
-  tasks:
-  - name: Collect the list of the existing VM
-    vmware.vmware_rest.vcenter_vm_info:
-    register: existing_vms
-    until: existing_vms is not failed
-
-  - name: Show All Vms
-    debug:
-      msg: "{{ existing_vms }}"
-
-```
-
-Save and Commit
-
-![Alt text](pics/23_test_vmware_rest.png?raw=true "vmware rest collection")
-
-Log on to server "ansible.ansible.local" using ssh
-
-Use git to get the playbook
-
-__Type:__
-
-```bash
-cd ansibleclass
-
-git pull
-
-ansible-playbook 03_vmware.yml
-
-```
-
-![Alt text](pics/24_test_vmware_rest_run.png?raw=true "vmware rest collection run")
-
-Lab done
-
-[Ansible Automation](../lab07/lab7.md)
+[Vmware Playbooks](../lab07/lab7.md)
