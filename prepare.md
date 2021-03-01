@@ -10,7 +10,7 @@ __Note:__ Run the browser in Incognito/Private mode to avoid issues with cashed 
 
 ![Alt text](pics/01_azure_login.png?raw=true "Azure login")
 
-In the top blue bar, click the "powershell" icon marked with red
+In the top blue bar, click the "cloudshell" icon marked with red
 
 ![Alt text](pics/05_start_cloud_shell.png?raw=true "Cloud Shell")
 
@@ -24,11 +24,11 @@ Select "Show advanced settings"
 
 Set Cloud Shell region to __"North Europe"__
 
-Resource group: Select Use existing and set it to your Resource group __userx-ansible__
+Resource group: Select Use existing and set it to your Resource group __userX-ansible__
 
 Storage account: Select Use existing your storage account will be selected, as you only have one
 
-File Share: Create new, give it same name as your storage account
+File Share: Select existing __userXansible__
 
 ![Alt text](pics/07_start_cloud_shell_advanced_set.png?raw=true "Cloud Shell advanced")
 
