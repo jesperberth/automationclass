@@ -1,4 +1,4 @@
-# Lab 7: Ansible Automation Platform - Ansible Tower
+# Lab 8: Ansible Automation Platform - Ansible Tower
 
 In this session we will use Red Hat Ansible Automation Platform to orchestrate our ansible playbooks
 

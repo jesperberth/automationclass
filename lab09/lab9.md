@@ -1,4 +1,4 @@
-# Lab 8: Ansible Exercise
+# Lab 9: Ansible Exercise
 
 In this session we will use ansible to create some scenarios
 

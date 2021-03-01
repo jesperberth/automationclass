@@ -1,4 +1,4 @@
-# Lab 6: Ansible Vmware
+# Lab 7: Ansible Vmware
 
 In this session we will use ansible to manage a vmware esxi host, adding NFS storage, create a virtual machine from template and install http inside the virtual machine.
 
@@ -695,4 +695,4 @@ ansible-playbook 03_vmware.yml
 
 Lab done
 
-[Ansible Automation](../lab07/lab7.md)
+[Ansible Automation](../lab08/lab8.md)
