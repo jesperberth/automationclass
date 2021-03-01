@@ -9,7 +9,6 @@ Running advanced playbooks with ansible
 * Handlers
 * Facts
 * Debug
-* __set_fact__
 * Loops
 * Loops Async
 
