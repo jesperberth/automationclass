@@ -133,14 +133,6 @@ Save the file (Ctrl + S)
 
 Click the Source control button in the left panel.
 
-Notice that there are three changes waiting
-
-* .gitignore
-* 01_linux.yml
-* settings.yml
-
-We need to commit the changes before .gitignore will ignore settings.yml
-
 ![Alt text](pics/016_code_playbook.png?raw=true "playbook in VSCode")
 
 Write a comment __"First Playbook__" and click "Ctrl + Enter" to commit the changes
@@ -472,19 +464,19 @@ We need to set an option in vi before pasteing the configuration
 ```ansible
 
 linuxservers:
-        hosts:
-                server1:
-                server2:
+  hosts:
+    server1:
+    server2:
 windowsservers:
-        hosts:
-                server3:
-                server4:
-        vars:
-                ansible_user: jesbe
-                ansible_port: 5985
-                ansible_connection: winrm
-                ansible_winrm_transport: ntlm
-                ansible_winrm_message_encryption: always
+  hosts:
+    server3:
+    server4:
+  vars:
+    ansible_user: jesbe
+    ansible_port: 5985
+    ansible_connection: winrm
+    ansible_winrm_transport: ntlm
+    ansible_winrm_message_encryption: always
 
 ```
 
