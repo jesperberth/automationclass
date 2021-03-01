@@ -10,7 +10,7 @@ Nothing to prepare, the ansible tower is installed and prepared
 
 Open a browser and go to the ansible tower URL its on the whiteboard
 
-Log in with your user and password
+ Log in user and password will be given by instructor
 
 ![Alt text](pics/01_ansible_tower_login.png?raw=true "Login to ansible tower")
 
@@ -24,9 +24,9 @@ Click on the Green Plus sign to create a new project
 
 Type
 
-__Name:__ userx_project
+__Name:__ project
 
-__Organization:__ Training
+__Organization:__ Default
 
 __SCM Type:__ Git
 
@@ -44,9 +44,9 @@ Click on the Green Plus sign to create a new inventory
 
 Type
 
-__Name:__ userx_inventory
+__Name:__ inventory
 
-__Organization:__ Training
+__Organization:__ Default
 
 Leave the rest, click __Save__
 
@@ -58,9 +58,9 @@ Click on the Green Plus sign to create a new Credential
 
 Type
 
-__Name:__ userx_credential
+__Name:__ credential
 
-__Organization:__ Training
+__Organization:__ Default
 
 Click on the "Credential Type
 
@@ -112,7 +112,7 @@ Click on the Green Plus sign to create a new Template select the __Job template_
 
 Type
 
-__Name:__ userx_resourcegroup
+__Name:__ resourcegroup
 
 __Job Type:__ Run
 
@@ -194,7 +194,7 @@ Click on the Green Plus sign to create a new Template select the __Job template_
 
 Type
 
-__Name:__ userx_webserver
+__Name:__ webserver
 
 __Job Type:__ Run
 
@@ -220,7 +220,7 @@ Leave the rest as default and click __Save__
 
 In the left pane click on Templates
 
-Locate your userx_webserver template and click on the Rocket to lauch it
+Locate your webserver template and click on the Rocket to lauch it
 
 ![Alt text](pics/12_launch_template.png?raw=true "launch template")
 
@@ -236,7 +236,7 @@ Eventhoug Ansible Tower has an Dynamic Inventory, we will use the on created ear
 
 In the left pane click on Inventory
 
-Select your own inventory userx_inventory
+Select your own inventory inventory
 
 Click on the Source button on the top
 
@@ -246,9 +246,9 @@ __Name:__ Azure_userx
 
 __Source:__ Sourced from a Project
 
-__Credential:__ userx_credential
+__Credential:__ credential
 
-__Project:__ userx_project
+__Project:__ project
 
 __Inventory File:__ webserver.azure_rm.yml
 
@@ -294,13 +294,13 @@ Click on Credentials in the left pane
 
 Click on the green + to create a new credential
 
-__Name:__ userx_webserver
+__Name:__ webserver
 
-__Organization:__ Training
+__Organization:__ Default
 
 Credential Type: Machine
 
-__Username:__ __webuserx__ <---- Change to your username
+__Username:__ __webuser__ <---- Change to your username
 
 __SSH Private Key:__ --- the key you copied ---
 
@@ -335,7 +335,7 @@ Click on the Green Plus sign to create a new Template select the __Job template_
 
 Type
 
-__Name:__ userx_webserver_install
+__Name:__ webserver_install
 
 __Job Type:__ Run
 
@@ -359,7 +359,7 @@ Click on the Green Plus sign to create a new Template select the __Workflow temp
 
 __Name:__ Userx
 
-__Organization:__ Training
+__Organization:__ Default
 
 __Inventory:__ Select your own inventory
 
@@ -373,23 +373,23 @@ Click on Start
 
 __Select:__ Template
 
-__Select:__ userx_resourcegroup
+__Select:__ resourcegroup
 
 Press the __Select__ Button
 
 ![Alt text](pics/21_work_step1.png?raw=true "Create workflow template step 1")
 
-Click on the green + on the new userx_resourcegroup
+Click on the green + on the new resourcegroup
 
 __Select:__ Template
 
-__Select:__ userx_webserver
+__Select:__ webserver
 
 Press the __Select__ Button
 
 ![Alt text](pics/23_work_step3.png?raw=true "Create workflow template step 3")
 
-Click on the green + on the new userx_webserver
+Click on the green + on the new webserver
 
 __Select:__ Inventory Sync
 
@@ -403,7 +403,7 @@ Click on the green + on the new Azure_userx
 
 __Select:__ Template
 
-__Select:__ userx_webserver_install
+__Select:__ webserver_install
 
 Press the __Select__ Button
 
@@ -455,7 +455,7 @@ Wait for the workflow to finish
 
 ![Alt text](pics/30_workflow_result.png?raw=true "Launch workflow result")
 
-Go check the new website, get the ip from the "Details" in userx_webserver Template
+Go check the new website, get the ip from the "Details" in webserver Template
 
 ![Alt text](pics/30_workflow_result_details.png?raw=true "Launch workflow result Details")
 
