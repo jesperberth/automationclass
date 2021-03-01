@@ -21,3 +21,20 @@ pip install "ansible-lint[community,yamllint]"
 ```
 
 ![Alt text](pics/001_install_ansible_lint.png?raw=true "install ansible lint")
+
+## Task 2: Run ansible-lint
+
+Lets test our playbooks
+
+__Type:__
+
+```bash
+cd
+
+cd ansibleclass
+
+ansible-lint
+
+```
+
+![Alt text](pics/002_run_ansible_lint.png?raw=true "run ansible lint")
