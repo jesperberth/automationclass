@@ -41,11 +41,11 @@ ansible-lint
 
 Lets take a look on the last three errors - all on 02_loop.yml
 
-The first in line 3: is a true/false it could be with a capital letter or yes/no (whitch works)
+* The first in line 3: is a true/false it could be with a capital letter or yes/no (whitch works)
 
-The Second in line 17: missing space before and after in var
+* The Second in line 17: missing space before and after in var
 
-The third in line 25: missing a new line in the end of document
+* The third in line 25: missing a new line in the end of document
 
 Change the errors in VSCode
 
