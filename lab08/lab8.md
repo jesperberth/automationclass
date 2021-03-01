@@ -8,15 +8,27 @@ Nothing to prepare, the ansible tower is installed and prepared
 
 ## Task 1: Login to Ansible Tower
 
-Open a browser and go to the ansible tower URL its on the whiteboard
+Open a browser and go to the ansible tower URL ip will be given by instructor
 
- Log in user and password will be given by instructor
+Log in user and password will be given by instructor
 
 ![Alt text](pics/01_ansible_tower_login.png?raw=true "Login to ansible tower")
 
 Take a tour around in the UI
 
-## Task 2: Create Project, inventory and Credential
+## Task 2: Create Organization, Project, inventory and Credential
+
+In the left pane, click Organizations
+
+Click Add to create a new Organization
+
+Type
+
+__Name:__ Default
+
+Leave the rest, click __Save__
+
+![Alt text](pics/01_ansible_tower_org.png?raw=true "Create a project")
 
 In the left pane, click Projects
 
