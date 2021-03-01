@@ -46,22 +46,26 @@ Create Ansible Playbooks
 
 Use Variables, prompts, facts and handlers in Playbooks
 
-### Lab 4: [Roles](lab04/lab4.md)
+### Lab 4: [Ansible linting](lab04/lab4.md)
+
+Use linting in ansible
+
+### Lab 5: [Roles](lab04/lab4.md)
+
+Use and create roles with Ansible
+
+### Lab 6: [Ansible Cloud](lab05/lab5.md)
 
 Use Ansible in the Cloud (Microsoft Azure)
 
-### Lab 5: [Ansible Cloud](lab05/lab5.md)
-
-Use Ansible to manage your network infrastructure (Fortinet)
-
-### Lab 6: [Ansible Vmware](lab06/lab6.md)
+### Lab 7: [Ansible Vmware](lab06/lab6.md)
 
 Use Ansible to manage Vmware VSphere
 
-### Lab 7: [Ansible Automation Platform](lab07/lab7.md)
+### Lab 8: [Ansible Automation Platform](lab07/lab7.md)
 
-Use Ansible to manage Vmware VSphere
+Use AWX/Ansible Tower to create a workflow
 
-### Lab 8: [Ansible Exercise](lab08/lab8.md)
+### Lab 9: [Ansible Exercise](lab08/lab8.md)
 
-Use Ansible to manage Vmware VSphere
+Extra lab
