@@ -50,22 +50,22 @@ Use Variables, prompts, facts and handlers in Playbooks
 
 Use linting in ansible
 
-### Lab 5: [Roles](lab04/lab4.md)
+### Lab 5: [Roles](lab05/lab5.md)
 
 Use and create roles with Ansible
 
-### Lab 6: [Ansible Cloud](lab05/lab5.md)
+### Lab 6: [Ansible Cloud](lab06/lab6.md)
 
 Use Ansible in the Cloud (Microsoft Azure)
 
-### Lab 7: [Ansible Vmware](lab06/lab6.md)
+### Lab 7: [Ansible Vmware](lab07/lab7.md)
 
 Use Ansible to manage Vmware VSphere
 
-### Lab 8: [Ansible Automation Platform](lab07/lab7.md)
+### Lab 8: [Ansible Automation Platform](lab08/lab8.md)
 
 Use AWX/Ansible Tower to create a workflow
 
-### Lab 9: [Ansible Exercise](lab08/lab8.md)
+### Lab 9: [Ansible Exercise](lab09/lab9.md)
 
 Extra lab
