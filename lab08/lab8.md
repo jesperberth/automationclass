@@ -415,23 +415,37 @@ You will now see the first task in the workflow
 
 ![Alt text](pics/21_work_step1_workflow.png?raw=true "Create workflow template step 1")
 
-Click on the green + on the new resourcegroup
+Hoover the mouse over the Resourcegroup box and click on the + icon
 
-__Select:__ Template
+![Alt text](pics/21_work_step1_workflow_plus.png?raw=true "Create workflow template step 1")
+
+Select on Success
+
+Click Next
+
+__Select:__ Job Template
 
 __Select:__ webserver
 
-Press the __Select__ Button
+Press the __Save__ Button
 
 ![Alt text](pics/23_work_step3.png?raw=true "Create workflow template step 3")
 
-Click on the green + on the new webserver
+You will now see the first and second task in the workflow
 
-__Select:__ Inventory Sync
+![Alt text](pics/23_work_step3_workflow.png?raw=true "Create workflow template step 3")
 
-__Select:__ Azure_userx
+Hoover the mouse over the Webserver box and click on the + icon
 
-Press the __Select__ Button
+![Alt text](pics/23_work_step3_workflow_plus.png?raw=true "Create workflow template step 3 add new")
+
+Select on Success
+
+__Select:__ Inventory Source Sync
+
+__Select:__ Azure
+
+Press the __Save__ Button
 
 ![Alt text](pics/24_work_step4.png?raw=true "Create workflow template step 3")
 
