@@ -473,29 +473,35 @@ Click Save in the top right corner
 
 In the top bar click Survey to add the two vars we deleted in the playbook  websiteheader: and websiteauthor:
 
-__Prompt:__ Web Site Name
+Click Add
+
+![Alt text](pics/26_work_add_survey.png?raw=true "Create workflow survey")
+
+__Question:__ Web Site Name
 
 __Answer variable name:__ websiteheader
 
 __Answer Type:__ Text
 
-Press the __Add__ Button
+Press the __Save__ Button
 
 ![Alt text](pics/25_survey_1.png?raw=true "Create survey 1")
 
-__Prompt:__ Web Site author
+Click Add to add the secondone
+
+__Question:__ Web Site author
 
 __Answer variable name:__ websiteauthor
 
 __Answer Type:__ Text
 
-Press the __Add__ Button
-
 Press the __Save__ Button
 
 ![Alt text](pics/26_survey_2.png?raw=true "Create survey 2")
 
-Click __Save__
+Click __Preview__
+
+![Alt text](pics/27_survey_preview.png?raw=true "Create survey 2")
 
 ## Task 9: Run Workflow template
 
