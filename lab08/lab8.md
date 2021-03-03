@@ -403,7 +403,7 @@ The window changes to the workflow Visualizer
 
 Click on Start
 
-__Select:__ Job Template
+Node Type: __Select:__ Job Template
 
 __Select:__ Resourcegroup
 
@@ -423,7 +423,7 @@ Select on Success
 
 Click Next
 
-__Select:__ Job Template
+Node Type: __Select:__ Job Template
 
 __Select:__ webserver
 
@@ -441,27 +441,37 @@ Hoover the mouse over the Webserver box and click on the + icon
 
 Select on Success
 
-__Select:__ Inventory Source Sync
+Node Type: __Select:__ Inventory Source Sync
 
 __Select:__ Azure
 
 Press the __Save__ Button
 
-![Alt text](pics/24_work_step4.png?raw=true "Create workflow template step 3")
+![Alt text](pics/24_work_step4.png?raw=true "Create workflow template step 4")
 
-Click on the green + on the new Azure_userx
+You will now see the first and second task + the inventory sync in the workflow
 
-__Select:__ Template
+![Alt text](pics/24_work_step4_workflow.png?raw=true "Create workflow template step 4")
 
-__Select:__ webserver_install
+Hoover the mouse over the Azure box and click on the + icon
 
-Press the __Select__ Button
+![Alt text](pics/24_work_step3_workflow_plus.png?raw=true "Create workflow template step 3 add new")
+
+Select on Success
+
+Node Type: __Select:__ Job Template
+
+__Select:__ Webserver_install
 
 Press the __Save__ Button
 
 ![Alt text](pics/25_work_step5.png?raw=true "Create workflow template step 4")
 
-Click Survey to add the two vars we deleted in the playbook  websiteheader: and websiteauthor:
+Click Save in the top right corner
+
+![Alt text](pics/25_work_step5_workflow.png?raw=true "Create workflow template step 4")
+
+In the top bar click Survey to add the two vars we deleted in the playbook  websiteheader: and websiteauthor:
 
 __Prompt:__ Web Site Name
 
