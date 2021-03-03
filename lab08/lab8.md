@@ -525,11 +525,7 @@ Wait for the workflow to finish
 
 ![Alt text](pics/30_workflow_result.png?raw=true "Launch workflow result")
 
-Go check the new website, get the ip from the "Details" in webserver Template
-
-![Alt text](pics/30_workflow_result_details.png?raw=true "Launch workflow result Details")
-
-Get the ip
+Go check the new website, click on the website box, click output in the top and get the ip from the "Details" in webserver Template
 
 ![Alt text](pics/31_workflow_result_details_ip.png?raw=true "Get IP")
 
@@ -538,6 +534,8 @@ Open your webbrowser
 ```bash
 http://<your ip>
 ```
+
+![Alt text](pics/32_result_ip.png?raw=true "Get IP")
 
 Lab done
 
