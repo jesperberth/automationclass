@@ -40,8 +40,6 @@ In Azure Cloud Shell(Bash)
 
 __Note:__
 
-You need to type the name of your allocated Azure Resource Group
-
 Username cannot be __root/administrator/admin/user/guest/owner/adm__
 
 __Use your initials as username__
