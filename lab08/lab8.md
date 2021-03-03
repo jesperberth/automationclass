@@ -198,7 +198,7 @@ Back in the Tower UI
 
 In the left pane, click Templates
 
-Click on the Green Plus sign to create a new Template select the __Job template__ type
+Click on Add to create a new Template select the __Job template__ type
 
 Type
 
