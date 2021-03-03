@@ -1,6 +1,6 @@
-# Lab 8: Ansible Automation Platform - Ansible Tower
+# Lab 8: Ansible Automation Platform - AWX / Ansible Tower
 
-In this session we will use Red Hat Ansible Automation Platform to orchestrate our ansible playbooks
+In this session we will use AWX / Ansible Tower to orchestrate our ansible playbooks
 
 ## Prepare
 
@@ -8,25 +8,37 @@ Nothing to prepare, the ansible tower is installed and prepared
 
 ## Task 1: Login to Ansible Tower
 
-Open a browser and go to the ansible tower URL its on the whiteboard
+Open a browser and go to the ansible tower URL ip will be given by instructor
 
-Log in with your user and password
+Log in user and password will be given by instructor
 
 ![Alt text](pics/01_ansible_tower_login.png?raw=true "Login to ansible tower")
 
 Take a tour around in the UI
 
-## Task 2: Create Project, inventory and Credential
+## Task 2: Create Organization, Project, inventory and Credential
 
-In the left pane, click Projects
+In the left pane, click Organizations
 
-Click on the Green Plus sign to create a new project
+Click Add to create a new Organization
 
 Type
 
-__Name:__ userx_project
+__Name:__ Default
 
-__Organization:__ Training
+Leave the rest, click __Save__
+
+![Alt text](pics/01_ansible_tower_org.png?raw=true "Create a project")
+
+In the left pane, click Projects
+
+Click Add to create a new project
+
+Type
+
+__Name:__ Project
+
+__Organization:__ Default
 
 __SCM Type:__ Git
 
@@ -40,13 +52,13 @@ Leave the rest, click __Save__
 
 In the left pane, click Inventory
 
-Click on the Green Plus sign to create a new inventory
+Click Add to create a new inventory, select Add Inventory
 
 Type
 
-__Name:__ userx_inventory
+__Name:__ Inventory
 
-__Organization:__ Training
+__Organization:__ Default
 
 Leave the rest, click __Save__
 
@@ -54,19 +66,15 @@ Leave the rest, click __Save__
 
 In the left pane, click credentials
 
-Click on the Green Plus sign to create a new Credential
+Click on Add to create a new Credential
 
 Type
 
-__Name:__ userx_credential
+__Name:__ Azure Credential
 
-__Organization:__ Training
+__Organization:__ Default
 
-Click on the "Credential Type
-
-![Alt text](pics/04_ansible_tower_create_credential.png?raw=true "select credential type")
-
-And select
+Click on the "Credential Type and select
 
 Microsoft Azure Resource Manager
 
@@ -96,7 +104,7 @@ Create a copy of 01_azure.yml -> 01_azure_tower.yml
 
 Change the variable user: - We already have a Resource Group called Webserver_userx so you need to change it
 
-to __webuserx eg. "webuser1"__
+to __your initials eg. "jesbe"__
 
 Save and Commit
 
@@ -108,21 +116,21 @@ In Tower go to project and refresh your project, this will do a "git pull"
 
 In the left pane, click Templates
 
-Click on the Green Plus sign to create a new Template select the __Job template__ type
+Click on Add to create a new Template select the __Add Job template__ type
 
 Type
 
-__Name:__ userx_resourcegroup
+__Name:__ Resourcegroup
 
 __Job Type:__ Run
 
-__Inventory:__ Select your own inventory
+__Inventory:__ Inventory
 
-__Project:__ Select your own project
+__Project:__ Project
 
 __Playbook:__ 01_azure_tower.yml
 
-__Credentials:__ Select credential type "Microsoft Azure Resource Manager" and your own credentials
+__Credentials:__ Select credential type "Microsoft Azure Resource Manager" and Azure Credentials
 
 Leave the rest as default and click __Save__
 
@@ -138,9 +146,9 @@ In VSCode
 
 Create a copy of 02_azure.yml -> 02_azure_tower.yml
 
-Change the variable user: - We already have a Resource Group called Webserver_userx so you need to change it
+Change the variable user: - so it matches the variable in the 01_azure_tower.yml
 
-to __webuserx eg. "webuser1"__
+to __your initials eg. "jesbe"__
 
 Remove the following lines from the playbook:
 
@@ -190,11 +198,11 @@ Back in the Tower UI
 
 In the left pane, click Templates
 
-Click on the Green Plus sign to create a new Template select the __Job template__ type
+Click on Add to create a new Template select the __Job template__ type
 
 Type
 
-__Name:__ userx_webserver
+__Name:__ webserver
 
 __Job Type:__ Run
 
@@ -206,7 +214,7 @@ __Playbook:__ 02_azure_tower.yml
 
 __Credentials:__ Select credential type "Microsoft Azure Resource Manager" and your own credentials
 
-__In the Extra Vars:__ add the ssh_public_key make sure you have " before and after the key
+__In the Extra Vars:__ add the ssh_public_key make sure you have " __before__ and __after__ the key
 
 ```bash
 ---
@@ -214,13 +222,15 @@ ssh_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCl/myugJcFI/2XmWcLd5P+tKV
 
 ```
 
+![Alt text](pics/11_ansible_tower_webserver_template_pubkey.png?raw=true "template")
+
 Leave the rest as default and click __Save__
 
 ![Alt text](pics/11_ansible_tower_webserver_template.png?raw=true "template")
 
 In the left pane click on Templates
 
-Locate your userx_webserver template and click on the Rocket to lauch it
+Locate your webserver template and click on the Rocket to lauch it
 
 ![Alt text](pics/12_launch_template.png?raw=true "launch template")
 
@@ -228,33 +238,41 @@ Wait for template to finish
 
 ![Alt text](pics/13_launch_template_run.png?raw=true "launch template")
 
-## Task 5: Create Azure Dynamic Inventory
-
-Change the Inventory to a dynamic azure inventory
-
-Eventhoug Ansible Tower has an Dynamic Inventory, we will use the on created earlier as it will give us the tags
+## Task 5: Create Azure Dynamic Inventory Source
 
 In the left pane click on Inventory
 
-Select your own inventory userx_inventory
+Select your inventory
 
-Click on the Source button on the top
+Click on the Sources button on the top
 
-Click on the Green + to create a new source
+Click Add to create a new source
 
-__Name:__ Azure_userx
+We can control how the plugin will retrieve resources from azure by adding variables to the Source
 
-__Source:__ Sourced from a Project
+__Name:__ Azure
 
-__Credential:__ userx_credential
+__Source:__ Microsoft Azure Resource Manager
 
-__Project:__ userx_project
+__Credential:__ Azure Credentials
 
-__Inventory File:__ webserver.azure_rm.yml
 
 __Overwrite:__ Checked
 
+__Overwrite Variables:__ Checked
+
 __Updata on Launch:__ Checked
+
+In the Source variables add this:
+
+```ansible
+
+---
+keyed_groups:
+- prefix: tag
+  key: tags
+
+```
 
 Leave the rest as default
 
@@ -262,9 +280,23 @@ Click __Save__
 
 ![Alt text](pics/14_azure_inventory.png?raw=true "azure inventory")
 
-Scroll down and click on the Sync button to the right, the gray cloud to the left should turn green
+In the bottom of the screen click on the Sync button
 
 ![Alt text](pics/15_azure_inventory_sync.png?raw=true "azure inventory sync")
+
+In the left pane click on Jobs
+
+You should see a Inventory - Azure job running, click on it to monitor the run
+
+Go back to inventory
+
+Select your inventory
+
+Click on the Groups button on the top
+
+You should see a few groups based on the tags that are on the vm's in Azure
+
+![Alt text](pics/15_azure_inventory_result.png?raw=true "azure inventory sync result")
 
 ## Task 6: Create Webserver credential
 
@@ -292,15 +324,15 @@ Create a new credential matching the webservers public key
 
 Click on Credentials in the left pane
 
-Click on the green + to create a new credential
+Click on Add to create a new credential
 
-__Name:__ userx_webserver
+__Name:__ webserver
 
-__Organization:__ Training
+__Organization:__ Default
 
 Credential Type: Machine
 
-__Username:__ __webuserx__ <---- Change to your username
+__Username:__ __jesbe__ <---- Change to your initials
 
 __SSH Private Key:__ --- the key you copied ---
 
@@ -314,9 +346,9 @@ In VSCode
 
 Create a copy of 01_webserver_azure.yml -> 01_webserver_azure_tower.yml
 
-Change the hosts: to match your webuserx
+Change the hosts: to match your initials
 
-- hosts: tag_solution_webserver_webuserx
+- hosts: tag_solution_webserver_jesbe
 
 Remove both vars:
 
@@ -331,21 +363,21 @@ Go to your project and sync
 
 In the left pane, click Templates
 
-Click on the Green Plus sign to create a new Template select the __Job template__ type
+Click on Add to create a new Template select the __Add Job template__ type
 
 Type
 
-__Name:__ userx_webserver_install
+__Name:__ Webserver_install
 
 __Job Type:__ Run
 
-__Inventory:__ Select your own inventory
+__Inventory:__ Select Inventory
 
-__Project:__ Select your own project
+__Project:__ Select Project
 
 __Playbook:__ 01_webserver_azure_tower.yml
 
-__Credentials:__ Select credential type "Machine" and your own credentials
+__Credentials:__ Select credential type "Machine" and Webserver
 
 Leave the rest as default and click __Save__
 
@@ -355,13 +387,13 @@ Leave the rest as default and click __Save__
 
 In the left pane, click Templates
 
-Click on the Green Plus sign to create a new Template select the __Workflow template__ type
+Click on Add to create a new Template select the __Add Workflow template__ type
 
-__Name:__ Userx
+__Name:__ Workflow
 
-__Organization:__ Training
+__Organization:__ Default
 
-__Inventory:__ Select your own inventory
+__Inventory:__ Select Inventory
 
 Leave the rest as default and click __Save__
 
@@ -371,79 +403,117 @@ The window changes to the workflow Visualizer
 
 Click on Start
 
-__Select:__ Template
+Node Type: __Select:__ Job Template
 
-__Select:__ userx_resourcegroup
+__Select:__ Resourcegroup
 
-Press the __Select__ Button
+Press the __Save__ Button
 
 ![Alt text](pics/21_work_step1.png?raw=true "Create workflow template step 1")
 
-Click on the green + on the new userx_resourcegroup
+You will now see the first task in the workflow
 
-__Select:__ Template
+![Alt text](pics/21_work_step1_workflow.png?raw=true "Create workflow template step 1")
 
-__Select:__ userx_webserver
+Hoover the mouse over the Resourcegroup box and click on the + icon
 
-Press the __Select__ Button
+![Alt text](pics/21_work_step1_workflow_plus.png?raw=true "Create workflow template step 1")
+
+Select on Success
+
+Click Next
+
+Node Type: __Select:__ Job Template
+
+__Select:__ webserver
+
+Press the __Save__ Button
 
 ![Alt text](pics/23_work_step3.png?raw=true "Create workflow template step 3")
 
-Click on the green + on the new userx_webserver
+You will now see the first and second task in the workflow
 
-__Select:__ Inventory Sync
+![Alt text](pics/23_work_step3_workflow.png?raw=true "Create workflow template step 3")
 
-__Select:__ Azure_userx
+Hoover the mouse over the Webserver box and click on the + icon
 
-Press the __Select__ Button
+![Alt text](pics/23_work_step3_workflow_plus.png?raw=true "Create workflow template step 3 add new")
 
-![Alt text](pics/24_work_step4.png?raw=true "Create workflow template step 3")
+Select on Success
 
-Click on the green + on the new Azure_userx
+Node Type: __Select:__ Inventory Source Sync
 
-__Select:__ Template
+__Select:__ Azure
 
-__Select:__ userx_webserver_install
+Press the __Save__ Button
 
-Press the __Select__ Button
+![Alt text](pics/24_work_step4.png?raw=true "Create workflow template step 4")
+
+You will now see the first and second task + the inventory sync in the workflow
+
+![Alt text](pics/24_work_step4_workflow.png?raw=true "Create workflow template step 4")
+
+Hoover the mouse over the Azure box and click on the + icon
+
+![Alt text](pics/24_work_step3_workflow_plus.png?raw=true "Create workflow template step 3 add new")
+
+Select on Success
+
+Node Type: __Select:__ Job Template
+
+__Select:__ Webserver_install
 
 Press the __Save__ Button
 
 ![Alt text](pics/25_work_step5.png?raw=true "Create workflow template step 4")
 
-Click Survey to add the two vars we deleted in the playbook  websiteheader: and websiteauthor:
+Click Save in the top right corner
 
-__Prompt:__ Web Site Name
+![Alt text](pics/25_work_step5_workflow.png?raw=true "Create workflow template step 4")
+
+In the top bar click Survey to add the two vars we deleted in the playbook  websiteheader: and websiteauthor:
+
+Click Add
+
+![Alt text](pics/26_work_add_survey.png?raw=true "Create workflow survey")
+
+__Question:__ Web Site Name
 
 __Answer variable name:__ websiteheader
 
 __Answer Type:__ Text
 
-Press the __Add__ Button
+Press the __Save__ Button
 
 ![Alt text](pics/25_survey_1.png?raw=true "Create survey 1")
 
-__Prompt:__ Web Site author
+Click Add to add the secondone
+
+__Question:__ Web Site author
 
 __Answer variable name:__ websiteauthor
 
 __Answer Type:__ Text
 
-Press the __Add__ Button
-
 Press the __Save__ Button
 
 ![Alt text](pics/26_survey_2.png?raw=true "Create survey 2")
 
-Click __Save__
+Click __Preview__
+
+![Alt text](pics/27_survey_preview.png?raw=true "Create survey 2")
+
+Toggle switch to On
+
+![Alt text](pics/28_survey_on.png?raw=true "Create survey 2")
 
 ## Task 9: Run Workflow template
 
-In the left pane click Templates, click on the Rocket to Launch
+In the left pane click Templates, click on the Rocket to Launch the Workflow
 
 ![Alt text](pics/27_run_workflow.png?raw=true "Launch workflow")
 
-Fill out the survey
+Fill out the survey, click Next
 
 ![Alt text](pics/28_run_workflow_survey.png?raw=true "Launch workflow survey")
 
@@ -455,11 +525,9 @@ Wait for the workflow to finish
 
 ![Alt text](pics/30_workflow_result.png?raw=true "Launch workflow result")
 
-Go check the new website, get the ip from the "Details" in userx_webserver Template
+Go check the new website
 
-![Alt text](pics/30_workflow_result_details.png?raw=true "Launch workflow result Details")
-
-Get the ip
+Click on the website box, click output in the top and get the ip from the "Details" in webserver Template
 
 ![Alt text](pics/31_workflow_result_details_ip.png?raw=true "Get IP")
 
@@ -468,6 +536,8 @@ Open your webbrowser
 ```bash
 http://<your ip>
 ```
+
+![Alt text](pics/32_result_ip.png?raw=true "Get IP")
 
 Lab done
 
