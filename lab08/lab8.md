@@ -324,7 +324,7 @@ Create a new credential matching the webservers public key
 
 Click on Credentials in the left pane
 
-Click on the green + to create a new credential
+Click on Add to create a new credential
 
 __Name:__ webserver
 
@@ -332,7 +332,7 @@ __Organization:__ Default
 
 Credential Type: Machine
 
-__Username:__ __webuser__ <---- Change to your username
+__Username:__ __jesbe__ <---- Change to your initials
 
 __SSH Private Key:__ --- the key you copied ---
 
