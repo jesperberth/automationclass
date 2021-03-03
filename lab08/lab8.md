@@ -503,13 +503,17 @@ Click __Preview__
 
 ![Alt text](pics/27_survey_preview.png?raw=true "Create survey 2")
 
+Toggle switch to On
+
+![Alt text](pics/28_survey_on.png?raw=true "Create survey 2")
+
 ## Task 9: Run Workflow template
 
-In the left pane click Templates, click on the Rocket to Launch
+In the left pane click Templates, click on the Rocket to Launch the Workflow
 
 ![Alt text](pics/27_run_workflow.png?raw=true "Launch workflow")
 
-Fill out the survey
+Fill out the survey, click Next
 
 ![Alt text](pics/28_run_workflow_survey.png?raw=true "Launch workflow survey")
 
