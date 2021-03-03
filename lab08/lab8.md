@@ -250,15 +250,15 @@ Select your own inventory inventory
 
 Click on the Source button on the top
 
-Click on the Green + to create a new source
+Click Add to create a new source
 
-__Name:__ Azure_userx
+__Name:__ Azure
 
 __Source:__ Sourced from a Project
 
-__Credential:__ credential
+__Credential:__ Azure credential
 
-__Project:__ project
+__Project:__ Project
 
 __Inventory File:__ webserver.azure_rm.yml
 
