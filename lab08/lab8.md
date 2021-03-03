@@ -346,9 +346,9 @@ In VSCode
 
 Create a copy of 01_webserver_azure.yml -> 01_webserver_azure_tower.yml
 
-Change the hosts: to match your webuserx
+Change the hosts: to match your initials
 
-- hosts: tag_solution_webserver_webuserx
+- hosts: tag_solution_webserver_jesbe
 
 Remove both vars:
 
@@ -363,21 +363,21 @@ Go to your project and sync
 
 In the left pane, click Templates
 
-Click on the Green Plus sign to create a new Template select the __Job template__ type
+Click on Add to create a new Template select the __Add Job template__ type
 
 Type
 
-__Name:__ webserver_install
+__Name:__ Webserver_install
 
 __Job Type:__ Run
 
-__Inventory:__ Select your own inventory
+__Inventory:__ Select Inventory
 
-__Project:__ Select your own project
+__Project:__ Select Project
 
 __Playbook:__ 01_webserver_azure_tower.yml
 
-__Credentials:__ Select credential type "Machine" and your own credentials
+__Credentials:__ Select credential type "Machine" and Webserver
 
 Leave the rest as default and click __Save__
 
@@ -387,13 +387,13 @@ Leave the rest as default and click __Save__
 
 In the left pane, click Templates
 
-Click on the Green Plus sign to create a new Template select the __Workflow template__ type
+Click on Add to create a new Template select the __Add Workflow template__ type
 
-__Name:__ Userx
+__Name:__ Workflow
 
 __Organization:__ Default
 
-__Inventory:__ Select your own inventory
+__Inventory:__ Select Inventory
 
 Leave the rest as default and click __Save__
 
@@ -403,13 +403,17 @@ The window changes to the workflow Visualizer
 
 Click on Start
 
-__Select:__ Template
+__Select:__ Job Template
 
-__Select:__ resourcegroup
+__Select:__ Resourcegroup
 
-Press the __Select__ Button
+Press the __Save__ Button
 
 ![Alt text](pics/21_work_step1.png?raw=true "Create workflow template step 1")
+
+You will now see the first task in the workflow
+
+![Alt text](pics/21_work_step1_workflow.png?raw=true "Create workflow template step 1")
 
 Click on the green + on the new resourcegroup
 
