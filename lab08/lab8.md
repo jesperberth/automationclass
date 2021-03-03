@@ -146,9 +146,9 @@ In VSCode
 
 Create a copy of 02_azure.yml -> 02_azure_tower.yml
 
-Change the variable user: - We already have a Resource Group called Webserver_userx so you need to change it
+Change the variable user: - so it matches the variable in the 01_azure_tower.yml
 
-to __webuserx eg. "webuser1"__
+to __your initials eg. "jesbe"__
 
 Remove the following lines from the playbook:
 
@@ -214,13 +214,15 @@ __Playbook:__ 02_azure_tower.yml
 
 __Credentials:__ Select credential type "Microsoft Azure Resource Manager" and your own credentials
 
-__In the Extra Vars:__ add the ssh_public_key make sure you have " before and after the key
+__In the Extra Vars:__ add the ssh_public_key make sure you have " __before__ and __after__ the key
 
 ```bash
 ---
 ssh_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCl/myugJcFI/2XmWcLd5P+tKVtbsGf83G/POHH3vc4p3fyLaGKUqaX8YBOLohJ5XFB9t25Tg8wZleCsbDm0s081jx4tdvudRhdqUMbA+n3oHRB3SHD7BLm7d13VgGlM6SCxnkIgrePFaSWsX+J5kk3rhxpo0LEEiGDgTdUDYz3wNypEBsal+eoFp1WHXArnkbl6FkEhOC8iZSJY2KKsJlv6xFXN1NlM/KWkgFdlB+tWps49Cl44IAMHgcjku+Xx+00trgWX89isK54MHWUXHTTPzOykaagLQXcwZZmZvy/84qdDBcRhehSwg7LxHAMjFEYCSpAE78AWoBNpB3lhR0r jesbe@ansible"
 
 ```
+
+![Alt text](pics/11_ansible_tower_webserver_template_pubkey.png?raw=true "template")
 
 Leave the rest as default and click __Save__
 
