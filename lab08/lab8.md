@@ -102,7 +102,7 @@ In VSCode
 
 Create a copy of 01_azure.yml -> 01_azure_tower.yml
 
-Change the variable user: - We already have a Resource Group called Webserver_userx so you need to change it
+Change the variable user: - it should be your initials as we copied your working playbook from previous lab
 
 to __your initials eg. "jesbe"__
 
