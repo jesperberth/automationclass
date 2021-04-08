@@ -396,8 +396,6 @@ Log on to server "ansible" using ssh
 
 Use git to get the new azure playbook
 
-Change url to your own repository
-
 __Type:__
 
 ```bash
