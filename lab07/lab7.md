@@ -38,6 +38,8 @@ Logon to ansible.ansible.local with ssh
 
 Username is __"user"__
 
+password is __"Passw0rd!"__
+
 Create a new Python Virtualenv
 
 We need to install the python modules for vmware for the SOAP SDK
