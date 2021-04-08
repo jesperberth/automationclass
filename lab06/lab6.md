@@ -396,8 +396,6 @@ Log on to server "ansible" using ssh
 
 Use git to get the new azure playbook
 
-Change url to your own repository
-
 __Type:__
 
 ```bash
@@ -430,10 +428,10 @@ Note: The inventory file must end with .azure_rm.yml
 plugin: azure_rm
 auth_source: auto
 include_vm_resource_groups:
-- '*'
+ - '*'
 keyed_groups:
-- prefix: tag
-  key: tags
+ - prefix: tag
+   key: tags
 
 ```
 
