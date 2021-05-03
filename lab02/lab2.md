@@ -22,6 +22,8 @@ Get extention "indent one space" from Alexander
 
 Get extention "Trailing Spaces" from Shardul Mahadik
 
+Get extention "Indent-rainbow" from oderwat
+
 ![Alt text](pics/003_vscode_install_ansible.png?raw=true "Install extention in VSCode")
 
 Download and install GIT [Download Git](https://git-scm.com/downloads)
@@ -40,9 +42,9 @@ Lets create a new Repository, click the green "New" in the top right corner
 
 Give you repository a name "ansibleclass"
 
-Select "Public" - it's default - __for the purpose of these labs keep it public__
+Select "Public" - it's default - **for the purpose of these labs keep it public**
 
-Make Sure you tick __"Initialize this repository with a README"__
+Make Sure you tick **"Initialize this repository with a README"**
 
 Click "Create repository"
 
@@ -70,7 +72,7 @@ We need to create a simple folder structure for keeping our files
 
 Open a Powershell Terminal
 
-__Type:__
+**Type:**
 
 ```powershell
 mkdir ansible
@@ -135,7 +137,7 @@ Click the Source control button in the left panel.
 
 ![Alt text](pics/016_code_playbook.png?raw=true "playbook in VSCode")
 
-Write a comment __"First Playbook__" and click "Ctrl + Enter" to commit the changes
+Write a comment **"First Playbook**" and click "Ctrl + Enter" to commit the changes
 
 Now Sync the changes Push/Pull, in the blue bar at the bottom, 0 up, 1 down it will start the sync process
 
@@ -153,7 +155,7 @@ Log on to server "ansible" using ssh
 
 We need to install git
 
-__Type:__
+**Type:**
 
 ```bash
 sudo dnf install git -y
@@ -165,11 +167,11 @@ Lets test the playbook
 
 Clone the git repository
 
-__Note:__
+**Note:**
 
 Change to your repository
 
-__Type:__
+**Type:**
 
 ```bash
 git clone https://github.com/jesperberth/ansibleclass.git
@@ -179,7 +181,7 @@ git clone https://github.com/jesperberth/ansibleclass.git
 
 Run the playbook
 
-__Type:__
+**Type:**
 
 ```bash
 cd ansibleclass
@@ -219,7 +221,7 @@ On ansible
 
 Pull the updated git repository
 
-__Type:__
+**Type:**
 
 ```bash
 git pull
@@ -229,7 +231,7 @@ git pull
 
 Run the playbook
 
-__Type:__
+**Type:**
 
 ```bash
 ls
@@ -243,7 +245,7 @@ Run the playbook again, the second task will become green as the line is already
 
 The "Create File" task will be changed every time as we use the touch command on the file
 
-__Type:__
+**Type:**
 
 ```bash
 ansible-playbook 01_linux.yml --ask-become-pass
@@ -255,7 +257,7 @@ ansible-playbook 01_linux.yml --ask-become-pass
 
 We will add server 2 to the inventory
 
-__Type:__
+**Type:**
 
 ```bash
 cd
@@ -266,7 +268,7 @@ vi ansible-hosts
 
 ![Alt text](pics/029_edit_hosts.png?raw=true "Edit hosts")
 
-In vi __type:__
+In vi **type:**
 
 ```bash
 i (for input)
@@ -276,7 +278,7 @@ server1
 server2
 ```
 
-__Type:__
+**Type:**
 
 ```bash
 Hit Esc-key
@@ -284,7 +286,7 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-__Type:__
+**Type:**
 
 ```bash
 cd ansibleclass
@@ -313,7 +315,7 @@ vi ansible-hosts
 
 In vi go to the line ansible_password=SomeThingSimple8
 
-__type:__
+**type:**
 
 in vi dd will remove the line
 
@@ -329,7 +331,7 @@ ansible_winrm_transport=ntlm
 ansible_winrm_message_encryption=always
 ```
 
-__Type:__
+**Type:**
 
 ```bash
 Hit Esc-key
@@ -341,7 +343,7 @@ Hit Esc-key
 
 Next lets create an encryptet var file for ansible
 
-__Type:__
+**Type:**
 
 ```bash
 cd
@@ -356,7 +358,7 @@ You will be promptet for a password and to confirm the password
 
 ansible-vault will open your default editor - in our case its vi
 
-In vi __type:__
+In vi **type:**
 
 ```bash
 i (for input)
@@ -367,7 +369,7 @@ windows_password: SomeThingSimple8   <------ Type your Windows password here
 
 ```
 
-__Type:__
+**Type:**
 
 ```bash
 Hit Esc-key
@@ -379,7 +381,7 @@ Hit Esc-key
 
 Try to cat the file
 
-__Type:__
+**Type:**
 
 ```bash
 
@@ -393,7 +395,7 @@ To change the content of an encryptet file use ansible-vault edit filename
 
 You will need to type your password again ..
 
-__Type:__
+**Type:**
 
 ```bash
 
@@ -409,7 +411,7 @@ In VSCode
 
 Create a new file 01_vault.yml
 
-__Type:__
+**Type:**
 
 ```ansible
 ---
@@ -455,11 +457,9 @@ Lets create a new ansible-hosts.yml
 
 Copy the following inventory to ansible-hosts.yml
 
-__Note:__
+**Note:**
 
 We need to set an option in vi before pasteing the configuration
-
-
 
 ```ansible
 
@@ -480,7 +480,7 @@ windowsservers:
 
 ```
 
-__Type:__
+**Type:**
 
 ```bash
 
@@ -505,7 +505,7 @@ You can do a copy/paste of the inventory
 
 ![Alt text](pics/037_yaml_inventory.png?raw=true "yaml inventory")
 
-__Type:__
+**Type:**
 
 ```bash
 Hit Esc-key
@@ -527,7 +527,7 @@ inventory = /home/jesbe/ansible-hosts.yml
 
 ```
 
-__Type:__
+**Type:**
 
 ```bash
 Hit Esc-key
@@ -553,7 +553,7 @@ In this task we will encrypt the password for the windows servers and place it i
 
 Encrypt you password
 
-__Type:__
+**Type:**
 
 ```bash
 
@@ -589,7 +589,7 @@ i (to toggle insert)
 
 Save the inventory file
 
-__Type:__
+**Type:**
 
 ```bash
 Hit Esc-key
