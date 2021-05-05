@@ -84,7 +84,7 @@ code .
 
 On your "ansibleclass" repository page
 
-Click the "Clone or Download" to retrieve the URL for the repository
+Click the "Code" to retrieve the URL for the repository
 
 ![Alt text](pics/010_repourl.png?raw=true "Repo URL")
 
