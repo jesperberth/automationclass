@@ -16,11 +16,11 @@ Before installtion the collection we need to install several python modules, the
 
 [https://github.com/ansible-collections/azure](https://github.com/ansible-collections/azure)
 
-We will use wget 
+We will use wget
 
 https://github.com/ansible-collections/azure/blob/dev/requirements-azure.txt
 
-__Type:__
+**Type:**
 
 ```bash
 cd
@@ -32,6 +32,7 @@ pip install -r requirements-azure.txt
 ansible-galaxy collection install azure.azcollection
 
 ```
+
 ![Alt text](pics/002_download_requirements_pip_azure.png?raw=true "install azure")
 
 ![Alt text](pics/002_run_requirements_pip_azure.png?raw=true "install azure")
@@ -54,7 +55,7 @@ Type a Name, Call it "ansible-yourname" so its possible to ID it later
 
 Select the:
 
-__Note:__ The Tenant name will be different than AzureADFS
+**Note:** The Tenant name will be different than AzureADFS
 
 "Accounts in this organizational directory only (AzureADFS only - Single tenant)"
 
@@ -94,7 +95,7 @@ Click "Add" Select "Add role assignment"
 
 Under "Role" select "Contributor"
 
-In the Select box, search for the application name __ansible-userx__
+In the Select box, search for the application name **ansible-userx**
 
 Select your application and click Save
 
@@ -110,7 +111,7 @@ Log on to server "ansible" using ssh
 
 We will create the authentication file, you must start in your home dir
 
-__Type:__
+**Type:**
 
 ```bash
 cd
@@ -121,7 +122,7 @@ vi .azure/credentials
 
 ![Alt text](pics/009_azure_credfile.png?raw=true "azure credentials")
 
-In vi __type:__
+In vi **type:**
 
 Use the vaules you collected from the Azure portal
 
@@ -137,7 +138,7 @@ secret=xxxxxxxxxxxxxxxxx
 tenant=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
-__Type:__
+**Type:**
 
 ```bash
 Hit Esc-key
@@ -155,7 +156,7 @@ In VSCode
 
 create a new playbook file 01_azure.yml
 
-  add the following text to the file, change the name of the variable __user to your initials__ use the same as you use to login to ansible server
+add the following text to the file, change the name of the variable **user to your initials** use the same as you use to login to ansible server
 
 ```ansible
 ---
@@ -182,7 +183,7 @@ Log on to server "ansible" using ssh
 
 Use git to get the new azure playbook
 
-__Type:__
+**Type:**
 
 ```bash
 
@@ -206,7 +207,7 @@ In VSCode
 
 create a new playbook file 02_azure.yml
 
-add the following text to the file, change the first variable __"user"__ to your initials, use the same as in previous task, it will be used for creating resources and a login to the webserver
+add the following text to the file, change the first variable **"user"** to your initials, use the same as in previous task, it will be used for creating resources and a login to the webserver
 
 ```ansible
 ---
@@ -247,9 +248,7 @@ Log on to server "ansible" using ssh
 
 Use git to get the new azure playbook
 
-Change url to your own repository
-
-__Type:__
+**Type:**
 
 ```bash
 
@@ -331,9 +330,7 @@ Log on to server "ansible" using ssh
 
 Use git to get the new azure playbook
 
-Change url to your own repository
-
-__Type:__
+**Type:**
 
 ```bash
 
@@ -396,7 +393,7 @@ Log on to server "ansible" using ssh
 
 Use git to get the new azure playbook
 
-__Type:__
+**Type:**
 
 ```bash
 
@@ -443,11 +440,9 @@ Log on to server "ansible" using ssh
 
 Use git to get the new azure inventory
 
-Change url to your own repository
-
 And run a test against Azure
 
-__Type:__
+**Type:**
 
 ```bash
 
@@ -485,7 +480,7 @@ In VSCode create a new file 01_webserver_azure.yml
 
 Change the websiteauthor to your name
 
-And change the __- hosts: tag_solution_webserver_jesbe__ so it matches your initials
+And change the **- hosts: tag_solution_webserver_jesbe** so it matches your initials
 
 ```ansible
 ---
@@ -553,11 +548,9 @@ Log on to server "ansible" using ssh
 
 Use git to get the new azure playbook
 
-Change url to your own repository
-
 Run the new playbook with the dynamic inventory
 
-__Type:__
+**Type:**
 
 ```bash
 
