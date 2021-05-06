@@ -36,9 +36,9 @@ Launch the Windows Terminal you should be able to run ssh from it
 
 Logon to ansible.ansible.local with ssh
 
-Username is __"user"__
+Username is **"user"**
 
-password is __"Passw0rd!"__
+password is **"Passw0rd!"**
 
 Create a new Python Virtualenv
 
@@ -46,7 +46,7 @@ We need to install the python modules for vmware for the SOAP SDK
 
 Lets create a Python virtualenv for our ansible installation
 
-__Type:__
+**Type:**
 
 ```bash
 
@@ -60,7 +60,7 @@ To activate our virtualenv ansible run the following
 
 which python - is just to check that were using the correct python
 
-__Type:__
+**Type:**
 
 ```bash
 
@@ -75,7 +75,7 @@ If you need to exit the virtualenv, you type "deactivate"
 
 ![Alt text](pics/003_activate_virtualenv.png?raw=true "active virtualenv Ansible")
 
-__Type:__
+**Type:**
 
 ```bash
 pip install ansible
@@ -83,7 +83,7 @@ pip install ansible
 
 ![Alt text](pics/003_install_ansible.png?raw=true "Install Ansible")
 
-__Type:__
+**Type:**
 
 ```bash
 
@@ -140,9 +140,9 @@ Log on to server "ansible.ansible.local" using ssh
 
 Use git to clone the repository
 
-__Change__ to your own repo
+**Change** to your own repo
 
-__Type:__
+**Type:**
 
 ```bash
 
@@ -194,7 +194,7 @@ Log on to server "ansible.ansible.local" using ssh
 
 Use git to get the playbook
 
-__Type:__
+**Type:**
 
 ```bash
 cd ansibleclass
@@ -211,7 +211,7 @@ Open Vcenter in a browser [vcenter.ansible.local](https://vcenter.ansible.local/
 
 Use your administrator@vsphere.local and password
 
- In the vmware webconsole check under networking/port groups that your vSwitch webserver is created
+In the vmware webconsole check under networking/port groups that your vSwitch webserver is created
 
 ![Alt text](pics/06_add_portgroup_to_vmware_created.png?raw=true "portgroup vmware")
 
@@ -260,7 +260,7 @@ Log on to server "ansible.ansible.local" using ssh
 
 Use git to get the playbook
 
-__Type:__
+**Type:**
 
 ```bash
 cd ansibleclass
@@ -297,7 +297,7 @@ add below task to the file 01_vmware.yml
 
   - name: Set Fact webserver_ip_fact
     set_fact:
-     webserver_ip_fact: "{{ webserver.instance.ipv4 }}"
+      webserver_ip_fact: "{{ webserver.instance.ipv4 }}"
 
   - name: IP address info
     debug:
@@ -316,7 +316,7 @@ Log on to server "ansible.ansible.local" using ssh
 
 Use git to get the playbook
 
-__Type:__
+**Type:**
 
 ```bash
 cd ansibleclass
@@ -343,7 +343,7 @@ Logon to ansible.ansible.local with ssh
 
 Username "user" and password
 
-__Type:__
+**Type:**
 
 ```bash
 cd
@@ -395,7 +395,7 @@ filters:
 - summary.runtime.powerState == "poweredOn"
 ```
 
-__Type:__
+**Type:**
 
 ```bash
 Hit Esc-key
@@ -407,7 +407,7 @@ Hit Esc-key
 
 Test the inventory
 
-__type:__
+**type:**
 
 ```bash
 cd
@@ -497,7 +497,7 @@ Log on to server "ansible.ansible.local" using ssh
 
 Use git to get the playbook
 
-__Type:__
+**Type:**
 
 ```bash
 cd ansibleclass
@@ -522,7 +522,7 @@ You should have a tag "tag_webserver"
 
 Test your inventory again
 
-__Type:__
+**Type:**
 
 ```bash
 cd
@@ -536,7 +536,7 @@ Look for @tag_webserver
 
 Lets test the tag before changing the webserver
 
-__Type:__
+**Type:**
 
 ```bash
 cd
@@ -572,7 +572,6 @@ In VSCode
 
 create a new playbook file 02_vmware.yml and add below
 
-
 ```ansible
 ---
 - hosts: tag_webserver
@@ -603,7 +602,7 @@ Log on to server "ansible.ansible.local" using ssh
 
 Use git to get the playbook
 
-__Type:__
+**Type:**
 
 ```bash
 cd ansibleclass
@@ -682,7 +681,7 @@ Log on to server "ansible.ansible.local" using ssh
 
 Use git to get the playbook
 
-__Type:__
+**Type:**
 
 ```bash
 cd ansibleclass
