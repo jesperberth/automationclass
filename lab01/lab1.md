@@ -4,8 +4,6 @@ In this session we will install ansible on server __ansible__, and connect to li
 
 We will use server __ansible__ to run the first part of the training
 
-Ansible is a Python based program, we will install python in a Python Virtuelenv, in which we can isolate the python version and modules from the system python.
-
 ## Prepare
 
 We will need the servers, __ansible, server1__ and __server3__ to be up and running - by default they are started after creation
@@ -37,6 +35,8 @@ In the Windows Terminal, Powershell or CMD write ssh __username@ansible-vm-ip__ 
 __Type:__
 
 Note: Sudo Password is equal to your user account password
+
+Ansible is a Python based program, we will install python in a Python Virtuelenv, in which we can isolate the python version and modules from the system python.
 
 ```bash
 sudo dnf install -y python3-pip virtualenv
