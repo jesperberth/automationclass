@@ -36,7 +36,11 @@ If you have a github account login, otherwise create a new account
 
 ![Alt text](pics/005_create_github.png?raw=true "Create GitHub Account")
 
-Lets create a new Repository, click the green "New" in the top right corner
+Login to your github account
+
+Click on Repositories
+
+Click the green "New" in the top right corner
 
 ![Alt text](pics/006_login_github.png?raw=true "Login GitHub")
 
@@ -82,9 +86,13 @@ code .
 
 ![Alt text](pics/009_start_code.png?raw=true "Start VSCode")
 
+Click "Yes, I trust the authers" button
+
+![Alt text](pics/009_start_code_trust.png?raw=true "Start VSCode trust")
+
 On your "ansibleclass" repository page
 
-Click the "Code" to retrieve the URL for the repository
+Click the green "Code" button to retrieve the URL for the repository
 
 ![Alt text](pics/010_repourl.png?raw=true "Repo URL")
 
@@ -293,10 +301,13 @@ cd ansibleclass
 
 ansible-playbook 01_linux.yml --ask-become-pass
 ```
+![Alt text](pics/030_2_server_play_error.png?raw=true "Run playbook error")
+
+If server2 fails, did you copy your ssh key? "ssh-copy-id user@server2" and run the playbook again
 
 ![Alt text](pics/030_2_server_play.png?raw=true "Run playbook")
 
-If server2 fails, did you copy your ssh key? "ssh-copy-id user@server2" and run the playbook again
+The playbook now runs against both servers
 
 ## Task 6: Ansible-vault
 
@@ -417,7 +428,7 @@ Create a new file 01_vault.yml
 ---
 - hosts: windowsservers
   collections:
-   - ansible.windows
+    - ansible.windows
   vars_files:
     - ~/secret.yml
   vars:
