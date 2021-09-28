@@ -81,10 +81,10 @@ __Type:__
 
   vars:
       package:
-         - httpd
-         - mariadb-server
-         - php
-         - php-mysqlnd
+          - httpd
+          - mariadb-server
+          - php
+          - php-mysqlnd
 
   tasks:
   - name: Install Packages
