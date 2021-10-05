@@ -424,10 +424,6 @@ ansible-playbook 01_facts.yml
 
 ![Alt text](pics/010_ansible_facts_list_dic_playbook_run.png?raw=true "ansible facts list and dic playbook run")
 
-Next Lab
-
-[Cloud Playbooks](../lab04/lab4.md)
-
 ## Task 5: Loops
 
 [ansible docs - loops](https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html)
