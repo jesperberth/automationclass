@@ -270,12 +270,12 @@ Open defaults/main.yml and add the following
 ---
 # defaults file for webserver
 package:
-   - httpd
-   - mod_ssl
-   - openssl
-   - php
-   - php-gd
-   - php-mbstring
+    - httpd
+    - mod_ssl
+    - openssl
+    - php
+    - php-gd
+    - php-mbstring
 
 ```
 
@@ -396,7 +396,7 @@ Create a new file 02_roles.yml add the following
   become: yes
 
   roles:
-     - webserver
+      - webserver
 
   tasks:
   - name: Copy Index.php
