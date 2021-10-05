@@ -362,7 +362,7 @@ __Type:__
 
 ```ansible
 
-  - name: Debug Facts Hostname
+  - name: Debug Facts Hostname - Unsafe Text
     ansible.builtin.debug:
       msg: "{{ ansible_facts['nodename'] }}"
 
