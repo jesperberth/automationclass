@@ -16,10 +16,6 @@ Before installtion the collection we need to install several python modules, the
 
 [https://github.com/ansible-collections/azure](https://github.com/ansible-collections/azure)
 
-We will use wget
-
-https://github.com/ansible-collections/azure/blob/dev/requirements-azure.txt
-
 **Type:**
 
 ```bash
