@@ -560,6 +560,12 @@ __Type:__
   become: yes
 
   tasks:
+    - name: Create dir /mnt/resource/
+      ansible.builtin.file:
+        path: /mnt/resource/
+        state: directory
+        mode: '0755'
+
     - name: Download files
       ansible.builtin.get_url:
         url: "{{ item }}"
