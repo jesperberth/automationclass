@@ -10,7 +10,7 @@ __Note:__ Run the browser in Incognito/Private mode to avoid issues with cashed 
 
 ![Alt text](pics/01_azure_login.png?raw=true "Azure login")
 
-In the top blue bar, click the "cloudshell" icon marked with red
+In the top bar, click the "cloudshell" icon marked with red
 
 ![Alt text](pics/05_start_cloud_shell.png?raw=true "Cloud Shell")
 
@@ -42,7 +42,7 @@ __Note:__
 
 Username cannot be __root/administrator/admin/user/guest/owner/adm__
 
-__Use your initials as username__
+__Use your initials as username__ eg. jesbe
 
 Password must be complex
 

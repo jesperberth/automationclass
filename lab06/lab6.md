@@ -39,69 +39,47 @@ ansible-galaxy collection install azure.azcollection
 
 We need to register an azure application to enable ansible automation
 
+You can do it in the Cloud Shell thats our __preferred__ method or __OPTIONAL__ you can do it using the gui in the browser [Azure GUI](azure_gui.md)
+
 In your browser log on to [https://portal.azure.com](https://portal.azure.com)
 
-In the left pane, click "Azure Active Directory" and "App Registrations"
+In the top bar, click the "cloudshell" icon marked with red
 
-In the top click "New registration"
+![Alt text](pics/01_start_cloud_shell.png?raw=true "Cloud Shell")
 
-![Alt text](pics/002_azure_app_registration.png?raw=true "new azure app")
+Select "Bash"
 
-Type a Name, Call it "ansible-yourname" so its possible to ID it later
+![Alt text](pics/02_start_cloud_shell_bash.png?raw=true "Cloud Shell")
 
-Select the:
+Run the following command to create a new Service User
 
-**Note:** The Tenant name will be different than AzureADFS
+Set the user variable to your initials
 
-"Accounts in this organizational directory only (AzureADFS only - Single tenant)"
+```bash
 
-Should be default
+USER=jesbe
 
-Click Register
+az ad sp create-for-rbac --name ansible-$USER --role Contributor
 
-![Alt text](pics/003_azure_app_registration_name.png?raw=true "register azure app")
+```
 
-Copy the "Tenant ID" and "Client ID" save them in a text file for now
+Copy the JSON output to a notepad file we will need the information later
 
-![Alt text](pics/004_azure_app_tenent_id.png?raw=true "get tenant id client id")
+![Alt text](pics/02_create_sp.png?raw=true "Cloud Shell output")
 
-Click "Certificates & Secrets" and "New client secret"
+We need to get the Subscription ID run the following in the Cloud Shell
 
-![Alt text](pics/005_azure_app_client_secret.png?raw=true "new secret")
+```bash
 
-Copy the "Client Secret" save it in the text file
+az account show
 
-![Alt text](pics/006_azure_app_client_secret_value.png?raw=true "secret value")
+```
 
-We need to assign rights to the application
+![Alt text](pics/03_get_sub_id.png?raw=true "Cloud Shell sub id")
 
-In the left pane go to "All Services"
+Copy the line id: "xxx-xxx" to the same notepad
 
-In the right pane select "Subscribtions"
-
-![Alt text](pics/006_azure_subscribtion.png?raw=true "secret value")
-
-Select the Subscribtion, only one should be available
-
-![Alt text](pics/006_azure_select_subscribtion.png?raw=true "secret value")
-
-Click "Access Control IAM"
-
-Click "Add" Select "Add role assignment"
-
-Under "Role" select "Contributor"
-
-In the Select box, search for the application name **ansible-userx**
-
-Select your application and click Save
-
-![Alt text](pics/007_azure_assign_rights.png?raw=true "azure role assignment")
-
-Still in the Subscribtion pane, click the "Overview"
-
-Copy the "Subscribtion ID" to the text file
-
-![Alt text](pics/008_azure_sub_id.png?raw=true "azure sub id")
+__Below is for both command and GUI__ versions
 
 Log on to server "ansible" using ssh
 
@@ -132,6 +110,20 @@ subscription_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 client_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 secret=xxxxxxxxxxxxxxxxx
 tenant=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+```
+
+```bash
+
+In the file 
+
+subscription_id = id from the last command
+
+client_id = appID in the first command
+
+secret = Password in the first command
+
+tenant = tenant in the first command
+
 ```
 
 **Type:**
