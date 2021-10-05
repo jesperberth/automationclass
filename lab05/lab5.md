@@ -84,19 +84,13 @@ ansible-playbook 01_roles.yml --ask-become-pass
 
 __Note:__ All tasks should be OK as we installed httpd in a previous lab
 
-## Task 2: Create a role - part 1
+## Task 2: Add SSH key to GitHub
 
 [Ansible docs - Roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
 
-Now we will create our own Role, webserver installing and configuring httpd and php
-
-The role will be placed in the same git repository as we are using for the playbooks, but could have been placed in a seperate repo and committed to Ansible-Galaxy
-
 We need to do some config to git, as we need to do some of the work on our linux host
 
-We will set git to remember our git account password in memory for 1 hour
-
-__Note:__ On August 13, 2021 you will no longer be allowed to login with a password, you will need to change to ssh keys
+And copy our public ssh key to our github account
 
 On ansible
 
@@ -109,9 +103,45 @@ git config --global user.email "you@example.com"
 
 git config --global user.name "Your Name"
 
-git config --global credential.helper 'cache --timeout=3600'
-
 ```
+
+![Alt text](pics/001_git_commands.png?raw=true "git commands")
+
+In your browser go to github.com and login to your account
+
+In the top right corner "click" on your profile and select "Settings"
+
+![Alt text](pics/002_github_settings.png?raw=true "github settings")
+
+In the left menu "click" on "SSH and GPG keys"
+
+![Alt text](pics/003_github_settings.png?raw=true "github settings")
+
+"Click" on the green "New SSH key"
+
+![Alt text](pics/004_github_newssh.png?raw=true "github settings")
+
+From the linux terminal copy the pub key
+
+![Alt text](pics/005_github_pubkey.png?raw=true "github settings")
+
+Give the new key a Title "ansible"
+
+paste the key
+
+and click "Add SSH key"
+
+![Alt text](pics/006_github_pubkey_add.png?raw=true "github settings")
+
+Now the key is created, you can see usage and delete the key when you are done with this course (My key is deleted)
+
+![Alt text](pics/007_github_pubkey.png?raw=true "github settings")
+
+## Task 3: Create a role - part 1
+
+Now we will create our own Role, webserver installing and configuring httpd and php
+
+The role will be placed in the same git repository as we are using for the playbooks, but could have been placed in a seperate repo and committed to Ansible-Galaxy
 
 We will use ansible-galaxy command to initialize a role template
 
@@ -166,7 +196,7 @@ In VSCode do a push/pull to get the changes, you should see the roles \ webserve
 
 ![Alt text](pics/009_vscode_push_pull.png?raw=true "vscode push pull")
 
-## Task 3: Create a role - part 2
+## Task 4: Create a role - part 2
 
 In VSCode we need to create tasks, handlers, meta and defaults
 
