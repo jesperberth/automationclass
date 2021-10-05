@@ -137,6 +137,35 @@ Now the key is created, you can see usage and delete the key when you are done w
 
 ![Alt text](pics/007_github_pubkey.png?raw=true "github settings")
 
+Now lets get the ssh url
+
+In the browser go to your repository on github "click" the green "Code" button and select "SSH" copy the url
+
+![Alt text](pics/008_github_sshurl.png?raw=true "github sshurl")
+
+On ansible
+
+Change the url to your own
+
+__Type:__
+
+```bash
+cd
+
+cd ansibleclass
+
+git remote set-url origin git@github.com:jesperberth/ansibleclass.git
+
+```
+
+![Alt text](pics/009_github_sshurl_cmd.png?raw=true "github sshurl cmd")
+
+Do a git pull
+
+It will prompt you for RSA fingerprint authenticy, write "yes"
+
+![Alt text](pics/010_git_pull.png?raw=true "git pull")
+
 ## Task 3: Create a role - part 1
 
 Now we will create our own Role, webserver installing and configuring httpd and php
