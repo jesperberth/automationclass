@@ -356,7 +356,7 @@ In VSCode add the next sections to the 02_azure.yml playbook
       image:
         offer: RHEL
         publisher: RedHat
-        sku: 8
+        sku: "8_4"
         version: latest
       vm_size: Standard_A1_v2
       network_interfaces: "webserver_nic01"
