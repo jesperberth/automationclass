@@ -2,11 +2,19 @@
 
 Using roles
 
+## Table of Contents
+
+- [Prepare](#prepare)
+- [Task 1 Ansible Galaxy and role install](#task-1-ansible-galaxy-and-role-install)
+- [Task 2 Add SSH key to GitHub](#task-2-add-ssh-key-to-github)
+- [Task 3 Create a role - part 1](#task-3-create-a-role---part-1)
+- [Task 4 Create a role - part 2](#task-4-create-a-role---part-2)
+
 ## Prepare
 
 We will need the servers, ansible, server1 and server2 to be up and running - by default they are started after creation
 
-## Task 1: Ansible Galaxy and role install
+## Task 1 Ansible Galaxy and role install
 
 [https://galaxy.ansible.com](https://galaxy.ansible.com/home)
 
@@ -49,7 +57,6 @@ To test the role lets create a new playbook
 
 In VsCode create a new file 01_roles.yml
 
-
 __Type:__
 
 ```ansible
@@ -84,7 +91,7 @@ ansible-playbook 01_roles.yml --ask-become-pass
 
 __Note:__ All tasks should be OK as we installed httpd in a previous lab
 
-## Task 2: Add SSH key to GitHub
+## Task 2 Add SSH key to GitHub
 
 [Ansible docs - Roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
 
@@ -166,7 +173,7 @@ It will prompt you for RSA fingerprint authenticy, write "yes"
 
 ![Alt text](pics/010_git_pull.png?raw=true "git pull")
 
-## Task 3: Create a role - part 1
+## Task 3 Create a role - part 1
 
 Now we will create our own Role, webserver installing and configuring httpd and php
 
@@ -225,7 +232,7 @@ In VSCode do a push/pull to get the changes, you should see the roles \ webserve
 
 ![Alt text](pics/009_vscode_push_pull.png?raw=true "vscode push pull")
 
-## Task 4: Create a role - part 2
+## Task 4 Create a role - part 2
 
 In VSCode we need to create tasks, handlers, meta and defaults
 
@@ -307,14 +314,14 @@ As a last thing, you need to update the meta/main.yml
 
 In VSCode change the meta/main.yml so it matches your information, to get a god score on galaxy you will need to fill in
 
-* author
-* description
-* company
-* licens
-* min_ansible_version
-* platforms
-* galaxy_tags
-* dependecies (if any)
+- author
+- description
+- company
+- licens
+- min_ansible_version
+- platforms
+- galaxy_tags
+- dependecies (if any)
 
 Fill in author, description, company, licens and platform
 
