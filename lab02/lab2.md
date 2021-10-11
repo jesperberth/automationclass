@@ -2,11 +2,23 @@
 
 In this session we will install and use Visual Studio Code with a few plugins to start working with ansible playbooks and create two playbooks, one for linux and one for windows
 
+## Table of Contents
+
+- [Prepare](#prepare)
+- [Task 1 Setup Visual Studio Code and GIT](#task-1-setup-visual-studio-code-and-git)
+- [Task 2 Clone Git Repository](#task-2-clone-git-repository)
+- [Task 3 Create the first playbook](#task-3-create-the-first-playbook)
+- [Task 4 Adding tasks to the playbook](#task-4-adding-tasks-to-the-playbook)
+- [Task 5 Add server two and run the playbook](#task-5-add-server-two-and-run-the-playbook)
+- [Task 6 Ansible-vault](#task-6-ansible-vault)
+- [Task 7 Ansible Inventory yaml](#task-7-ansible-inventory-yaml)
+- [Task 8 Ansible Vault - Yaml inventory](#task-8-ansible-vault---yaml-inventory)
+
 ## Prepare
 
 We will need the servers, ansible, server1 and server2 to be up and running - by default they are started after creation
 
-## Task 1: Setup Visual Studio Code and GIT
+## Task 1 Setup Visual Studio Code and GIT
 
 Download and install VSCode [Download vscode](https://code.visualstudio.com/download)
 
@@ -58,7 +70,7 @@ Your new repository is created with an empty README.md file
 
 ![Alt text](pics/008_newrepo_created_github.png?raw=true "New Repo")
 
-## Task 2: Clone Git Repository
+## Task 2 Clone Git Repository
 
 We need to configure git with a Name and email to track the changes you are making
 
@@ -117,7 +129,7 @@ Click "Yes" to Open the repository
 
 ![Alt text](pics/014_git_in_vscode.png?raw=true "Git repo is now in VSCode")
 
-## Task 3: Create the first playbook
+## Task 3 Create the first playbook
 
 In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
 
@@ -202,7 +214,7 @@ ansible-playbook 01_linux.yml --ask-become-pass
 
 ![Alt text](pics/023_run_playbook.png?raw=true "Run playbook")
 
-## Task 4: Adding tasks to the playbook
+## Task 4 Adding tasks to the playbook
 
 Lets add a second task in the playbook 01_linux.yml
 
@@ -261,7 +273,7 @@ ansible-playbook 01_linux.yml --ask-become-pass
 
 ![Alt text](pics/028_run_playbook_secondtask_idempodent.png?raw=true "Run playbook")
 
-## Task 5: Add server two and run the playbook
+## Task 5 Add server two and run the playbook
 
 We will add server 2 to the inventory
 
@@ -309,7 +321,7 @@ If server2 fails, did you copy your ssh key? "ssh-copy-id user@server2" and run 
 
 The playbook now runs against both servers
 
-## Task 6: Ansible-vault
+## Task 6 Ansible-vault
 
 [Ansible Vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html)
 
@@ -460,7 +472,7 @@ ansible-playbook 01_vault.yml --ask-vault-pass
 
 ![Alt text](pics/036_vault_playbook_run.png?raw=true "vault playbook run")
 
-## Task 7: Ansible Inventory yaml
+## Task 7 Ansible Inventory yaml
 
 Another option for the inventory is using a yaml file instead of the ini format, the yaml file will give us some other options for the vault
 
@@ -558,7 +570,7 @@ ansible linuxservers -m ping
 
 ![Alt text](pics/039_ansible_yaml_test.png?raw=true "test yaml inventory")
 
-## Task 8: Ansible Vault - Yaml inventory
+## Task 8 Ansible Vault - Yaml inventory
 
 In this task we will encrypt the password for the windows servers and place it in the new yaml inventory file
 
