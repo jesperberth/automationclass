@@ -4,11 +4,20 @@ In this session we will install ansible on server __ansible__, and connect to li
 
 We will use server __ansible__ to run the first part of the training
 
+## Table of Contents
+
+- [Prepare](#prepare)
+- [Task 1 Install Ansible](#task-1-install-ansible)
+- [Task 2 Run ansible command](#task-2-run-ansible-command)
+- [Task 3 Connect Linux host](#task-3-connect-linux-host)
+- [Task 4 Connect Windows Host](#task-4-connect-windows-host)
+- [Task 5 Ansible Collections](#task-5-ansible-collections)
+
 ## Prepare
 
 We will need the servers, __ansible, server1__ and __server3__ to be up and running - by default they are started after creation
 
-## Task 1: Install Ansible
+## Task 1 Install Ansible
 
 Log on to server __ansible__ using ssh
 
@@ -88,7 +97,7 @@ pip install ansible
 
 ![Alt text](pics/003_install_ansible.png?raw=true "Install Ansible")
 
-## Task 2: Run ansible command
+## Task 2 Run ansible command
 
 Log on to server "ansible" using ssh
 
@@ -140,7 +149,7 @@ __module arguments__ arguments for module if needed, here path=/home/jesbe/testf
 
 ![Alt text](pics/006_install_ansible_localhost_file.png?raw=true "Ansible localhost ping")
 
-## Task 3: Connect Linux host
+## Task 3 Connect Linux host
 
 Log on to server "ansible" using ssh
 
@@ -349,7 +358,7 @@ ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=ye
 
 ![Alt text](pics/017_systemd_works.png?raw=true "ansible systemd works")
 
-## Task 4: Connect Windows Host
+## Task 4 Connect Windows Host
 
 Windows Servers can be connected in different ways, we will use ansible_messageencryption, but Certificate encryption is available, but requires more work 
 
@@ -414,7 +423,7 @@ ansible windowsservers -m win_ping
 
 ![Alt text](pics/021_ansible_win_ping.png?raw=true "win_ping")
 
-## Task 5: Ansible Collections
+## Task 5 Ansible Collections
 
 In ansible 2.10 and forward, most modules will be delivered from collections via [Ansible Galaxy](https://galaxy.ansible.com)
 
