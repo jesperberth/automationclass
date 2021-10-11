@@ -12,11 +12,21 @@ Running advanced playbooks with ansible
 * Loops
 * Loops Async
 
+## Table of Contents
+
+- [Prepare](#prepare)
+- [Task 1 Variables and Lists](#task-1-variables-and-lists)
+- [Task 2 Register and Conditions](#task-2-register-and-conditions)
+- [Task 3 Handlers](#task-3-handlers)
+- [Task 4 Facts and debug](#task-4-facts-and-debug)
+- [Task 5 Loops](#task-5-loops)
+- [Task 6 Loops Async](#task-6-loops-async)
+
 ## Prepare
 
 We will need the servers, ansible, server1, server2 and server3 to be up and running - by default they are started after creation
 
-## Task 1: Variables and Lists
+## Task 1 Variables and Lists
 
 [ansible docs - variables](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html)
 
@@ -113,7 +123,7 @@ ansible-playbook 01_vars.yml --ask-become-pass
 
 ![Alt text](pics/005_vars_list_playbook_run.png?raw=true "ansible vars list in playbook run")
 
-## Task 2: Register and Conditions
+## Task 2 Register and Conditions
 
 [ansible docs - systemd module](https://docs.ansible.com/ansible/2.5/modules/systemd_module.html)
 
@@ -198,7 +208,7 @@ ansible-playbook 01_vars.yml --ask-become-pass
 
 ![Alt text](pics/005_conditional_playbook_run.png?raw=true "ansible conditional in playbook run")
 
-## Task 3: Handlers
+## Task 3 Handlers
 
 [ansible docs - handlers](https://docs.ansible.com/ansible/latest/user_guide/playbooks_handlers.html)
 
@@ -268,7 +278,7 @@ ansible-playbook 01_vars.yml --ask-become-pass
 
 ![Alt text](pics/003_handlers_playbook_run2.png?raw=true "ansible handlers playbook second run")
 
-## Task 4: Facts and debug
+## Task 4 Facts and debug
 
 [ansible docs - facts](https://docs.ansible.com/ansible/latest/user_guide/playbooks_vars_facts.html)
 
@@ -424,7 +434,7 @@ ansible-playbook 01_facts.yml
 
 ![Alt text](pics/010_ansible_facts_list_dic_playbook_run.png?raw=true "ansible facts list and dic playbook run")
 
-## Task 5: Loops
+## Task 5 Loops
 
 [ansible docs - loops](https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html)
 
@@ -537,7 +547,7 @@ ansible-playbook 01_loop.yml --ask-become-pass
 
 ![Alt text](pics/004_ansible_loop_hash_playbook_run.png?raw=true "ansible loop hash playbook run")
 
-## Task 6: Loops Async
+## Task 6 Loops Async
 
 [Ansible docs - async](https://docs.ansible.com/ansible/latest/user_guide/playbooks_async.html)
 
