@@ -572,4 +572,4 @@ http://<your webserver ip>
 
 Lab Done
 
-[Vmware Playbooks](../lab07/lab7.md)
+[Ansible Windows](../lab07/lab7.md)

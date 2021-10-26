@@ -59,14 +59,10 @@ Use and create roles with Ansible
 
 Use Ansible in the Cloud (Microsoft Azure)
 
-### Lab 7: [Ansible Vmware](lab07/lab7.md)
+### Lab 7: [Ansible Windows](lab07/lab7.md)
 
-Use Ansible to manage Vmware VSphere
+Use Ansible to manage Windows Servers
 
 ### Lab 8: [Ansible Automation Platform](lab08/lab8.md)
 
 Use AWX/Ansible Tower to create a workflow
-
-### Lab 9: [Ansible Exercise](lab09/lab9.md)
-
-Extra lab
