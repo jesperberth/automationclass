@@ -189,6 +189,7 @@ __Type:__
     when: httpd_status.state == "started"
 
 ```
+
 Save the playbook, Commit the changes and push to github
 
 ![Alt text](pics/004_conditional_playbook.png?raw=true "ansible conditional in playbook")
@@ -335,6 +336,7 @@ __Type:__
     ansible.builtin.debug:
       msg: "{{ ansible_facts }}"
 ```
+
 Save the playbook, Commit the changes and push to github
 
 ![Alt text](pics/003_get_facts_playbook.png?raw=true "facts playbook")
