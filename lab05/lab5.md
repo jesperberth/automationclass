@@ -1,4 +1,4 @@
-# Lab 4: Ansible Lint
+# Lab 5: Ansible Lint
 
 Install and run ansible-lint on playbooks
 
@@ -75,4 +75,4 @@ ansible-lint
 
 Lab done
 
-[Ansible Roles](../lab05/lab5.md)
+[Ansible Roles](../lab06/lab6.md)

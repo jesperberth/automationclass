@@ -1,4 +1,4 @@
-# Lab 3: Work with Playbooks
+# Lab 4: Work with Playbooks
 
 Running advanced playbooks with ansible
 
@@ -622,4 +622,4 @@ ansible-playbook 02_loop.yml --ask-become-pass
 
 Lab done
 
-[Ansible Linting](../lab04/lab4.md)
+[Ansible Linting](../lab05/lab5.md)

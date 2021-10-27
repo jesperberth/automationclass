@@ -1,4 +1,4 @@
-# Lab 8: Ansible Automation Platform - AWX / Ansible Tower
+# Lab 9: Ansible Automation Platform - AWX / Ansible Tower
 
 In this session we will use AWX / Ansible Tower to orchestrate our ansible playbooks
 
@@ -540,5 +540,3 @@ http://<your ip>
 ![Alt text](pics/32_result_ip.png?raw=true "Get IP")
 
 Lab done
-
-[Ansible Exercise](../lab09/lab9.md)

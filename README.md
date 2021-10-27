@@ -43,26 +43,30 @@ Install Ansible and Connect to a Linux and Windows Server
 
 Create Ansible Playbooks
 
-### Lab 3: [Work with Playbooks](lab03/lab3.md)
+### Lab 3: [Ansible Vault](lab03/lab3.md)
+
+Use ansible vault to secure secrets
+
+### Lab 4: [Work with Playbooks](lab04/lab4.md)
 
 Use Variables, prompts, facts and handlers in Playbooks
 
-### Lab 4: [Ansible linting](lab04/lab4.md)
+### Lab 5: [Ansible linting](lab05/lab5.md)
 
 Use linting in ansible
 
-### Lab 5: [Roles](lab05/lab5.md)
+### Lab 6: [Roles](lab06/lab6.md)
 
 Use and create roles with Ansible
 
-### Lab 6: [Ansible Windows](lab06/lab6.md)
+### Lab 7: [Ansible Windows](lab07/lab7.md)
 
 Use Ansible to manage Windows Servers
 
-### Lab 7: [Ansible Cloud](lab07/lab7.md)
+### Lab 8: [Ansible Cloud](lab08/lab8.md)
 
 Use Ansible in the Cloud (Microsoft Azure)
 
-### Lab 8: [Ansible AWX Tower](lab08/lab8.md)
+### Lab 9: [Ansible AWX Tower](lab09/lab9.md)
 
 Use AWX/Ansible Tower to create a workflow

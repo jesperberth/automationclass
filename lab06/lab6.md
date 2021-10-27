@@ -1,4 +1,4 @@
-# Lab 5: Roles
+# Lab 6: Roles
 
 Using roles
 
@@ -440,4 +440,4 @@ Go to the azure portal and get the external ip of server1 or server2 and type it
 
 Lab done
 
-[Ansible Windows](../lab06/lab6.md)
+[Ansible Windows](../lab07/lab7.md)

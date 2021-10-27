@@ -324,4 +324,4 @@ Click on users, see that the user "basim" exist and the group "corp" exist, righ
 
 Lab Done
 
-[Ansible Cloud](../lab07/lab7.md)
+[Ansible Cloud](../lab08/lab8.md)

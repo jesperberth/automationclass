@@ -1,4 +1,4 @@
-# Lab 6: Ansible Cloud
+# Lab 8: Ansible Cloud
 
 In this session we will use ansible to setup and manage resources in Azure to deploy a virtual machine with a webserver installed and running
 
@@ -572,4 +572,4 @@ http://<your webserver ip>
 
 Lab Done
 
-[Ansible Tower](../lab08/lab8.md)
+[Ansible Tower](../lab09/lab9.md)
