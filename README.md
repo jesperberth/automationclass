@@ -55,14 +55,14 @@ Use linting in ansible
 
 Use and create roles with Ansible
 
-### Lab 6: [Ansible Cloud](lab06/lab6.md)
-
-Use Ansible in the Cloud (Microsoft Azure)
-
-### Lab 7: [Ansible Windows](lab07/lab7.md)
+### Lab 6: [Ansible Windows](lab06/lab6.md)
 
 Use Ansible to manage Windows Servers
 
-### Lab 8: [Ansible Automation Platform](lab08/lab8.md)
+### Lab 7: [Ansible Cloud](lab07/lab7.md)
+
+Use Ansible in the Cloud (Microsoft Azure)
+
+### Lab 8: [Ansible AWX Tower](lab08/lab8.md)
 
 Use AWX/Ansible Tower to create a workflow
