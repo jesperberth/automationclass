@@ -201,7 +201,7 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 01_domain.yml --ask-vault-password
+ansible-playbook 02_domain.yml --ask-vault-password
 
 ```
 
