@@ -1,327 +1,446 @@
-# Lab 6: Ansible Windows
+# Lab 6: Roles
 
-In this session we will use ansible to setup and manage Active Directory, add users and groups and join a second server to the domain.
-
-Server3 will act as Domain controller, server4 will join as a member
+Using roles
 
 ## Table of Contents
 
 - [Prepare](#prepare)
-- [Task 1 Task 1 Add new host groups](#task-1-add-new-host-groups)
-- [Task 2 Create Domain controller](#task-2-create-domain-controller)
-- [Task 3 Create user and group](#task-3-create-user-and-group)
-- [Task 4 Change DNS for Domainmember](#task-4-change-dns-for-domainmember)
-- [Task 5 Add member server to AD](#task-5-add-member-server-to-ad)
+- [Task 1 Ansible Galaxy and role install](#task-1-ansible-galaxy-and-role-install)
+- [Task 2 Add SSH key to GitHub](#task-2-add-ssh-key-to-github)
+- [Task 3 Create a role - part 1](#task-3-create-a-role---part-1)
+- [Task 4 Create a role - part 2](#task-4-create-a-role---part-2)
 
 ## Prepare
 
-We will need the servers, __ansible__, __server3__ and __server4__ to be up and running - by default they are started after creation
+We will need the servers, ansible, server1 and server2 to be up and running - by default they are started after creation
 
-## Task 1 Add new host groups
+## Task 1 Ansible Galaxy and role install
 
-[ansible docs - inventory](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html)
+[https://galaxy.ansible.com](https://galaxy.ansible.com/home)
 
-We need to add child groups to the windowsserver group in the host file, when using child groups we can target the group windowsserver or one of the child groups like domaincontrollers
+[Ansible Docs - ansible-galaxy](https://docs.ansible.com/ansible/latest/cli/ansible-galaxy.html)
 
-Log on to server "ansible" using ssh
+![Alt text](pics/001_ansible_galaxy.png?raw=true "ansible galaxy")
 
-Use vi to edit ansible-hosts.yml
+Ansible Galaxy holds roles and collections, its an Hub for sharing ansible content
+
+Search for a role called el_httpd
+
+![Alt text](pics/002_ansible_galaxy_search.png?raw=true "ansible galaxy search")
+
+Click on the top result "el_https"
+
+Click the Read Me for a short description of the role and how use it
+
+Click on the GitHub Repo button to get to the repository for this role, you are able to provide feedback and report issues here
+
+![Alt text](pics/003_ansible_galaxy_role.png?raw=true "ansible galaxy role")
+
+Lets install the role
+
+On the ansible server
 
 __Type:__
 
 ```bash
 cd
 
-vi ansible-hosts.yml
-```
+ansible-galaxy install jesperberth.el_httpd
 
-In vi __type:__
-
-```bash
-i (hit i to toggle input)
-```
-
-Add below between server4: and vars: be aware that the indentation needs to be correct
-
-```bash
-  children:
-    domaincontroller:
-      hosts:
-        server3:
-    domainmember:
-      hosts:
-        server4:
-```
-
-__Type:__
-
-```bash
-Hit Esc-key
-
-:wq (: for a command w for write and q for quit vi)
-```
-
-![Alt text](pics/01_changehosts.png?raw=true "change hosts file")
-
-Lets test the groups
-
-__Type:__
-
-```bash
-
-ansible windowsservers -m win_ping --ask-vault-password
-
-ansible domaincontroller -m win_ping --ask-vault-password
-
-ansible domainmember -m win_ping --ask-vault-password
+ansible-galaxy role list
 
 ```
 
-![Alt text](pics/02_testgroups.png?raw=true "Test groups")
+![Alt text](pics/004_ansible_galaxy_role_install.png?raw=true "ansible galaxy role install")
 
-## Task 2 Create Domain controller
+To test the role lets create a new playbook
 
-[ansible docs - win feature module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_feature_module.html)
-
-[ansible docs - win reboot](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
-
-[ansible docs - win domain](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_domain_module.html)
-
-In VSCode create a new file 01_domain.yml
-
-Add below to the playbook, this will create a new Active Directory.
-
-```ansible
-
----
-- hosts: domaincontroller
-  vars:
-    domain: ansible.local
-
-  tasks:
-  - name: Install AD-Tools and DNS
-    win_feature:
-      name:
-      - DNS
-      - AD-Domain-Services
-      state: present
-      include_management_tools: yes
-    register: feature_install
-
-  - name: Reboot if required
-    win_reboot:
-    when: feature_install.reboot_required
-
-  - name: Create new Active Directory
-    win_domain:
-      create_dns_delegation: no
-      database_path: C:\Windows\NTDS
-      dns_domain_name: "{{ domain }}"
-      domain_mode: Win2012R2
-      forest_mode: Win2012R2
-      safe_mode_password: "{{ ansible_password }}"
-      sysvol_path: C:\Windows\SYSVOL
-    register: domain_install
-
-  - name: Reboot if required
-    win_reboot:
-    when: domain_install.reboot_required
-```
-
-![Alt text](pics/03_domaincontroller.png?raw=true "domain controller playbook")
-
-Save and commit to Git
-
-Log on to server "ansible" using ssh
-
-Use git to get the new azure playbook
-
-**Type:**
-
-```bash
-
-cd ansibleclass
-
-git pull
-
-ansible-playbook 01_domain.yml --ask-vault-password
-
-```
-
-![Alt text](pics/04_domaincontroller_play.png?raw=true "domain controller playbook run")
-
-## Task 3 Create user and group
-
-[ansible docs - win domain group module](https://docs.ansible.com/ansible/latest/collections/community/windows/win_domain_group_module.html)
-[ansible docs - win domain user module](https://docs.ansible.com/ansible/latest/collections/community/windows/win_domain_user_module.html)
-
-In VSCode create a new file 02_domain.yml
-
-Add below to the playbook, this will create a new group and user in AD.
+In VsCode create a new file 01_roles.yml
 
 __Type:__
 
 ```ansible
+
 ---
-- hosts: domaincontroller
-  vars:
-    domain: ansible.local
+- hosts: linuxservers
+  become: yes
 
-  tasks:
-  - name: Create Group
-    community.windows.win_domain_group:
-      name: corp
-      scope: global
-      state: present
+  roles:
+     - jesperberth.el_httpd
 
-  - name: Create user
-    community.windows.win_domain_user:
-      name: basim
-      firstname: Bart
-      surname: Simpson
-      password: P@ssw0rd!
-      state: present
-      groups:
-      - corp
 ```
 
-![Alt text](pics/05_addgrpanduser.png?raw=true "add group and user")
+Save, Commit and push
 
-Save and commit to Git
+![Alt text](pics/005_ansible_role_playbook.png?raw=true "ansible role playbook")
 
-Log on to server "ansible" using ssh
+On the ansible server pull the new playbook and run it
 
-Use git to get the new azure playbook
-
-**Type:**
+__Type:__
 
 ```bash
+cd  ansibleclass
+
+git pull
+
+ansible-playbook 01_roles.yml --ask-become-pass
+
+```
+
+![Alt text](pics/006_ansible_role_playbook_run.png?raw=true "ansible role playbook run")
+
+__Note:__ All tasks should be OK as we installed httpd in a previous lab
+
+## Task 2 Add SSH key to GitHub
+
+[Ansible docs - Roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
+
+We need to do some config to git, as we need to do some of the work on our linux host
+
+And copy our public ssh key to our github account
+
+On ansible
+
+__Type:__
+
+```bash
+cd
+
+git config --global user.email "you@example.com"
+
+git config --global user.name "Your Name"
+
+cat ~/.ssh/id_rsa.pub
+
+```
+
+![Alt text](pics/001_git_commands.png?raw=true "git commands")
+
+In your browser go to github.com and login to your account
+
+In the top right corner "click" on your profile and select "Settings"
+
+![Alt text](pics/002_github_settings.png?raw=true "github settings")
+
+In the left menu "click" on "SSH and GPG keys"
+
+![Alt text](pics/003_github_settings.png?raw=true "github settings")
+
+"Click" on the green "New SSH key"
+
+![Alt text](pics/004_github_newssh.png?raw=true "github settings")
+
+From the linux terminal copy the pub key
+
+![Alt text](pics/005_github_pubkey.png?raw=true "github settings")
+
+Give the new key a Title "ansible"
+
+paste the key
+
+and click "Add SSH key"
+
+![Alt text](pics/006_github_pubkey_add.png?raw=true "github settings")
+
+Now the key is created, you can see usage and delete the key when you are done with this course (My key is deleted)
+
+![Alt text](pics/007_github_pubkey.png?raw=true "github settings")
+
+Now lets get the ssh url
+
+In the browser go to your repository on github "click" the green "Code" button and select "SSH" copy the url
+
+![Alt text](pics/008_github_sshurl.png?raw=true "github sshurl")
+
+On ansible
+
+Change the url to your own
+
+__Type:__
+
+```bash
+cd
 
 cd ansibleclass
 
+git remote set-url origin git@github.com:jesperberth/ansibleclass.git
+
+```
+
+![Alt text](pics/009_github_sshurl_cmd.png?raw=true "github sshurl cmd")
+
+Do a git pull
+
+It will prompt you for RSA fingerprint authenticy, write "yes"
+
+![Alt text](pics/010_git_pull.png?raw=true "git pull")
+
+## Task 3 Create a role - part 1
+
+Now we will create our own Role, webserver installing and configuring httpd and php
+
+The role will be placed in the same git repository as we are using for the playbooks, but could have been placed in a seperate repo and committed to Ansible-Galaxy
+
+We will use ansible-galaxy command to initialize a role template
+
+Its important that you do a git pull before we are adding anything in the folders
+
+On ansible
+
+__Type:__
+
+```bash
+
+cd  ansibleclass
+
 git pull
+
+mkdir roles
+
+cd roles
+
+ansible-galaxy init webserver
+
+ls -al
+
+```
+
+![Alt text](pics/007_ansible_galaxy_init.png?raw=true "ansible galaxy init")
+
+Now lets add, commit and push this to our git repo so we can work with the role in VSCode
+
+On ansible
+
+__Type:__
+
+```bash
+
+cd
+
+cd ansibleclass
+
+git add .
+
+git commit -m "Adding roles"
+
+git push origin main
 
 ansible-playbook 02_domain.yml --ask-vault-password
 
 ```
 
-![Alt text](pics/06_addgrpanduser_run.png?raw=true "add group and user playbook run")
+![Alt text](pics/008_ansible_git_push.png?raw=true "ansible git push")
 
-## Task 4 Change DNS for Domainmember
+In VSCode do a push/pull to get the changes, you should see the roles \ webserver with all the default content
 
-[ansible docs - win dns client module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_dns_client_module.html)
+![Alt text](pics/009_vscode_push_pull.png?raw=true "vscode push pull")
 
-[ansible docs - win reboot module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
+## Task 4 Create a role - part 2
 
-In VSCode create a new file 01_changedns.yml
+In VSCode we need to create tasks, handlers, meta and defaults
 
-Add below to the playbook, this will set the member servers dns client to use the new domaincontroller.
+First thing to do is install all needed packages, start the httpd daemon and open the firewall
+
+In VSCode open the roles/webserver/tasks/main.yml add the following
+
+```ansible
+
+---
+# tasks file for webserver
+- name: Install Packages
+  ansible.builtin.package:
+    name: "{{ package }}"
+    state: latest
+  notify: httpd restart
+
+- name: Enable httpd service
+  ansible.builtin.systemd:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Configure firewall
+  ansible.posix.firewalld:
+    zone: public
+    service: http
+    permanent: yes
+    state: enabled
+  notify: firewall reload
+
+```
+
+![Alt text](pics/010_vscode_tasks.png?raw=true "vscode tasks")
+
+We will put a list - package in the defaults main.yml
+
+Open defaults/main.yml and add the following
+
+```ansible
+
+---
+# defaults file for webserver
+package:
+    - httpd
+    - mod_ssl
+    - openssl
+    - php
+    - php-gd
+    - php-mbstring
+
+```
+
+![Alt text](pics/011_vscode_defaults.png?raw=true "vscode defaults")
+
+We will add the handler firewall reload
+
+Open handlers/main.yml and add the following
+
+```ansible
+
+---
+# handlers file for webserver
+- name: firewall reload
+  ansible.builtin.systemd:
+    name: firewalld
+    state: reloaded
+
+- name: httpd restart
+  ansible.builtin.systemd:
+    name: httpd
+    state: restarted
+
+```
+
+![Alt text](pics/012_vscode_handlers.png?raw=true "vscode handlers")
+
+As a last thing, you need to update the meta/main.yml
+
+In VSCode change the meta/main.yml so it matches your information, to get a god score on galaxy you will need to fill in
+
+- author
+- description
+- company
+- licens
+- min_ansible_version
+- platforms
+- galaxy_tags
+- dependecies (if any)
+
+Fill in author, description, company, licens and platform
+
+```ansible
+galaxy_info:
+  author: Jesper Berth
+  description: Install and configure httpd and php on Enterprise Linux
+  company: Arrow ECS
+
+  # If the issue tracker for your role is not on github, uncomment the
+  # next line and provide a value
+  # issue_tracker_url: http://example.com/issue/tracker
+
+  # Choose a valid license ID from https://spdx.org - some suggested licenses:
+  # - BSD-3-Clause (default)
+  # - MIT
+  # - GPL-2.0-or-later
+  # - GPL-3.0-only
+  # - Apache-2.0
+  # - CC-BY-4.0
+  license: BSD-3-Clause
+
+  min_ansible_version: 2.10
+
+  # If this a Container Enabled role, provide the minimum Ansible Container version.
+  # min_ansible_container_version:
+
+  #
+  # Provide a list of supported platforms, and for each platform a list of versions.
+  # If you don't wish to enumerate all versions for a particular platform, use 'all'.
+  # To view available platforms and versions (or releases), visit:
+  # https://galaxy.ansible.com/api/v1/platforms/
+  #
+  platforms:
+   - name: EL
+     versions:
+     - 8
+
+  galaxy_tags: []
+    # List tags for your role here, one per line. A tag is a keyword that describes
+    # and categorizes the role. Users find roles by searching for tags. Be sure to
+    # remove the '[]' above, if you add tags to this list.
+    #
+    # NOTE: A tag is limited to a single word comprised of alphanumeric characters.
+    #       Maximum 20 tags per role.
+
+dependencies: []
+  # List your role dependencies here, one per line. Be sure to remove the '[]' above,
+  # if you add dependencies to this list.
+
+
+```
+
+![Alt text](pics/013_vscode_meta.png?raw=true "vscode meta")
+
+Create an php file index.php make sure its in the root of your ansibleclass repo
+
+In VSCode add the following to index.php
+
+```php
+<?PHP
+echo "Welcome to your new webserver: ";
+echo gethostname();
+?>
+
+```
+
+![Alt text](pics/014_vscode_index_php.png?raw=true "vscode index.php")
+
+And finally lets create a playbook to run it all
+
+First we use our role to install and configure httpd and php next we have a simple task that copies our php file
+
+Create a new file 02_roles.yml add the following
 
 ```ansible
 ---
-- hosts: domainmember
+- hosts: linuxservers
+  become: yes
+
+  roles:
+      - webserver
 
   tasks:
-  - name: Change DNS for member servers
-    ansible.windows.win_dns_client:
-      adapter_names: "*"
-      dns_servers: 10.1.0.7
+  - name: Copy Index.php
+    ansible.builtin.copy:
+      src: index.php
+      dest: /var/www/html/index.php
+      owner: root
+      group: root
 
-  - name: Reboot member servers
-    win_reboot:
 ```
 
-![Alt text](pics/07_changedns.png?raw=true "changedns playbook")
+![Alt text](pics/015_vscode_roles.png?raw=true "vscode roles")
 
-Save and commit to Git
+Save and commit
 
-Log on to server "ansible" using ssh
+On the ansible server pull the new playbook and run it
 
-Use git to get the new azure playbook
-
-**Type:**
+__Type:__
 
 ```bash
-
-cd ansibleclass
+cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_changedns.yml --ask-vault-password
+ansible-playbook 02_roles.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/08_changedns_run.png?raw=true "changedns playbook run")
+![Alt text](pics/016_vscode_roles_run.png?raw=true "vscode roles run")
 
-## Task 5 Add member server to AD
+Go to the azure portal and get the external ip of server1 or server2 and type it in your browser
 
-[ansible docs - win domain membership module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_domain_membership_module.html)
+![Alt text](pics/01_webpage.png?raw=true "webpage")
 
-[ansible docs - win reboot module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
+Lab done
 
-In VSCode create a new file 01_joinad.yml
-
-Add below to the playbook, this will join the member servers to the new Active Directory.
-
-```ansible
----
-- hosts: domainmember
-  vars:
-    domain: ansible.local
-
-  tasks:
-  - name: Domain Join
-    win_domain_membership:
-      dns_domain_name: "{{ domain }}"
-      domain_admin_user: "{{ ansible_user }}@{{ domain }}"
-      domain_admin_password: "{{ ansible_password }}"
-      state: domain
-    register: domain_join
-
-  - name: Reboot Server
-    win_reboot:
-    when: domain_join.reboot_required
-
-```
-
-![Alt text](pics/09_joinad.png?raw=true "join ad")
-
-Save and commit to Git
-
-Log on to server "ansible" using ssh
-
-Use git to get the new azure playbook
-
-**Type:**
-
-```bash
-
-cd ansibleclass
-
-git pull
-
-ansible-playbook 01_joinad.yml --ask-vault-password
-
-```
-
-![Alt text](pics/10_joinad_run.png?raw=true "join ad playbook run")
-
-Lets check that everything worked
-
-Logon to the Domain Controller (server3) using RDP
-
-In the Server Manager Console, top right corner select tools and click on "Active Directory Users and Computers"
-
-![Alt text](pics/11_open_ad_users.png?raw=true "Open Active Directory Users and Computers")
-
-In the new window click on computers, server4 should be visible here
-
-![Alt text](pics/12_computers.png?raw=true "Show Computers")
-
-Click on users, see that the user "basim" exist and the group "corp" exist, right click on "corp" and select properties select the "Members" Tab, the user "basim" should be a member.
-
-![Alt text](pics/13_grpanduser.png?raw=true "Show Users")
-
-Lab Done
-
-[Ansible Cloud](../lab07/lab7.md)
+[Ansible Windows](../lab07/lab7.md)

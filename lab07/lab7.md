@@ -1,142 +1,59 @@
-# Lab 7: Ansible Cloud
+# Lab 7: Ansible Windows
 
-In this session we will use ansible to setup and manage resources in Azure to deploy a virtual machine with a webserver installed and running
+In this session we will use ansible to setup and manage Active Directory, add users and groups and join a second server to the domain.
+
+Server3 will act as Domain controller, server4 will join as a member
 
 ## Table of Contents
 
 - [Prepare](#prepare)
-- [Task 1 Install requirements for Azure](#task-1-install-requirements-for-azure)
-- [Task 2 Create credentials for Azure](#task-2-create-credentials-for-azure)
-- [Task 3 Create Network in Azure](#task-3-create-network-in-azure)
-- [Task 4 Create Public Ip, NIC and Security Group in Azure](#task-4-create-public-ip-nic-and-security-group-in-azure)
-- [Task 5 Create an ansible dynamic inventory for Azure RM](#task-5-create-an-ansible-dynamic-inventory-for-azure-rm)
-- [Task 6 Install Apache Webserver and create the site - using ansible Azure dynamic inventory](#task-6-install-apache-webserver-and-create-the-site---using-ansible-azure-dynamic-inventory)
+- [Task 1 Task 1 Add new host groups](#task-1-add-new-host-groups)
+- [Task 2 Create Domain controller](#task-2-create-domain-controller)
+- [Task 3 Create user and group](#task-3-create-user-and-group)
+- [Task 4 Change DNS for Domainmember](#task-4-change-dns-for-domainmember)
+- [Task 5 Add member server to AD](#task-5-add-member-server-to-ad)
 
 ## Prepare
 
-We will need the server, ansible to be up and running - by default they are started after creation
+We will need the servers, __ansible__, __server3__ and __server4__ to be up and running - by default they are started after creation
 
-## Task 1 Install requirements for Azure
+## Task 1 Add new host groups
+
+[ansible docs - inventory](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html)
+
+We need to add child groups to the windowsserver group in the host file, when using child groups we can target the group windowsserver or one of the child groups like domaincontrollers
 
 Log on to server "ansible" using ssh
 
-Install ansible azure collection
+Use vi to edit ansible-hosts.yml
 
-Before installtion the collection we need to install several python modules, the requirements file is on the github project page
-
-[https://github.com/ansible-collections/azure](https://github.com/ansible-collections/azure)
-
-**Type:**
+__Type:__
 
 ```bash
 cd
 
-wget https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
-
-pip install -r requirements-azure.txt
-
-ansible-galaxy collection install azure.azcollection
-
+vi ansible-hosts.yml
 ```
 
-![Alt text](pics/002_download_requirements_pip_azure.png?raw=true "install azure")
-
-![Alt text](pics/002_run_requirements_pip_azure.png?raw=true "install azure")
-
-![Alt text](pics/001_install_pip_azure.png?raw=true "install azure")
-
-## Task 2 Create credentials for Azure
-
-We need to register an azure application to enable ansible automation
-
-You can do it in the Cloud Shell thats our __preferred__ method or __OPTIONAL__ you can do it using the gui in the browser [Azure GUI](azure_gui.md)
-
-In your browser log on to [https://portal.azure.com](https://portal.azure.com)
-
-In the top bar, click the "cloudshell" icon marked with red
-
-![Alt text](pics/01_start_cloud_shell.png?raw=true "Cloud Shell")
-
-Select "Bash"
-
-![Alt text](pics/02_start_cloud_shell_bash.png?raw=true "Cloud Shell")
-
-Run the following command to create a new Service User
-
-Set the user variable to your initials
+In vi __type:__
 
 ```bash
-
-USER=jesbe
-
-az ad sp create-for-rbac --name ansible-$USER --role Contributor
-
+i (hit i to toggle input)
 ```
 
-Copy the JSON output to a notepad file we will need the information later
-
-![Alt text](pics/02_create_sp.png?raw=true "Cloud Shell output")
-
-We need to get the Subscription ID run the following in the Cloud Shell
+Add below between server4: and vars: be aware that the indentation needs to be correct
 
 ```bash
-
-az account show
-
+  children:
+    domaincontroller:
+      hosts:
+        server3:
+    domainmember:
+      hosts:
+        server4:
 ```
 
-![Alt text](pics/03_get_sub_id.png?raw=true "Cloud Shell sub id")
-
-Copy the line id: "xxx-xxx" to the same notepad
-
-__Below is for both command and GUI__ versions
-
-Log on to server "ansible" using ssh
-
-We will create the authentication file, you must start in your home dir
-
-**Type:**
-
-```bash
-cd
-mkdir .azure
-vi .azure/credentials
-
-```
-
-![Alt text](pics/009_azure_credfile.png?raw=true "azure credentials")
-
-In vi **type:**
-
-Use the vaules you collected from the Azure portal
-
-```bash
-i (to toggle input)
-```
-
-```bash
-[default]
-subscription_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-client_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-secret=xxxxxxxxxxxxxxxxx
-tenant=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-```
-
-```bash
-
-In the file 
-
-subscription_id = id from the last command
-
-client_id = appID in the first command
-
-secret = Password in the first command
-
-tenant = tenant in the first command
-
-```
-
-**Type:**
+__Type:__
 
 ```bash
 Hit Esc-key
@@ -144,246 +61,74 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-![Alt text](pics/010_azure_credfile_input.png?raw=true "azure credentials file input")
+![Alt text](pics/01_changehosts.png?raw=true "change hosts file")
 
-Lets test the connection to azure by creating a small playbook
+Lets test the groups
 
-[Ansible Module azure_rm_resourcegroup](https://docs.ansible.com/ansible/latest/modules/azure_rm_resourcegroup_module.html#azure-rm-resourcegroup-module)
-
-In VSCode
-
-create a new playbook file 01_azure.yml
-
-add the following text to the file, change the name of the variable **user to your initials** use the same as you use to login to ansible server
-
-```ansible
----
-- hosts: localhost
-  connection: local
-  vars:
-    user: write your username here
-  tasks:
-  - name: Create resource group
-    azure_rm_resourcegroup:
-      name: "webserver_{{ user }}"
-      location: northeurope
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
-    register: rg
-  - debug:
-      var: rg
-```
-
-![Alt text](pics/011_azure_play.png?raw=true "azure play")
-
-Log on to server "ansible" using ssh
-
-Use git to get the new azure playbook
-
-**Type:**
+__Type:__
 
 ```bash
 
-cd ansibleclass
+ansible windowsservers -m win_ping --ask-vault-password
 
-git pull
+ansible domaincontroller -m win_ping --ask-vault-password
 
-ansible-playbook 01_azure.yml
+ansible domainmember -m win_ping --ask-vault-password
 
 ```
 
-![Alt text](pics/011_azure_play_run.png?raw=true "azure play run")
+![Alt text](pics/02_testgroups.png?raw=true "Test groups")
 
-## Task 3 Create Network in Azure
+## Task 2 Create Domain controller
 
-[Ansible Module azure_rm_virtualnetwork](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualnetwork_module.html#azure-rm-virtualnetwork-module)
+[ansible docs - win feature module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_feature_module.html)
 
-[Ansible Module azure_rm_subnet](https://docs.ansible.com/ansible/latest/modules/azure_rm_subnet_module.html#azure-rm-subnet-module)
+[ansible docs - win reboot](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
 
-In VSCode
+[ansible docs - win domain](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_domain_module.html)
 
-create a new playbook file 02_azure.yml
+In VSCode create a new file 01_domain.yml
 
-add the following text to the file, change the first variable **"user"** to your initials, use the same as in previous task, it will be used for creating resources and a login to the webserver
+Add below to the playbook, this will create a new Active Directory.
 
 ```ansible
+
 ---
-- hosts: localhost
-  connection: local
+- hosts: domaincontroller
   vars:
-    user: write your username here
-    location: northeurope
-    virtual_network_name: "webserver_{{ user }}"
-    subnet: Webserver
-    resource_group: "webserver_{{ user }}"
-    domain_sub: "domain{{ user }}"
-    ssh_public_key: "{{lookup('file', '~/.ssh/id_rsa.pub') }}"
+    domain: ansible.local
 
   tasks:
-  - name: Create a virtual network
-    azure_rm_virtualnetwork:
-      resource_group: "{{ resource_group }}"
-      name: "{{ virtual_network_name }}"
-      address_prefixes_cidr: "10.99.0.0/16"
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
-
-  - name: Create a subnet
-    azure_rm_subnet:
-      resource_group: "{{ resource_group }}"
-      virtual_network_name: "{{ virtual_network_name }}"
-      name: "{{ subnet }}"
-      address_prefix_cidr: "10.99.0.0/24"
-```
-
-![Alt text](pics/012_azure_net_playbook.png?raw=true "azure net playbook")
-
-Save and commit to Git
-
-Log on to server "ansible" using ssh
-
-Use git to get the new azure playbook
-
-**Type:**
-
-```bash
-
-cd ansibleclass
-
-git pull
-
-ansible-playbook 02_azure.yml
-
-```
-
-![Alt text](pics/013_azure_net_playbook_run.png?raw=true "azure net playbook run")
-
-## Task 4 Create Public Ip, NIC and Security Group in Azure
-
-[Ansible Module azure_rm_publicipaddress](https://docs.ansible.com/ansible/latest/modules/azure_rm_publicipaddress_module.html#azure-rm-publicipaddress-module)
-
-[Ansible Module azure_rm_securitygroup](https://docs.ansible.com/ansible/latest/modules/azure_rm_securitygroup_module.html#azure-rm-securitygroup-module)
-
-[Ansible Module azure_rm_networkinterface](https://docs.ansible.com/ansible/latest/modules/azure_rm_networkinterface_module.html#azure-rm-networkinterface-module)
-
-In VSCode add the next sections to the 02_azure.yml playbook
-
-```ansible
-  - name: Create a public ip address for webserver
-    azure_rm_publicipaddress:
-      resource_group: "{{ resource_group }}"
-      name: public_ip_webserver
-      allocation_method: static
-      domain_name: "webserver{{ domain_sub }}"
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
-    register: webserver_pub_ip
-
-  - name: Create Security Group for webserver
-    azure_rm_securitygroup:
-      resource_group: "{{ resource_group }}"
-      name: "webserver_securitygroup"
-      purge_rules: yes
-      rules:
-          - name: Allow_SSH
-            protocol: Tcp
-            destination_port_range: 22
-            access: Allow
-            priority: 100
-            direction: Inbound
-          - name: Allow_HTTP
-            protocol: Tcp
-            destination_port_range: 80
-            access: Allow
-            priority: 101
-            direction: Inbound
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
-
-  - name: Create a network interface for webserver
-    azure_rm_networkinterface:
-      name: "webserver_nic01"
-      resource_group: "{{ resource_group }}"
-      virtual_network: "{{ virtual_network_name }}"
-      subnet_name: "{{ subnet }}"
-      security_group: "webserver_securitygroup"
-      ip_configurations:
-        - name: "webserver_nic01_ipconfig"
-          public_ip_address_name: "public_ip_webserver"
-          primary: True
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
-```
-
-![Alt text](pics/014_azure_network.png?raw=true "azure nic playbook")
-
-Save and commit to Git
-
-Log on to server "ansible" using ssh
-
-Use git to get the new azure playbook
-
-**Type:**
-
-```bash
-
-cd ansibleclass
-
-git pull
-
-ansible-playbook 02_azure.yml
-
-```
-
-![Alt text](pics/015_azure_network_run.png?raw=true "azure nic playbook run")
-
-[Ansible Module azure_rm_virtualmachine](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualmachine_module.html#azure-rm-virtualmachine-module)
-
-[Ansible Module shell](https://docs.ansible.com/ansible/latest/modules/shell_module.html#shell-module)
-
-Add the virtualmachine task to the 02_azure.yml playbook
-
-In VSCode add the next sections to the 02_azure.yml playbook
-
-```ansible
-  - name: Create a VM webserver
-    azure_rm_virtualmachine:
-      resource_group: "{{ resource_group }}"
-      name: "webserver"
-      os_type: Linux
-      admin_username: "{{ user }}"
-      ssh_password_enabled: false
-      ssh_public_keys:
-        - path: "/home/{{ user }}/.ssh/authorized_keys"
-          key_data: "{{ ssh_public_key }}"
-      managed_disk_type: Standard_LRS
+  - name: Install AD-Tools and DNS
+    win_feature:
+      name:
+      - DNS
+      - AD-Domain-Services
       state: present
-      image:
-        offer: RHEL
-        publisher: RedHat
-        sku: "8_4"
-        version: latest
-      vm_size: Standard_A1_v2
-      network_interfaces: "webserver_nic01"
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
+      include_management_tools: yes
+    register: feature_install
 
-  - name: Show webserver public ip
-    debug:
-      msg: "{{ webserver_pub_ip.state.ip_address }}"
+  - name: Reboot if required
+    win_reboot:
+    when: feature_install.reboot_required
 
-  - name: Add webserver to ssh known_hosts
-    shell: "ssh-keyscan -t ecdsa {{ webserver_pub_ip.state.ip_address }}  >> /home/{{ user }}/.ssh/known_hosts"
+  - name: Create new Active Directory
+    win_domain:
+      create_dns_delegation: no
+      database_path: C:\Windows\NTDS
+      dns_domain_name: "{{ domain }}"
+      domain_mode: Win2012R2
+      forest_mode: Win2012R2
+      safe_mode_password: "{{ ansible_password }}"
+      sysvol_path: C:\Windows\SYSVOL
+    register: domain_install
 
+  - name: Reboot if required
+    win_reboot:
+    when: domain_install.reboot_required
 ```
 
-![Alt text](pics/016_azure_vm.png?raw=true "azure vm playbook")
+![Alt text](pics/03_domaincontroller.png?raw=true "domain controller playbook")
 
 Save and commit to Git
 
@@ -399,154 +144,54 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 02_azure.yml
+ansible-playbook 01_domain.yml --ask-vault-password
 
 ```
 
-![Alt text](pics/017_azure_vm_run.png?raw=true "azure vm playbook run")
+![Alt text](pics/04_domaincontroller_play.png?raw=true "domain controller playbook run")
 
-The new webserver is now deployed in Azure and we are able to ssh keyless to the webserver
+## Task 3 Create user and group
 
-## Task 5 Create an ansible dynamic inventory for Azure RM
+[ansible docs - win domain group module](https://docs.ansible.com/ansible/latest/collections/community/windows/win_domain_group_module.html)
+[ansible docs - win domain user module](https://docs.ansible.com/ansible/latest/collections/community/windows/win_domain_user_module.html)
 
-We can either add the webserver in the ansible-hosts file or use an Inventory plugin
+In VSCode create a new file 02_domain.yml
 
-The Azure Resource Manager inventory plugin is part of ansible and can return a dynamic inventory grouped on tags
+Add below to the playbook, this will create a new group and user in AD.
 
-[Azure Resource Manager inventory plugin](https://docs.ansible.com/ansible/latest/plugins/inventory/azure_rm.html)
-
-In VSCode create a new file webserver.azure_rm.yml
-
-Note: The inventory file must end with .azure_rm.yml
-
-```ansible
-plugin: azure_rm
-auth_source: auto
-include_vm_resource_groups:
- - '*'
-keyed_groups:
- - prefix: tag
-   key: tags
-
-```
-
-![Alt text](pics/018_azure_inventory.png?raw=true "vscode create inventory file")
-
-Save and commit to Git
-
-Log on to server "ansible" using ssh
-
-Use git to get the new azure inventory
-
-And run a test against Azure
-
-**Type:**
-
-```bash
-
-cd ansibleclass
-
-git pull
-
-ansible-inventory -i ./webserver.azure_rm.yml --graph
-
-ansible-inventory -i ./webserver.azure_rm.yml --list
-
-```
-
-![Alt text](pics/019_azure_inventory_run.png?raw=true "azure inventory run")
-
-![Alt text](pics/020_azure_inventory_run_list.png?raw=true "azure inventory run list")
-
---list will give a lot more information, --graph will consolidate output in a more viewable way
-
-If we add another server in the Resource Group it will be included in the inventory
-
-## Task 6 Install Apache Webserver and create the site - using ansible Azure dynamic inventory
-
-Install apache webserver, setup the static website, allow http trafic on the local firewall
-
-[Ansible Module dnf](https://docs.ansible.com/ansible/latest/modules/dnf_module.html)
-
-[Ansible Module systemd](https://docs.ansible.com/ansible/latest/modules/systemd_module.html)
-
-[Ansible Module firewalld](https://docs.ansible.com/ansible/latest/modules/firewalld_module.html)
-
-[Ansible Module template](https://docs.ansible.com/ansible/latest/modules/template_module.html)
-
-In VSCode create a new file 01_webserver_azure.yml
-
-Change the websiteauthor to your name
-
-And change the **- hosts: tag_solution_webserver_jesbe** so it matches your initials
+__Type:__
 
 ```ansible
 ---
-- hosts: tag_solution_webserver_jesbe
-  become: yes
+- hosts: domaincontroller
   vars:
-    websiteheader: "Ansible Playbook"
-    websiteauthor: "Jesper Berth"
+    domain: ansible.local
+
   tasks:
-  - name: Install Apache
-    dnf:
-      name: httpd
-      state: latest
+  - name: Create Group
+    community.windows.win_domain_group:
+      name: corp
+      scope: global
+      state: present
 
-  - name: Enable Apache
-    systemd:
-      name: httpd
-      enabled: yes
-      state: started
-
-  - name: Allow http in firewall
-    firewalld:
-      service: http
-      permanent: true
-      state: enabled
-      immediate: yes
-    notify:
-      - reload firewall
-
-  - name: Add index.html
-    template:
-      src: index.html.j2
-      dest: /var/www/html/index.html
-      owner: root
-      group: root
-
-  handlers:
-  - name: reload firewall
-    service:
-      name: firewalld
-      state: reloaded
+  - name: Create user
+    community.windows.win_domain_user:
+      name: basim
+      firstname: Bart
+      surname: Simpson
+      password: P@ssw0rd!
+      state: present
+      groups:
+      - corp
 ```
 
-![Alt text](pics/021_webserver_playbook.png?raw=true "azure install httpd playbook")
-
-In VSCode create a new jinja file index.html.j2
-
-```html
-<html>
-<header><title>{{ websiteheader }}</title></header>
-<body>
-<h1>Welcome to {{ websiteheader }}</h1>
-
-<h3>This site was created with Ansible by {{ websiteauthor }}
-
-</body>
-</html>
-```
-
-![Alt text](pics/022_webserver_template.png?raw=true "azure template")
+![Alt text](pics/05_addgrpanduser.png?raw=true "add group and user")
 
 Save and commit to Git
 
 Log on to server "ansible" using ssh
 
 Use git to get the new azure playbook
-
-Run the new playbook with the dynamic inventory
 
 **Type:**
 
@@ -556,20 +201,127 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 01_webserver_azure.yml -i ./webserver.azure_rm.yml
+ansible-playbook 02_domain.yml --ask-vault-password
 
 ```
 
-![Alt text](pics/023_webserver_run.png?raw=true "webserver playbook run")
+![Alt text](pics/06_addgrpanduser_run.png?raw=true "add group and user playbook run")
 
-Check the result in a browser
+## Task 4 Change DNS for Domainmember
 
-```code
-http://<your webserver ip>
+[ansible docs - win dns client module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_dns_client_module.html)
+
+[ansible docs - win reboot module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
+
+In VSCode create a new file 01_changedns.yml
+
+Add below to the playbook, this will set the member servers dns client to use the new domaincontroller.
+
+```ansible
+---
+- hosts: domainmember
+
+  tasks:
+  - name: Change DNS for member servers
+    ansible.windows.win_dns_client:
+      adapter_names: "*"
+      dns_servers: 10.1.0.7
+
+  - name: Reboot member servers
+    win_reboot:
 ```
 
-![Alt text](pics/024_webserver_site.png?raw=true "webserver site")
+![Alt text](pics/07_changedns.png?raw=true "changedns playbook")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+**Type:**
+
+```bash
+
+cd ansibleclass
+
+git pull
+
+ansible-playbook 01_changedns.yml --ask-vault-password
+
+```
+
+![Alt text](pics/08_changedns_run.png?raw=true "changedns playbook run")
+
+## Task 5 Add member server to AD
+
+[ansible docs - win domain membership module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_domain_membership_module.html)
+
+[ansible docs - win reboot module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
+
+In VSCode create a new file 01_joinad.yml
+
+Add below to the playbook, this will join the member servers to the new Active Directory.
+
+```ansible
+---
+- hosts: domainmember
+  vars:
+    domain: ansible.local
+
+  tasks:
+  - name: Domain Join
+    win_domain_membership:
+      dns_domain_name: "{{ domain }}"
+      domain_admin_user: "{{ ansible_user }}@{{ domain }}"
+      domain_admin_password: "{{ ansible_password }}"
+      state: domain
+    register: domain_join
+
+  - name: Reboot Server
+    win_reboot:
+    when: domain_join.reboot_required
+
+```
+
+![Alt text](pics/09_joinad.png?raw=true "join ad")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+**Type:**
+
+```bash
+
+cd ansibleclass
+
+git pull
+
+ansible-playbook 01_joinad.yml --ask-vault-password
+
+```
+
+![Alt text](pics/10_joinad_run.png?raw=true "join ad playbook run")
+
+Lets check that everything worked
+
+Logon to the Domain Controller (server3) using RDP
+
+In the Server Manager Console, top right corner select tools and click on "Active Directory Users and Computers"
+
+![Alt text](pics/11_open_ad_users.png?raw=true "Open Active Directory Users and Computers")
+
+In the new window click on computers, server4 should be visible here
+
+![Alt text](pics/12_computers.png?raw=true "Show Computers")
+
+Click on users, see that the user "basim" exist and the group "corp" exist, right click on "corp" and select properties select the "Members" Tab, the user "basim" should be a member.
+
+![Alt text](pics/13_grpanduser.png?raw=true "Show Users")
 
 Lab Done
 
-[Ansible Tower](../lab08/lab8.md)
+[Ansible Cloud](../lab08/lab8.md)

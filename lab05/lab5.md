@@ -1,443 +1,78 @@
-# Lab 5: Roles
+# Lab 5: Ansible Lint
 
-Using roles
+Install and run ansible-lint on playbooks
 
 ## Table of Contents
 
 - [Prepare](#prepare)
-- [Task 1 Ansible Galaxy and role install](#task-1-ansible-galaxy-and-role-install)
-- [Task 2 Add SSH key to GitHub](#task-2-add-ssh-key-to-github)
-- [Task 3 Create a role - part 1](#task-3-create-a-role---part-1)
-- [Task 4 Create a role - part 2](#task-4-create-a-role---part-2)
+- [Task 1 Install Ansible Lint](#task-1-install-ansible-lint)
+- [Task 2 Run ansible-lint](#task-2-run-ansible-lint)
 
 ## Prepare
 
-We will need the servers, ansible, server1 and server2 to be up and running - by default they are started after creation
+We will need the servers, ansible to be up and running - by default it is started after creation
 
-## Task 1 Ansible Galaxy and role install
+## Task 1 Install Ansible Lint
 
-[https://galaxy.ansible.com](https://galaxy.ansible.com/home)
+[Ansible Docs - ansible-lint](https://ansible-lint.readthedocs.io/en/latest/)
 
-[Ansible Docs - ansible-galaxy](https://docs.ansible.com/ansible/latest/cli/ansible-galaxy.html)
+Log on to server "ansible" using ssh
 
-![Alt text](pics/001_ansible_galaxy.png?raw=true "ansible galaxy")
+We need to install ansible-lint using pip
 
-Ansible Galaxy holds roles and collections, its an Hub for sharing ansible content
+__Type:__
 
-Search for a role called el_httpd
+```bash
+pip install "ansible-lint[community,yamllint]"
+```
 
-![Alt text](pics/002_ansible_galaxy_search.png?raw=true "ansible galaxy search")
+![Alt text](pics/001_install_ansible_lint.png?raw=true "install ansible lint")
 
-Click on the top result "el_https"
+## Task 2 Run ansible-lint
 
-Click the Read Me for a short description of the role and how use it
-
-Click on the GitHub Repo button to get to the repository for this role, you are able to provide feedback and report issues here
-
-![Alt text](pics/003_ansible_galaxy_role.png?raw=true "ansible galaxy role")
-
-Lets install the role
-
-On the ansible server
+Lets test our playbooks
 
 __Type:__
 
 ```bash
 cd
 
-ansible-galaxy install jesperberth.el_httpd
+cd ansibleclass
 
-ansible-galaxy role list
-
-```
-
-![Alt text](pics/004_ansible_galaxy_role_install.png?raw=true "ansible galaxy role install")
-
-To test the role lets create a new playbook
-
-In VsCode create a new file 01_roles.yml
-
-__Type:__
-
-```ansible
-
----
-- hosts: linuxservers
-  become: yes
-
-  roles:
-     - jesperberth.el_httpd
+ansible-lint
 
 ```
+
+![Alt text](pics/002_run_ansible_lint.png?raw=true "run ansible lint")
+
+Lets take a look on the last three errors - all on 02_loop.yml
+
+* The first in line 3: is a true/false it could be with a capital letter or yes/no (whitch works)
+
+* The Second in line 25: missing space before and after in var
+
+* The third in line 31: missing a new line in the end of document
+
+Change the errors in VSCode
+
+![Alt text](pics/003_ansible_lint_correct.png?raw=true "ansible lint corrections")
 
 Save, Commit and push
 
-![Alt text](pics/005_ansible_role_playbook.png?raw=true "ansible role playbook")
-
-On the ansible server pull the new playbook and run it
+on server ansible
 
 __Type:__
 
 ```bash
-cd  ansibleclass
-
 git pull
 
-ansible-playbook 01_roles.yml --ask-become-pass
+ansible-lint
 
 ```
 
-![Alt text](pics/006_ansible_role_playbook_run.png?raw=true "ansible role playbook run")
+![Alt text](pics/004_ansible_lint_second.png?raw=true "ansible lint second runs")
 
-__Note:__ All tasks should be OK as we installed httpd in a previous lab
-
-## Task 2 Add SSH key to GitHub
-
-[Ansible docs - Roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
-
-We need to do some config to git, as we need to do some of the work on our linux host
-
-And copy our public ssh key to our github account
-
-On ansible
-
-__Type:__
-
-```bash
-cd
-
-git config --global user.email "you@example.com"
-
-git config --global user.name "Your Name"
-
-```
-
-![Alt text](pics/001_git_commands.png?raw=true "git commands")
-
-In your browser go to github.com and login to your account
-
-In the top right corner "click" on your profile and select "Settings"
-
-![Alt text](pics/002_github_settings.png?raw=true "github settings")
-
-In the left menu "click" on "SSH and GPG keys"
-
-![Alt text](pics/003_github_settings.png?raw=true "github settings")
-
-"Click" on the green "New SSH key"
-
-![Alt text](pics/004_github_newssh.png?raw=true "github settings")
-
-From the linux terminal copy the pub key
-
-![Alt text](pics/005_github_pubkey.png?raw=true "github settings")
-
-Give the new key a Title "ansible"
-
-paste the key
-
-and click "Add SSH key"
-
-![Alt text](pics/006_github_pubkey_add.png?raw=true "github settings")
-
-Now the key is created, you can see usage and delete the key when you are done with this course (My key is deleted)
-
-![Alt text](pics/007_github_pubkey.png?raw=true "github settings")
-
-Now lets get the ssh url
-
-In the browser go to your repository on github "click" the green "Code" button and select "SSH" copy the url
-
-![Alt text](pics/008_github_sshurl.png?raw=true "github sshurl")
-
-On ansible
-
-Change the url to your own
-
-__Type:__
-
-```bash
-cd
-
-cd ansibleclass
-
-git remote set-url origin git@github.com:jesperberth/ansibleclass.git
-
-```
-
-![Alt text](pics/009_github_sshurl_cmd.png?raw=true "github sshurl cmd")
-
-Do a git pull
-
-It will prompt you for RSA fingerprint authenticy, write "yes"
-
-![Alt text](pics/010_git_pull.png?raw=true "git pull")
-
-## Task 3 Create a role - part 1
-
-Now we will create our own Role, webserver installing and configuring httpd and php
-
-The role will be placed in the same git repository as we are using for the playbooks, but could have been placed in a seperate repo and committed to Ansible-Galaxy
-
-We will use ansible-galaxy command to initialize a role template
-
-Its important that you do a git pull before we are adding anything in the folders
-
-On ansible
-
-__Type:__
-
-```bash
-
-cd  ansibleclass
-
-git pull
-
-mkdir roles
-
-cd roles
-
-ansible-galaxy init webserver
-
-ls -al
-
-```
-
-![Alt text](pics/007_ansible_galaxy_init.png?raw=true "ansible galaxy init")
-
-Now lets add, commit and push this to our git repo so we can work with the role in VSCode
-
-On ansible
-
-__Type:__
-
-```bash
-
-cd
-
-cd ansibleclass
-
-git add .
-
-git commit -m "Adding roles"
-
-git push origin main
-
-
-```
-
-![Alt text](pics/008_ansible_git_push.png?raw=true "ansible git push")
-
-In VSCode do a push/pull to get the changes, you should see the roles \ webserver with all the default content
-
-![Alt text](pics/009_vscode_push_pull.png?raw=true "vscode push pull")
-
-## Task 4 Create a role - part 2
-
-In VSCode we need to create tasks, handlers, meta and defaults
-
-First thing to do is install all needed packages, start the httpd daemon and open the firewall
-
-In VSCode open the roles/webserver/tasks/main.yml add the following
-
-```ansible
-
----
-# tasks file for webserver
-- name: Install Packages
-  ansible.builtin.package:
-    name: "{{ package }}"
-    state: latest
-  notify: httpd restart
-
-- name: Enable httpd service
-  ansible.builtin.systemd:
-    name: httpd
-    state: started
-    enabled: yes
-
-- name: Configure firewall
-  ansible.posix.firewalld:
-    zone: public
-    service: http
-    permanent: yes
-    state: enabled
-  notify: firewall reload
-
-```
-
-![Alt text](pics/010_vscode_tasks.png?raw=true "vscode tasks")
-
-We will put a list - package in the defaults main.yml
-
-Open defaults/main.yml and add the following
-
-```ansible
-
----
-# defaults file for webserver
-package:
-    - httpd
-    - mod_ssl
-    - openssl
-    - php
-    - php-gd
-    - php-mbstring
-
-```
-
-![Alt text](pics/011_vscode_defaults.png?raw=true "vscode defaults")
-
-We will add the handler firewall reload
-
-Open handlers/main.yml and add the following
-
-```ansible
-
----
-# handlers file for webserver
-- name: firewall reload
-  ansible.builtin.systemd:
-    name: firewalld
-    state: reloaded
-
-- name: httpd restart
-  ansible.builtin.systemd:
-    name: httpd
-    state: restarted
-
-```
-
-![Alt text](pics/012_vscode_handlers.png?raw=true "vscode handlers")
-
-As a last thing, you need to update the meta/main.yml
-
-In VSCode change the meta/main.yml so it matches your information, to get a god score on galaxy you will need to fill in
-
-- author
-- description
-- company
-- licens
-- min_ansible_version
-- platforms
-- galaxy_tags
-- dependecies (if any)
-
-Fill in author, description, company, licens and platform
-
-```ansible
-galaxy_info:
-  author: Jesper Berth
-  description: Install and configure httpd and php on Enterprise Linux
-  company: Arrow ECS
-
-  # If the issue tracker for your role is not on github, uncomment the
-  # next line and provide a value
-  # issue_tracker_url: http://example.com/issue/tracker
-
-  # Choose a valid license ID from https://spdx.org - some suggested licenses:
-  # - BSD-3-Clause (default)
-  # - MIT
-  # - GPL-2.0-or-later
-  # - GPL-3.0-only
-  # - Apache-2.0
-  # - CC-BY-4.0
-  license: BSD-3-Clause
-
-  min_ansible_version: 2.10
-
-  # If this a Container Enabled role, provide the minimum Ansible Container version.
-  # min_ansible_container_version:
-
-  #
-  # Provide a list of supported platforms, and for each platform a list of versions.
-  # If you don't wish to enumerate all versions for a particular platform, use 'all'.
-  # To view available platforms and versions (or releases), visit:
-  # https://galaxy.ansible.com/api/v1/platforms/
-  #
-  platforms:
-   - name: EL
-     versions:
-     - 8
-
-  galaxy_tags: []
-    # List tags for your role here, one per line. A tag is a keyword that describes
-    # and categorizes the role. Users find roles by searching for tags. Be sure to
-    # remove the '[]' above, if you add tags to this list.
-    #
-    # NOTE: A tag is limited to a single word comprised of alphanumeric characters.
-    #       Maximum 20 tags per role.
-
-dependencies: []
-  # List your role dependencies here, one per line. Be sure to remove the '[]' above,
-  # if you add dependencies to this list.
-
-
-```
-
-![Alt text](pics/013_vscode_meta.png?raw=true "vscode meta")
-
-Create an php file index.php make sure its in the root of your ansibleclass repo
-
-In VSCode add the following to index.php
-
-```php
-<?PHP
-echo "Welcome to your new webserver: ";
-echo gethostname();
-?>
-
-```
-
-![Alt text](pics/014_vscode_index_php.png?raw=true "vscode index.php")
-
-And finally lets create a playbook to run it all
-
-First we use our role to install and configure httpd and php next we have a simple task that copies our php file
-
-Create a new file 02_roles.yml add the following
-
-```ansible
----
-- hosts: linuxservers
-  become: yes
-
-  roles:
-      - webserver
-
-  tasks:
-  - name: Copy Index.php
-    ansible.builtin.copy:
-      src: index.php
-      dest: /var/www/html/index.php
-      owner: root
-      group: root
-
-```
-
-![Alt text](pics/015_vscode_roles.png?raw=true "vscode roles")
-
-Save and commit
-
-On the ansible server pull the new playbook and run it
-
-__Type:__
-
-```bash
-cd  ansibleclass
-
-git pull
-
-ansible-playbook 02_roles.yml --ask-become-pass
-
-```
-
-![Alt text](pics/016_vscode_roles_run.png?raw=true "vscode roles run")
-
-Go to the azure portal and get the external ip of server1 or server2 and type it in your browser
-
-![Alt text](pics/01_webpage.png?raw=true "webpage")
 
 Lab done
 
-[Ansible Windows](../lab06/lab6.md)
+[Ansible Roles](../lab06/lab6.md)
