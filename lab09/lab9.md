@@ -269,7 +269,6 @@ __Source:__ Microsoft Azure Resource Manager
 
 __Credential:__ Azure Credentials
 
-
 __Overwrite:__ Checked
 
 __Overwrite Variables:__ Checked
@@ -366,6 +365,7 @@ Change the hosts: to match your initials
 Remove both vars:
 
 websiteheader: "Ansible Playbook"
+
 websiteauthor: "Some Name"
 
 ![Alt text](pics/18_webserver_playbook.png?raw=true "playbook")
