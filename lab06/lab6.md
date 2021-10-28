@@ -110,6 +110,8 @@ git config --global user.email "you@example.com"
 
 git config --global user.name "Your Name"
 
+cat ~/.ssh/id_rsa.pub
+
 ```
 
 ![Alt text](pics/001_git_commands.png?raw=true "git commands")
