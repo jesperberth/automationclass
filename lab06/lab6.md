@@ -1,4 +1,4 @@
-# Lab 7: Ansible Windows
+# Lab 6: Ansible Windows
 
 In this session we will use ansible to setup and manage Active Directory, add users and groups and join a second server to the domain.
 

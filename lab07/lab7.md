@@ -1,4 +1,4 @@
-# Lab 6: Ansible Cloud
+# Lab 7: Ansible Cloud
 
 In this session we will use ansible to setup and manage resources in Azure to deploy a virtual machine with a webserver installed and running
 
