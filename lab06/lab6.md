@@ -225,8 +225,6 @@ git commit -m "Adding roles"
 
 git push origin main
 
-ansible-playbook 02_domain.yml --ask-vault-password
-
 ```
 
 ![Alt text](pics/008_ansible_git_push.png?raw=true "ansible git push")
