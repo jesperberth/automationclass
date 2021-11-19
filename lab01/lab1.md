@@ -51,32 +51,32 @@ To meet ansible 2.12 requirements we need to upgrade Python to version 3.9
 
 ```bash
 
-sudo dnf install @python39
+sudo dnf install -y @python39
 
 ```
 
 ![Alt text](pics/000_install_python.png?raw=true "install python")
 
-```bash
-sudo dnf install -y python3-pip virtualenv
-```
-
-![Alt text](pics/001_install_pip3.png?raw=true "Install Python3 PIP3 and Virtualenv")
-
-__Type:__
+And we need to set the alternative for python3 command to python3.9
 
 ```bash
-sudo pip3 install --upgrade pip
+
+sudo alternatives --set python3 /usr/bin/python3.9
+
+python3 --version
+
 ```
 
-![Alt text](pics/002_install_pip3_upgrade.png?raw=true "Upgrade PIP")
+![Alt text](pics/000_default_python.png?raw=true "default python")
 
 Lets create a Python virtualenv for our ansible installation
 
 __Type:__
 
 ```bash
-virtualenv ansible
+
+python3 -m venv ansible
+
 ```
 
 ![Alt text](pics/003_create_virtualenv.png?raw=true "create virtualenv Ansible")
@@ -88,9 +88,13 @@ which python - is just to check that were using the correct python
 __Type:__
 
 ```bash
+
 source ansible/bin/activate
 
 which python
+
+python --version
+
 ```
 
 Note: That when you are in a virtualenv, the name of the environment will be in the beginning of you command prompt like (ansible)
@@ -98,6 +102,16 @@ Note: That when you are in a virtualenv, the name of the environment will be in 
 If you need to exit the virtualenv, you type "deactivate"
 
 ![Alt text](pics/003_activate_virtualenv.png?raw=true "active virtualenv Ansible")
+
+__Type:__
+
+```bash
+
+pip3 install --upgrade pip
+
+```
+
+![Alt text](pics/002_install_pip3_upgrade.png?raw=true "Upgrade PIP")
 
 __Type:__
 
@@ -243,7 +257,7 @@ __Type:__
 ansible linuxservers -m ping
 ```
 
-when it asks "Are you sure you want to continue connecting (yes/no)?" type yes
+If it asks "Are you sure you want to continue connecting (yes/no)?" type yes
 
 ![Alt text](pics/009_connect_error.png?raw=true "Connect Error")
 
