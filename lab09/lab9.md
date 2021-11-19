@@ -1,6 +1,6 @@
-# Lab 9: Ansible AWX / Ansible Tower
+# Lab 9: Ansible AWX
 
-In this session we will use AWX / Ansible Tower to orchestrate our ansible playbooks
+In this session we will use Ansible AWX to orchestrate our ansible playbooks
 
 ## Table of Contents
 
