@@ -47,6 +47,16 @@ Note: Sudo Password is equal to your user account password
 
 Ansible is a Python based program, we will install python in a Python Virtuelenv, in which we can isolate the python version and modules from the system python.
 
+To meet ansible 2.12 requirements we need to upgrade Python to version 3.9
+
+```bash
+
+sudo dnf install @python39
+
+```
+
+![Alt text](pics/000_install_python.png?raw=true "install python")
+
 ```bash
 sudo dnf install -y python3-pip virtualenv
 ```

@@ -620,4 +620,4 @@ ansible-playbook 03_azure.yml
 
 Lab Done
 
-[Ansible Tower](../lab09/lab9.md)
+[Ansible AWX](../lab09/lab9.md)
