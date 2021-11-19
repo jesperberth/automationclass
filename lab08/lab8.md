@@ -11,6 +11,7 @@ In this session we will use ansible to setup and manage resources in Azure to de
 - [Task 4 Create Public Ip, NIC and Security Group in Azure](#task-4-create-public-ip-nic-and-security-group-in-azure)
 - [Task 5 Create an ansible dynamic inventory for Azure RM](#task-5-create-an-ansible-dynamic-inventory-for-azure-rm)
 - [Task 6 Install Apache Webserver and create the site - using ansible Azure dynamic inventory](#task-6-install-apache-webserver-and-create-the-site---using-ansible-azure-dynamic-inventory)
+- [Task 7 Delete Resource Group Webserver](#task-7-delete-resource-group-Webserver)
 
 ## Prepare
 
@@ -569,6 +570,53 @@ http://<your webserver ip>
 ```
 
 ![Alt text](pics/024_webserver_site.png?raw=true "webserver site")
+
+## Task 7 Delete Resource Group Webserver
+
+We need to delete the webserver_{{user}} Resource group from Azure before we can start on the next lab
+
+In VSCode create a new file 03_azure.yml
+
+add the following text to the file, change the name of the variable user to your initials use the same as you use to login to ansible server
+
+```ansible
+
+---
+- hosts: localhost
+  connection: local
+  vars:
+    user: write your username here
+  tasks:
+  - name: Delete resource group
+    azure_rm_resourcegroup:
+      name: "webserver_{{ user }}"
+      location: northeurope
+      state: absent
+      force_delete_nonempty: yes
+
+```
+
+![Alt text](pics/025_delete_rg.png?raw=true "delete rg")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+**Type:**
+
+```bash
+
+cd ansibleclass
+
+git pull
+
+ansible-playbook 03_azure.yml
+
+```
+
+![Alt text](pics/026_delete_rg_run.png?raw=true "delete rg run")
 
 Lab Done
 

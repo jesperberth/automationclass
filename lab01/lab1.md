@@ -360,7 +360,7 @@ ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=ye
 
 ## Task 4 Connect Windows Host
 
-Windows Servers can be connected in different ways, we will use ansible_messageencryption, but Certificate encryption is available, but requires more work 
+Windows Servers can be connected in different ways, we will use ansible_messageencryption, but Certificate encryption is available, but requires more work
 
 Log on to server "ansible" using ssh
 
@@ -483,7 +483,7 @@ ansible-doc -l ansible.windows
 
 ![Alt text](pics/025_ansible-doc.png?raw=true "ansible-doc -l")
 
-You can get the documentation for a single module with ansible-doc <modulename>
+You can get the documentation for a single module with ansible-doc *modulename*
 
 __Type:__
 
