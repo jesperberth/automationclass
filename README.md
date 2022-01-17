@@ -1,6 +1,6 @@
 # Automationclass with Ansible
 
-## Automate Linux, Windows, VMware, Network and Cloud
+## Automate Linux, Windows and Cloud
 
 ### Prerequsits
 
