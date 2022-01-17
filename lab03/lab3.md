@@ -176,6 +176,8 @@ Copy the following inventory to ansible-hosts.yml
 
 We need to set an option in vi before pasteing the configuration
 
+__Remember__ to change the ansible_user to your initials
+
 ```ansible
 
 linuxservers:
