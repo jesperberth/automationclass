@@ -38,6 +38,22 @@ Cloud shell is now ready
 
 In Azure Cloud Shell(Bash)
 
+```bash
+
+cd
+
+virtualenv ansible
+
+source ansible/bin/activate
+
+pip install ansible
+
+ansible-galaxy collection install azure.azcollection
+
+pip install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt
+
+```
+
 __Note:__
 
 Username cannot be __root/administrator/admin/user/guest/owner/adm__
@@ -61,6 +77,8 @@ Password will be visible on the screen
 cd clouddrive
 
 git clone https://github.com/jesperberth/automationclass_setup/
+
+git pull
 
 cd automationclass_setup
 
