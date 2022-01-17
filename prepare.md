@@ -78,6 +78,8 @@ cd clouddrive
 
 git clone https://github.com/jesperberth/automationclass_setup/
 
+cd automation_class
+
 git pull
 
 cd automationclass_setup
