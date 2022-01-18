@@ -66,7 +66,7 @@ __Type:__
   become: yes
 
   roles:
-     - jesperberth.el_httpd
+      - jesperberth.el_httpd
 
 ```
 
