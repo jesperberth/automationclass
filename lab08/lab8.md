@@ -30,13 +30,12 @@ Before installtion the collection we need to install several python modules, the
 **Type:**
 
 ```bash
+
 cd
 
-wget https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
-
-pip install -r requirements-azure.txt
-
 ansible-galaxy collection install azure.azcollection
+
+pip install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt
 
 ```
 
