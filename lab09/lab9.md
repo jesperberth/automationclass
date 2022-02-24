@@ -41,6 +41,112 @@ In Task 1 you took a tour round the AWX interface, by default the installation c
 - Demo Credential
 - Demo Job Template
 
+First we need to get a OAUTHTOKEN for AWX
+
+In the AWX console
+
+In the left pane, in the Access Block click Users
+
+Select the user "Admin"
+
+![Alt text](pics/01_ansible_tower_adminuser.png?raw=true "select admin user")
+
+Click Tokens
+
+![Alt text](pics/02_ansible_tower_token.png?raw=true "admin token")
+
+Click Add
+
+In the Create User Token window
+
+Select "Write" in the Scope dropdown box click save
+
+![Alt text](pics/03_ansible_tower_create_token.png?raw=true "create admin token")
+
+The Token will only be visible one time so copy the token and save it in a notepad we need it in a monment
+
+![Alt text](pics/04_ansible_tower_view_token.png?raw=true "view admin token")
+
+On the ansible server we need to set three Environment variables
+
+Change the IP to your awx host
+
+Change the OAUTH_TOKEN to the one you just created
+
+Run all three export commands on the ansible server
+
+__Type:__
+
+```bash
+
+export CONTROLLER_HOST=http://137.135.180.213
+export CONTROLLER_USERNAME=admin
+export CONTROLLER_OAUTH_TOKEN=flNNBoKPnlnMyNTAhHL4hhMhFxmzTe
+
+```
+
+![Alt text](pics/05_ansible_tower_export_token.png?raw=true "export token")
+
+In VSCode create a new playbook 01_awx.yml
+
+Add below to the playbook
+
+```ansible
+---
+- hosts: localhost
+  connection: local
+  vars:
+
+  tasks:
+  - name: Remove Demo Template
+    awx.awx.job_template:
+      name: Demo Job Template
+      organization: Default
+      state: absent
+
+  - name: Remove Demo credential
+    awx.awx.credential:
+      name: Demo Credential
+      credential_type: Machine
+      state: absent
+
+  - name: Remove Demo inventory
+    awx.awx.inventory:
+      name: Demo Inventory
+      organization: Default
+      state: absent
+
+  - name: Remove Demo project
+    awx.awx.project:
+      name: Demo Project
+      organization: Default
+      state: absent
+```
+
+![Alt text](pics/06_create_awx_playbook.png?raw=true "awx playbook")
+
+Save and commit to Git
+
+On the ansible server
+
+Use git to get the new azure playbook
+
+__Type:__
+
+```bash
+
+cd ansibleclass
+
+git pull
+
+ansible-playbook 01_awx.yml
+
+```
+
+![Alt text](pics/07_run_awx_playbook.png?raw=true "awx playbook run")
+
+Now go to the awx portal and take a look around, Demo Template, Credential, Inventory and Project is gone
+
 ## Task 3 Create Project inventory and Credential
 
 In the left pane, click Projects
