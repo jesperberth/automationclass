@@ -6,14 +6,15 @@ In this session we will use Ansible AWX to orchestrate our ansible playbooks
 
 - [Prepare](#prepare)
 - [Task 1 Login to Ansible Tower](#task-1-login-to-ansible-tower)
-- [Task 2 Create Organization Project inventory and Credential](#task-2-create-organization-project-inventory-and-credential)
-- [Task 3 Create Azure RM Template](#task-3-create-azure-rm-template)
-- [Task 4 Create Azure Webserver template](#task-4-create-azure-webserver-template)
-- [Task 5 Create Azure Dynamic Inventory Source](#task-5-create-azure-dynamic-inventory-source)
-- [Task 6 Create Webserver credential](#task-6-create-webserver-credential)
-- [Task 7 Create Webserver Template](#task-7-create-webserver-template)
-- [Task 8 Create Workflow template](#task-8-create-workflow-template)
-- [Task 9 Run Workflow template](#task-9-run-workflow-template)
+- [Task 2 Modify AWX with playbook](#task-2-modify-awx-with-playbook)
+- [Task 3 Create Organization Project inventory and Credential](#task-3-create-organization-project-inventory-and-credential)
+- [Task 4 Create Azure RM Template](#task-4-create-azure-rm-template)
+- [Task 5 Create Azure Webserver template](#task-5-create-azure-webserver-template)
+- [Task 6 Create Azure Dynamic Inventory Source](#task-6-create-azure-dynamic-inventory-source)
+- [Task 7 Create Webserver credential](#task-7-create-webserver-credential)
+- [Task 8 Create Webserver Template](#task-8-create-webserver-template)
+- [Task 9 Create Workflow template](#task-9-create-workflow-template)
+- [Task 10 Run Workflow template](#task-10-run-workflow-template)
 
 ## Prepare
 
@@ -29,19 +30,124 @@ Log in user and password will be given by instructor
 
 Take a tour around in the UI
 
-## Task 2 Create Organization Project inventory and Credential
+## Task 2 Modify AWX with playbook
 
-In the left pane, click Organizations
+We can use ansible playbooks to create, change or remove objects in AWX
 
-Click Add to create a new Organization
+In Task 1 you took a tour round the AWX interface, by default the installation creates the following objects, we will create a ansible playbook to remove these items
 
-Type
+- Demo Inventory
+- Demo Project
+- Demo Credential
+- Demo Job Template
 
-__Name:__ Default
+First we need to get a OAUTHTOKEN for AWX
 
-Leave the rest, click __Save__
+In the AWX console
 
-![Alt text](pics/01_ansible_tower_org.png?raw=true "Create a project")
+In the left pane, in the Access Block click Users
+
+Select the user "Admin"
+
+![Alt text](pics/01_ansible_tower_adminuser.png?raw=true "select admin user")
+
+Click Tokens
+
+![Alt text](pics/02_ansible_tower_token.png?raw=true "admin token")
+
+Click Add
+
+In the Create User Token window
+
+Select "Write" in the Scope dropdown box click save
+
+![Alt text](pics/03_ansible_tower_create_token.png?raw=true "create admin token")
+
+The Token will only be visible one time so copy the token and save it in a notepad we need it in a monment
+
+![Alt text](pics/04_ansible_tower_view_token.png?raw=true "view admin token")
+
+On the ansible server we need to set three Environment variables
+
+Change the IP to your awx host
+
+Change the OAUTH_TOKEN to the one you just created
+
+Run all three export commands on the ansible server
+
+__Type:__
+
+```bash
+
+export CONTROLLER_HOST=http://137.135.180.213
+export CONTROLLER_USERNAME=admin
+export CONTROLLER_OAUTH_TOKEN=flNNBoKPnlnMyNTAhHL4hhMhFxmzTe
+
+```
+
+![Alt text](pics/05_ansible_tower_export_token.png?raw=true "export token")
+
+In VSCode create a new playbook 01_awx.yml
+
+Add below to the playbook
+
+```ansible
+---
+- hosts: localhost
+  connection: local
+  vars:
+
+  tasks:
+  - name: Remove Demo Template
+    awx.awx.job_template:
+      name: Demo Job Template
+      organization: Default
+      state: absent
+
+  - name: Remove Demo credential
+    awx.awx.credential:
+      name: Demo Credential
+      credential_type: Machine
+      state: absent
+
+  - name: Remove Demo inventory
+    awx.awx.inventory:
+      name: Demo Inventory
+      organization: Default
+      state: absent
+
+  - name: Remove Demo project
+    awx.awx.project:
+      name: Demo Project
+      organization: Default
+      state: absent
+```
+
+![Alt text](pics/06_create_awx_playbook.png?raw=true "awx playbook")
+
+Save and commit to Git
+
+On the ansible server
+
+Use git to get the new azure playbook
+
+__Type:__
+
+```bash
+
+cd ansibleclass
+
+git pull
+
+ansible-playbook 01_awx.yml
+
+```
+
+![Alt text](pics/07_run_awx_playbook.png?raw=true "awx playbook run")
+
+Now go to the awx portal and take a look around, Demo Template, Credential, Inventory and Project is gone
+
+## Task 3 Create Project inventory and Credential
 
 In the left pane, click Projects
 
@@ -109,7 +215,7 @@ Leave the rest as default and click __Save__
 
 ![Alt text](pics/05_ansible_tower_create_credential_filled.png?raw=true "Create credential")
 
-## Task 3 Create Azure RM Template
+## Task 4 Create Azure RM Template
 
 In VSCode
 
@@ -153,7 +259,7 @@ Click on the "Launch" button and wait a minute to see the result
 
 ![Alt text](pics/09_ansible_tower_template_run.png?raw=true "Run template")
 
-## Task 4 Create Azure Webserver template
+## Task 5 Create Azure Webserver template
 
 In VSCode
 
@@ -251,7 +357,7 @@ Wait for template to finish
 
 ![Alt text](pics/13_launch_template_run.png?raw=true "launch template")
 
-## Task 5 Create Azure Dynamic Inventory Source
+## Task 6 Create Azure Dynamic Inventory Source
 
 In the left pane click on Inventory
 
@@ -310,7 +416,7 @@ You should see a few groups based on the tags that are on the vm's in Azure
 
 ![Alt text](pics/15_azure_inventory_result.png?raw=true "azure inventory sync result")
 
-## Task 6 Create Webserver credential
+## Task 7 Create Webserver credential
 
 We need the __private__ ssh key from server ansible
 
@@ -352,7 +458,7 @@ Leave the rest as default and click __Save__
 
 ![Alt text](pics/17_create_ssh_cred.png?raw=true "create cred")
 
-## Task 7 Create Webserver Template
+## Task 8 Create Webserver Template
 
 In VSCode
 
@@ -396,7 +502,7 @@ Leave the rest as default and click __Save__
 
 ![Alt text](pics/19_webserver_template_create.png?raw=true "Create template")
 
-## Task 8 Create Workflow template
+## Task 9 Create Workflow template
 
 In the left pane, click Templates
 
@@ -520,7 +626,7 @@ Toggle switch to On
 
 ![Alt text](pics/28_survey_on.png?raw=true "Create survey 2")
 
-## Task 9 Run Workflow template
+## Task 10 Run Workflow template
 
 In the left pane click Templates, click on the Rocket to Launch the Workflow
 
