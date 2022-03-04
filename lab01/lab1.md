@@ -495,6 +495,10 @@ ansible-galaxy collection install ansible.windows
 
 You can list all installed modules with ansible-doc -l and filter out from collection ansible-doc -l ansible.windows for modules in the collection we just installed
 
+__Hint:__
+
+ You can use "q" to quit the viewing
+
 __Type:__
 
 ```bash
