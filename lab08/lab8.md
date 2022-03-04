@@ -57,7 +57,7 @@ In the top bar, click the "cloudshell" icon marked with red
 
 ![Alt text](pics/01_start_cloud_shell.png?raw=true "Cloud Shell")
 
-Select "Bash"
+Select "Powershell"
 
 ![Alt text](pics/02_start_cloud_shell_bash.png?raw=true "Cloud Shell")
 
@@ -67,9 +67,11 @@ Set the user variable to your initials
 
 ```bash
 
-USER=jesbe
+$USER = "jesbe"
 
-az ad sp create-for-rbac --name ansible-$USER --role Contributor
+$SubID = (az account list | convertfrom-json).Id
+
+az ad sp create-for-rbac --name ansible-$USER --role Contributor --scopes /subscriptions/$SubID
 
 ```
 
@@ -81,7 +83,7 @@ We need to get the Subscription ID run the following in the Cloud Shell
 
 ```bash
 
-az account show
+$SubID
 
 ```
 
@@ -95,7 +97,7 @@ Log on to server "ansible" using ssh
 
 We will create the authentication file, you must start in your home dir
 
-**Type:**
+__Type:__
 
 ```bash
 cd
