@@ -523,6 +523,26 @@ ansible-doc ansible.windows.win_feature
 
 ![Alt text](pics/026_ansible-doc-winfeature.png?raw=true "ansible-doc -l")
 
+## Optional Set Nano as default editor
+
+Some ansible commands as ansible-vault will use a the default editor vi
+
+You can change the default editor to nano or other preferred editors to do so follow the guide below
+
+```bash
+
+nano ~/.bashrc
+
+```
+
+Add the line at the end of the configuration file
+
+```bash
+
+export EDITOR=nano
+
+```
+
 Next Lab
 
 [Ansible Playbooks](../lab02/lab2.md)

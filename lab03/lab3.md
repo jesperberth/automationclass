@@ -30,7 +30,7 @@ vi ansible-hosts
 
 In vi go to the line ansible_password=SomeThingSimple8
 
-**type:**
+__type:__
 
 in vi dd will remove the line
 
@@ -46,7 +46,7 @@ ansible_winrm_transport=ntlm
 ansible_winrm_message_encryption=always
 ```
 
-**Type:**
+__Type:__
 
 ```bash
 Hit Esc-key
@@ -58,7 +58,7 @@ Hit Esc-key
 
 Next lets create an encryptet var file for ansible
 
-**Type:**
+__Type:__
 
 ```bash
 cd
@@ -73,7 +73,7 @@ You will be promptet for a password and to confirm the password
 
 ansible-vault will open your default editor - in our case its vi
 
-In vi **type:**
+In vi __type:__
 
 ```bash
 i (for input)
@@ -84,7 +84,7 @@ windows_password: SomeThingSimple8   <------ Type your Windows password here
 
 ```
 
-**Type:**
+__Type:__
 
 ```bash
 Hit Esc-key
@@ -96,7 +96,7 @@ Hit Esc-key
 
 Try to cat the file
 
-**Type:**
+__Type:__
 
 ```bash
 
@@ -110,7 +110,7 @@ To change the content of an encryptet file use ansible-vault edit filename
 
 You will need to type your password again ..
 
-**Type:**
+__Type:__
 
 ```bash
 
@@ -126,7 +126,7 @@ In VSCode
 
 Create a new file 01_vault.yml
 
-**Type:**
+__Type:__
 
 ```ansible
 ---
@@ -172,7 +172,7 @@ Lets create a new ansible-hosts.yml
 
 Copy the following inventory to ansible-hosts.yml
 
-**Note:**
+__Note:__
 
 We need to set an option in vi before pasteing the configuration
 
@@ -197,7 +197,7 @@ windowsservers:
 
 ```
 
-**Type:**
+__Type:__
 
 ```bash
 
@@ -222,7 +222,7 @@ You can do a copy/paste of the inventory
 
 ![Alt text](pics/037_yaml_inventory.png?raw=true "yaml inventory")
 
-**Type:**
+__Type:__
 
 ```bash
 Hit Esc-key
@@ -244,7 +244,7 @@ inventory = /home/jesbe/ansible-hosts.yml
 
 ```
 
-**Type:**
+__Type:__
 
 ```bash
 Hit Esc-key
@@ -270,7 +270,7 @@ In this task we will encrypt the password for the windows servers and place it i
 
 Encrypt you password
 
-**Type:**
+__Type:__
 
 ```bash
 
@@ -306,7 +306,7 @@ i (to toggle insert)
 
 Save the inventory file
 
-**Type:**
+__Type:__
 
 ```bash
 Hit Esc-key
