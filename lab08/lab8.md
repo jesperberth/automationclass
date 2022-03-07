@@ -57,7 +57,7 @@ In the top bar, click the "cloudshell" icon marked with red
 
 ![Alt text](pics/01_start_cloud_shell.png?raw=true "Cloud Shell")
 
-Select "Powershell"
+Select "Bash"
 
 ![Alt text](pics/02_start_cloud_shell_bash.png?raw=true "Cloud Shell")
 
@@ -67,9 +67,9 @@ Set the user variable to your initials
 
 ```bash
 
-$USER = "jesbe"
+USER=jesbe
 
-$SubID = (az account list | convertfrom-json).Id
+SubID=$(az account list --query "[].{id:id}" -o tsv)
 
 az ad sp create-for-rbac --name ansible-$USER --role Contributor --scopes /subscriptions/$SubID
 
@@ -83,7 +83,7 @@ We need to get the Subscription ID run the following in the Cloud Shell
 
 ```bash
 
-$SubID
+echo $SubID
 
 ```
 
