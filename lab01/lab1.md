@@ -19,7 +19,7 @@ We will need the servers, __ansible, server1__ and __server3__ to be up and runn
 
 ## Task 1 Install Ansible
 
-Log on to server __ansible__ using ssh
+Log on to your workstation __student__ using rdp
 
 On the Azure portal click Virtual Machines
 
