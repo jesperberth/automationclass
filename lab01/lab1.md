@@ -45,7 +45,7 @@ Click "More choises" type your username/initials and password click __Ok__
 
 ![Alt text](pics/000_azure_portal_vm_mstsc_login.png?raw=true "mstsc login")
 
-Put a select the "Don't ask me again for connections to this computer and click __Yes__
+Select the "Don't ask me again for connections to this computer and click __Yes__
 
 ![Alt text](pics/000_azure_portal_vm_mstsc_login_yes.png?raw=true "mstsc login")
 
@@ -59,7 +59,15 @@ In the startmenu __Type__ "terminal" and click on __Windows Terminal__
 
 ![Alt text](pics/000_student_start_winterm.png?raw=true "Student start winterminal")
 
-In the Windows Terminal, Powershell or CMD write ssh __username@ansible-vm-ip__ hit enter
+In the Windows Terminal write ssh __username@ansible__ hit enter
+
+__Type:__
+
+```bash
+
+yes - to accept the fingerprint
+
+```
 
 ![Alt text](pics/000_azure_ssh.png?raw=true "ssh")
 
