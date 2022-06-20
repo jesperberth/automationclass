@@ -73,7 +73,8 @@ yes - to accept the fingerprint
 
 __Type:__
 
-Note: Sudo Password is equal to your user account password
+> **Note**
+> Sudo Password is equal to your user account password
 
 Ansible is a Python based program, we will install python in a Python Virtuelenv, in which we can isolate the python version and modules from the system python.
 
@@ -127,7 +128,8 @@ python --version
 
 ```
 
-Note: That when you are in a virtualenv, the name of the environment will be in the beginning of you command prompt like (ansible)
+> **Note**
+> That when you are in a virtualenv, the name of the environment will be in the beginning of you command prompt like (ansible)
 
 If you need to exit the virtualenv, you type "deactivate"
 
@@ -225,9 +227,8 @@ vi .ansible.cfg
 
 ![Alt text](pics/007_ansible_cfg.png?raw=true "ansible config")
 
-__Note:__
-
-Change __jesbe__ in the path with your username
+> **Note**
+> Change __jesbe__ in the path with your username
 
 In vi __type:__
 
@@ -327,9 +328,8 @@ hit enter again
 
 We need to copy the public key to server1
 
-__Note:__
-
-Change __jesbe__ to your username
+> **Note**
+> Change __jesbe__ to your username
 
 __Type:__
 
@@ -431,9 +431,8 @@ Lets add the windows server to our ansible hosts file
 
 Yes the password is in clear text, you can encrypt the password with ansible-vault
 
-__Note:__
-
-Change __ansible_user__ and __ansible_password__ to your username and password
+> **Note**
+> Change __ansible_user__ and __ansible_password__ to your username and password
 
 Add after the first group, linuxservers
 
