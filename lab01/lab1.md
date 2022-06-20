@@ -367,8 +367,8 @@ ansible linuxservers -m ping
 
 Lets test a few ansible commands
 
-**Note**
-Change jesbe to your username
+> **Note**
+> Change jesbe to your username
 
 __Type:__
 
