@@ -6,7 +6,15 @@
 
 #### Environment
 
-5 servers - made available in Azure
+Envoronment deployed in Microsoft Azure
+
+6 Virtual Machines
+
+1 Student PC Running Windows 11 Pro
+
+* student - 10.1.0.9
+
+5 servers
 
 3 - Running Red Hat Enterprise Linux 8
 Accessible with ssh and http/https
@@ -21,23 +29,19 @@ Accessible with winRM and RDP
 * server3 - 10.1.0.7
 * server4 - 10.1.0.8
 
-#### Software on your client
+#### Software on student PC
 
-* VSCode (or other IDE) [Download vscode](https://code.visualstudio.com/download)
+* Windows Terminal
+* Windows Subsystem for Linux (WSL2)
+* VSCode [Download vscode](https://code.visualstudio.com/download)
 * Git [Download Git](https://git-scm.com/downloads)
-* ssh client
-* RDP client
-* Webbrowser
 * Optional: Powershell Core 7 [Download Powershell Core](https://github.com/PowerShell/PowerShell)
-* Optional: Windows Terminal (Install from Windows Store)
-
-[Prepare Labs](prepare.md)
 
 ## Labs
 
 ### Lab 1: [Install Ansible](lab01/lab1.md)
 
-Install Ansible and Connect to a Linux and Windows Server
+Deploy Lab and Install Ansible and Connect to a Linux and Windows Server
 
 ### Lab 2: [Ansible Playbooks](lab02/lab2.md)
 
