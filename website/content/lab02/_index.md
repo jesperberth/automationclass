@@ -1,4 +1,9 @@
-# Lab 2: Ansible Playbooks
+---
+title: "Ansible Playbooks"
+weight: 20
+chapter: false
+pre: "<b>Lab 2. </b>"
+---
 
 In this session we will install and use Visual Studio Code with a few plugins to start working with ansible playbooks and create two playbooks, one for linux and one for windows
 
