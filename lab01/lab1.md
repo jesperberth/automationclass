@@ -22,19 +22,19 @@ In your browser go to [http://portal.azure.com](http://portal.azure.com)
 
 __Note:__ Run the browser in Incognito/Private mode to avoid issues with cashed credentials
 
-![Alt text](pics/01_azure_login.png?raw=true "Azure login")
+![Alt text](images/01_azure_login.png?raw=true "Azure login")
 
 In the top bar, click the "cloudshell" icon marked with red
 
-![Alt text](pics/05_start_cloud_shell.png?raw=true "Cloud Shell")
+![Alt text](images/05_start_cloud_shell.png?raw=true "Cloud Shell")
 
 Select Bash
 
-![Alt text](pics/05_start_cloud_shell_bash.png?raw=true "Cloud Shell Bash")
+![Alt text](images/05_start_cloud_shell_bash.png?raw=true "Cloud Shell Bash")
 
 Select "Show advanced settings"
 
-![Alt text](pics/06_start_cloud_shell_advanced.png?raw=true "Cloud Shell bash")
+![Alt text](images/06_start_cloud_shell_advanced.png?raw=true "Cloud Shell bash")
 
 Set Cloud Shell region to __"North Europe"__
 
@@ -44,11 +44,11 @@ Storage account: Select Use existing your storage account will be selected, as y
 
 File Share: Select existing __userXansible__
 
-![Alt text](pics/07_start_cloud_shell_advanced_set.png?raw=true "Cloud Shell advanced")
+![Alt text](images/07_start_cloud_shell_advanced_set.png?raw=true "Cloud Shell advanced")
 
 Cloud shell is now ready
 
-![Alt text](pics/09_start_cloud_shell_ready.png?raw=true "Cloud Shell storage")
+![Alt text](images/09_start_cloud_shell_ready.png?raw=true "Cloud Shell storage")
 
 In Azure Cloud Shell(Bash)
 
@@ -64,7 +64,7 @@ chmod +x deploy_lab.sh
 
 ```
 
-![Alt text](pics/10_run_deploy_lab.png?raw=true "Run deploy_lab.sh")
+![Alt text](images/10_run_deploy_lab.png?raw=true "Run deploy_lab.sh")
 
 __Note:__
 
@@ -87,9 +87,9 @@ Password will be visible on the screen
 
 The playbook will create all resources needed for the Automation class - Lab 01 -> Lab 05
 
-![Alt text](pics/11_enter_user_password.png?raw=true "Enter Username and password")
+![Alt text](images/11_enter_user_password.png?raw=true "Enter Username and password")
 
-![Alt text](pics/11_lab_ready.png?raw=true "Labs are ready")
+![Alt text](images/11_lab_ready.png?raw=true "Labs are ready")
 
 Lab is now deployed
 
@@ -105,41 +105,41 @@ Log on to your workstation __student__ using rdp
 
 On the Azure portal click Virtual Machines
 
-![Alt text](pics/000_azure_portal.png?raw=true "Azure Portal")
+![Alt text](images/000_azure_portal.png?raw=true "Azure Portal")
 
 Select your Resource Group, it's named __ansible-initials__
 
-![Alt text](pics/000_azure_portal_resourcegroup.png?raw=true "Azure Portal")
+![Alt text](images/000_azure_portal_resourcegroup.png?raw=true "Azure Portal")
 
 Click on the student vm
 
-![Alt text](pics/000_azure_portal_vm.png?raw=true "Azure Portal VMs")
+![Alt text](images/000_azure_portal_vm.png?raw=true "Azure Portal VMs")
 
 Get the ansible servers external ip, click on the "Copy to ClipBoard"
 
-![Alt text](pics/000_azure_portal_vm_ip.png?raw=true "Azure Portal VM ip")
+![Alt text](images/000_azure_portal_vm_ip.png?raw=true "Azure Portal VM ip")
 
 Start a Remote Desktop Client (On windows run __mstsc__) paste the public IP and connect
 
-![Alt text](pics/000_azure_portal_vm_mstsc.png?raw=true "mstsc")
+![Alt text](images/000_azure_portal_vm_mstsc.png?raw=true "mstsc")
 
 Click "More choises" type your username/initials and password click __Ok__
 
-![Alt text](pics/000_azure_portal_vm_mstsc_login.png?raw=true "mstsc login")
+![Alt text](images/000_azure_portal_vm_mstsc_login.png?raw=true "mstsc login")
 
 Select the "Don't ask me again for connections to this computer and click __Yes__
 
-![Alt text](pics/000_azure_portal_vm_mstsc_login_yes.png?raw=true "mstsc login")
+![Alt text](images/000_azure_portal_vm_mstsc_login_yes.png?raw=true "mstsc login")
 
 On the stundent vm click __Accept__
 
-![Alt text](pics/000_student_accept.png?raw=true "Student accept")
+![Alt text](images/000_student_accept.png?raw=true "Student accept")
 
 Start Windows Terminal
 
 In the startmenu __Type__ "terminal" and click on __Windows Terminal__
 
-![Alt text](pics/000_student_start_winterm.png?raw=true "Student start winterminal")
+![Alt text](images/000_student_start_winterm.png?raw=true "Student start winterminal")
 
 In the Windows Terminal write ssh __username@ansible__ hit enter
 
@@ -151,7 +151,7 @@ yes - to accept the fingerprint
 
 ```
 
-![Alt text](pics/000_azure_ssh.png?raw=true "ssh")
+![Alt text](images/000_azure_ssh.png?raw=true "ssh")
 
 __Type:__
 
@@ -168,7 +168,7 @@ sudo dnf install -y @python39
 
 ```
 
-![Alt text](pics/000_install_python.png?raw=true "install python")
+![Alt text](images/000_install_python.png?raw=true "install python")
 
 And we need to set the alternative for python3 command to python3.9
 
@@ -180,7 +180,7 @@ python3 --version
 
 ```
 
-![Alt text](pics/000_default_python.png?raw=true "default python")
+![Alt text](images/000_default_python.png?raw=true "default python")
 
 Lets create a Python virtualenv for our ansible installation
 
@@ -192,7 +192,7 @@ python3 -m venv ansible
 
 ```
 
-![Alt text](pics/003_create_virtualenv.png?raw=true "create virtualenv Ansible")
+![Alt text](images/003_create_virtualenv.png?raw=true "create virtualenv Ansible")
 
 To activate our virtualenv ansible run the following
 
@@ -215,7 +215,7 @@ python --version
 
 If you need to exit the virtualenv, you type "deactivate"
 
-![Alt text](pics/003_activate_virtualenv.png?raw=true "active virtualenv Ansible")
+![Alt text](images/003_activate_virtualenv.png?raw=true "active virtualenv Ansible")
 
 __Type:__
 
@@ -225,7 +225,7 @@ pip3 install --upgrade pip
 
 ```
 
-![Alt text](pics/002_install_pip3_upgrade.png?raw=true "Upgrade PIP")
+![Alt text](images/002_install_pip3_upgrade.png?raw=true "Upgrade PIP")
 
 __Type:__
 
@@ -233,7 +233,7 @@ __Type:__
 pip install ansible
 ```
 
-![Alt text](pics/003_install_ansible.png?raw=true "Install Ansible")
+![Alt text](images/003_install_ansible.png?raw=true "Install Ansible")
 
 ## Task 3 Run ansible command
 
@@ -245,7 +245,7 @@ __Type:__
 ansible --version
 ```
 
-![Alt text](pics/004_install_ansible_version.png?raw=true "Ansible --version")
+![Alt text](images/004_install_ansible_version.png?raw=true "Ansible --version")
 
 __Type:__
 
@@ -263,7 +263,7 @@ ansible localhost -m ping
 
 Will run ansible against localhost with module ping
 
-![Alt text](pics/005_install_ansible_localhost_ping.png?raw=true "Ansible localhost ping")
+![Alt text](images/005_install_ansible_localhost_ping.png?raw=true "Ansible localhost ping")
 
 [Ansible File Module](https://docs.ansible.com/ansible/latest/modules/list_of_files_modules.html)
 
@@ -285,7 +285,7 @@ __module__ any ansible module, here file
 
 __module arguments__ arguments for module if needed, here path=/home/jesbe/testfile.txt and state=touch
 
-![Alt text](pics/006_install_ansible_localhost_file.png?raw=true "Ansible localhost ping")
+![Alt text](images/006_install_ansible_localhost_file.png?raw=true "Ansible localhost ping")
 
 ## Task 4 Connect Linux host
 
@@ -307,7 +307,7 @@ pwd
 vi .ansible.cfg
 ```
 
-![Alt text](pics/007_ansible_cfg.png?raw=true "ansible config")
+![Alt text](images/007_ansible_cfg.png?raw=true "ansible config")
 
 > **Note**
 > Change __jesbe__ in the path with your username
@@ -331,7 +331,7 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-![Alt text](pics/008_ansible_cfg_set_inventory.png?raw=true "set ansible inventory")
+![Alt text](images/008_ansible_cfg_set_inventory.png?raw=true "set ansible inventory")
 
 Create the Ansible Hosts file
 
@@ -360,7 +360,7 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-![Alt text](pics/009_edit_hostfile.png?raw=true "Edit ansible hostfile")
+![Alt text](images/009_edit_hostfile.png?raw=true "Edit ansible hostfile")
 
 Lets ping our remote host server1
 
@@ -372,7 +372,7 @@ ansible linuxservers -m ping
 
 If it asks "Are you sure you want to continue connecting (yes/no)?" type yes
 
-![Alt text](pics/009_connect_error.png?raw=true "Connect Error")
+![Alt text](images/009_connect_error.png?raw=true "Connect Error")
 
 Connection will fail, as ansible expects passwordless ssh connections to be established before running
 
@@ -384,7 +384,7 @@ __Type:__
 ssh server1
 ```
 
-![Alt text](pics/010_ssh_connect.png?raw=true "SSH Connect")
+![Alt text](images/010_ssh_connect.png?raw=true "SSH Connect")
 
 __Type:__
 
@@ -406,7 +406,7 @@ hit enter for empty passphrase
 hit enter again
 ```
 
-![Alt text](pics/011_ssh_keygen.png?raw=true "SSH Connect")
+![Alt text](images/011_ssh_keygen.png?raw=true "SSH Connect")
 
 We need to copy the public key to server1
 
@@ -419,7 +419,7 @@ __Type:__
 ssh-copy-id jesbe@server1
 ```
 
-![Alt text](pics/012_ssh_copy.png?raw=true "SSH Copy ID")
+![Alt text](images/012_ssh_copy.png?raw=true "SSH Copy ID")
 
 __Type:__
 
@@ -429,7 +429,7 @@ ssh server1
 
 You should now be able to ssh to server1 without beeing prompted for a password
 
-![Alt text](pics/013_ssh_passwordless.png?raw=true "SSH Copy ID")
+![Alt text](images/013_ssh_passwordless.png?raw=true "SSH Copy ID")
 
 __Type:__
 
@@ -445,7 +445,7 @@ __Type:__
 ansible linuxservers -m ping
 ```
 
-![Alt text](pics/014_ping_pong.png?raw=true "SSH Copy ID")
+![Alt text](images/014_ping_pong.png?raw=true "SSH Copy ID")
 
 Lets test a few ansible commands
 
@@ -469,7 +469,7 @@ is the file testfile.txt there?
 exit
 ```
 
-![Alt text](pics/015_file_test.png?raw=true "ansible file")
+![Alt text](images/015_file_test.png?raw=true "ansible file")
 
 [Ansible Systemd module](https://docs.ansible.com/ansible/latest/modules/systemd_module.html)
 
@@ -479,7 +479,7 @@ __Type:__
 ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=yes"
 ```
 
-![Alt text](pics/016_systemd_error.png?raw=true "ansible systemd error")
+![Alt text](images/016_systemd_error.png?raw=true "ansible systemd error")
 
 This will fail as the user dosn't have the right permissions
 
@@ -491,7 +491,7 @@ __Type:__
 ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=yes" -b --ask-become-pass
 ```
 
-![Alt text](pics/017_systemd_works.png?raw=true "ansible systemd works")
+![Alt text](images/017_systemd_works.png?raw=true "ansible systemd works")
 
 ## Task 5 Connect Windows Host
 
@@ -507,7 +507,7 @@ __Type:__
 pip install pywinrm
 ```
 
-![Alt text](pics/019_install_pywinrm.png?raw=true "enable winRm")
+![Alt text](images/019_install_pywinrm.png?raw=true "enable winRm")
 
 Lets add the windows server to our ansible hosts file
 
@@ -545,7 +545,7 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-![Alt text](pics/020_winrm_hostsfile.png?raw=true "hosts file winRm")
+![Alt text](images/020_winrm_hostsfile.png?raw=true "hosts file winRm")
 
 Lets test connection to the Windows server
 
@@ -555,7 +555,7 @@ __Type:__
 ansible windowsservers -m win_ping
 ```
 
-![Alt text](pics/021_ansible_win_ping.png?raw=true "win_ping")
+![Alt text](images/021_ansible_win_ping.png?raw=true "win_ping")
 
 ## Task 6 Ansible Collections
 
@@ -575,7 +575,7 @@ mkdir .ansible/roles
 mkdir .ansible/collections
 ```
 
-![Alt text](pics/022_ansible_roles_dir.png?raw=true "create roles dir")
+![Alt text](images/022_ansible_roles_dir.png?raw=true "create roles dir")
 
 List existing collections (should be none)
 
@@ -587,7 +587,7 @@ ansible-galaxy collection list
 
 ```
 
-![Alt text](pics/023_ansible_collection_list.png?raw=true "list collections")
+![Alt text](images/023_ansible_collection_list.png?raw=true "list collections")
 
 Lets install the ansible Windows Collection, we need it in the next lab
 
@@ -601,7 +601,7 @@ ansible-galaxy collection install ansible.windows
 
 ```
 
-![Alt text](pics/024_ansible_collection_install.png?raw=true "install collection")
+![Alt text](images/024_ansible_collection_install.png?raw=true "install collection")
 
 You can list all installed modules with ansible-doc -l and filter out from collection ansible-doc -l ansible.windows for modules in the collection we just installed
 
@@ -619,7 +619,7 @@ ansible-doc -l ansible.windows
 
 ```
 
-![Alt text](pics/025_ansible-doc.png?raw=true "ansible-doc -l")
+![Alt text](images/025_ansible-doc.png?raw=true "ansible-doc -l")
 
 You can get the documentation for a single module with ansible-doc *modulename*
 
@@ -631,7 +631,7 @@ ansible-doc ansible.windows.win_feature
 
 ```
 
-![Alt text](pics/026_ansible-doc-winfeature.png?raw=true "ansible-doc -l")
+![Alt text](images/026_ansible-doc-winfeature.png?raw=true "ansible-doc -l")
 
 ## Optional Set Nano as default editor
 

@@ -26,7 +26,7 @@ __Type:__
 pip install "ansible-lint[community,yamllint]"
 ```
 
-![Alt text](pics/001_install_ansible_lint.png?raw=true "install ansible lint")
+![Alt text](images/001_install_ansible_lint.png?raw=true "install ansible lint")
 
 ## Task 2 Run ansible-lint
 
@@ -43,7 +43,7 @@ ansible-lint
 
 ```
 
-![Alt text](pics/002_run_ansible_lint.png?raw=true "run ansible lint")
+![Alt text](images/002_run_ansible_lint.png?raw=true "run ansible lint")
 
 Lets take a look on the last three errors - all on 02_loop.yml
 
@@ -55,7 +55,7 @@ Lets take a look on the last three errors - all on 02_loop.yml
 
 Change the errors in VSCode
 
-![Alt text](pics/003_ansible_lint_correct.png?raw=true "ansible lint corrections")
+![Alt text](images/003_ansible_lint_correct.png?raw=true "ansible lint corrections")
 
 Save, Commit and push
 
@@ -70,7 +70,7 @@ ansible-lint
 
 ```
 
-![Alt text](pics/004_ansible_lint_second.png?raw=true "ansible lint second runs")
+![Alt text](images/004_ansible_lint_second.png?raw=true "ansible lint second runs")
 
 
 Lab done

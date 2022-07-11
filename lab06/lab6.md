@@ -20,13 +20,13 @@ We will need the servers, ansible, server1 and server2 to be up and running - by
 
 [Ansible Docs - ansible-galaxy](https://docs.ansible.com/ansible/latest/cli/ansible-galaxy.html)
 
-![Alt text](pics/001_ansible_galaxy.png?raw=true "ansible galaxy")
+![Alt text](images/001_ansible_galaxy.png?raw=true "ansible galaxy")
 
 Ansible Galaxy holds roles and collections, its an Hub for sharing ansible content
 
 Search for a role called el_httpd
 
-![Alt text](pics/002_ansible_galaxy_search.png?raw=true "ansible galaxy search")
+![Alt text](images/002_ansible_galaxy_search.png?raw=true "ansible galaxy search")
 
 Click on the top result "el_https"
 
@@ -34,7 +34,7 @@ Click the Read Me for a short description of the role and how use it
 
 Click on the GitHub Repo button to get to the repository for this role, you are able to provide feedback and report issues here
 
-![Alt text](pics/003_ansible_galaxy_role.png?raw=true "ansible galaxy role")
+![Alt text](images/003_ansible_galaxy_role.png?raw=true "ansible galaxy role")
 
 Lets install the role
 
@@ -51,7 +51,7 @@ ansible-galaxy role list
 
 ```
 
-![Alt text](pics/004_ansible_galaxy_role_install.png?raw=true "ansible galaxy role install")
+![Alt text](images/004_ansible_galaxy_role_install.png?raw=true "ansible galaxy role install")
 
 To test the role lets create a new playbook
 
@@ -72,7 +72,7 @@ __Type:__
 
 Save, Commit and push
 
-![Alt text](pics/005_ansible_role_playbook.png?raw=true "ansible role playbook")
+![Alt text](images/005_ansible_role_playbook.png?raw=true "ansible role playbook")
 
 On the ansible server pull the new playbook and run it
 
@@ -87,7 +87,7 @@ ansible-playbook 01_roles.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/006_ansible_role_playbook_run.png?raw=true "ansible role playbook run")
+![Alt text](images/006_ansible_role_playbook_run.png?raw=true "ansible role playbook run")
 
 __Note:__ All tasks should be OK as we installed httpd in a previous lab
 
@@ -114,25 +114,25 @@ cat ~/.ssh/id_rsa.pub
 
 ```
 
-![Alt text](pics/001_git_commands.png?raw=true "git commands")
+![Alt text](images/001_git_commands.png?raw=true "git commands")
 
 In your browser go to github.com and login to your account
 
 In the top right corner "click" on your profile and select "Settings"
 
-![Alt text](pics/002_github_settings.png?raw=true "github settings")
+![Alt text](images/002_github_settings.png?raw=true "github settings")
 
 In the left menu "click" on "SSH and GPG keys"
 
-![Alt text](pics/003_github_settings.png?raw=true "github settings")
+![Alt text](images/003_github_settings.png?raw=true "github settings")
 
 "Click" on the green "New SSH key"
 
-![Alt text](pics/004_github_newssh.png?raw=true "github settings")
+![Alt text](images/004_github_newssh.png?raw=true "github settings")
 
 From the linux terminal copy the pub key
 
-![Alt text](pics/005_github_pubkey.png?raw=true "github settings")
+![Alt text](images/005_github_pubkey.png?raw=true "github settings")
 
 Give the new key a Title "ansible"
 
@@ -140,17 +140,17 @@ paste the key
 
 and click "Add SSH key"
 
-![Alt text](pics/006_github_pubkey_add.png?raw=true "github settings")
+![Alt text](images/006_github_pubkey_add.png?raw=true "github settings")
 
 Now the key is created, you can see usage and delete the key when you are done with this course (My key is deleted)
 
-![Alt text](pics/007_github_pubkey.png?raw=true "github settings")
+![Alt text](images/007_github_pubkey.png?raw=true "github settings")
 
 Now lets get the ssh url
 
 In the browser go to your repository on github "click" the green "Code" button and select "SSH" copy the url
 
-![Alt text](pics/008_github_sshurl.png?raw=true "github sshurl")
+![Alt text](images/008_github_sshurl.png?raw=true "github sshurl")
 
 On ansible
 
@@ -167,13 +167,13 @@ git remote set-url origin git@github.com:jesperberth/ansibleclass.git
 
 ```
 
-![Alt text](pics/009_github_sshurl_cmd.png?raw=true "github sshurl cmd")
+![Alt text](images/009_github_sshurl_cmd.png?raw=true "github sshurl cmd")
 
 Do a git pull
 
 It will prompt you for RSA fingerprint authenticy, write "yes"
 
-![Alt text](pics/010_git_pull.png?raw=true "git pull")
+![Alt text](images/010_git_pull.png?raw=true "git pull")
 
 ## Task 3 Create a role - part 1
 
@@ -205,7 +205,7 @@ ls -al
 
 ```
 
-![Alt text](pics/007_ansible_galaxy_init.png?raw=true "ansible galaxy init")
+![Alt text](images/007_ansible_galaxy_init.png?raw=true "ansible galaxy init")
 
 Now lets add, commit and push this to our git repo so we can work with the role in VSCode
 
@@ -227,11 +227,11 @@ git push origin main
 
 ```
 
-![Alt text](pics/008_ansible_git_push.png?raw=true "ansible git push")
+![Alt text](images/008_ansible_git_push.png?raw=true "ansible git push")
 
 In VSCode do a push/pull to get the changes, you should see the roles \ webserver with all the default content
 
-![Alt text](pics/009_vscode_push_pull.png?raw=true "vscode push pull")
+![Alt text](images/009_vscode_push_pull.png?raw=true "vscode push pull")
 
 ## Task 4 Create a role - part 2
 
@@ -267,7 +267,7 @@ In VSCode open the roles/webserver/tasks/main.yml add the following
 
 ```
 
-![Alt text](pics/010_vscode_tasks.png?raw=true "vscode tasks")
+![Alt text](images/010_vscode_tasks.png?raw=true "vscode tasks")
 
 We will put a list - package in the defaults main.yml
 
@@ -287,7 +287,7 @@ package:
 
 ```
 
-![Alt text](pics/011_vscode_defaults.png?raw=true "vscode defaults")
+![Alt text](images/011_vscode_defaults.png?raw=true "vscode defaults")
 
 We will add the handler firewall reload
 
@@ -309,7 +309,7 @@ Open handlers/main.yml and add the following
 
 ```
 
-![Alt text](pics/012_vscode_handlers.png?raw=true "vscode handlers")
+![Alt text](images/012_vscode_handlers.png?raw=true "vscode handlers")
 
 As a last thing, you need to update the meta/main.yml
 
@@ -376,7 +376,7 @@ dependencies: []
 
 ```
 
-![Alt text](pics/013_vscode_meta.png?raw=true "vscode meta")
+![Alt text](images/013_vscode_meta.png?raw=true "vscode meta")
 
 Create an php file index.php make sure its in the root of your ansibleclass repo
 
@@ -390,7 +390,7 @@ echo gethostname();
 
 ```
 
-![Alt text](pics/014_vscode_index_php.png?raw=true "vscode index.php")
+![Alt text](images/014_vscode_index_php.png?raw=true "vscode index.php")
 
 And finally lets create a playbook to run it all
 
@@ -416,7 +416,7 @@ Create a new file 02_roles.yml add the following
 
 ```
 
-![Alt text](pics/015_vscode_roles.png?raw=true "vscode roles")
+![Alt text](images/015_vscode_roles.png?raw=true "vscode roles")
 
 Save and commit
 
@@ -433,11 +433,11 @@ ansible-playbook 02_roles.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/016_vscode_roles_run.png?raw=true "vscode roles run")
+![Alt text](images/016_vscode_roles_run.png?raw=true "vscode roles run")
 
 Go to the azure portal and get the external ip of server1 or server2 and type it in your browser
 
-![Alt text](pics/01_webpage.png?raw=true "webpage")
+![Alt text](images/01_webpage.png?raw=true "webpage")
 
 Lab done
 

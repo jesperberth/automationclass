@@ -61,7 +61,7 @@ __Type:__
 
 Save the playbook, Commit the changes and push to github
 
-![Alt text](pics/001_vars_playbook.png?raw=true "ansible vars in playbook")
+![Alt text](images/001_vars_playbook.png?raw=true "ansible vars in playbook")
 
 On the ansible server pull the new playbook and run it
 
@@ -76,7 +76,7 @@ ansible-playbook 01_vars.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/002_vars_playbook_run.png?raw=true "ansible vars in playbook run")
+![Alt text](images/002_vars_playbook_run.png?raw=true "ansible vars in playbook run")
 
 Lets change the playbook to use a list to install several packages
 
@@ -106,7 +106,7 @@ __Type:__
 
 Save the playbook, Commit the changes and push to github
 
-![Alt text](pics/004_vars_list_playbook.png?raw=true "ansible vars list in playbook")
+![Alt text](images/004_vars_list_playbook.png?raw=true "ansible vars list in playbook")
 
 On the ansible server pull the new playbook and run it
 
@@ -121,7 +121,7 @@ ansible-playbook 01_vars.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/005_vars_list_playbook_run.png?raw=true "ansible vars list in playbook run")
+![Alt text](images/005_vars_list_playbook_run.png?raw=true "ansible vars list in playbook run")
 
 ## Task 2 Register and Conditions
 
@@ -152,7 +152,7 @@ __Type:__
 
 Save the playbook, Commit the changes and push to github
 
-![Alt text](pics/001_register_playbook.png?raw=true "ansible register in playbook")
+![Alt text](images/001_register_playbook.png?raw=true "ansible register in playbook")
 
 On the ansible server pull the new playbook and run it
 
@@ -167,11 +167,11 @@ ansible-playbook 01_vars.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/002_register_playbook_run.png?raw=true "ansible register in playbook run")
+![Alt text](images/002_register_playbook_run.png?raw=true "ansible register in playbook run")
 
 The status from systemd contains alot of information, scroll to the top to see that the httpd service is now enabled and running
 
-![Alt text](pics/003_register_playbook_status.png?raw=true "ansible register in playbook status")
+![Alt text](images/003_register_playbook_status.png?raw=true "ansible register in playbook status")
 
 We can use facts from the registered variable httpd_status in a condition
 
@@ -192,7 +192,7 @@ __Type:__
 
 Save the playbook, Commit the changes and push to github
 
-![Alt text](pics/004_conditional_playbook.png?raw=true "ansible conditional in playbook")
+![Alt text](images/004_conditional_playbook.png?raw=true "ansible conditional in playbook")
 
 On the ansible server pull the new playbook and run it
 
@@ -207,7 +207,7 @@ ansible-playbook 01_vars.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/005_conditional_playbook_run.png?raw=true "ansible conditional in playbook run")
+![Alt text](images/005_conditional_playbook_run.png?raw=true "ansible conditional in playbook run")
 
 ## Task 3 Handlers
 
@@ -247,7 +247,7 @@ __Type:__
 
 Save the playbook, Commit the changes and push to github
 
-![Alt text](pics/001_handlers_playbook.png?raw=true "ansible handlers in playbook")
+![Alt text](images/001_handlers_playbook.png?raw=true "ansible handlers in playbook")
 
 On the ansible server pull the new playbook and run it
 
@@ -262,7 +262,7 @@ ansible-playbook 01_vars.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/002_handlers_playbook_run.png?raw=true "ansible handlers playbook run")
+![Alt text](images/002_handlers_playbook_run.png?raw=true "ansible handlers playbook run")
 
 On the ansible server run the playbook again, note this time it will not run the handler
 
@@ -277,7 +277,7 @@ ansible-playbook 01_vars.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/003_handlers_playbook_run2.png?raw=true "ansible handlers playbook second run")
+![Alt text](images/003_handlers_playbook_run2.png?raw=true "ansible handlers playbook second run")
 
 ## Task 4 Facts and debug
 
@@ -305,7 +305,7 @@ ansible linuxservers -m setup
 
 ```
 
-![Alt text](pics/001_get_facts.png?raw=true "ansible setup")
+![Alt text](images/001_get_facts.png?raw=true "ansible setup")
 
 We can use a filter to get a cleaner output
 
@@ -317,7 +317,7 @@ ansible linuxservers -m setup -a "filter=*ipv4"
 
 ```
 
-![Alt text](pics/002_get_facts_filter.png?raw=true "ansible setup filter")
+![Alt text](images/002_get_facts_filter.png?raw=true "ansible setup filter")
 
 We will use debug module to show the facts in a playbook
 
@@ -339,7 +339,7 @@ __Type:__
 
 Save the playbook, Commit the changes and push to github
 
-![Alt text](pics/003_get_facts_playbook.png?raw=true "facts playbook")
+![Alt text](images/003_get_facts_playbook.png?raw=true "facts playbook")
 
 On the ansible server pull the new playbook and run it
 
@@ -354,7 +354,7 @@ ansible-playbook 01_facts.yml
 
 ```
 
-![Alt text](pics/004_get_facts_playbook_run.png?raw=true "facts playbook run")
+![Alt text](images/004_get_facts_playbook_run.png?raw=true "facts playbook run")
 
 Facts can be in one of three type
 
@@ -362,11 +362,11 @@ Facts can be in one of three type
 * Dictionary - will have { } around the key value pairs
 * Ansible UnSafe Text (Variable)
 
-![Alt text](pics/005_ansible_facts.png?raw=true "ansible facts")
+![Alt text](images/005_ansible_facts.png?raw=true "ansible facts")
 
 Lets get the nodename of our servers, nodename is an Ansible UnSafe Text
 
-![Alt text](pics/006_ansible_facts_nodename.png?raw=true "ansible facts nodename")
+![Alt text](images/006_ansible_facts_nodename.png?raw=true "ansible facts nodename")
 
 Add the below task to the playbook 01_facts.yml
 
@@ -382,7 +382,7 @@ __Type:__
 
 Save, Commit and push
 
-![Alt text](pics/007_ansible_facts_nodename_playbook.png?raw=true "ansible facts nodename playbook")
+![Alt text](images/007_ansible_facts_nodename_playbook.png?raw=true "ansible facts nodename playbook")
 
 On the ansible server pull the new playbook and run it
 
@@ -397,7 +397,7 @@ ansible-playbook 01_facts.yml
 
 ```
 
-![Alt text](pics/008_ansible_facts_nodename_playbook_run.png?raw=true "ansible facts nodename playbook")
+![Alt text](images/008_ansible_facts_nodename_playbook_run.png?raw=true "ansible facts nodename playbook")
 
 Now lets try getting output from a list and a dictionary
 
@@ -419,7 +419,7 @@ __Type:__
 
 Save, Commit and push
 
-![Alt text](pics/009_ansible_facts_list_dic_playbook.png?raw=true "ansible facts list and dic playbook")
+![Alt text](images/009_ansible_facts_list_dic_playbook.png?raw=true "ansible facts list and dic playbook")
 
 On the ansible server pull the new playbook and run it
 
@@ -434,7 +434,7 @@ ansible-playbook 01_facts.yml
 
 ```
 
-![Alt text](pics/010_ansible_facts_list_dic_playbook_run.png?raw=true "ansible facts list and dic playbook run")
+![Alt text](images/010_ansible_facts_list_dic_playbook_run.png?raw=true "ansible facts list and dic playbook run")
 
 ## Task 5 Loops
 
@@ -477,7 +477,7 @@ __Type:__
 
 Save, Commit and push
 
-![Alt text](pics/001_ansible_loop_playbook.png?raw=true "ansible loop playbook")
+![Alt text](images/001_ansible_loop_playbook.png?raw=true "ansible loop playbook")
 
 On the ansible server pull the new playbook and run it
 
@@ -492,7 +492,7 @@ ansible-playbook 01_loop.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/002_ansible_loop_playbook_run.png?raw=true "ansible loop playbook run")
+![Alt text](images/002_ansible_loop_playbook_run.png?raw=true "ansible loop playbook run")
 
 We can iterate over a list of hashes
 
@@ -532,7 +532,7 @@ __Type:__
 
 Save, Commit and push
 
-![Alt text](pics/003_ansible_loop_hash_playbook.png?raw=true "ansible loop hash playbook")
+![Alt text](images/003_ansible_loop_hash_playbook.png?raw=true "ansible loop hash playbook")
 
 On the ansible server pull the new playbook and run it
 
@@ -547,7 +547,7 @@ ansible-playbook 01_loop.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/004_ansible_loop_hash_playbook_run.png?raw=true "ansible loop hash playbook run")
+![Alt text](images/004_ansible_loop_hash_playbook_run.png?raw=true "ansible loop hash playbook run")
 
 ## Task 6 Loops Async
 
@@ -603,7 +603,7 @@ __Type:__
 
 Save, Commit and push
 
-![Alt text](pics/001_ansible_loop_async_playbook.png?raw=true "ansible loop async playbook")
+![Alt text](images/001_ansible_loop_async_playbook.png?raw=true "ansible loop async playbook")
 
 On the ansible server pull the new playbook and run it
 
@@ -618,7 +618,7 @@ ansible-playbook 02_loop.yml --ask-become-pass
 
 ```
 
-![Alt text](pics/002_ansible_loop_async_playbook_run.png?raw=true "ansible loop async playbook run")
+![Alt text](images/002_ansible_loop_async_playbook_run.png?raw=true "ansible loop async playbook run")
 
 Lab done
 

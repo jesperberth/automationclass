@@ -39,11 +39,11 @@ pip install -r ~/.ansible/collections/ansible_collections/azure/azcollection/req
 
 ```
 
-![Alt text](pics/002_download_requirements_pip_azure.png?raw=true "install azure")
+![Alt text](images/002_download_requirements_pip_azure.png?raw=true "install azure")
 
-![Alt text](pics/002_run_requirements_pip_azure.png?raw=true "install azure")
+![Alt text](images/002_run_requirements_pip_azure.png?raw=true "install azure")
 
-![Alt text](pics/001_install_pip_azure.png?raw=true "install azure")
+![Alt text](images/001_install_pip_azure.png?raw=true "install azure")
 
 ## Task 2 Create credentials for Azure
 
@@ -55,11 +55,11 @@ In your browser log on to [https://portal.azure.com](https://portal.azure.com)
 
 In the top bar, click the "cloudshell" icon marked with red
 
-![Alt text](pics/01_start_cloud_shell.png?raw=true "Cloud Shell")
+![Alt text](images/01_start_cloud_shell.png?raw=true "Cloud Shell")
 
 Select "Bash"
 
-![Alt text](pics/02_start_cloud_shell_bash.png?raw=true "Cloud Shell")
+![Alt text](images/02_start_cloud_shell_bash.png?raw=true "Cloud Shell")
 
 Run the following command to create a new Service User
 
@@ -77,7 +77,7 @@ az ad sp create-for-rbac --name ansible-$USER --role Contributor --scopes /subsc
 
 Copy the JSON output to a notepad file we will need the information later
 
-![Alt text](pics/02_create_sp.png?raw=true "Cloud Shell output")
+![Alt text](images/02_create_sp.png?raw=true "Cloud Shell output")
 
 We need to get the Subscription ID run the following in the Cloud Shell
 
@@ -87,7 +87,7 @@ echo $SubID
 
 ```
 
-![Alt text](pics/03_get_sub_id.png?raw=true "Cloud Shell sub id")
+![Alt text](images/03_get_sub_id.png?raw=true "Cloud Shell sub id")
 
 Copy the line id: "xxx-xxx" to the same notepad
 
@@ -106,7 +106,7 @@ vi .azure/credentials
 
 ```
 
-![Alt text](pics/009_azure_credfile.png?raw=true "azure credentials")
+![Alt text](images/009_azure_credfile.png?raw=true "azure credentials")
 
 In vi **type:**
 
@@ -146,7 +146,7 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-![Alt text](pics/010_azure_credfile_input.png?raw=true "azure credentials file input")
+![Alt text](images/010_azure_credfile_input.png?raw=true "azure credentials file input")
 
 Lets test the connection to azure by creating a small playbook
 
@@ -177,7 +177,7 @@ add the following text to the file, change the name of the variable **user to yo
       var: rg
 ```
 
-![Alt text](pics/011_azure_play.png?raw=true "azure play")
+![Alt text](images/011_azure_play.png?raw=true "azure play")
 
 Log on to server "ansible" using ssh
 
@@ -195,7 +195,7 @@ ansible-playbook 01_azure.yml
 
 ```
 
-![Alt text](pics/011_azure_play_run.png?raw=true "azure play run")
+![Alt text](images/011_azure_play_run.png?raw=true "azure play run")
 
 ## Task 3 Create Network in Azure
 
@@ -240,7 +240,7 @@ add the following text to the file, change the first variable **"user"** to your
       address_prefix_cidr: "10.99.0.0/24"
 ```
 
-![Alt text](pics/012_azure_net_playbook.png?raw=true "azure net playbook")
+![Alt text](images/012_azure_net_playbook.png?raw=true "azure net playbook")
 
 Save and commit to Git
 
@@ -260,7 +260,7 @@ ansible-playbook 02_azure.yml
 
 ```
 
-![Alt text](pics/013_azure_net_playbook_run.png?raw=true "azure net playbook run")
+![Alt text](images/013_azure_net_playbook_run.png?raw=true "azure net playbook run")
 
 ## Task 4 Create Public Ip, NIC and Security Group in Azure
 
@@ -322,7 +322,7 @@ In VSCode add the next sections to the 02_azure.yml playbook
           delete: ansibletraining
 ```
 
-![Alt text](pics/014_azure_network.png?raw=true "azure nic playbook")
+![Alt text](images/014_azure_network.png?raw=true "azure nic playbook")
 
 Save and commit to Git
 
@@ -342,7 +342,7 @@ ansible-playbook 02_azure.yml
 
 ```
 
-![Alt text](pics/015_azure_network_run.png?raw=true "azure nic playbook run")
+![Alt text](images/015_azure_network_run.png?raw=true "azure nic playbook run")
 
 [Ansible Module azure_rm_virtualmachine](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualmachine_module.html#azure-rm-virtualmachine-module)
 
@@ -385,7 +385,7 @@ In VSCode add the next sections to the 02_azure.yml playbook
 
 ```
 
-![Alt text](pics/016_azure_vm.png?raw=true "azure vm playbook")
+![Alt text](images/016_azure_vm.png?raw=true "azure vm playbook")
 
 Save and commit to Git
 
@@ -405,7 +405,7 @@ ansible-playbook 02_azure.yml
 
 ```
 
-![Alt text](pics/017_azure_vm_run.png?raw=true "azure vm playbook run")
+![Alt text](images/017_azure_vm_run.png?raw=true "azure vm playbook run")
 
 The new webserver is now deployed in Azure and we are able to ssh keyless to the webserver
 
@@ -432,7 +432,7 @@ keyed_groups:
 
 ```
 
-![Alt text](pics/018_azure_inventory.png?raw=true "vscode create inventory file")
+![Alt text](images/018_azure_inventory.png?raw=true "vscode create inventory file")
 
 Save and commit to Git
 
@@ -456,9 +456,9 @@ ansible-inventory -i ./webserver.azure_rm.yml --list
 
 ```
 
-![Alt text](pics/019_azure_inventory_run.png?raw=true "azure inventory run")
+![Alt text](images/019_azure_inventory_run.png?raw=true "azure inventory run")
 
-![Alt text](pics/020_azure_inventory_run_list.png?raw=true "azure inventory run list")
+![Alt text](images/020_azure_inventory_run_list.png?raw=true "azure inventory run list")
 
 --list will give a lot more information, --graph will consolidate output in a more viewable way
 
@@ -524,7 +524,7 @@ And change the **- hosts: tag_solution_webserver_jesbe** so it matches your init
       state: reloaded
 ```
 
-![Alt text](pics/021_webserver_playbook.png?raw=true "azure install httpd playbook")
+![Alt text](images/021_webserver_playbook.png?raw=true "azure install httpd playbook")
 
 In VSCode create a new jinja file index.html.j2
 
@@ -540,7 +540,7 @@ In VSCode create a new jinja file index.html.j2
 </html>
 ```
 
-![Alt text](pics/022_webserver_template.png?raw=true "azure template")
+![Alt text](images/022_webserver_template.png?raw=true "azure template")
 
 Save and commit to Git
 
@@ -562,7 +562,7 @@ ansible-playbook 01_webserver_azure.yml -i ./webserver.azure_rm.yml
 
 ```
 
-![Alt text](pics/023_webserver_run.png?raw=true "webserver playbook run")
+![Alt text](images/023_webserver_run.png?raw=true "webserver playbook run")
 
 Check the result in a browser
 
@@ -570,7 +570,7 @@ Check the result in a browser
 http://<your webserver ip>
 ```
 
-![Alt text](pics/024_webserver_site.png?raw=true "webserver site")
+![Alt text](images/024_webserver_site.png?raw=true "webserver site")
 
 ## Task 7 Delete Resource Group Webserver
 
@@ -597,7 +597,7 @@ add the following text to the file, change the name of the variable user to your
 
 ```
 
-![Alt text](pics/025_delete_rg.png?raw=true "delete rg")
+![Alt text](images/025_delete_rg.png?raw=true "delete rg")
 
 Save and commit to Git
 
@@ -617,7 +617,7 @@ ansible-playbook 03_azure.yml
 
 ```
 
-![Alt text](pics/026_delete_rg_run.png?raw=true "delete rg run")
+![Alt text](images/026_delete_rg_run.png?raw=true "delete rg run")
 
 Lab Done
 

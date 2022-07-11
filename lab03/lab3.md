@@ -54,7 +54,7 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-![Alt text](pics/031_remove_password.png?raw=true "remove password")
+![Alt text](images/031_remove_password.png?raw=true "remove password")
 
 Next lets create an encryptet var file for ansible
 
@@ -69,7 +69,7 @@ ansible-vault create secret.yml
 
 You will be promptet for a password and to confirm the password
 
-![Alt text](pics/032_create_vault.png?raw=true "create vault")
+![Alt text](images/032_create_vault.png?raw=true "create vault")
 
 ansible-vault will open your default editor - in our case its vi
 
@@ -92,7 +92,7 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-![Alt text](pics/033_create_vault_save.png?raw=true "edit vault")
+![Alt text](images/033_create_vault_save.png?raw=true "edit vault")
 
 Try to cat the file
 
@@ -104,7 +104,7 @@ cat secret.yml
 
 ```
 
-![Alt text](pics/034_cat_vault.png?raw=true "cat vault")
+![Alt text](images/034_cat_vault.png?raw=true "cat vault")
 
 To change the content of an encryptet file use ansible-vault edit filename
 
@@ -118,7 +118,7 @@ ansible-vault edit secret.yml
 
 ```
 
-![Alt text](pics/034_edit_vault.png?raw=true "edit vault")
+![Alt text](images/034_edit_vault.png?raw=true "edit vault")
 
 Lets create a playbook to use the encryptet var file
 
@@ -148,7 +148,7 @@ Save the file
 
 Notice that Git detects the changed file, do a commit add a comment "Vault" and Sync to Git
 
-![Alt text](pics/035_vault_playbook.png?raw=true "vault playbook")
+![Alt text](images/035_vault_playbook.png?raw=true "vault playbook")
 
 On server ansible do a git pull and run the playbook
 
@@ -162,7 +162,7 @@ ansible-playbook 01_vault.yml --ask-vault-pass
 
 ```
 
-![Alt text](pics/036_vault_playbook_run.png?raw=true "vault playbook run")
+![Alt text](images/036_vault_playbook_run.png?raw=true "vault playbook run")
 
 ## Task 2 Ansible Inventory yaml
 
@@ -214,13 +214,13 @@ Hit Esc-key
 i (to toggle insert)
 ```
 
-![Alt text](pics/037_set_paste.png?raw=true "vi paste")
+![Alt text](images/037_set_paste.png?raw=true "vi paste")
 
 Note that it now writes -- INSERT (paste) -- in the bottom
 
 You can do a copy/paste of the inventory
 
-![Alt text](pics/037_yaml_inventory.png?raw=true "yaml inventory")
+![Alt text](images/037_yaml_inventory.png?raw=true "yaml inventory")
 
 __Type:__
 
@@ -252,7 +252,7 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-![Alt text](pics/038_ansible_cfg.png?raw=true "config")
+![Alt text](images/038_ansible_cfg.png?raw=true "config")
 
 Do a ping test to check if we are using the new inventory
 
@@ -262,7 +262,7 @@ ansible linuxservers -m ping
 
 ```
 
-![Alt text](pics/039_ansible_yaml_test.png?raw=true "test yaml inventory")
+![Alt text](images/039_ansible_yaml_test.png?raw=true "test yaml inventory")
 
 ## Task 3 Ansible Vault - Yaml inventory
 
@@ -278,11 +278,11 @@ ansible-vault encrypt_string 'SomeThingSimple8' --name ansible_password
 
 ```
 
-![Alt text](pics/040_ansible_vault_string.png?raw=true "Encrypt string")
+![Alt text](images/040_ansible_vault_string.png?raw=true "Encrypt string")
 
 Copy the string
 
-![Alt text](pics/041_ansible_vault_string_copy.png?raw=true "Encrypt string copy")
+![Alt text](images/041_ansible_vault_string_copy.png?raw=true "Encrypt string copy")
 
 Paste the encryptet string into ansible-hosts.yml
 
@@ -314,7 +314,7 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-![Alt text](pics/042_inventory_encrypt.png?raw=true "inventory encryptet string")
+![Alt text](images/042_inventory_encrypt.png?raw=true "inventory encryptet string")
 
 Lets do a test with win_ping
 
@@ -324,7 +324,7 @@ ansible windowsservers -m win_ping --ask-vault-pass
 
 ```
 
-![Alt text](pics/043_win_ping.png?raw=true "win ping")
+![Alt text](images/043_win_ping.png?raw=true "win ping")
 
 Lab done
 

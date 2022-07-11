@@ -26,7 +26,7 @@ Open a browser and go to the ansible tower URL ip will be given by instructor
 
 Log in user and password will be given by instructor
 
-![Alt text](pics/01_ansible_tower_login.png?raw=true "Login to ansible tower")
+![Alt text](images/01_ansible_tower_login.png?raw=true "Login to ansible tower")
 
 Take a tour around in the UI
 
@@ -49,11 +49,11 @@ In the left pane, in the Access Block click Users
 
 Select the user "Admin"
 
-![Alt text](pics/01_ansible_tower_adminuser.png?raw=true "select admin user")
+![Alt text](images/01_ansible_tower_adminuser.png?raw=true "select admin user")
 
 Click Tokens
 
-![Alt text](pics/02_ansible_tower_token.png?raw=true "admin token")
+![Alt text](images/02_ansible_tower_token.png?raw=true "admin token")
 
 Click Add
 
@@ -61,11 +61,11 @@ In the Create User Token window
 
 Select "Write" in the Scope dropdown box click save
 
-![Alt text](pics/03_ansible_tower_create_token.png?raw=true "create admin token")
+![Alt text](images/03_ansible_tower_create_token.png?raw=true "create admin token")
 
 The Token will only be visible one time so copy the token and save it in a notepad we need it in a monment
 
-![Alt text](pics/04_ansible_tower_view_token.png?raw=true "view admin token")
+![Alt text](images/04_ansible_tower_view_token.png?raw=true "view admin token")
 
 On the ansible server we need to set three Environment variables
 
@@ -85,7 +85,7 @@ export CONTROLLER_OAUTH_TOKEN=flNNBoKPnlnMyNTAhHL4hhMhFxmzTe
 
 ```
 
-![Alt text](pics/05_ansible_tower_export_token.png?raw=true "export token")
+![Alt text](images/05_ansible_tower_export_token.png?raw=true "export token")
 
 In VSCode create a new playbook 01_awx.yml
 
@@ -123,7 +123,7 @@ Add below to the playbook
       state: absent
 ```
 
-![Alt text](pics/06_create_awx_playbook.png?raw=true "awx playbook")
+![Alt text](images/06_create_awx_playbook.png?raw=true "awx playbook")
 
 Save and commit to Git
 
@@ -143,7 +143,7 @@ ansible-playbook 01_awx.yml
 
 ```
 
-![Alt text](pics/07_run_awx_playbook.png?raw=true "awx playbook run")
+![Alt text](images/07_run_awx_playbook.png?raw=true "awx playbook run")
 
 Now go to the awx portal and take a look around, Demo Template, Credential, Inventory and Project is gone
 
@@ -167,7 +167,7 @@ __Update Revision on Launch:__ Checked
 
 Leave the rest, click __Save__
 
-![Alt text](pics/02_ansible_tower_create_project.png?raw=true "Create a project")
+![Alt text](images/02_ansible_tower_create_project.png?raw=true "Create a project")
 
 In the left pane, click Inventory
 
@@ -181,7 +181,7 @@ __Organization:__ Default
 
 Leave the rest, click __Save__
 
-![Alt text](pics/03_ansible_tower_create_inventory.png?raw=true "Create an inventory")
+![Alt text](images/03_ansible_tower_create_inventory.png?raw=true "Create an inventory")
 
 In the left pane, click credentials
 
@@ -213,7 +213,7 @@ __Tenant ID:__ xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
 
 Leave the rest as default and click __Save__
 
-![Alt text](pics/05_ansible_tower_create_credential_filled.png?raw=true "Create credential")
+![Alt text](images/05_ansible_tower_create_credential_filled.png?raw=true "Create credential")
 
 ## Task 4 Create Azure RM Template
 
@@ -227,11 +227,11 @@ to __your initials eg. "jesbe"__
 
 Save and Commit
 
-![Alt text](pics/06_ansible_tower_playbook.png?raw=true "Tower playbook")
+![Alt text](images/06_ansible_tower_playbook.png?raw=true "Tower playbook")
 
 In Tower go to project and refresh your project, this will do a "git pull"
 
-![Alt text](pics/07_ansible_tower_refresh.png?raw=true "Refresh project")
+![Alt text](images/07_ansible_tower_refresh.png?raw=true "Refresh project")
 
 In the left pane, click Templates
 
@@ -253,11 +253,11 @@ __Credentials:__ Select credential type "Microsoft Azure Resource Manager" and A
 
 Leave the rest as default and click __Save__
 
-![Alt text](pics/08_ansible_tower_template.png?raw=true "Create template")
+![Alt text](images/08_ansible_tower_template.png?raw=true "Create template")
 
 Click on the "Launch" button and wait a minute to see the result
 
-![Alt text](pics/09_ansible_tower_template_run.png?raw=true "Run template")
+![Alt text](images/09_ansible_tower_template_run.png?raw=true "Run template")
 
 ## Task 5 Create Azure Webserver template
 
@@ -287,11 +287,11 @@ and __Remove__ the two last lines in the playbook
 
 Save and Commit
 
-![Alt text](pics/10_ansible_tower_playbook_webserver.png?raw=true "Tower playbook")
+![Alt text](images/10_ansible_tower_playbook_webserver.png?raw=true "Tower playbook")
 
 In Tower go to project and refresh your project, this will do a "git pull"
 
-![Alt text](pics/07_ansible_tower_refresh.png?raw=true "Refresh project")
+![Alt text](images/07_ansible_tower_refresh.png?raw=true "Refresh project")
 
 We need the public ssh key from server ansible
 
@@ -311,7 +311,7 @@ cat ~/.ssh/id_rsa.pub
 
 Mark the key and copy it to the clipboard, you will need it when we create the next Job Template
 
-![Alt text](pics/08_cat_public_key.png?raw=true "cat public key")
+![Alt text](images/08_cat_public_key.png?raw=true "cat public key")
 
 Back in the Tower UI
 
@@ -341,21 +341,21 @@ ssh_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCl/myugJcFI/2XmWcLd5P+tKV
 
 ```
 
-![Alt text](pics/11_ansible_tower_webserver_template_pubkey.png?raw=true "template")
+![Alt text](images/11_ansible_tower_webserver_template_pubkey.png?raw=true "template")
 
 Leave the rest as default and click __Save__
 
-![Alt text](pics/11_ansible_tower_webserver_template.png?raw=true "template")
+![Alt text](images/11_ansible_tower_webserver_template.png?raw=true "template")
 
 In the left pane click on Templates
 
 Locate your webserver template and click on the Rocket to lauch it
 
-![Alt text](pics/12_launch_template.png?raw=true "launch template")
+![Alt text](images/12_launch_template.png?raw=true "launch template")
 
 Wait for template to finish
 
-![Alt text](pics/13_launch_template_run.png?raw=true "launch template")
+![Alt text](images/13_launch_template_run.png?raw=true "launch template")
 
 ## Task 6 Create Azure Dynamic Inventory Source
 
@@ -396,11 +396,11 @@ Leave the rest as default
 
 Click __Save__
 
-![Alt text](pics/14_azure_inventory.png?raw=true "azure inventory")
+![Alt text](images/14_azure_inventory.png?raw=true "azure inventory")
 
 In the bottom of the screen click on the Sync button
 
-![Alt text](pics/15_azure_inventory_sync.png?raw=true "azure inventory sync")
+![Alt text](images/15_azure_inventory_sync.png?raw=true "azure inventory sync")
 
 In the left pane click on Jobs
 
@@ -414,7 +414,7 @@ Click on the Groups button on the top
 
 You should see a few groups based on the tags that are on the vm's in Azure
 
-![Alt text](pics/15_azure_inventory_result.png?raw=true "azure inventory sync result")
+![Alt text](images/15_azure_inventory_result.png?raw=true "azure inventory sync result")
 
 ## Task 7 Create Webserver credential
 
@@ -436,7 +436,7 @@ cat ~/.ssh/id_rsa
 
 Mark the key and copy it to the clipboard, you will need it when we create the next Job Template
 
-![Alt text](pics/16_ssh_key.png?raw=true "cat private key")
+![Alt text](images/16_ssh_key.png?raw=true "cat private key")
 
 Create a new credential matching the webservers public key
 
@@ -456,7 +456,7 @@ __SSH Private Key:__ --- the key you copied ---
 
 Leave the rest as default and click __Save__
 
-![Alt text](pics/17_create_ssh_cred.png?raw=true "create cred")
+![Alt text](images/17_create_ssh_cred.png?raw=true "create cred")
 
 ## Task 8 Create Webserver Template
 
@@ -474,7 +474,7 @@ websiteheader: "Ansible Playbook"
 
 websiteauthor: "Some Name"
 
-![Alt text](pics/18_webserver_playbook.png?raw=true "playbook")
+![Alt text](images/18_webserver_playbook.png?raw=true "playbook")
 
 Save and commit
 
@@ -500,7 +500,7 @@ __Credentials:__ Select credential type "Machine" and Webserver
 
 Leave the rest as default and click __Save__
 
-![Alt text](pics/19_webserver_template_create.png?raw=true "Create template")
+![Alt text](images/19_webserver_template_create.png?raw=true "Create template")
 
 ## Task 9 Create Workflow template
 
@@ -516,7 +516,7 @@ __Inventory:__ Select Inventory
 
 Leave the rest as default and click __Save__
 
-![Alt text](pics/20_workflow_create.png?raw=true "Create workflow template")
+![Alt text](images/20_workflow_create.png?raw=true "Create workflow template")
 
 The window changes to the workflow Visualizer
 
@@ -528,15 +528,15 @@ __Select:__ Resourcegroup
 
 Press the __Save__ Button
 
-![Alt text](pics/21_work_step1.png?raw=true "Create workflow template step 1")
+![Alt text](images/21_work_step1.png?raw=true "Create workflow template step 1")
 
 You will now see the first task in the workflow
 
-![Alt text](pics/21_work_step1_workflow.png?raw=true "Create workflow template step 1")
+![Alt text](images/21_work_step1_workflow.png?raw=true "Create workflow template step 1")
 
 Hoover the mouse over the Resourcegroup box and click on the + icon
 
-![Alt text](pics/21_work_step1_workflow_plus.png?raw=true "Create workflow template step 1")
+![Alt text](images/21_work_step1_workflow_plus.png?raw=true "Create workflow template step 1")
 
 Select on Success
 
@@ -548,15 +548,15 @@ __Select:__ webserver
 
 Press the __Save__ Button
 
-![Alt text](pics/23_work_step3.png?raw=true "Create workflow template step 3")
+![Alt text](images/23_work_step3.png?raw=true "Create workflow template step 3")
 
 You will now see the first and second task in the workflow
 
-![Alt text](pics/23_work_step3_workflow.png?raw=true "Create workflow template step 3")
+![Alt text](images/23_work_step3_workflow.png?raw=true "Create workflow template step 3")
 
 Hoover the mouse over the Webserver box and click on the + icon
 
-![Alt text](pics/23_work_step3_workflow_plus.png?raw=true "Create workflow template step 3 add new")
+![Alt text](images/23_work_step3_workflow_plus.png?raw=true "Create workflow template step 3 add new")
 
 Select on Success
 
@@ -566,15 +566,15 @@ __Select:__ Azure
 
 Press the __Save__ Button
 
-![Alt text](pics/24_work_step4.png?raw=true "Create workflow template step 4")
+![Alt text](images/24_work_step4.png?raw=true "Create workflow template step 4")
 
 You will now see the first and second task + the inventory sync in the workflow
 
-![Alt text](pics/24_work_step4_workflow.png?raw=true "Create workflow template step 4")
+![Alt text](images/24_work_step4_workflow.png?raw=true "Create workflow template step 4")
 
 Hoover the mouse over the Azure box and click on the + icon
 
-![Alt text](pics/24_work_step3_workflow_plus.png?raw=true "Create workflow template step 3 add new")
+![Alt text](images/24_work_step3_workflow_plus.png?raw=true "Create workflow template step 3 add new")
 
 Select on Success
 
@@ -584,17 +584,17 @@ __Select:__ Webserver_install
 
 Press the __Save__ Button
 
-![Alt text](pics/25_work_step5.png?raw=true "Create workflow template step 4")
+![Alt text](images/25_work_step5.png?raw=true "Create workflow template step 4")
 
 Click Save in the top right corner
 
-![Alt text](pics/25_work_step5_workflow.png?raw=true "Create workflow template step 4")
+![Alt text](images/25_work_step5_workflow.png?raw=true "Create workflow template step 4")
 
 In the top bar click Survey to add the two vars we deleted in the playbook  websiteheader: and websiteauthor:
 
 Click Add
 
-![Alt text](pics/26_work_add_survey.png?raw=true "Create workflow survey")
+![Alt text](images/26_work_add_survey.png?raw=true "Create workflow survey")
 
 __Question:__ Web Site Name
 
@@ -604,7 +604,7 @@ __Answer Type:__ Text
 
 Press the __Save__ Button
 
-![Alt text](pics/25_survey_1.png?raw=true "Create survey 1")
+![Alt text](images/25_survey_1.png?raw=true "Create survey 1")
 
 Click Add to add the secondone
 
@@ -616,39 +616,39 @@ __Answer Type:__ Text
 
 Press the __Save__ Button
 
-![Alt text](pics/26_survey_2.png?raw=true "Create survey 2")
+![Alt text](images/26_survey_2.png?raw=true "Create survey 2")
 
 Click __Preview__
 
-![Alt text](pics/27_survey_preview.png?raw=true "Create survey 2")
+![Alt text](images/27_survey_preview.png?raw=true "Create survey 2")
 
 Toggle switch to On
 
-![Alt text](pics/28_survey_on.png?raw=true "Create survey 2")
+![Alt text](images/28_survey_on.png?raw=true "Create survey 2")
 
 ## Task 10 Run Workflow template
 
 In the left pane click Templates, click on the Rocket to Launch the Workflow
 
-![Alt text](pics/27_run_workflow.png?raw=true "Launch workflow")
+![Alt text](images/27_run_workflow.png?raw=true "Launch workflow")
 
 Fill out the survey, click Next
 
-![Alt text](pics/28_run_workflow_survey.png?raw=true "Launch workflow survey")
+![Alt text](images/28_run_workflow_survey.png?raw=true "Launch workflow survey")
 
 Click Launch on the result page
 
-![Alt text](pics/29_run_workflow_survey_result.png?raw=true "Launch workflow survey result")
+![Alt text](images/29_run_workflow_survey_result.png?raw=true "Launch workflow survey result")
 
 Wait for the workflow to finish
 
-![Alt text](pics/30_workflow_result.png?raw=true "Launch workflow result")
+![Alt text](images/30_workflow_result.png?raw=true "Launch workflow result")
 
 Go check the new website
 
 Click on the website box, click output in the top and get the ip from the "Details" in webserver Template
 
-![Alt text](pics/31_workflow_result_details_ip.png?raw=true "Get IP")
+![Alt text](images/31_workflow_result_details_ip.png?raw=true "Get IP")
 
 Open your webbrowser
 
@@ -656,6 +656,6 @@ Open your webbrowser
 http://<your ip>
 ```
 
-![Alt text](pics/32_result_ip.png?raw=true "Get IP")
+![Alt text](images/32_result_ip.png?raw=true "Get IP")
 
 Lab done

@@ -61,7 +61,7 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-![Alt text](pics/01_changehosts.png?raw=true "change hosts file")
+![Alt text](images/01_changehosts.png?raw=true "change hosts file")
 
 Lets test the groups
 
@@ -77,7 +77,7 @@ ansible domainmember -m win_ping --ask-vault-password
 
 ```
 
-![Alt text](pics/02_testgroups.png?raw=true "Test groups")
+![Alt text](images/02_testgroups.png?raw=true "Test groups")
 
 ## Task 2 Create Domain controller
 
@@ -128,7 +128,7 @@ Add below to the playbook, this will create a new Active Directory.
     when: domain_install.reboot_required
 ```
 
-![Alt text](pics/03_domaincontroller.png?raw=true "domain controller playbook")
+![Alt text](images/03_domaincontroller.png?raw=true "domain controller playbook")
 
 Save and commit to Git
 
@@ -148,7 +148,7 @@ ansible-playbook 01_domain.yml --ask-vault-password
 
 ```
 
-![Alt text](pics/04_domaincontroller_play.png?raw=true "domain controller playbook run")
+![Alt text](images/04_domaincontroller_play.png?raw=true "domain controller playbook run")
 
 ## Task 3 Create user and group
 
@@ -185,7 +185,7 @@ __Type:__
       - corp
 ```
 
-![Alt text](pics/05_addgrpanduser.png?raw=true "add group and user")
+![Alt text](images/05_addgrpanduser.png?raw=true "add group and user")
 
 Save and commit to Git
 
@@ -205,7 +205,7 @@ ansible-playbook 02_domain.yml --ask-vault-password
 
 ```
 
-![Alt text](pics/06_addgrpanduser_run.png?raw=true "add group and user playbook run")
+![Alt text](images/06_addgrpanduser_run.png?raw=true "add group and user playbook run")
 
 ## Task 4 Change DNS for Domainmember
 
@@ -231,7 +231,7 @@ Add below to the playbook, this will set the member servers dns client to use th
     win_reboot:
 ```
 
-![Alt text](pics/07_changedns.png?raw=true "changedns playbook")
+![Alt text](images/07_changedns.png?raw=true "changedns playbook")
 
 Save and commit to Git
 
@@ -251,7 +251,7 @@ ansible-playbook 01_changedns.yml --ask-vault-password
 
 ```
 
-![Alt text](pics/08_changedns_run.png?raw=true "changedns playbook run")
+![Alt text](images/08_changedns_run.png?raw=true "changedns playbook run")
 
 ## Task 5 Add member server to AD
 
@@ -284,7 +284,7 @@ Add below to the playbook, this will join the member servers to the new Active D
 
 ```
 
-![Alt text](pics/09_joinad.png?raw=true "join ad")
+![Alt text](images/09_joinad.png?raw=true "join ad")
 
 Save and commit to Git
 
@@ -304,7 +304,7 @@ ansible-playbook 01_joinad.yml --ask-vault-password
 
 ```
 
-![Alt text](pics/10_joinad_run.png?raw=true "join ad playbook run")
+![Alt text](images/10_joinad_run.png?raw=true "join ad playbook run")
 
 Lets check that everything worked
 
@@ -312,15 +312,15 @@ Logon to the Domain Controller (server3) using RDP
 
 In the Server Manager Console, top right corner select tools and click on "Active Directory Users and Computers"
 
-![Alt text](pics/11_open_ad_users.png?raw=true "Open Active Directory Users and Computers")
+![Alt text](images/11_open_ad_users.png?raw=true "Open Active Directory Users and Computers")
 
 In the new window click on computers, server4 should be visible here
 
-![Alt text](pics/12_computers.png?raw=true "Show Computers")
+![Alt text](images/12_computers.png?raw=true "Show Computers")
 
 Click on users, see that the user "basim" exist and the group "corp" exist, right click on "corp" and select properties select the "Members" Tab, the user "basim" should be a member.
 
-![Alt text](pics/13_grpanduser.png?raw=true "Show Users")
+![Alt text](images/13_grpanduser.png?raw=true "Show Users")
 
 Lab Done
 
