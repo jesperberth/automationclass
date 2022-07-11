@@ -83,7 +83,3 @@ The playbook will create all resources needed for the Automation class - Lab 01 
 Lab is now deployed
 
 Close the Cloudshell
-
-## Prepare
-
-We will need the servers, __ansible, server1__ and __server3__ to be up and running - by default they are started after creation
