@@ -37,13 +37,11 @@ Accessible with winRM and RDP
 * Git [Download Git](https://git-scm.com/downloads)
 * Optional: Powershell Core 7 [Download Powershell Core](https://github.com/PowerShell/PowerShell)
 
-[Prepare Labs](prepare.md)
-
 ## Labs
 
 ### Lab 1: [Install Ansible](lab01/lab1.md)
 
-Install Ansible and Connect to a Linux and Windows Server
+Deploy Lab and Install Ansible and Connect to a Linux and Windows Server
 
 ### Lab 2: [Ansible Playbooks](lab02/lab2.md)
 
