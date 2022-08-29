@@ -1,0 +1,8 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'Automationclass'
+theme = 'hugo-theme-learn'
+[params]
+themeVariant = "blue"
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
