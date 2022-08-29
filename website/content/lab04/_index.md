@@ -1,6 +1,6 @@
 ---
 title: "Work with Playbooks"
-weight: 20
+weight: 40
 chapter: false
 pre: "<b>Lab 4. </b>"
 ---

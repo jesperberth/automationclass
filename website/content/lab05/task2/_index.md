@@ -1,32 +1,7 @@
-# Lab 5: Ansible Lint
-
-Install and run ansible-lint on playbooks
-
-## Table of Contents
-
-- [Prepare](#prepare)
-- [Task 1 Install Ansible Lint](#task-1-install-ansible-lint)
-- [Task 2 Run ansible-lint](#task-2-run-ansible-lint)
-
-## Prepare
-
-We will need the servers, ansible to be up and running - by default it is started after creation
-
-## Task 1 Install Ansible Lint
-
-[Ansible Docs - ansible-lint](https://ansible-lint.readthedocs.io/en/latest/)
-
-Log on to server "ansible" using ssh
-
-We need to install ansible-lint using pip
-
-__Type:__
-
-```bash
-pip install "ansible-lint[community,yamllint]"
-```
-
-![Alt text](images/001_install_ansible_lint.png?raw=true "install ansible lint")
+---
+title: Run ansible-lint
+weight: 20
+---
 
 ## Task 2 Run ansible-lint
 
@@ -71,8 +46,3 @@ ansible-lint
 ```
 
 ![Alt text](images/004_ansible_lint_second.png?raw=true "ansible lint second runs")
-
-
-Lab done
-
-[Ansible Roles](../lab06/lab6.md)

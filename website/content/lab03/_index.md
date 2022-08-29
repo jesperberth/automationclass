@@ -1,6 +1,6 @@
 ---
 title: "Ansible Vault"
-weight: 20
+weight: 30
 chapter: false
 pre: "<b>Lab 3. </b>"
 ---
