@@ -1,32 +1,19 @@
 ---
-title: "Work with Playbooks"
+title: "Ansible Vault"
 weight: 40
 chapter: false
 pre: "<b>Lab 4. </b>"
 ---
 
-Running advanced playbooks with ansible
-
-* Variables
-* Lists
-* Register
-* Conditions
-* Handlers
-* Facts
-* Debug
-* Loops
-* Loops Async
+In this session we will install and use Visual Studio Code with a few plugins to start working with ansible playbooks and create two playbooks, one for linux and one for windows
 
 ## Table of Contents
 
 - [Prepare](#prepare)
-- [Task 1 Variables and Lists](#task-1-variables-and-lists)
-- [Task 2 Register and Conditions](#task-2-register-and-conditions)
-- [Task 3 Handlers](#task-3-handlers)
-- [Task 4 Facts and debug](#task-4-facts-and-debug)
-- [Task 5 Loops](#task-5-loops)
-- [Task 6 Loops Async](#task-6-loops-async)
+- [Task 1 Ansible-vault](#task-1-ansible-vault)
+- [Task 2 Ansible Inventory yaml](#task-2-ansible-inventory-yaml)
+- [Task 3 Ansible Vault - Yaml inventory](#task-3-ansible-vault---yaml-inventory)
 
 ## Prepare
 
-We will need the servers, ansible, server1, server2 and server3 to be up and running - by default they are started after creation
+We will need the servers, __ansible__, __server1__ ,__server2__, __server3__ and __server4__ to be up and running - by default they are started after creation

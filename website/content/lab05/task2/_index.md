@@ -1,48 +1,90 @@
 ---
-title: Run ansible-lint
+title: Register and Conditions
 weight: 20
 ---
 
-## Task 2 Run ansible-lint
+## Task 2 Register and Conditions
 
-Lets test our playbooks
+[ansible docs - systemd module](https://docs.ansible.com/ansible/2.5/modules/systemd_module.html)
+
+All Tasks in a playbook has an output, we can put this output into a variable and use in other tasks
+
+Add a task to start the httpd service, register the output of systemd and show the output with debug
+
+Add below to the playbook 01_vars.yml
 
 __Type:__
 
-```bash
-cd
+```ansible
 
-cd ansibleclass
+  - name: Enable httpd service
+    ansible.builtin.systemd:
+      name: httpd
+      state: started
+      enabled: yes
+    register: httpd_status
 
-ansible-lint
+  - name: Show Status
+    debug:
+      var: httpd_status
 
 ```
 
-![Alt text](images/002_run_ansible_lint.png?raw=true "run ansible lint")
+Save the playbook, Commit the changes and push to github
 
-Lets take a look on the last three errors - all on 02_loop.yml
+![Alt text](images/001_register_playbook.png?raw=true "ansible register in playbook")
 
-* The first in line 3: is a true/false it could be with a capital letter or yes/no (whitch works)
-
-* The Second in line 25: missing space before and after in var
-
-* The third in line 31: missing a new line in the end of document
-
-Change the errors in VSCode
-
-![Alt text](images/003_ansible_lint_correct.png?raw=true "ansible lint corrections")
-
-Save, Commit and push
-
-on server ansible
+On the ansible server pull the new playbook and run it
 
 __Type:__
 
 ```bash
+cd  ansibleclass
+
 git pull
 
-ansible-lint
+ansible-playbook 01_vars.yml --ask-become-pass
 
 ```
 
-![Alt text](images/004_ansible_lint_second.png?raw=true "ansible lint second runs")
+![Alt text](images/002_register_playbook_run.png?raw=true "ansible register in playbook run")
+
+The status from systemd contains alot of information, scroll to the top to see that the httpd service is now enabled and running
+
+![Alt text](images/003_register_playbook_status.png?raw=true "ansible register in playbook status")
+
+We can use facts from the registered variable httpd_status in a condition
+
+[ansible docs - conditionals](https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html)
+
+Add below to the playbook 01_vars.yml
+
+__Type:__
+
+```ansible
+
+  - name: Is httpd running
+    debug:
+      msg: httpd is running
+    when: httpd_status.state == "started"
+
+```
+
+Save the playbook, Commit the changes and push to github
+
+![Alt text](images/004_conditional_playbook.png?raw=true "ansible conditional in playbook")
+
+On the ansible server pull the new playbook and run it
+
+__Type:__
+
+```bash
+cd  ansibleclass
+
+git pull
+
+ansible-playbook 01_vars.yml --ask-become-pass
+
+```
+
+![Alt text](images/005_conditional_playbook_run.png?raw=true "ansible conditional in playbook run")

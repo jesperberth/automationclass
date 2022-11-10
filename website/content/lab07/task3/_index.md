@@ -1,61 +1,62 @@
 ---
-title: Create user and group
+title: Create a role - part 1
 weight: 30
 ---
 
-## Task 3 Create user and group
+## Task 3 Create a role - part 1
 
-[ansible docs - win domain group module](https://docs.ansible.com/ansible/latest/collections/community/windows/win_domain_group_module.html)
-[ansible docs - win domain user module](https://docs.ansible.com/ansible/latest/collections/community/windows/win_domain_user_module.html)
+Now we will create our own Role, webserver installing and configuring httpd and php
 
-In VSCode create a new file 02_domain.yml
+The role will be placed in the same git repository as we are using for the playbooks, but could have been placed in a seperate repo and committed to Ansible-Galaxy
 
-Add below to the playbook, this will create a new group and user in AD.
+We will use ansible-galaxy command to initialize a role template
+
+Its important that you do a git pull before we are adding anything in the folders
+
+On ansible
 
 __Type:__
 
-```ansible
----
-- hosts: domaincontroller
-  vars:
-    domain: ansible.local
-
-  tasks:
-  - name: Create Group
-    community.windows.win_domain_group:
-      name: corp
-      scope: global
-      state: present
-
-  - name: Create user
-    community.windows.win_domain_user:
-      name: basim
-      firstname: Bart
-      surname: Simpson
-      password: P@ssw0rd!
-      state: present
-      groups:
-      - corp
-```
-
-![Alt text](images/05_addgrpanduser.png?raw=true "add group and user")
-
-Save and commit to Git
-
-Log on to server "ansible" using ssh
-
-Use git to get the new azure playbook
-
-**Type:**
-
 ```bash
 
-cd ansibleclass
+cd  ansibleclass
 
 git pull
 
-ansible-playbook 02_domain.yml --ask-vault-password
+mkdir roles
+
+cd roles
+
+ansible-galaxy init webserver
+
+ls -al
 
 ```
 
-![Alt text](images/06_addgrpanduser_run.png?raw=true "add group and user playbook run")
+![Alt text](images/007_ansible_galaxy_init.png?raw=true "ansible galaxy init")
+
+Now lets add, commit and push this to our git repo so we can work with the role in VSCode
+
+On ansible
+
+__Type:__
+
+```bash
+
+cd
+
+cd ansibleclass
+
+git add .
+
+git commit -m "Adding roles"
+
+git push origin main
+
+```
+
+![Alt text](images/008_ansible_git_push.png?raw=true "ansible git push")
+
+In VSCode do a push/pull to get the changes, you should see the roles \ webserver with all the default content
+
+![Alt text](images/009_vscode_push_pull.png?raw=true "vscode push pull")

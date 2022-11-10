@@ -5,6 +5,16 @@ weight: 20
 
 ## Task 2 Install Software
 
+Set the timezone to match your current timezone
+
+```bash
+
+tzutil /s "Romance Standard Time"
+
+```
+
+![Alt text](images/001_set_timezone.png?raw=true "set timezone")
+
 You need to install the following software
 
 ```bash

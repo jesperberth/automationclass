@@ -1,8 +1,8 @@
 ---
-title: "Ansible Vault"
-weight: 30
+title: "Ansible Playbooks"
+weight: 40
 chapter: false
-pre: "<b>Lab 3. </b>"
+pre: "<b>Lab 4. </b>"
 ---
 
 In this session we will install and use Visual Studio Code with a few plugins to start working with ansible playbooks and create two playbooks, one for linux and one for windows
@@ -10,10 +10,11 @@ In this session we will install and use Visual Studio Code with a few plugins to
 ## Table of Contents
 
 - [Prepare](#prepare)
-- [Task 1 Ansible-vault](#task-1-ansible-vault)
-- [Task 2 Ansible Inventory yaml](#task-2-ansible-inventory-yaml)
-- [Task 3 Ansible Vault - Yaml inventory](#task-3-ansible-vault---yaml-inventory)
+- [Task 1 Clone Git Repository](#task-2-clone-git-repository)
+- [Task 2 Create the first playbook](#task-3-create-the-first-playbook)
+- [Task 3 Adding tasks to the playbook](#task-4-adding-tasks-to-the-playbook)
+- [Task 4 Add server two and run the playbook](#task-5-add-server-two-and-run-the-playbook)
 
 ## Prepare
 
-We will need the servers, __ansible__, __server1__ ,__server2__, __server3__ and __server4__ to be up and running - by default they are started after creation
+We will need the servers, ansible, server1 and server2 to be up and running - by default they are started after creation

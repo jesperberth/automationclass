@@ -1,75 +1,88 @@
 ---
-title: Create Domain controller
+title: Add SSH key to GitHub
 weight: 20
 ---
 
-## Task 2 Create Domain controller
+## Task 2 Add SSH key to GitHub
 
-[ansible docs - win feature module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_feature_module.html)
+[Ansible docs - Roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
 
-[ansible docs - win reboot](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
+We need to do some config to git, as we need to do some of the work on our linux host
 
-[ansible docs - win domain](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_domain_module.html)
+And copy our public ssh key to our github account
 
-In VSCode create a new file 01_domain.yml
+On ansible
 
-Add below to the playbook, this will create a new Active Directory.
-
-```ansible
-
----
-- hosts: domaincontroller
-  vars:
-    domain: ansible.local
-
-  tasks:
-  - name: Install AD-Tools and DNS
-    win_feature:
-      name:
-      - DNS
-      - AD-Domain-Services
-      state: present
-      include_management_tools: yes
-    register: feature_install
-
-  - name: Reboot if required
-    win_reboot:
-    when: feature_install.reboot_required
-
-  - name: Create new Active Directory
-    win_domain:
-      create_dns_delegation: no
-      database_path: C:\Windows\NTDS
-      dns_domain_name: "{{ domain }}"
-      domain_mode: Win2012R2
-      forest_mode: Win2012R2
-      safe_mode_password: "{{ ansible_password }}"
-      sysvol_path: C:\Windows\SYSVOL
-    register: domain_install
-
-  - name: Reboot if required
-    win_reboot:
-    when: domain_install.reboot_required
-```
-
-![Alt text](images/03_domaincontroller.png?raw=true "domain controller playbook")
-
-Save and commit to Git
-
-Log on to server "ansible" using ssh
-
-Use git to get the new azure playbook
-
-**Type:**
+__Type:__
 
 ```bash
+cd
+
+git config --global user.email "you@example.com"
+
+git config --global user.name "Your Name"
+
+cat ~/.ssh/id_rsa.pub
+
+```
+
+![Alt text](images/001_git_commands.png?raw=true "git commands")
+
+In your browser go to github.com and login to your account
+
+In the top right corner "click" on your profile and select "Settings"
+
+![Alt text](images/002_github_settings.png?raw=true "github settings")
+
+In the left menu "click" on "SSH and GPG keys"
+
+![Alt text](images/003_github_settings.png?raw=true "github settings")
+
+"Click" on the green "New SSH key"
+
+![Alt text](images/004_github_newssh.png?raw=true "github settings")
+
+From the linux terminal copy the pub key
+
+![Alt text](images/005_github_pubkey.png?raw=true "github settings")
+
+Give the new key a Title "ansible"
+
+paste the key
+
+and click "Add SSH key"
+
+![Alt text](images/006_github_pubkey_add.png?raw=true "github settings")
+
+Now the key is created, you can see usage and delete the key when you are done with this course (My key is deleted)
+
+![Alt text](images/007_github_pubkey.png?raw=true "github settings")
+
+Now lets get the ssh url
+
+In the browser go to your repository on github "click" the green "Code" button and select "SSH" copy the url
+
+![Alt text](images/008_github_sshurl.png?raw=true "github sshurl")
+
+On ansible
+
+Change the url to your own
+
+__Type:__
+
+```bash
+cd
 
 cd ansibleclass
 
-git pull
-
-ansible-playbook 01_domain.yml --ask-vault-password
+git remote set-url origin git@github.com:jesperberth/ansibleclass.git
 
 ```
 
-![Alt text](images/04_domaincontroller_play.png?raw=true "domain controller playbook run")
+![Alt text](images/009_github_sshurl_cmd.png?raw=true "github sshurl cmd")
+
+Do a git pull
+
+It will prompt you for RSA fingerprint authenticy, write "yes"
+
+![Alt text](images/010_git_pull.png?raw=true "git pull")

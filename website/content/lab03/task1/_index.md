@@ -1,155 +1,63 @@
 ---
-title: Ansible-vault
+title: Clone Git Repo
 weight: 10
 ---
 
-## Task 1 Ansible-vault
+## Task 1 Clone Git Repository
 
-[Ansible Vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html)
+We need to configure git with a Name and email to track the changes you are making
 
-In this lab we will work with ansible-vault to encrypt sensitive data as passwords
-
-First we need to remove the password for the windows servers in the ansible-hosts file
+Open Powershell on your desktop
 
 ```bash
-cd
-
-vi ansible-hosts
-
+git config --global user.name "Full Name"
+git config --global user.email "email@address.com"
+git config --list
 ```
 
-In vi go to the line ansible_password=SomeThingSimple8
+![Alt text](images/009_git_config.png?raw=true "Git Config")
 
-__type:__
+We need to create a simple folder structure for keeping our files
 
-in vi dd will remove the line
+Open a Powershell Terminal
 
-```bash
-dd
+**Type:**
 
-[windowsservers:vars]
-ansible_user=jesbe
-ansible_password=SomeThingSimple8   <--------- Make sure the marker is at this line
-ansible_port=5985
-ansible_connection=winrm
-ansible_winrm_transport=ntlm
-ansible_winrm_message_encryption=always
+```powershell
+mkdir ansible
+cd ansible
+code .
 ```
 
-__Type:__
+![Alt text](images/009_start_code.png?raw=true "Start VSCode")
 
-```bash
-Hit Esc-key
+Click "Yes, I trust the authers" button
 
-:wq (: for a command w for write and q for quit vi)
-```
+![Alt text](images/009_start_code_trust.png?raw=true "Start VSCode trust")
 
-![Alt text](images/031_remove_password.png?raw=true "remove password")
+On your "ansibleclass" repository page
 
-Next lets create an encryptet var file for ansible
+Click the green "Code" button to retrieve the URL for the repository
 
-__Type:__
-
-```bash
-cd
-
-ansible-vault create secret.yml
-
-```
-
-You will be promptet for a password and to confirm the password
-
-![Alt text](images/032_create_vault.png?raw=true "create vault")
-
-ansible-vault will open your default editor - in our case its vi
-
-In vi __type:__
-
-```bash
-i (for input)
-
----
-
-windows_password: SomeThingSimple8   <------ Type your Windows password here
-
-```
-
-__Type:__
-
-```bash
-Hit Esc-key
-
-:wq (: for a command w for write and q for quit vi)
-```
-
-![Alt text](images/033_create_vault_save.png?raw=true "edit vault")
-
-Try to cat the file
-
-__Type:__
-
-```bash
-
-cat secret.yml
-
-```
-
-![Alt text](images/034_cat_vault.png?raw=true "cat vault")
-
-To change the content of an encryptet file use ansible-vault edit filename
-
-You will need to type your password again ..
-
-__Type:__
-
-```bash
-
-ansible-vault edit secret.yml
-
-```
-
-![Alt text](images/034_edit_vault.png?raw=true "edit vault")
-
-Lets create a playbook to use the encryptet var file
+![Alt text](images/010_repourl.png?raw=true "Repo URL")
 
 In VSCode
 
-Create a new file 01_vault.yml
+Click (Windows: Ctrl + Shift + P) (Mac: Command + Shift + P)
+This will open the VSCode command Palette
 
-__Type:__
+Write "Git Clone"
 
-```ansible
----
-- hosts: windowsservers
-  collections:
-    - ansible.windows
-  vars_files:
-    - ~/secret.yml
-  vars:
-    ansible_password: "{{ windows_password }}"
-  tasks:
-  - name: Install IIS (Web-Server only)
-    win_feature:
-      name: Web-Server
-      state: present
-```
+![Alt text](images/011_git_clone.png?raw=true "VSCode Command")
 
-Save the file
+Paste the git url
 
-Notice that Git detects the changed file, do a commit add a comment "Vault" and Sync to Git
+![Alt text](images/012_git_clone_url.png?raw=true "Paste Repo URL")
 
-![Alt text](images/035_vault_playbook.png?raw=true "vault playbook")
+Specify a path for the git repository on your disk (Don't use a One Drive)
 
-On server ansible do a git pull and run the playbook
+![Alt text](images/013_git_clone_path.png?raw=true "Set Git local path")
 
-```bash
+Click "Yes" to Open the repository
 
-cd ansibleclass
-
-git pull
-
-ansible-playbook 01_vault.yml --ask-vault-pass
-
-```
-
-![Alt text](images/036_vault_playbook_run.png?raw=true "vault playbook run")
+![Alt text](images/014_git_in_vscode.png?raw=true "Git repo is now in VSCode")

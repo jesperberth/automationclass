@@ -1,66 +1,63 @@
 ---
-title: Encryptet inventory
+title: Adding tasks to the playbook
 weight: 30
 ---
 
-## Task 3 Encryptet inventory
+## Task 3 Adding tasks to the playbook
 
-In this task we will encrypt the password for the windows servers and place it in the new yaml inventory file
+Lets add a second task in the playbook 01_linux.yml
 
-Encrypt you password
+In VSCode add the following text to the file
 
-__Type:__
+```ansible
 
-```bash
-
-ansible-vault encrypt_string 'SomeThingSimple8' --name ansible_password
-
-```
-
-![Alt text](images/040_ansible_vault_string.png?raw=true "Encrypt string")
-
-Copy the string
-
-![Alt text](images/041_ansible_vault_string_copy.png?raw=true "Encrypt string copy")
-
-Paste the encryptet string into ansible-hosts.yml
-
-When copied you might need to indent the lines with spaces so it placed under the first S in password, se the picture
-
-```bash
-
-cd
-
-vi ansible-hosts.yml
-
-Hit Esc-key
-
-:set paste <Hit Enter>
-
-Hit Esc-key
-
-i (to toggle insert)
+  - name: Add line in file
+    lineinfile:
+      path: /root/testfile.txt
+      line: Ansible was here...
 
 ```
 
-Save the inventory file
+![Alt text](images/024_secondtask_code.png?raw=true "Add second task to playbook")
 
-__Type:__
+Save the file
+
+Notice that Git detects the changed file, do a commit add a comment "Second Edition" and Sync to Git
+
+![Alt text](images/025_secondtask_commit.png?raw=true "Second Commit to playbook")
+
+On ansible
+
+Pull the updated git repository
+
+**Type:**
 
 ```bash
-Hit Esc-key
-
-:wq (: for a command w for write and q for quit vi)
+git pull
 ```
 
-![Alt text](images/042_inventory_encrypt.png?raw=true "inventory encryptet string")
+![Alt text](images/026_git_pull.png?raw=true "git pull")
 
-Lets do a test with win_ping
+Run the playbook
+
+**Type:**
 
 ```bash
+ls
 
-ansible windowsservers -m win_ping --ask-vault-pass
-
+ansible-playbook 01_linux.yml --ask-become-pass
 ```
 
-![Alt text](images/043_win_ping.png?raw=true "win ping")
+![Alt text](images/027_run_playbook_secondtask.png?raw=true "Run playbook")
+
+Run the playbook again, the second task will become green as the line is already there, this is the idempotency
+
+The "Create File" task will be changed every time as we use the touch command on the file
+
+**Type:**
+
+```bash
+ansible-playbook 01_linux.yml --ask-become-pass
+```
+
+![Alt text](images/028_run_playbook_secondtask_idempodent.png?raw=true "Run playbook")

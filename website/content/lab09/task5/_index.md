@@ -1,102 +1,59 @@
 ---
-title: Create Azure Webserver template
+title: Create an ansible dynamic inventory for Azure RM
 weight: 50
 ---
 
-## Task 5 Create Azure Webserver template
+## Task 5 Create an ansible dynamic inventory for Azure RM
 
-In VSCode
+We can either add the webserver in the ansible-hosts file or use an Inventory plugin
 
-Create a copy of 02_azure.yml -> 02_azure_tower.yml
+The Azure Resource Manager inventory plugin is part of ansible and can return a dynamic inventory grouped on tags
 
-Change the variable user: - so it matches the variable in the 01_azure_tower.yml
+[Azure Resource Manager inventory plugin](https://docs.ansible.com/ansible/latest/plugins/inventory/azure_rm.html)
 
-to __your initials eg. "jesbe"__
+In VSCode create a new file webserver.azure_rm.yml
 
-Remove the following lines from the playbook:
+Note: The inventory file must end with .azure_rm.yml
 
-First line is under the vars section
+```ansible
+plugin: azure_rm
+auth_source: auto
+include_vm_resource_groups:
+ - '*'
+keyed_groups:
+ - prefix: tag
+   key: tags
 
-```bash
-ssh_public_key: "{{lookup('file', '~/.ssh/id_rsa.pub') }}"
 ```
 
-and __Remove__ the two last lines in the playbook
+![Alt text](images/018_azure_inventory.png?raw=true "vscode create inventory file")
 
-```bash
-
-  - name: Add webserver to ssh known_hosts
-    shell: "ssh-keyscan -t ecdsa {{ webserver_pub_ip.state.ip_address }}  >> /home/{{ user }}/.ssh/known_hosts"
-```
-
-Save and Commit
-
-![Alt text](images/10_ansible_tower_playbook_webserver.png?raw=true "Tower playbook")
-
-In Tower go to project and refresh your project, this will do a "git pull"
-
-![Alt text](images/07_ansible_tower_refresh.png?raw=true "Refresh project")
-
-We need the public ssh key from server ansible
+Save and commit to Git
 
 Log on to server "ansible" using ssh
 
-and retrive your public key
+Use git to get the new azure inventory
 
-__Type:__
+And run a test against Azure
+
+**Type:**
 
 ```bash
 
-cd
+cd ansibleclass
 
-cat ~/.ssh/id_rsa.pub
+git pull
+
+ansible-inventory -i ./webserver.azure_rm.yml --graph
+
+ansible-inventory -i ./webserver.azure_rm.yml --list
 
 ```
 
-Mark the key and copy it to the clipboard, you will need it when we create the next Job Template
+![Alt text](images/019_azure_inventory_run.png?raw=true "azure inventory run")
 
-![Alt text](images/08_cat_public_key.png?raw=true "cat public key")
+![Alt text](images/020_azure_inventory_run_list.png?raw=true "azure inventory run list")
 
-Back in the Tower UI
+--list will give a lot more information, --graph will consolidate output in a more viewable way
 
-In the left pane, click Templates
-
-Click on Add to create a new Template select the __Job template__ type
-
-Type
-
-__Name:__ webserver
-
-__Job Type:__ Run
-
-__Inventory:__ Select your own inventory
-
-__Project:__ Select your own project
-
-__Playbook:__ 02_azure_tower.yml
-
-__Credentials:__ Select credential type "Microsoft Azure Resource Manager" and your own credentials
-
-__In the Extra Vars:__ add the ssh_public_key make sure you have " __before__ and __after__ the key
-
-```bash
----
-ssh_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCl/myugJcFI/2XmWcLd5P+tKVtbsGf83G/POHH3vc4p3fyLaGKUqaX8YBOLohJ5XFB9t25Tg8wZleCsbDm0s081jx4tdvudRhdqUMbA+n3oHRB3SHD7BLm7d13VgGlM6SCxnkIgrePFaSWsX+J5kk3rhxpo0LEEiGDgTdUDYz3wNypEBsal+eoFp1WHXArnkbl6FkEhOC8iZSJY2KKsJlv6xFXN1NlM/KWkgFdlB+tWps49Cl44IAMHgcjku+Xx+00trgWX89isK54MHWUXHTTPzOykaagLQXcwZZmZvy/84qdDBcRhehSwg7LxHAMjFEYCSpAE78AWoBNpB3lhR0r jesbe@ansible"
-
-```
-
-![Alt text](images/11_ansible_tower_webserver_template_pubkey.png?raw=true "template")
-
-Leave the rest as default and click __Save__
-
-![Alt text](images/11_ansible_tower_webserver_template.png?raw=true "template")
-
-In the left pane click on Templates
-
-Locate your webserver template and click on the Rocket to lauch it
-
-![Alt text](images/12_launch_template.png?raw=true "launch template")
-
-Wait for template to finish
-
-![Alt text](images/13_launch_template_run.png?raw=true "launch template")
+If we add another server in the Resource Group it will be included in the inventory

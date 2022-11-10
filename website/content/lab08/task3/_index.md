@@ -1,52 +1,44 @@
 ---
-title: Create Network in Azure
+title: Create user and group
 weight: 30
 ---
 
-## Task 3 Create Network in Azure
+## Task 3 Create user and group
 
-[Ansible Module azure_rm_virtualnetwork](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualnetwork_module.html#azure-rm-virtualnetwork-module)
+[ansible docs - win domain group module](https://docs.ansible.com/ansible/latest/collections/community/windows/win_domain_group_module.html)
+[ansible docs - win domain user module](https://docs.ansible.com/ansible/latest/collections/community/windows/win_domain_user_module.html)
 
-[Ansible Module azure_rm_subnet](https://docs.ansible.com/ansible/latest/modules/azure_rm_subnet_module.html#azure-rm-subnet-module)
+In VSCode create a new file 02_domain.yml
 
-In VSCode
+Add below to the playbook, this will create a new group and user in AD.
 
-create a new playbook file 02_azure.yml
-
-add the following text to the file, change the first variable **"user"** to your initials, use the same as in previous task, it will be used for creating resources and a login to the webserver
+__Type:__
 
 ```ansible
 ---
-- hosts: localhost
-  connection: local
+- hosts: domaincontroller
   vars:
-    user: write your username here
-    location: northeurope
-    virtual_network_name: "webserver_{{ user }}"
-    subnet: Webserver
-    resource_group: "webserver_{{ user }}"
-    domain_sub: "domain{{ user }}"
-    ssh_public_key: "{{lookup('file', '~/.ssh/id_rsa.pub') }}"
+    domain: ansible.local
 
   tasks:
-  - name: Create a virtual network
-    azure_rm_virtualnetwork:
-      resource_group: "{{ resource_group }}"
-      name: "{{ virtual_network_name }}"
-      address_prefixes_cidr: "10.99.0.0/16"
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
+  - name: Create Group
+    community.windows.win_domain_group:
+      name: corp
+      scope: global
+      state: present
 
-  - name: Create a subnet
-    azure_rm_subnet:
-      resource_group: "{{ resource_group }}"
-      virtual_network_name: "{{ virtual_network_name }}"
-      name: "{{ subnet }}"
-      address_prefix_cidr: "10.99.0.0/24"
+  - name: Create user
+    community.windows.win_domain_user:
+      name: basim
+      firstname: Bart
+      surname: Simpson
+      password: P@ssw0rd!
+      state: present
+      groups:
+      - corp
 ```
 
-![Alt text](images/012_azure_net_playbook.png?raw=true "azure net playbook")
+![Alt text](images/05_addgrpanduser.png?raw=true "add group and user")
 
 Save and commit to Git
 
@@ -62,8 +54,8 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 02_azure.yml
+ansible-playbook 02_domain.yml --ask-vault-password
 
 ```
 
-![Alt text](images/013_azure_net_playbook_run.png?raw=true "azure net playbook run")
+![Alt text](images/06_addgrpanduser_run.png?raw=true "add group and user playbook run")

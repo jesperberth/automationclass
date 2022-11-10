@@ -1,101 +1,155 @@
 ---
-title: Variables and Lists
+title: Ansible-vault
 weight: 10
 ---
 
-## Task 1 Variables and Lists
+## Task 1 Ansible-vault
 
-[ansible docs - variables](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html)
+[Ansible Vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html)
 
-Variables are a key value pair we can use to make dynamic tasks in our playbooks
+In this lab we will work with ansible-vault to encrypt sensitive data as passwords
 
-In ansible vars can be defined in 22 different places, yes .... and they all take precedence over one and other see the list here
+First we need to remove the password for the windows servers in the ansible-hosts file
 
-[ansible docs - variable precedence](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#understanding-variable-precedence)
+```bash
+cd
 
-[ansible docs - package module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/package_module.html)
+vi ansible-hosts
 
-Lets use a single variable in a playbook
+```
 
-Create a new playbook 01_vars.yml
+In vi go to the line ansible_password=SomeThingSimple8
+
+__type:__
+
+in vi dd will remove the line
+
+```bash
+dd
+
+[windowsservers:vars]
+ansible_user=jesbe
+ansible_password=SomeThingSimple8   <--------- Make sure the marker is at this line
+ansible_port=5985
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+ansible_winrm_message_encryption=always
+```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](images/031_remove_password.png?raw=true "remove password")
+
+Next lets create an encryptet var file for ansible
+
+__Type:__
+
+```bash
+cd
+
+ansible-vault create secret.yml
+
+```
+
+You will be promptet for a password and to confirm the password
+
+![Alt text](images/032_create_vault.png?raw=true "create vault")
+
+ansible-vault will open your default editor - in our case its vi
+
+In vi __type:__
+
+```bash
+i (for input)
+
+---
+
+windows_password: SomeThingSimple8   <------ Type your Windows password here
+
+```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](images/033_create_vault_save.png?raw=true "edit vault")
+
+Try to cat the file
+
+__Type:__
+
+```bash
+
+cat secret.yml
+
+```
+
+![Alt text](images/034_cat_vault.png?raw=true "cat vault")
+
+To change the content of an encryptet file use ansible-vault edit filename
+
+You will need to type your password again ..
+
+__Type:__
+
+```bash
+
+ansible-vault edit secret.yml
+
+```
+
+![Alt text](images/034_edit_vault.png?raw=true "edit vault")
+
+Lets create a playbook to use the encryptet var file
+
+In VSCode
+
+Create a new file 01_vault.yml
 
 __Type:__
 
 ```ansible
 ---
-- hosts: linuxservers
-  become: yes
-
+- hosts: windowsservers
+  collections:
+    - ansible.windows
+  vars_files:
+    - ~/secret.yml
   vars:
-      package: httpd
-
+    ansible_password: "{{ windows_password }}"
   tasks:
-  - name: Install Packages
-    ansible.builtin.package:
-      name: "{{ package }}"
-      state: latest
+  - name: Install IIS (Web-Server only)
+    win_feature:
+      name: Web-Server
+      state: present
 ```
 
-Save the playbook, Commit the changes and push to github
+Save the file
 
-![Alt text](images/001_vars_playbook.png?raw=true "ansible vars in playbook")
+Notice that Git detects the changed file, do a commit add a comment "Vault" and Sync to Git
 
-On the ansible server pull the new playbook and run it
+![Alt text](images/035_vault_playbook.png?raw=true "vault playbook")
 
-__Type:__
+On server ansible do a git pull and run the playbook
 
 ```bash
-cd  ansibleclass
+
+cd ansibleclass
 
 git pull
 
-ansible-playbook 01_vars.yml --ask-become-pass
+ansible-playbook 01_vault.yml --ask-vault-pass
 
 ```
 
-![Alt text](images/002_vars_playbook_run.png?raw=true "ansible vars in playbook run")
-
-Lets change the playbook to use a list to install several packages
-
-Change the playbook 01_vars.yml
-
-__Type:__
-
-```ansible
----
-- hosts: linuxservers
-  become: yes
-
-  vars:
-      package:
-          - httpd
-          - mariadb-server
-          - php
-          - php-mysqlnd
-
-  tasks:
-  - name: Install Packages
-    ansible.builtin.package:
-      name: "{{ package }}"
-      state: latest
-
-```
-
-Save the playbook, Commit the changes and push to github
-
-![Alt text](images/004_vars_list_playbook.png?raw=true "ansible vars list in playbook")
-
-On the ansible server pull the new playbook and run it
-
-__Type:__
-
-```bash
-cd  ansibleclass
-
-git pull
-
-ansible-playbook 01_vars.yml --ask-become-pass
-
-```
-
-![Alt text](images/005_vars_list_playbook_run.png?raw=true "ansible vars list in playbook run")
+![Alt text](images/036_vault_playbook_run.png?raw=true "vault playbook run")

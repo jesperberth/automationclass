@@ -1,48 +1,151 @@
 ---
-title: Create Azure RM Template
+title: Create Public Ip, NIC and Security Group in Azure
 weight: 40
 ---
 
-## Task 4 Create Azure RM Template
+## Task 4 Create Public Ip, NIC and Security Group in Azure
 
-In VSCode
+[Ansible Module azure_rm_publicipaddress](https://docs.ansible.com/ansible/latest/modules/azure_rm_publicipaddress_module.html#azure-rm-publicipaddress-module)
 
-Create a copy of 01_azure.yml -> 01_azure_tower.yml
+[Ansible Module azure_rm_securitygroup](https://docs.ansible.com/ansible/latest/modules/azure_rm_securitygroup_module.html#azure-rm-securitygroup-module)
 
-Change the variable user: - it should be your initials as we copied your working playbook from previous lab
+[Ansible Module azure_rm_networkinterface](https://docs.ansible.com/ansible/latest/modules/azure_rm_networkinterface_module.html#azure-rm-networkinterface-module)
 
-to __your initials eg. "jesbe"__
+In VSCode add the next sections to the 02_azure.yml playbook
 
-Save and Commit
+```ansible
+  - name: Create a public ip address for webserver
+    azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: public_ip_webserver
+      allocation_method: static
+      domain_name: "webserver{{ domain_sub }}"
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
+    register: webserver_pub_ip
 
-![Alt text](images/06_ansible_tower_playbook.png?raw=true "Tower playbook")
+  - name: Create Security Group for webserver
+    azure_rm_securitygroup:
+      resource_group: "{{ resource_group }}"
+      name: "webserver_securitygroup"
+      purge_rules: yes
+      rules:
+          - name: Allow_SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 100
+            direction: Inbound
+          - name: Allow_HTTP
+            protocol: Tcp
+            destination_port_range: 80
+            access: Allow
+            priority: 101
+            direction: Inbound
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
 
-In Tower go to project and refresh your project, this will do a "git pull"
+  - name: Create a network interface for webserver
+    azure_rm_networkinterface:
+      name: "webserver_nic01"
+      resource_group: "{{ resource_group }}"
+      virtual_network: "{{ virtual_network_name }}"
+      subnet_name: "{{ subnet }}"
+      security_group: "webserver_securitygroup"
+      ip_configurations:
+        - name: "webserver_nic01_ipconfig"
+          public_ip_address_name: "public_ip_webserver"
+          primary: True
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
+```
 
-![Alt text](images/07_ansible_tower_refresh.png?raw=true "Refresh project")
+![Alt text](images/014_azure_network.png?raw=true "azure nic playbook")
 
-In the left pane, click Templates
+Save and commit to Git
 
-Click on Add to create a new Template select the __Add Job template__ type
+Log on to server "ansible" using ssh
 
-Type
+Use git to get the new azure playbook
 
-__Name:__ Resourcegroup
+**Type:**
 
-__Job Type:__ Run
+```bash
 
-__Inventory:__ Inventory
+cd ansibleclass
 
-__Project:__ Project
+git pull
 
-__Playbook:__ 01_azure_tower.yml
+ansible-playbook 02_azure.yml
 
-__Credentials:__ Select credential type "Microsoft Azure Resource Manager" and Azure Credentials
+```
 
-Leave the rest as default and click __Save__
+![Alt text](images/015_azure_network_run.png?raw=true "azure nic playbook run")
 
-![Alt text](images/08_ansible_tower_template.png?raw=true "Create template")
+[Ansible Module azure_rm_virtualmachine](https://docs.ansible.com/ansible/latest/modules/azure_rm_virtualmachine_module.html#azure-rm-virtualmachine-module)
 
-Click on the "Launch" button and wait a minute to see the result
+[Ansible Module shell](https://docs.ansible.com/ansible/latest/modules/shell_module.html#shell-module)
 
-![Alt text](images/09_ansible_tower_template_run.png?raw=true "Run template")
+Add the virtualmachine task to the 02_azure.yml playbook
+
+In VSCode add the next sections to the 02_azure.yml playbook
+
+```ansible
+  - name: Create a VM webserver
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "webserver"
+      os_type: Linux
+      admin_username: "{{ user }}"
+      ssh_password_enabled: false
+      ssh_public_keys:
+        - path: "/home/{{ user }}/.ssh/authorized_keys"
+          key_data: "{{ ssh_public_key }}"
+      managed_disk_type: Standard_LRS
+      state: present
+      image:
+        offer: RHEL
+        publisher: RedHat
+        sku: "8_4"
+        version: latest
+      vm_size: Standard_A1_v2
+      network_interfaces: "webserver_nic01"
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
+
+  - name: Show webserver public ip
+    debug:
+      msg: "{{ webserver_pub_ip.state.ip_address }}"
+
+  - name: Add webserver to ssh known_hosts
+    shell: "ssh-keyscan -t ecdsa {{ webserver_pub_ip.state.ip_address }}  >> /home/{{ user }}/.ssh/known_hosts"
+
+```
+
+![Alt text](images/016_azure_vm.png?raw=true "azure vm playbook")
+
+Save and commit to Git
+
+Log on to server "ansible" using ssh
+
+Use git to get the new azure playbook
+
+**Type:**
+
+```bash
+
+cd ansibleclass
+
+git pull
+
+ansible-playbook 02_azure.yml
+
+```
+
+![Alt text](images/017_azure_vm_run.png?raw=true "azure vm playbook run")
+
+The new webserver is now deployed in Azure and we are able to ssh keyless to the webserver

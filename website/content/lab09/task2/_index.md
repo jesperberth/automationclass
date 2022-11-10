@@ -1,110 +1,145 @@
 ---
-title: Modify AWX with playbook
+title: Create credentials for Azure
 weight: 20
 ---
 
-## Task 2 Modify AWX with playbook
+## Task 2 Create credentials for Azure
 
-We can use ansible playbooks to create, change or remove objects in AWX
+We need to register an azure application to enable ansible automation
 
-In Task 1 you took a tour round the AWX interface, by default the installation creates the following objects, we will create a ansible playbook to remove these items
+In your browser log on to [https://portal.azure.com](https://portal.azure.com)
 
-- Demo Inventory
-- Demo Project
-- Demo Credential
-- Demo Job Template
+In the top bar, click the "cloudshell" icon marked with red
 
-First we need to get a OAUTHTOKEN for AWX
+![Alt text](images/01_start_cloud_shell.png?raw=true "Cloud Shell")
 
-In the AWX console
+Select "Bash"
 
-In the left pane, in the Access Block click Users
+![Alt text](images/02_start_cloud_shell_bash.png?raw=true "Cloud Shell")
 
-Select the user "Admin"
+Run the following command to create a new Service User
 
-![Alt text](images/01_ansible_tower_adminuser.png?raw=true "select admin user")
+Set the user variable to your initials
 
-Click Tokens
+```bash
 
-![Alt text](images/02_ansible_tower_token.png?raw=true "admin token")
+USER=jesbe
 
-Click Add
+SubID=$(az account list --query "[].{id:id}" -o tsv)
 
-In the Create User Token window
+az ad sp create-for-rbac --name ansible-$USER --role Contributor --scopes /subscriptions/$SubID
 
-Select "Write" in the Scope dropdown box click save
+```
 
-![Alt text](images/03_ansible_tower_create_token.png?raw=true "create admin token")
+Copy the JSON output to a notepad file we will need the information later
 
-The Token will only be visible one time so copy the token and save it in a notepad we need it in a monment
+![Alt text](images/02_create_sp.png?raw=true "Cloud Shell output")
 
-![Alt text](images/04_ansible_tower_view_token.png?raw=true "view admin token")
+We need to get the Subscription ID run the following in the Cloud Shell
 
-On the ansible server we need to set three Environment variables
+```bash
 
-Change the IP to your awx host
+echo $SubID
 
-Change the OAUTH_TOKEN to the one you just created
+```
 
-Run all three export commands on the ansible server
+![Alt text](images/03_get_sub_id.png?raw=true "Cloud Shell sub id")
+
+Copy the line id: "xxx-xxx" to the same notepad
+
+__Below is for both command and GUI__ versions
+
+Log on to server "ansible" using ssh
+
+We will create the authentication file, you must start in your home dir
 
 __Type:__
 
 ```bash
-
-export CONTROLLER_HOST=http://137.135.180.213
-export CONTROLLER_USERNAME=admin
-export CONTROLLER_OAUTH_TOKEN=flNNBoKPnlnMyNTAhHL4hhMhFxmzTe
+cd
+mkdir .azure
+vi .azure/credentials
 
 ```
 
-![Alt text](images/05_ansible_tower_export_token.png?raw=true "export token")
+![Alt text](images/009_azure_credfile.png?raw=true "azure credentials")
 
-In VSCode create a new playbook 01_awx.yml
+In vi **type:**
 
-Add below to the playbook
+Use the vaules you collected from the Azure portal
+
+```bash
+i (to toggle input)
+```
+
+```bash
+[default]
+subscription_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+client_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+secret=xxxxxxxxxxxxxxxxx
+tenant=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+```
+
+```bash
+
+In the file
+
+subscription_id = id from the last command
+
+client_id = appID in the first command
+
+secret = Password in the first command
+
+tenant = tenant in the first command
+
+```
+
+**Type:**
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](images/010_azure_credfile_input.png?raw=true "azure credentials file input")
+
+Lets test the connection to azure by creating a small playbook
+
+[Ansible Module azure_rm_resourcegroup](https://docs.ansible.com/ansible/latest/modules/azure_rm_resourcegroup_module.html#azure-rm-resourcegroup-module)
+
+In VSCode
+
+create a new playbook file 01_azure.yml
+
+add the following text to the file, change the name of the variable **user to your initials** use the same as you use to login to ansible server
 
 ```ansible
 ---
 - hosts: localhost
   connection: local
   vars:
-
+    user: write your username here
   tasks:
-  - name: Remove Demo Template
-    awx.awx.job_template:
-      name: Demo Job Template
-      organization: Default
-      state: absent
-
-  - name: Remove Demo credential
-    awx.awx.credential:
-      name: Demo Credential
-      credential_type: Machine
-      state: absent
-
-  - name: Remove Demo inventory
-    awx.awx.inventory:
-      name: Demo Inventory
-      organization: Default
-      state: absent
-
-  - name: Remove Demo project
-    awx.awx.project:
-      name: Demo Project
-      organization: Default
-      state: absent
+  - name: Create resource group
+    azure_rm_resourcegroup:
+      name: "webserver_{{ user }}"
+      location: northeurope
+      tags:
+          solution: "webserver_{{ user }}"
+          delete: ansibletraining
+    register: rg
+  - debug:
+      var: rg
 ```
 
-![Alt text](images/06_create_awx_playbook.png?raw=true "awx playbook")
+![Alt text](images/011_azure_play.png?raw=true "azure play")
 
-Save and commit to Git
-
-On the ansible server
+Log on to server "ansible" using ssh
 
 Use git to get the new azure playbook
 
-__Type:__
+**Type:**
 
 ```bash
 
@@ -112,10 +147,8 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 01_awx.yml
+ansible-playbook 01_azure.yml
 
 ```
 
-![Alt text](images/07_run_awx_playbook.png?raw=true "awx playbook run")
-
-Now go to the awx portal and take a look around, Demo Template, Credential, Inventory and Project is gone
+![Alt text](images/011_azure_play_run.png?raw=true "azure play run")

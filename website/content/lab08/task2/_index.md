@@ -1,139 +1,60 @@
 ---
-title: Create credentials for Azure
+title: Create Domain controller
 weight: 20
 ---
 
-## Task 2 Create credentials for Azure
+## Task 2 Create Domain controller
 
-We need to register an azure application to enable ansible automation
+[ansible docs - win feature module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_feature_module.html)
 
-In your browser log on to [https://portal.azure.com](https://portal.azure.com)
+[ansible docs - win reboot](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
 
-In the top bar, click the "cloudshell" icon marked with red
+[ansible docs - win domain](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_domain_module.html)
 
-![Alt text](images/01_start_cloud_shell.png?raw=true "Cloud Shell")
+In VSCode create a new file 01_domain.yml
 
-Select "Bash"
-
-![Alt text](images/02_start_cloud_shell_bash.png?raw=true "Cloud Shell")
-
-Run the following command to create a new Service User
-
-Set the user variable to your initials
-
-```bash
-
-USER=jesbe
-
-SubID=$(az account list --query "[].{id:id}" -o tsv)
-
-az ad sp create-for-rbac --name ansible-$USER --role Contributor --scopes /subscriptions/$SubID
-
-```
-
-Copy the JSON output to a notepad file we will need the information later
-
-![Alt text](images/02_create_sp.png?raw=true "Cloud Shell output")
-
-We need to get the Subscription ID run the following in the Cloud Shell
-
-```bash
-
-echo $SubID
-
-```
-
-![Alt text](images/03_get_sub_id.png?raw=true "Cloud Shell sub id")
-
-Copy the line id: "xxx-xxx" to the same notepad
-
-__Below is for both command and GUI__ versions
-
-Log on to server "ansible" using ssh
-
-We will create the authentication file, you must start in your home dir
-
-__Type:__
-
-```bash
-cd
-mkdir .azure
-vi .azure/credentials
-
-```
-
-![Alt text](images/009_azure_credfile.png?raw=true "azure credentials")
-
-In vi **type:**
-
-Use the vaules you collected from the Azure portal
-
-```bash
-i (to toggle input)
-```
-
-```bash
-[default]
-subscription_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-client_id=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-secret=xxxxxxxxxxxxxxxxx
-tenant=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-```
-
-```bash
-
-In the file
-
-subscription_id = id from the last command
-
-client_id = appID in the first command
-
-secret = Password in the first command
-
-tenant = tenant in the first command
-
-```
-
-**Type:**
-
-```bash
-Hit Esc-key
-
-:wq (: for a command w for write and q for quit vi)
-```
-
-![Alt text](images/010_azure_credfile_input.png?raw=true "azure credentials file input")
-
-Lets test the connection to azure by creating a small playbook
-
-[Ansible Module azure_rm_resourcegroup](https://docs.ansible.com/ansible/latest/modules/azure_rm_resourcegroup_module.html#azure-rm-resourcegroup-module)
-
-In VSCode
-
-create a new playbook file 01_azure.yml
-
-add the following text to the file, change the name of the variable **user to your initials** use the same as you use to login to ansible server
+Add below to the playbook, this will create a new Active Directory.
 
 ```ansible
+
 ---
-- hosts: localhost
-  connection: local
+- hosts: domaincontroller
   vars:
-    user: write your username here
+    domain: ansible.local
+
   tasks:
-  - name: Create resource group
-    azure_rm_resourcegroup:
-      name: "webserver_{{ user }}"
-      location: northeurope
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
-    register: rg
-  - debug:
-      var: rg
+  - name: Install AD-Tools and DNS
+    win_feature:
+      name:
+      - DNS
+      - AD-Domain-Services
+      state: present
+      include_management_tools: yes
+    register: feature_install
+
+  - name: Reboot if required
+    win_reboot:
+    when: feature_install.reboot_required
+
+  - name: Create new Active Directory
+    win_domain:
+      create_dns_delegation: no
+      database_path: C:\Windows\NTDS
+      dns_domain_name: "{{ domain }}"
+      domain_mode: Win2012R2
+      forest_mode: Win2012R2
+      safe_mode_password: "{{ ansible_password }}"
+      sysvol_path: C:\Windows\SYSVOL
+    register: domain_install
+
+  - name: Reboot if required
+    win_reboot:
+    when: domain_install.reboot_required
 ```
 
-![Alt text](images/011_azure_play.png?raw=true "azure play")
+![Alt text](images/03_domaincontroller.png?raw=true "domain controller playbook")
+
+Save and commit to Git
 
 Log on to server "ansible" using ssh
 
@@ -147,8 +68,8 @@ cd ansibleclass
 
 git pull
 
-ansible-playbook 01_azure.yml
+ansible-playbook 01_domain.yml --ask-vault-password
 
 ```
 
-![Alt text](images/011_azure_play_run.png?raw=true "azure play run")
+![Alt text](images/04_domaincontroller_play.png?raw=true "domain controller playbook run")

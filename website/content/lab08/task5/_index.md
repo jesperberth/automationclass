@@ -1,40 +1,46 @@
 ---
-title: Create an ansible dynamic inventory for Azure RM
+title: Add member server to AD
 weight: 50
 ---
 
-## Task 5 Create an ansible dynamic inventory for Azure RM
+## Task 5 Add member server to AD
 
-We can either add the webserver in the ansible-hosts file or use an Inventory plugin
+[ansible docs - win domain membership module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_domain_membership_module.html)
 
-The Azure Resource Manager inventory plugin is part of ansible and can return a dynamic inventory grouped on tags
+[ansible docs - win reboot module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
 
-[Azure Resource Manager inventory plugin](https://docs.ansible.com/ansible/latest/plugins/inventory/azure_rm.html)
+In VSCode create a new file 01_joinad.yml
 
-In VSCode create a new file webserver.azure_rm.yml
-
-Note: The inventory file must end with .azure_rm.yml
+Add below to the playbook, this will join the member servers to the new Active Directory.
 
 ```ansible
-plugin: azure_rm
-auth_source: auto
-include_vm_resource_groups:
- - '*'
-keyed_groups:
- - prefix: tag
-   key: tags
+---
+- hosts: domainmember
+  vars:
+    domain: ansible.local
+
+  tasks:
+  - name: Domain Join
+    win_domain_membership:
+      dns_domain_name: "{{ domain }}"
+      domain_admin_user: "{{ ansible_user }}@{{ domain }}"
+      domain_admin_password: "{{ ansible_password }}"
+      state: domain
+    register: domain_join
+
+  - name: Reboot Server
+    win_reboot:
+    when: domain_join.reboot_required
 
 ```
 
-![Alt text](images/018_azure_inventory.png?raw=true "vscode create inventory file")
+![Alt text](images/09_joinad.png?raw=true "join ad")
 
 Save and commit to Git
 
 Log on to server "ansible" using ssh
 
-Use git to get the new azure inventory
-
-And run a test against Azure
+Use git to get the new azure playbook
 
 **Type:**
 
@@ -44,16 +50,24 @@ cd ansibleclass
 
 git pull
 
-ansible-inventory -i ./webserver.azure_rm.yml --graph
-
-ansible-inventory -i ./webserver.azure_rm.yml --list
+ansible-playbook 01_joinad.yml --ask-vault-password
 
 ```
 
-![Alt text](images/019_azure_inventory_run.png?raw=true "azure inventory run")
+![Alt text](images/10_joinad_run.png?raw=true "join ad playbook run")
 
-![Alt text](images/020_azure_inventory_run_list.png?raw=true "azure inventory run list")
+Lets check that everything worked
 
---list will give a lot more information, --graph will consolidate output in a more viewable way
+Logon to the Domain Controller (server3) using RDP
 
-If we add another server in the Resource Group it will be included in the inventory
+In the Server Manager Console, top right corner select tools and click on "Active Directory Users and Computers"
+
+![Alt text](images/11_open_ad_users.png?raw=true "Open Active Directory Users and Computers")
+
+In the new window click on computers, server4 should be visible here
+
+![Alt text](images/12_computers.png?raw=true "Show Computers")
+
+Click on users, see that the user "basim" exist and the group "corp" exist, right click on "corp" and select properties select the "Members" Tab, the user "basim" should be a member.
+
+![Alt text](images/13_grpanduser.png?raw=true "Show Users")

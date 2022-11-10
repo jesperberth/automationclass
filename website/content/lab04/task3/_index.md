@@ -1,74 +1,66 @@
 ---
-title: Handlers
+title: Encryptet inventory
 weight: 30
 ---
 
-## Task 3 Handlers
+## Task 3 Encryptet inventory
 
-[ansible docs - handlers](https://docs.ansible.com/ansible/latest/user_guide/playbooks_handlers.html)
+In this task we will encrypt the password for the windows servers and place it in the new yaml inventory file
 
-[ansible docs - firewalld module](https://docs.ansible.com/ansible/latest/collections/ansible/posix/firewalld_module.html)
-
-Handlers will run tasks on changes in other tasks
-
-A handler is a task placed in a seperat section __handlers:__ in the playbook and run when a task __notify__ it to run
-
-Add below to the playbook 01_vars.yml
-
-First task configures the firewall and has the notify option sat
-
-below is the handlers: section, we create the firewall reload handler
-
-__Type:__
-
-```ansible
-
-  - name: Configure firewall
-    ansible.posix.firewalld:
-      zone: public
-      service: http
-      permanent: yes
-      state: enabled
-    notify: firewall reload
-
-  handlers:
-  - name: firewall reload
-    ansible.builtin.systemd:
-      name: firewalld
-      state: reloaded
-
-```
-
-Save the playbook, Commit the changes and push to github
-
-![Alt text](images/001_handlers_playbook.png?raw=true "ansible handlers in playbook")
-
-On the ansible server pull the new playbook and run it
+Encrypt you password
 
 __Type:__
 
 ```bash
-cd  ansibleclass
 
-git pull
-
-ansible-playbook 01_vars.yml --ask-become-pass
+ansible-vault encrypt_string 'SomeThingSimple8' --name ansible_password
 
 ```
 
-![Alt text](images/002_handlers_playbook_run.png?raw=true "ansible handlers playbook run")
+![Alt text](images/040_ansible_vault_string.png?raw=true "Encrypt string")
 
-On the ansible server run the playbook again, note this time it will not run the handler
+Copy the string
+
+![Alt text](images/041_ansible_vault_string_copy.png?raw=true "Encrypt string copy")
+
+Paste the encryptet string into ansible-hosts.yml
+
+When copied you might need to indent the lines with spaces so it placed under the first S in password, se the picture
+
+```bash
+
+cd
+
+vi ansible-hosts.yml
+
+Hit Esc-key
+
+:set paste <Hit Enter>
+
+Hit Esc-key
+
+i (to toggle insert)
+
+```
+
+Save the inventory file
 
 __Type:__
 
 ```bash
-cd  ansibleclass
+Hit Esc-key
 
-git pull
+:wq (: for a command w for write and q for quit vi)
+```
 
-ansible-playbook 01_vars.yml --ask-become-pass
+![Alt text](images/042_inventory_encrypt.png?raw=true "inventory encryptet string")
+
+Lets do a test with win_ping
+
+```bash
+
+ansible windowsservers -m win_ping --ask-vault-pass
 
 ```
 
-![Alt text](images/003_handlers_playbook_run2.png?raw=true "ansible handlers playbook second run")
+![Alt text](images/043_win_ping.png?raw=true "win ping")

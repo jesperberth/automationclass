@@ -1,14 +1,32 @@
 ---
-title: Login to Ansible Tower
+title: Install requirements for Azure
 weight: 10
 ---
 
-## Task 1 Login to Ansible Tower
+## Task 1 Install requirements for Azure
 
-Open a browser and go to the ansible tower URL ip will be given by instructor
+Log on to server "ansible" using ssh
 
-Log in user and password will be given by instructor
+Install ansible azure collection
 
-![Alt text](images/01_ansible_tower_login.png?raw=true "Login to ansible tower")
+Before installtion the collection we need to install several python modules, the requirements file is on the github project page
 
-Take a tour around in the UI
+[https://github.com/ansible-collections/azure](https://github.com/ansible-collections/azure)
+
+**Type:**
+
+```bash
+
+cd
+
+ansible-galaxy collection install azure.azcollection
+
+pip install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt
+
+```
+
+![Alt text](images/002_download_requirements_pip_azure.png?raw=true "install azure")
+
+![Alt text](images/002_run_requirements_pip_azure.png?raw=true "install azure")
+
+![Alt text](images/001_install_pip_azure.png?raw=true "install azure")

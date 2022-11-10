@@ -1,26 +1,23 @@
 ---
-title: "Ansible AWX"
+title: "Ansible Cloud"
 weight: 90
 chapter: false
 pre: "<b>Lab 9. </b>"
 ---
 
-In this session we will use Ansible AWX to orchestrate our ansible playbooks
+In this session we will use ansible to setup and manage resources in Azure to deploy a virtual machine with a webserver installed and running
 
 ## Table of Contents
 
 - [Prepare](#prepare)
-- [Task 1 Login to Ansible Tower](#task-1-login-to-ansible-tower)
-- [Task 2 Modify AWX with playbook](#task-2-modify-awx-with-playbook)
-- [Task 3 Create Organization Project inventory and Credential](#task-3-create-organization-project-inventory-and-credential)
-- [Task 4 Create Azure RM Template](#task-4-create-azure-rm-template)
-- [Task 5 Create Azure Webserver template](#task-5-create-azure-webserver-template)
-- [Task 6 Create Azure Dynamic Inventory Source](#task-6-create-azure-dynamic-inventory-source)
-- [Task 7 Create Webserver credential](#task-7-create-webserver-credential)
-- [Task 8 Create Webserver Template](#task-8-create-webserver-template)
-- [Task 9 Create Workflow template](#task-9-create-workflow-template)
-- [Task 10 Run Workflow template](#task-10-run-workflow-template)
+- [Task 1 Install requirements for Azure](#task-1-install-requirements-for-azure)
+- [Task 2 Create credentials for Azure](#task-2-create-credentials-for-azure)
+- [Task 3 Create Network in Azure](#task-3-create-network-in-azure)
+- [Task 4 Create Public Ip, NIC and Security Group in Azure](#task-4-create-public-ip-nic-and-security-group-in-azure)
+- [Task 5 Create an ansible dynamic inventory for Azure RM](#task-5-create-an-ansible-dynamic-inventory-for-azure-rm)
+- [Task 6 Install Apache Webserver and create the site - using ansible Azure dynamic inventory](#task-6-install-apache-webserver-and-create-the-site---using-ansible-azure-dynamic-inventory)
+- [Task 7 Delete Resource Group Webserver](#task-7-delete-resource-group-Webserver)
 
 ## Prepare
 
-Nothing to prepare, the ansible tower is installed and prepared
+We will need the server, ansible to be up and running - by default they are started after creation

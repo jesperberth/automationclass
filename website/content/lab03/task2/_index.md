@@ -1,104 +1,89 @@
 ---
-title: Yaml Inventory
+title: Create the first playbook
 weight: 20
 ---
 
-## Task 2 Yaml Inventory
+## Task 2 Create the first playbook
 
-Another option for the inventory is using a yaml file instead of the ini format, the yaml file will give us some other options for the vault
+In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
 
-Lets create a new ansible-hosts.yml
+![Alt text](images/015_code_newfile.png?raw=true "new file in VSCode")
 
-Copy the following inventory to ansible-hosts.yml
+Name it "01_linux.yml"
 
-__Note:__
-
-We need to set an option in vi before pasteing the configuration
-
-__Remember__ to change the ansible_user to your initials
+Write the following in the text pane
 
 ```ansible
+---
+- hosts: linuxservers
+  become: yes
 
-linuxservers:
-  hosts:
-    server1:
-    server2:
-windowsservers:
-  hosts:
-    server3:
-    server4:
-  vars:
-    ansible_user: jesbe
-    ansible_port: 5985
-    ansible_connection: winrm
-    ansible_winrm_transport: ntlm
-    ansible_winrm_message_encryption: always
-
+  tasks:
+  - name: Create file
+    file:
+      path: /root/testfile.txt
+      state: touch
 ```
 
-__Type:__
+Save the file (Ctrl + S)
+
+Click the Source control button in the left panel.
+
+![Alt text](images/016_code_playbook.png?raw=true "playbook in VSCode")
+
+Write a comment **"First Playbook**" and click "Ctrl + Enter" to commit the changes
+
+Now Sync the changes Push/Pull, in the blue bar at the bottom, 0 up, 1 down it will start the sync process
+
+![Alt text](images/018_code_git_sync.png?raw=true "git sync in VSCode")
+
+The first time you will be prompted for github credentials
+
+![Alt text](images/019_code_git_sync_login.png?raw=true "git login in VSCode")
+
+Open the Git Hub repository, the 01_linux.yml is now added, note the comment next to the filename
+
+![Alt text](images/020_github_new.png?raw=true "github new file")
+
+Log on to server "ansible" using ssh
+
+We need to install git
+
+**Type:**
 
 ```bash
-
-cd
-
-vi ansible-hosts.yml
-
-Hit Esc-key
-
-:set paste <Hit Enter>
-
-Hit Esc-key
-
-i (to toggle insert)
+sudo dnf install git -y
 ```
 
-![Alt text](images/037_set_paste.png?raw=true "vi paste")
+![Alt text](images/021_install_git.png?raw=true "install git")
 
-Note that it now writes -- INSERT (paste) -- in the bottom
+Lets test the playbook
 
-You can do a copy/paste of the inventory
+Clone the git repository
 
-![Alt text](images/037_yaml_inventory.png?raw=true "yaml inventory")
+**Note:**
 
-__Type:__
+Change to your repository
+
+**Type:**
 
 ```bash
-Hit Esc-key
-
-:wq (: for a command w for write and q for quit vi)
+git clone https://github.com/jesperberth/ansibleclass.git
 ```
 
-Lets change ansible.cfg to use the new inventory, you just need to add the .yml to the inventory line
+![Alt text](images/022_git_clone.png?raw=true "git clone")
+
+Run the playbook
+
+**Type:**
 
 ```bash
+cd ansibleclass
 
-cd
+ls
 
-vi .ansible.cfg
-
-i (for input)
-
-inventory = /home/jesbe/ansible-hosts.yml
+ansible-playbook 01_linux.yml --ask-become-pass
 
 ```
 
-__Type:__
-
-```bash
-Hit Esc-key
-
-:wq (: for a command w for write and q for quit vi)
-```
-
-![Alt text](images/038_ansible_cfg.png?raw=true "config")
-
-Do a ping test to check if we are using the new inventory
-
-```bash
-
-ansible linuxservers -m ping
-
-```
-
-![Alt text](images/039_ansible_yaml_test.png?raw=true "test yaml inventory")
+![Alt text](images/023_run_playbook.png?raw=true "Run playbook")

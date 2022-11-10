@@ -1,66 +1,81 @@
 ---
-title: Add new host groups
+title: Ansible Galaxy and role install
 weight: 10
 ---
 
-## Task 1 Add new host groups
+## Task 1 Ansible Galaxy and role install
 
-[ansible docs - inventory](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html)
+[https://galaxy.ansible.com](https://galaxy.ansible.com/home)
 
-We need to add child groups to the windowsserver group in the host file, when using child groups we can target the group windowsserver or one of the child groups like domaincontrollers
+[Ansible Docs - ansible-galaxy](https://docs.ansible.com/ansible/latest/cli/ansible-galaxy.html)
 
-Log on to server "ansible" using ssh
+![Alt text](images/001_ansible_galaxy.png?raw=true "ansible galaxy")
 
-Use vi to edit ansible-hosts.yml
+Ansible Galaxy holds roles and collections, its an Hub for sharing ansible content
+
+Search for a role called el_httpd
+
+![Alt text](images/002_ansible_galaxy_search.png?raw=true "ansible galaxy search")
+
+Click on the top result "el_https"
+
+Click the Read Me for a short description of the role and how use it
+
+Click on the GitHub Repo button to get to the repository for this role, you are able to provide feedback and report issues here
+
+![Alt text](images/003_ansible_galaxy_role.png?raw=true "ansible galaxy role")
+
+Lets install the role
+
+On the ansible server
 
 __Type:__
 
 ```bash
 cd
 
-vi ansible-hosts.yml
+ansible-galaxy install jesperberth.el_httpd
+
+ansible-galaxy role list
+
 ```
 
-In vi __type:__
+![Alt text](images/004_ansible_galaxy_role_install.png?raw=true "ansible galaxy role install")
 
-```bash
-i (hit i to toggle input)
+To test the role lets create a new playbook
+
+In VsCode create a new file 01_roles.yml
+
+__Type:__
+
+```ansible
+
+---
+- hosts: linuxservers
+  become: yes
+
+  roles:
+      - jesperberth.el_httpd
+
 ```
 
-Add below between server4: and vars: be aware that the indentation needs to be correct
+Save, Commit and push
 
-```bash
-  children:
-    domaincontroller:
-      hosts:
-        server3:
-    domainmember:
-      hosts:
-        server4:
-```
+![Alt text](images/005_ansible_role_playbook.png?raw=true "ansible role playbook")
+
+On the ansible server pull the new playbook and run it
 
 __Type:__
 
 ```bash
-Hit Esc-key
+cd  ansibleclass
 
-:wq (: for a command w for write and q for quit vi)
-```
+git pull
 
-![Alt text](images/01_changehosts.png?raw=true "change hosts file")
-
-Lets test the groups
-
-__Type:__
-
-```bash
-
-ansible windowsservers -m win_ping --ask-vault-password
-
-ansible domaincontroller -m win_ping --ask-vault-password
-
-ansible domainmember -m win_ping --ask-vault-password
+ansible-playbook 01_roles.yml --ask-become-pass
 
 ```
 
-![Alt text](images/02_testgroups.png?raw=true "Test groups")
+![Alt text](images/006_ansible_role_playbook_run.png?raw=true "ansible role playbook run")
+
+__Note:__ All tasks should be OK as we installed httpd in a previous lab
