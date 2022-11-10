@@ -44,7 +44,7 @@ Copy the url
 
 In Terminal
 
-write __git clone__ and paste the url
+write **git clone** and paste the url
 
 ```powershell
 
@@ -54,7 +54,7 @@ git clone https://github.com/jesperberth/ansibleclass.git
 
 ![Alt text](images/009_git_clone.png?raw=true "git clone")
 
-Open the new git project folder __ansibleclass__
+Open the new git project folder **ansibleclass**
 
 start Visual Studio Code
 
