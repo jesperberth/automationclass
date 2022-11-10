@@ -1,63 +1,63 @@
 ---
-title: Adding tasks to the playbook
+title: Clone Git Repo
 weight: 40
 ---
 
-## Task 4 Adding tasks to the playbook
+## Task 4 Clone Git Repository
 
-Lets add a second task in the playbook 01_linux.yml
+We need to configure git with a Name and email to track the changes you are making
 
-In VSCode add the following text to the file
+Open Powershell on your desktop
 
-```ansible
-
-  - name: Add line in file
-    lineinfile:
-      path: /root/testfile.txt
-      line: Ansible was here...
-
+```bash
+git config --global user.name "Full Name"
+git config --global user.email "email@address.com"
+git config --list
 ```
 
-![Alt text](images/024_secondtask_code.png?raw=true "Add second task to playbook")
+![Alt text](images/009_git_config.png?raw=true "Git Config")
 
-Save the file
+We need to create a simple folder structure for keeping our files
 
-Notice that Git detects the changed file, do a commit add a comment "Second Edition" and Sync to Git
-
-![Alt text](images/025_secondtask_commit.png?raw=true "Second Commit to playbook")
-
-On ansible
-
-Pull the updated git repository
+Open a Powershell Terminal
 
 **Type:**
 
-```bash
-git pull
+```powershell
+mkdir ansible
+cd ansible
+code .
 ```
 
-![Alt text](images/026_git_pull.png?raw=true "git pull")
+![Alt text](images/009_start_code.png?raw=true "Start VSCode")
 
-Run the playbook
+Click "Yes, I trust the authers" button
 
-**Type:**
+![Alt text](images/009_start_code_trust.png?raw=true "Start VSCode trust")
 
-```bash
-ls
+On your "ansibleclass" repository page
 
-ansible-playbook 01_linux.yml --ask-become-pass
-```
+Click the green "Code" button to retrieve the URL for the repository
 
-![Alt text](images/027_run_playbook_secondtask.png?raw=true "Run playbook")
+![Alt text](images/010_repourl.png?raw=true "Repo URL")
 
-Run the playbook again, the second task will become green as the line is already there, this is the idempotency
+In VSCode
 
-The "Create File" task will be changed every time as we use the touch command on the file
+Click (Windows: Ctrl + Shift + P) (Mac: Command + Shift + P)
+This will open the VSCode command Palette
 
-**Type:**
+Write "Git Clone"
 
-```bash
-ansible-playbook 01_linux.yml --ask-become-pass
-```
+![Alt text](images/011_git_clone.png?raw=true "VSCode Command")
 
-![Alt text](images/028_run_playbook_secondtask_idempodent.png?raw=true "Run playbook")
+Paste the git url
+
+![Alt text](images/012_git_clone_url.png?raw=true "Paste Repo URL")
+
+Specify a path for the git repository on your disk (Don't use a One Drive)
+
+![Alt text](images/013_git_clone_path.png?raw=true "Set Git local path")
+
+Click "Yes" to Open the repository
+
+![Alt text](images/014_git_in_vscode.png?raw=true "Git repo is now in VSCode")

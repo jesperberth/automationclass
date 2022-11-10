@@ -1,56 +1,47 @@
 ---
-title: Install Software
+title: Install WinGet
 weight: 10
 ---
 
-## Task 1 Install Software
 
-Download and install VSCode [Download vscode](https://code.visualstudio.com/download)
+## Task 1 Install WinGet
 
-![Alt text](images/001_download_vscode.png?raw=true "Download VSCode")
+We will use winget command to install our software for the labs
 
-Start VSCode
+First we need to enable winget
 
-![Alt text](images/002_vscode_start.png?raw=true "Start VSCode")
+Log in to your student desktop
 
-In VSCode
+Instructor will hand out ip, username and password
 
-Get extention "indent one space" from Alexander
+Once logged in you will have to click through the the privacy settings
 
-Get extention "Trailing Spaces" from Shardul Mahadik
+Click __Next__
 
-Get extention "Indent-rainbow" from oderwat
+![Alt text](images/001_win11_settings.png?raw=true "Privacy settings")
 
-![Alt text](images/003_vscode_install_ansible.png?raw=true "Install extention in VSCode")
+Click __Accept__
 
-Download and install GIT [Download Git](https://git-scm.com/downloads)
+![Alt text](images/002_win11_settings.png?raw=true "Privacy settings")
 
-![Alt text](images/004_download_git.png?raw=true "Download GIT")
+One the Desktop
 
-Open a browser and go to [Git Hub](https://github.com)
+Click __Microsoft Store__ in the taskbar
 
-If you have a github account login, otherwise create a new account
+![Alt text](images/003_microsoft_store.png?raw=true "start microsoft store")
 
-![Alt text](images/005_create_github.png?raw=true "Create GitHub Account")
+Click __Search__ and type __app install__
 
-Login to your github account
+Click on __App Installer__
 
-Click on Repositories
+![Alt text](images/004_search_appinstall.png?raw=true "start microsoft store")
 
-Click the green "New" in the top right corner
+Installation will start automaticly
 
-![Alt text](images/006_login_github.png?raw=true "Login GitHub")
+![Alt text](images/005_app_installer.png?raw=true "app installer")
 
-Give you repository a name "ansibleclass"
+Start Windows Terminal, in Windows 11 its installed by default
 
-Select "Public" - it's default - **for the purpose of these labs keep it public**
+Click the __Start__ button, write __terminal__ make sure you select __Run as administrator__
 
-Make Sure you tick **"Initialize this repository with a README"**
-
-Click "Create repository"
-
-![Alt text](images/007_newrepo_github.png?raw=true "Create Repo")
-
-Your new repository is created with an empty README.md file
-
-![Alt text](images/008_newrepo_created_github.png?raw=true "New Repo")
+![Alt text](images/006_start_winterm.png?raw=true "start winterm")

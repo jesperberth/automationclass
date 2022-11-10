@@ -9,6 +9,14 @@ Login to Azure
 
 In your browser go to [http://portal.azure.com](http://portal.azure.com)
 
+Your username will be __userxx__ as below
+
+```bash
+
+userxx@redhatbyarrow.onmicrosoft.com
+
+```
+
 __Note:__ Run the browser in Incognito/Private mode to avoid issues with cashed credentials
 
 ![Alt text](images/01_azure_login.png?raw=true "Azure login")

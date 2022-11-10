@@ -1,63 +1,42 @@
 ---
-title: Clone Git Repo
+title: Install Software
 weight: 20
 ---
 
-## Task 2 Clone Git Repository
+## Task 2 Install Software
 
-We need to configure git with a Name and email to track the changes you are making
-
-Open Powershell on your desktop
+You need to install the following software
 
 ```bash
-git config --global user.name "Full Name"
-git config --global user.email "email@address.com"
-git config --list
+
+winget install microsoft.powershell
+
+winget install git.git
+
+winget install Microsoft.VisualStudioCode
+
+winget install Microsoft.AzureCLI
+
 ```
 
-![Alt text](images/009_git_config.png?raw=true "Git Config")
+![Alt text](images/001_install_powershell.png?raw=true "powershell")
 
-We need to create a simple folder structure for keeping our files
+![Alt text](images/002_install_git.png?raw=true "git")
 
-Open a Powershell Terminal
+![Alt text](images/003_install_vscode.png?raw=true "vscode")
 
-**Type:**
+![Alt text](images/004_install_azcli.png?raw=true "az cli")
 
-```powershell
-mkdir ansible
-cd ansible
-code .
+If you need to install other software you can search for it with __winget search__
+
+Eg.
+
+```bash
+
+winget search firefox
+
 ```
 
-![Alt text](images/009_start_code.png?raw=true "Start VSCode")
+![Alt text](images/005_winget_search.png?raw=true "search")
 
-Click "Yes, I trust the authers" button
-
-![Alt text](images/009_start_code_trust.png?raw=true "Start VSCode trust")
-
-On your "ansibleclass" repository page
-
-Click the green "Code" button to retrieve the URL for the repository
-
-![Alt text](images/010_repourl.png?raw=true "Repo URL")
-
-In VSCode
-
-Click (Windows: Ctrl + Shift + P) (Mac: Command + Shift + P)
-This will open the VSCode command Palette
-
-Write "Git Clone"
-
-![Alt text](images/011_git_clone.png?raw=true "VSCode Command")
-
-Paste the git url
-
-![Alt text](images/012_git_clone_url.png?raw=true "Paste Repo URL")
-
-Specify a path for the git repository on your disk (Don't use a One Drive)
-
-![Alt text](images/013_git_clone_path.png?raw=true "Set Git local path")
-
-Click "Yes" to Open the repository
-
-![Alt text](images/014_git_in_vscode.png?raw=true "Git repo is now in VSCode")
+Close __Windows Terminal__

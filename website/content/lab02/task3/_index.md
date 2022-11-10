@@ -1,89 +1,34 @@
 ---
-title: Create the first playbook
+title: Create GitHub Account
 weight: 30
 ---
 
-## Task 3 Create the first playbook
+## Task 3 Create GitHub Account
 
-In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
+Open a browser and go to [Git Hub](https://github.com)
 
-![Alt text](images/015_code_newfile.png?raw=true "new file in VSCode")
+If you have a github account login, otherwise create a new account
 
-Name it "01_linux.yml"
+![Alt text](images/005_create_github.png?raw=true "Create GitHub Account")
 
-Write the following in the text pane
+Login to your github account
 
-```ansible
----
-- hosts: linuxservers
-  become: yes
+Click on Repositories
 
-  tasks:
-  - name: Create file
-    file:
-      path: /root/testfile.txt
-      state: touch
-```
+Click the green "New" in the top right corner
 
-Save the file (Ctrl + S)
+![Alt text](images/006_login_github.png?raw=true "Login GitHub")
 
-Click the Source control button in the left panel.
+Give you repository a name "ansibleclass"
 
-![Alt text](images/016_code_playbook.png?raw=true "playbook in VSCode")
+Select "Public" - it's default - **for the purpose of these labs keep it public**
 
-Write a comment **"First Playbook**" and click "Ctrl + Enter" to commit the changes
+Make Sure you tick **"Initialize this repository with a README"**
 
-Now Sync the changes Push/Pull, in the blue bar at the bottom, 0 up, 1 down it will start the sync process
+Click "Create repository"
 
-![Alt text](images/018_code_git_sync.png?raw=true "git sync in VSCode")
+![Alt text](images/007_newrepo_github.png?raw=true "Create Repo")
 
-The first time you will be prompted for github credentials
+Your new repository is created with an empty README.md file
 
-![Alt text](images/019_code_git_sync_login.png?raw=true "git login in VSCode")
-
-Open the Git Hub repository, the 01_linux.yml is now added, note the comment next to the filename
-
-![Alt text](images/020_github_new.png?raw=true "github new file")
-
-Log on to server "ansible" using ssh
-
-We need to install git
-
-**Type:**
-
-```bash
-sudo dnf install git -y
-```
-
-![Alt text](images/021_install_git.png?raw=true "install git")
-
-Lets test the playbook
-
-Clone the git repository
-
-**Note:**
-
-Change to your repository
-
-**Type:**
-
-```bash
-git clone https://github.com/jesperberth/ansibleclass.git
-```
-
-![Alt text](images/022_git_clone.png?raw=true "git clone")
-
-Run the playbook
-
-**Type:**
-
-```bash
-cd ansibleclass
-
-ls
-
-ansible-playbook 01_linux.yml --ask-become-pass
-
-```
-
-![Alt text](images/023_run_playbook.png?raw=true "Run playbook")
+![Alt text](images/008_newrepo_created_github.png?raw=true "New Repo")
