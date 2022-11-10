@@ -12,21 +12,9 @@ First we need to enable winget
 
 Log in to your student desktop
 
-Instructor will hand out ip, username and password
-
-Once logged in you will have to click through the the privacy settings
-
-Click __Next__
-
-![Alt text](images/001_win11_settings.png?raw=true "Privacy settings")
-
-Click __Accept__
-
-![Alt text](images/002_win11_settings.png?raw=true "Privacy settings")
-
 One the Desktop
 
-Click __Microsoft Store__ in the taskbar
+Click __Microsoft Store__ in the taskbarc
 
 ![Alt text](images/003_microsoft_store.png?raw=true "start microsoft store")
 
