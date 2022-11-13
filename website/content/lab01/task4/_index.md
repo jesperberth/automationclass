@@ -185,3 +185,21 @@ docker ps
 if it looks like this, it worked
 
 ![Alt text](images/12_docker_ps.png?raw=true "docker ps")
+
+Lets install some VS Code extentions
+
+- Ansible
+- Indent Rainbow
+- Indent One Space
+
+In the terminal run below to install the extentions
+
+```bash
+
+code --install-extension redhat.ansible
+code --install-extension oderwat.indent-rainbow
+code --install-extension usernamehw.indent-one-space
+
+```
+
+![Alt text](images/13_install_code_extentions.png?raw=true "Install code extentions")
