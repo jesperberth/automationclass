@@ -9,11 +9,11 @@ In this session we will install and use Visual Studio Code with a few plugins to
 
 ## Table of Contents
 
-- [Prepare](#prepare)
 - [Task 1 Clone Git Repository](#task-2-clone-git-repository)
-- [Task 2 Create the first playbook](#task-3-create-the-first-playbook)
-- [Task 3 Adding tasks to the playbook](#task-4-adding-tasks-to-the-playbook)
-- [Task 4 Add server two and run the playbook](#task-5-add-server-two-and-run-the-playbook)
+- [Task 2 Enable Ansible extention](#task-2-clone-git-repository)
+- [Task 3 Create the first playbook](#task-3-create-the-first-playbook)
+- [Task 4 Adding tasks to the playbook](#task-4-adding-tasks-to-the-playbook)
+- [Task 5 Add server two and run the playbook](#task-5-add-server-two-and-run-the-playbook)
 
 ## Prepare
 

@@ -1,89 +1,40 @@
 ---
-title: Create the first playbook
+title: Enable Ansible Extention
 weight: 20
 ---
 
-## Task 2 Create the first playbook
+## Task 2 Enable Ansible Extention
 
-In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
+In the left lower corner click the green **><**
 
-![Alt text](images/015_code_newfile.png?raw=true "new file in VSCode")
+Select **Reopen Folder in WSL** in the menu
 
-Name it "01_linux.yml"
+![Alt text](images/01_run_in_wsl.png?raw=true "Code in wsl")
 
-Write the following in the text pane
+Tick the **Trust the authors of all files in parent folder**
 
-```ansible
----
-- hosts: linuxservers
-  become: yes
+Click **Yes i trust the authers**
 
-  tasks:
-  - name: Create file
-    file:
-      path: /root/testfile.txt
-      state: touch
-```
+![Alt text](images/02_trust_the_folder.png?raw=true "Code trust")
 
-Save the file (Ctrl + S)
+Click the **Extentions** box in the left menu
 
-Click the Source control button in the left panel.
+Click on **Install in WSL:Ubuntu** for the Ansible Extention
 
-![Alt text](images/016_code_playbook.png?raw=true "playbook in VSCode")
+![Alt text](images/03_install_in_wsl.png?raw=true "Code install in wsl")
 
-Write a comment **"First Playbook**" and click "Ctrl + Enter" to commit the changes
+In the ansible extention click the small **Cockwheel** and select **Extention settings**
 
-Now Sync the changes Push/Pull, in the blue bar at the bottom, 0 up, 1 down it will start the sync process
+![Alt text](images/04_go_to_settings.png?raw=true "Code Extention settings")
 
-![Alt text](images/018_code_git_sync.png?raw=true "git sync in VSCode")
+Make sure you change to the **Remote [WSL:Ubuntu]**
 
-The first time you will be prompted for github credentials
+Select **Docker** in the **Execution Environment Container Engine** drop down
 
-![Alt text](images/019_code_git_sync_login.png?raw=true "git login in VSCode")
+Tick the **Execution Environment Enabled** box
 
-Open the Git Hub repository, the 01_linux.yml is now added, note the comment next to the filename
+![Alt text](images/05_enable_execution_env.png?raw=true "Code Ansible ext")
 
-![Alt text](images/020_github_new.png?raw=true "github new file")
+Now the extention is enabled
 
-Log on to server "ansible" using ssh
-
-We need to install git
-
-**Type:**
-
-```bash
-sudo dnf install git -y
-```
-
-![Alt text](images/021_install_git.png?raw=true "install git")
-
-Lets test the playbook
-
-Clone the git repository
-
-**Note:**
-
-Change to your repository
-
-**Type:**
-
-```bash
-git clone https://github.com/jesperberth/ansibleclass.git
-```
-
-![Alt text](images/022_git_clone.png?raw=true "git clone")
-
-Run the playbook
-
-**Type:**
-
-```bash
-cd ansibleclass
-
-ls
-
-ansible-playbook 01_linux.yml --ask-become-pass
-
-```
-
-![Alt text](images/023_run_playbook.png?raw=true "Run playbook")
+Close the Settings tab and go to files and folders in Code
