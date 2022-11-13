@@ -1,18 +1,21 @@
 ---
-title: "Install Ansible"
+title: "Install Lab"
 weight: 10
 chapter: false
 pre: "<b>Lab 1. </b>"
 ---
 
-In this lab we will deploy our lab environment and install ansible on server __ansible__, and connect to linux - __server1__ and windows - __server3__
+In this session we will install and use Visual Studio Code with a few plugins to start working with ansible playbooks and create two playbooks, one for linux and one for windows
 
 ## Table of Contents
 
 - [Prepare](#prepare)
 - [Task 1 Deploy Lab](#task-1-deploy-lab)
-- [Task 2 Install Ansible](#task-2-install-ansible)
-- [Task 3 Run ansible command](#task-3-run-ansible-command)
-- [Task 4 Connect Linux host](#task-4-connect-linux-host)
-- [Task 5 Connect Windows Host](#task-5-connect-windows-host)
-- [Task 6 Ansible Collections](#task-6-ansible-collections)
+- [Task 2 Install Winget](#task-1-setup-visual-studio-code-and-git)
+- [Task 3 Install Software]()
+- [Task 4 Install WSL]()
+- [Task 5 Create GitHub Account]()
+
+## Prepare
+
+We will need the servers, ansible, server1 and server2 to be up and running - by default they are started after creation

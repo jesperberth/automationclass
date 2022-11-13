@@ -1,140 +1,35 @@
 ---
-title: Install Ansible
-weight: 20
+title: Install WinGet
+weight: 10
 ---
 
-## Task 2 Install Ansible
 
-Log on to your workstation __student__ using rdp
+## Task 1 Install WinGet
 
-On the Azure portal click Virtual Machines
+We will use winget command to install our software for the labs
 
-![Alt text](images/000_azure_portal.png?raw=true "Azure Portal")
+First we need to enable winget
 
-Select your Resource Group, it's named __ansible-initials__
+Log in to your student desktop
 
-![Alt text](images/000_azure_portal_resourcegroup.png?raw=true "Azure Portal")
+One the Desktop
 
-Click on the student vm
+Click __Microsoft Store__ in the taskbarc
 
-![Alt text](images/000_azure_portal_vm.png?raw=true "Azure Portal VMs")
+![Alt text](images/003_microsoft_store.png?raw=true "start microsoft store")
 
-Get the ansible servers external ip, click on the "Copy to ClipBoard"
+Click __Search__ and type __app install__
 
-![Alt text](images/000_azure_portal_vm_ip.png?raw=true "Azure Portal VM ip")
+Click on __App Installer__
 
-Start a Remote Desktop Client (On windows run __mstsc__) paste the public IP and connect
+![Alt text](images/004_search_appinstall.png?raw=true "start microsoft store")
 
-![Alt text](images/000_azure_portal_vm_mstsc.png?raw=true "mstsc")
+Installation will start automaticly
 
-Click "More choises" type your username/initials and password click __Ok__
+![Alt text](images/005_app_installer.png?raw=true "app installer")
 
-![Alt text](images/000_azure_portal_vm_mstsc_login.png?raw=true "mstsc login")
+Start Windows Terminal, in Windows 11 its installed by default
 
-Select the "Don't ask me again for connections to this computer and click __Yes__
+Click the __Start__ button, write __terminal__ make sure you select __Run as administrator__
 
-![Alt text](images/000_azure_portal_vm_mstsc_login_yes.png?raw=true "mstsc login")
-
-On the stundent vm click __Accept__
-
-![Alt text](images/000_student_accept.png?raw=true "Student accept")
-
-Start Windows Terminal
-
-In the startmenu __Type__ "terminal" and click on __Windows Terminal__
-
-![Alt text](images/000_student_start_winterm.png?raw=true "Student start winterminal")
-
-In the Windows Terminal write ssh __username@ansible__ hit enter
-
-__Type:__
-
-```bash
-
-yes - to accept the fingerprint
-
-```
-
-![Alt text](images/000_azure_ssh.png?raw=true "ssh")
-
-__Type:__
-
-> **Note**
-> Sudo Password is equal to your user account password
-
-Ansible is a Python based program, we will install python in a Python Virtuelenv, in which we can isolate the python version and modules from the system python.
-
-To meet ansible 2.12 requirements we need to upgrade Python to version 3.9
-
-```bash
-
-sudo dnf install -y @python39
-
-```
-
-![Alt text](images/000_install_python.png?raw=true "install python")
-
-And we need to set the alternative for python3 command to python3.9
-
-```bash
-
-sudo alternatives --set python3 /usr/bin/python3.9
-
-python3 --version
-
-```
-
-![Alt text](images/000_default_python.png?raw=true "default python")
-
-Lets create a Python virtualenv for our ansible installation
-
-__Type:__
-
-```bash
-
-python3 -m venv ansible
-
-```
-
-![Alt text](images/003_create_virtualenv.png?raw=true "create virtualenv Ansible")
-
-To activate our virtualenv ansible run the following
-
-which python - is just to check that were using the correct python
-
-__Type:__
-
-```bash
-
-source ansible/bin/activate
-
-which python
-
-python --version
-
-```
-
-> **Note**
-> That when you are in a virtualenv, the name of the environment will be in the beginning of you command prompt like (ansible)
-
-If you need to exit the virtualenv, you type "deactivate"
-
-![Alt text](images/003_activate_virtualenv.png?raw=true "active virtualenv Ansible")
-
-__Type:__
-
-```bash
-
-pip3 install --upgrade pip
-
-```
-
-![Alt text](images/002_install_pip3_upgrade.png?raw=true "Upgrade PIP")
-
-__Type:__
-
-```bash
-pip install ansible
-```
-
-![Alt text](images/003_install_ansible.png?raw=true "Install Ansible")
+![Alt text](images/006_start_winterm.png?raw=true "start winterm")

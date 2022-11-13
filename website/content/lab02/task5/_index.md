@@ -1,9 +1,9 @@
 ---
 title: Ansible Collections
-weight: 60
+weight: 50
 ---
 
-## Task 6 Ansible Collections
+## Task 5 Ansible Collections
 
 In ansible 2.10 and forward, most modules will be delivered from collections via [Ansible Galaxy](https://galaxy.ansible.com)
 

@@ -1,52 +1,56 @@
 ---
-title: Install Software
+title: Run ansible command
 weight: 20
 ---
 
-## Task 2 Install Software
+## Task 2 Run ansible command
 
-Set the timezone to match your current timezone
+Log on to server "ansible" using ssh
 
-```bash
-
-tzutil /s "Romance Standard Time"
-
-```
-
-![Alt text](images/001_set_timezone.png?raw=true "set timezone")
-
-You need to install the following software
+__Type:__
 
 ```bash
-
-winget install microsoft.powershell
-
-winget install git.git
-
-winget install Microsoft.VisualStudioCode
-
-winget install Microsoft.AzureCLI
-
+ansible --version
 ```
 
-![Alt text](images/001_install_powershell.png?raw=true "powershell")
+![Alt text](images/004_install_ansible_version.png?raw=true "Ansible --version")
 
-![Alt text](images/002_install_git.png?raw=true "git")
-
-![Alt text](images/003_install_vscode.png?raw=true "vscode")
-
-![Alt text](images/004_install_azcli.png?raw=true "az cli")
-
-If you need to install other software you can search for it with __winget search__
-
-Eg.
+__Type:__
 
 ```bash
-
-winget search firefox
-
+ansible --help
 ```
 
-![Alt text](images/005_winget_search.png?raw=true "search")
+Will give you other options for ansible command
 
-Close __Windows Terminal__
+[Ansible Ping Module](https://docs.ansible.com/ansible/latest/modules/ping_module.html)
+
+```bash
+ansible localhost -m ping
+```
+
+Will run ansible against localhost with module ping
+
+![Alt text](images/005_install_ansible_localhost_ping.png?raw=true "Ansible localhost ping")
+
+[Ansible File Module](https://docs.ansible.com/ansible/latest/modules/list_of_files_modules.html)
+
+__Type:__
+
+```bash
+ansible localhost -m file -a "path=/home/jesbe/testfile.txt state=touch"
+```
+
+change __jesbe__ with your username
+
+The ansible command:
+
+ansible __hosts__ -m __module__ -a __module arguments__
+
+__hosts__ can be localhost or a group from the inventory file or all
+
+__module__ any ansible module, here file
+
+__module arguments__ arguments for module if needed, here path=/home/jesbe/testfile.txt and state=touch
+
+![Alt text](images/006_install_ansible_localhost_file.png?raw=true "Ansible localhost ping")

@@ -1,34 +1,210 @@
 ---
-title: Create GitHub Account
+title: Connect Linux host
 weight: 30
 ---
 
-## Task 3 Create GitHub Account
+## Task 3 Connect Linux host
 
-Open a browser and go to [Git Hub](https://github.com)
+Log on to server "ansible" using ssh
 
-If you have a github account login, otherwise create a new account
+Lets create a configuration file for ansible in your root dir
 
-![Alt text](images/005_create_github.png?raw=true "Create GitHub Account")
+We will use it to control our ansible environment
 
-Login to your github account
+[Ansible Configuration file](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-configuration-settings-locations)
 
-Click on Repositories
+__Type:__
 
-Click the green "New" in the top right corner
+```bash
+cd
 
-![Alt text](images/006_login_github.png?raw=true "Login GitHub")
+pwd
 
-Give you repository a name "ansibleclass"
+vi .ansible.cfg
+```
 
-Select "Public" - it's default - **for the purpose of these labs keep it public**
+![Alt text](images/007_ansible_cfg.png?raw=true "ansible config")
 
-Make Sure you tick **"Initialize this repository with a README"**
+> **Note**
+> Change __jesbe__ in the path with your username
 
-Click "Create repository"
+In vi __type:__
 
-![Alt text](images/007_newrepo_github.png?raw=true "Create Repo")
+```bash
+i (hit i to toggle input)
+```
 
-Your new repository is created with an empty README.md file
+```bash
+[defaults]
+inventory = /home/jesbe/ansible-hosts
+```
 
-![Alt text](images/008_newrepo_created_github.png?raw=true "New Repo")
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](images/008_ansible_cfg_set_inventory.png?raw=true "set ansible inventory")
+
+Create the Ansible Hosts file
+
+__Type:__
+
+```bash
+vi ansible-hosts
+```
+
+In vi __Type:__
+
+```bash
+i (hit i to toggle input)
+```
+
+```bash
+[linuxservers]
+server1
+```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](images/009_edit_hostfile.png?raw=true "Edit ansible hostfile")
+
+Lets ping our remote host server1
+
+__Type:__
+
+```bash
+ansible linuxservers -m ping
+```
+
+If it asks "Are you sure you want to continue connecting (yes/no)?" type yes
+
+![Alt text](images/009_connect_error.png?raw=true "Connect Error")
+
+Connection will fail, as ansible expects passwordless ssh connections to be established before running
+
+Test ssh to server 1
+
+__Type:__
+
+```bash
+ssh server1
+```
+
+![Alt text](images/010_ssh_connect.png?raw=true "SSH Connect")
+
+__Type:__
+
+```bash
+exit
+```
+
+We need to generate a ssh-key pair for passwordless connection
+
+__Type:__
+
+```bash
+ssh-keygen
+```
+
+```bash
+hit enter on key-path
+hit enter for empty passphrase
+hit enter again
+```
+
+![Alt text](images/011_ssh_keygen.png?raw=true "SSH Connect")
+
+We need to copy the public key to server1
+
+> **Note**
+> Change __jesbe__ to your username
+
+__Type:__
+
+```bash
+ssh-copy-id jesbe@server1
+```
+
+![Alt text](images/012_ssh_copy.png?raw=true "SSH Copy ID")
+
+__Type:__
+
+```bash
+ssh server1
+```
+
+You should now be able to ssh to server1 without beeing prompted for a password
+
+![Alt text](images/013_ssh_passwordless.png?raw=true "SSH Copy ID")
+
+__Type:__
+
+```bash
+exit
+```
+
+Ping linuxservers
+
+__Type:__
+
+```bash
+ansible linuxservers -m ping
+```
+
+![Alt text](images/014_ping_pong.png?raw=true "SSH Copy ID")
+
+Lets test a few ansible commands
+
+> **Note**
+> Change jesbe to your username
+
+__Type:__
+
+```bash
+ansible linuxservers -m file -a "path=/home/jesbe/testfile.txt state=touch"
+
+ssh server1
+
+ls
+```
+
+is the file testfile.txt there?
+
+```bash
+
+exit
+```
+
+![Alt text](images/015_file_test.png?raw=true "ansible file")
+
+[Ansible Systemd module](https://docs.ansible.com/ansible/latest/modules/systemd_module.html)
+
+__Type:__
+
+```bash
+ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=yes"
+```
+
+![Alt text](images/016_systemd_error.png?raw=true "ansible systemd error")
+
+This will fail as the user dosn't have the right permissions
+
+Add -b (become will default use sudo to root) and --ask-become-pass is the escalation password
+
+__Type:__
+
+```bash
+ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=yes" -b --ask-become-pass
+```
+
+![Alt text](images/017_systemd_works.png?raw=true "ansible systemd works")
