@@ -1,34 +1,68 @@
 ---
-title: Create GitHub Account
+title: Connect Windows Host
 weight: 40
 ---
 
-## Task 4 Create GitHub Account
+## Task 4 Connect Windows Host
 
-Open a browser and go to [Git Hub](https://github.com)
+Windows Servers can be connected in different ways, we will use ansible_messageencryption, but Certificate encryption is available, but requires more work
 
-If you have a github account login, otherwise create a new account
+Log on to server "ansible" using ssh
 
-![Alt text](images/005_create_github.png?raw=true "Create GitHub Account")
+We need to install pywinrm before being able to connect to windows servers from ansible
 
-Login to your github account
+__Type:__
 
-Click on Repositories
+```bash
+pip install pywinrm
+```
 
-Click the green "New" in the top right corner
+![Alt text](images/019_install_pywinrm.png?raw=true "enable winRm")
 
-![Alt text](images/006_login_github.png?raw=true "Login GitHub")
+Lets add the windows server to our ansible hosts file
 
-Give you repository a name "ansibleclass"
+Yes the password is in clear text, you can encrypt the password with ansible-vault
 
-Select "Public" - it's default - **for the purpose of these labs keep it public**
+> **Note**
+> Change __ansible_user__ and __ansible_password__ to your username and password
 
-Make Sure you tick **"Initialize this repository with a README"**
+Add after the first group, linuxservers
 
-Click "Create repository"
+__Type:__
 
-![Alt text](images/007_newrepo_github.png?raw=true "Create Repo")
+```bash
+vi ansible-hosts
 
-Your new repository is created with an empty README.md file
+i (for input)
 
-![Alt text](images/008_newrepo_created_github.png?raw=true "New Repo")
+[windowsservers]
+server3
+
+[windowsservers:vars]
+ansible_user=jesbe
+ansible_password=SomeThingSimple8
+ansible_port=5985
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+ansible_winrm_message_encryption=always
+```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](images/020_winrm_hostsfile.png?raw=true "hosts file winRm")
+
+Lets test connection to the Windows server
+
+__Type:__
+
+```bash
+ansible windowsservers -m win_ping
+```
+
+![Alt text](images/021_ansible_win_ping.png?raw=true "win_ping")

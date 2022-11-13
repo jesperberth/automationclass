@@ -1,56 +1,52 @@
 ---
-title: Run ansible command
-weight: 30
+title: Install Software
+weight: 20
 ---
 
-## Task 3 Run ansible command
+## Task 2 Install Software
 
-Log on to server "ansible" using ssh
-
-__Type:__
+Set the timezone to match your current timezone
 
 ```bash
-ansible --version
+
+tzutil /s "Romance Standard Time"
+
 ```
 
-![Alt text](images/004_install_ansible_version.png?raw=true "Ansible --version")
+![Alt text](images/001_set_timezone.png?raw=true "set timezone")
 
-__Type:__
+You need to install the following software
 
 ```bash
-ansible --help
+
+winget install microsoft.powershell
+
+winget install git.git
+
+winget install Microsoft.VisualStudioCode
+
+winget install Microsoft.AzureCLI
+
 ```
 
-Will give you other options for ansible command
+![Alt text](images/001_install_powershell.png?raw=true "powershell")
 
-[Ansible Ping Module](https://docs.ansible.com/ansible/latest/modules/ping_module.html)
+![Alt text](images/002_install_git.png?raw=true "git")
+
+![Alt text](images/003_install_vscode.png?raw=true "vscode")
+
+![Alt text](images/004_install_azcli.png?raw=true "az cli")
+
+If you need to install other software you can search for it with __winget search__
+
+Eg.
 
 ```bash
-ansible localhost -m ping
+
+winget search firefox
+
 ```
 
-Will run ansible against localhost with module ping
+![Alt text](images/005_winget_search.png?raw=true "search")
 
-![Alt text](images/005_install_ansible_localhost_ping.png?raw=true "Ansible localhost ping")
-
-[Ansible File Module](https://docs.ansible.com/ansible/latest/modules/list_of_files_modules.html)
-
-__Type:__
-
-```bash
-ansible localhost -m file -a "path=/home/jesbe/testfile.txt state=touch"
-```
-
-change __jesbe__ with your username
-
-The ansible command:
-
-ansible __hosts__ -m __module__ -a __module arguments__
-
-__hosts__ can be localhost or a group from the inventory file or all
-
-__module__ any ansible module, here file
-
-__module arguments__ arguments for module if needed, here path=/home/jesbe/testfile.txt and state=touch
-
-![Alt text](images/006_install_ansible_localhost_file.png?raw=true "Ansible localhost ping")
+Close __Windows Terminal__

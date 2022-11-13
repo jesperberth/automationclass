@@ -1,187 +1,210 @@
 ---
-title: Install WSL
+title: Connect Linux host
 weight: 30
 ---
 
-## Task 3 Install WSL
+## Task 3 Connect Linux host
 
-Install WSL
+Log on to server "ansible" using ssh
 
-In Terminal
+Lets create a configuration file for ansible in your root dir
 
-When its ready, reboot the workstation
+We will use it to control our ansible environment
 
-```powershell
+[Ansible Configuration file](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-configuration-settings-locations)
 
-wsl --install
-
-```
-
-![Alt text](images/01_install_wsl.png?raw=true "install wsl")
-
-Login to you workstation
-
-After the reboot
-
-Ubuntu will continue the installation
-
-When ready it will prompt for a username and password
-
-![Alt text](images/02_install_wsl_add_user.png?raw=true "install wsl add user")
-
-WSL is now ready
-
-![Alt text](images/03_wsl_ready.png?raw=true "wsl ready")
-
-Close the Linux console
-
-We need to update WSL
-
-Open Windows Terminal and run
-
-```powershell
-
-wsl --update
-
-wsl --shutdown
-
-```
-
-![Alt text](images/04_wsl_update.png?raw=true "wsl update")
-
-Close the terminal and reopen it
-
-We need to install the vscode remote extention
-
-In the terminal
-
-```powershell
-
-code --install-extension ms-vscode-remote.remote-wsl
-
-```
-
-![Alt text](images/05_code_remote_ext.png?raw=true "code extention")
-
-Now start WSL from Windows Terminal
-
-In the menu select **Ubuntu**
-
-![Alt text](images/06_start_ubuntu.png?raw=true "start ubuntu")
-
-Now update the Ubuntu
+__Type:__
 
 ```bash
-
-sudo apt-get update && sudo apt-get upgrade -y
-
-```
-
-![Alt text](images/07_update_ubuntu.png?raw=true "update ubuntu")
-
-Install docker
-
-```bash
-
-sudo apt-get install docker.io -y
-
-```
-
-![Alt text](images/08_install_docker.png?raw=true "install docker")
-
-Open .bashrc in vi
-
-```bash
-
 cd
 
-vi .bashrc
+pwd
 
+vi .ansible.cfg
 ```
 
-Go to the end of the file
+![Alt text](images/007_ansible_cfg.png?raw=true "ansible config")
+
+> **Note**
+> Change __jesbe__ in the path with your username
+
+In vi __type:__
 
 ```bash
-
 i (hit i to toggle input)
-
 ```
 
-Copy and paste the following five lines to enable dockerd at start
-
 ```bash
-
-RUNNING=`ps aux | grep dockerd | grep -v grep`
-if [ -z "$RUNNING" ]; then
-    sudo /usr/bin/dockerd > /dev/null 2>&1 &
-    disown
-fi
-
+[defaults]
+inventory = /home/jesbe/ansible-hosts
 ```
 
-Save and quit
+__Type:__
 
 ```bash
-
 Hit Esc-key
 
 :wq (: for a command w for write and q for quit vi)
-
-
 ```
 
-![Alt text](images/09_edit_bashrc.png?raw=true "bashrc")
+![Alt text](images/008_ansible_cfg_set_inventory.png?raw=true "set ansible inventory")
 
-Add user to the docker group
+Create the Ansible Hosts file
+
+__Type:__
+
+```bash
+vi ansible-hosts
+```
+
+In vi __Type:__
+
+```bash
+i (hit i to toggle input)
+```
+
+```bash
+[linuxservers]
+server1
+```
+
+__Type:__
+
+```bash
+Hit Esc-key
+
+:wq (: for a command w for write and q for quit vi)
+```
+
+![Alt text](images/009_edit_hostfile.png?raw=true "Edit ansible hostfile")
+
+Lets ping our remote host server1
+
+__Type:__
+
+```bash
+ansible linuxservers -m ping
+```
+
+If it asks "Are you sure you want to continue connecting (yes/no)?" type yes
+
+![Alt text](images/009_connect_error.png?raw=true "Connect Error")
+
+Connection will fail, as ansible expects passwordless ssh connections to be established before running
+
+Test ssh to server 1
+
+__Type:__
+
+```bash
+ssh server1
+```
+
+![Alt text](images/010_ssh_connect.png?raw=true "SSH Connect")
+
+__Type:__
+
+```bash
+exit
+```
+
+We need to generate a ssh-key pair for passwordless connection
+
+__Type:__
+
+```bash
+ssh-keygen
+```
+
+```bash
+hit enter on key-path
+hit enter for empty passphrase
+hit enter again
+```
+
+![Alt text](images/011_ssh_keygen.png?raw=true "SSH Connect")
+
+We need to copy the public key to server1
+
+> **Note**
+> Change __jesbe__ to your username
+
+__Type:__
+
+```bash
+ssh-copy-id jesbe@server1
+```
+
+![Alt text](images/012_ssh_copy.png?raw=true "SSH Copy ID")
+
+__Type:__
+
+```bash
+ssh server1
+```
+
+You should now be able to ssh to server1 without beeing prompted for a password
+
+![Alt text](images/013_ssh_passwordless.png?raw=true "SSH Copy ID")
+
+__Type:__
+
+```bash
+exit
+```
+
+Ping linuxservers
+
+__Type:__
+
+```bash
+ansible linuxservers -m ping
+```
+
+![Alt text](images/014_ping_pong.png?raw=true "SSH Copy ID")
+
+Lets test a few ansible commands
+
+> **Note**
+> Change jesbe to your username
+
+__Type:__
+
+```bash
+ansible linuxservers -m file -a "path=/home/jesbe/testfile.txt state=touch"
+
+ssh server1
+
+ls
+```
+
+is the file testfile.txt there?
 
 ```bash
 
-sudo usermod -aG docker $USER
-
+exit
 ```
 
-![Alt text](images/10_groupadd.png?raw=true "groupadd")
+![Alt text](images/015_file_test.png?raw=true "ansible file")
 
-Next allow your user to run docker without typing a password
+[Ansible Systemd module](https://docs.ansible.com/ansible/latest/modules/systemd_module.html)
+
+__Type:__
 
 ```bash
-
-sudo visudo
-
+ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=yes"
 ```
 
-add the line below in the bottom of the file
+![Alt text](images/016_systemd_error.png?raw=true "ansible systemd error")
 
-**Change** USERNAME to your user
+This will fail as the user dosn't have the right permissions
+
+Add -b (become will default use sudo to root) and --ask-become-pass is the escalation password
+
+__Type:__
 
 ```bash
-
-USERNAME ALL = NOPASSWD: /usr/bin/dockerd
-
+ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=yes" -b --ask-become-pass
 ```
 
-![Alt text](images/11_visudo.png?raw=true "visudo")
-
-To save
-
-```bash
-
-Hit Esc-key two times
-
-then x
-
-```
-
-Close the Ubuntu tab in Windows Terminal and open it again
-
-run a docker command to check that it works
-
-```bash
-
-docker ps
-
-```
-
-if it looks like this, it worked
-
-![Alt text](images/12_docker_ps.png?raw=true "docker ps")
+![Alt text](images/017_systemd_works.png?raw=true "ansible systemd works")
