@@ -1,18 +1,17 @@
 ---
-title: "Ansible lint"
+title: "Work with Playbooks 2"
 weight: 60
 chapter: false
 pre: "<b>Lab 6. </b>"
 ---
 
-Install and run ansible-lint on playbooks
+Running advanced playbooks with ansible
 
 ## Table of Contents
 
-- [Prepare](#prepare)
-- [Task 1 Install Ansible Lint](#task-1-install-ansible-lint)
-- [Task 2 Run ansible-lint](#task-2-run-ansible-lint)
+- Task 1 Stat module
+- Task 2 Shell
 
 ## Prepare
 
-We will need the servers, ansible to be up and running - by default it is started after creation
+We will need the servers, ansible, server1, server2 and server3 to be up and running - by default they are started after creation
