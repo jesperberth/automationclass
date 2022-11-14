@@ -1,20 +1,63 @@
 ---
-title: Install Ansible Lint
+title: Stat Module
 weight: 10
 ---
 
-## Task 1 Install Ansible Lint
+## Task 1 Stat Module
 
-[Ansible Docs - ansible-lint](https://ansible-lint.readthedocs.io/en/latest/)
+[Ansible Docs - stat module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/stat_module.html)
 
-Log on to server "ansible" using ssh
+Create a new file in Vscode 01_stat.yml
 
-We need to install ansible-lint using pip
+**Type:**
 
-__Type:__
+```ansible
 
-```bash
-pip install "ansible-lint[community,yamllint]"
+---
+- name: Use Ansible Stat
+  hosts: linuxservers
+  become: true
+
+  tasks:
+  - name: Check if aws-cli is downloaded
+    ansible.builtin.stat:
+      path: ~/awscliv2.zip
+    register: awsfile
+
+  - name: Debug awsfile
+    ansible.builtin.debug:
+      msg: "{{ awsfile }}"
+
+  - name: Download aws-cli
+    ansible.builtin.get_url:
+      url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+      dest: ~/awscliv2.zip
+      mode: '0700'
+    when: not awsfile.stat.exists
+
+  - name: Unzip aws-cli
+    ansible.builtin.unarchive:
+      src: ~/awscliv2.zip
+      dest: ~/
+      remote_src: true
+
 ```
 
-![Alt text](images/001_install_ansible_lint.png?raw=true "install ansible lint")
+Save, Commit and push
+
+![Alt text](images/001_ansible_stat_playbook.png?raw=true "ansible stat playbook")
+
+On the ansible server pull the new playbook and run it
+
+**Type:**
+
+```bash
+cd  ansibleclass
+
+git pull
+
+ansible-playbook 01_stat.yml --ask-become-pass
+
+```
+
+![Alt text](images/002_ansible_stat_playbook_run.png?raw=true "ansible stat playbook run")

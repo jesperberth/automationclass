@@ -1,48 +1,63 @@
 ---
-title: Run ansible-lint
+title: Shell module
 weight: 20
 ---
 
-## Task 2 Run ansible-lint
+## Task 2 Run shell module
 
-Lets test our playbooks
+[Ansible Docs - shell module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/shell_module.html)
 
-__Type:__
+Create a new file in Vscode 02_stat.yml
 
-```bash
-cd
+**Type:**
 
-cd ansibleclass
+```ansible
 
-ansible-lint
+---
+- name: Use Ansible Shell
+  hosts: linuxservers
+  become: true
+
+  tasks:
+  - name: Check if aws-cli is installed
+    ansible.builtin.stat:
+      path: /usr/local/aws-cli
+    register: awsinstallfile
+
+  - name: Install aws-cli
+    ansible.builtin.shell: |
+      ~/aws/install
+    when: not awsinstallfile.stat.exists
 
 ```
-
-![Alt text](images/002_run_ansible_lint.png?raw=true "run ansible lint")
-
-Lets take a look on the last three errors - all on 02_loop.yml
-
-* The first in line 3: is a true/false it could be with a capital letter or yes/no (whitch works)
-
-* The Second in line 25: missing space before and after in var
-
-* The third in line 31: missing a new line in the end of document
-
-Change the errors in VSCode
-
-![Alt text](images/003_ansible_lint_correct.png?raw=true "ansible lint corrections")
 
 Save, Commit and push
 
-on server ansible
+![Alt text](images/001_ansible_stat2_playbook.png?raw=true "ansible stat playbook")
 
-__Type:__
+On the ansible server pull the new playbook and run it
+
+**Type:**
 
 ```bash
+cd  ansibleclass
+
 git pull
 
-ansible-lint
+ansible-playbook 02_stat.yml --ask-become-pass
 
 ```
 
-![Alt text](images/004_ansible_lint_second.png?raw=true "ansible lint second runs")
+![Alt text](images/002_ansible_stat2_playbook_run.png?raw=true "ansible stat playbook run")
+
+On the ansible server run the playbook one more time
+
+**Type:**
+
+```bash
+
+ansible-playbook 02_stat.yml --ask-become-pass
+
+```
+
+![Alt text](images/003_ansible_stat2_playbook_run.png?raw=true "ansible stat playbook run second")

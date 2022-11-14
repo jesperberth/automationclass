@@ -41,38 +41,42 @@ Accessible with winRM and RDP
 
 ## Labs
 
-### Lab 1: [Install Ansible](lab01/lab1.md)
+### Lab 1: Install Lab
 
-Deploy Lab and Install Ansible and Connect to a Linux and Windows Server
+Deploy Lab and Install Workstation
 
-### Lab 2: [Ansible Playbooks](lab02/lab2.md)
+### Lab 2: Install Ansible
+
+Install Ansible and Connect to a Linux and Windows Server
+
+### Lab 3: Ansible Playbooks
 
 Create Ansible Playbooks
 
-### Lab 3: [Ansible Vault](lab03/lab3.md)
+### Lab 4: Ansible Vault
 
 Use ansible vault to secure secrets
 
-### Lab 4: [Work with Playbooks](lab04/lab4.md)
+### Lab 5: Work with Playbooks
 
 Use Variables, prompts, facts and handlers in Playbooks
 
-### Lab 5: [Ansible linting](lab05/lab5.md)
+### Lab 6: Work with Playbooks 2
 
-Use linting in ansible
+Use stat and shell modules in playbooks
 
-### Lab 6: [Roles](lab06/lab6.md)
+### Lab 7: Roles
 
 Use and create roles with Ansible
 
-### Lab 7: [Ansible Windows](lab07/lab7.md)
+### Lab 8: Ansible Windows
 
 Use Ansible to manage Windows Servers
 
-### Lab 8: [Ansible Cloud](lab08/lab8.md)
+### Lab 9: Ansible Cloud
 
 Use Ansible in the Cloud (Microsoft Azure)
 
-### Lab 9: [Ansible AWX Tower](lab09/lab9.md)
+### Lab 10: Ansible AWX Tower
 
 Use AWX/Ansible Tower to create a workflow
