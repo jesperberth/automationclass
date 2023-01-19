@@ -1,52 +1,35 @@
 ---
-title: Install Software
-weight: 20
+title: Install WinGet
+weight: 30
 ---
 
-## Task 2 Install Software
 
-Set the timezone to match your current timezone
+## Task 3 Install WinGet
 
-```bash
+We will use winget command to install our software for the labs
 
-tzutil /s "Romance Standard Time"
+First we need to enable winget
 
-```
+Log in to your student desktop
 
-![Alt text](images/001_set_timezone.png?raw=true "set timezone")
+One the Desktop
 
-You need to install the following software
+Click __Microsoft Store__ in the taskbarc
 
-```bash
+![Alt text](images/003_microsoft_store.png?raw=true "start microsoft store")
 
-winget install microsoft.powershell
+Click __Search__ and type __app install__
 
-winget install git.git
+Click on __App Installer__
 
-winget install Microsoft.VisualStudioCode
+![Alt text](images/004_search_appinstall.png?raw=true "start microsoft store")
 
-winget install Microsoft.AzureCLI
+Installation will start automaticly
 
-```
+![Alt text](images/005_app_installer.png?raw=true "app installer")
 
-![Alt text](images/001_install_powershell.png?raw=true "powershell")
+Start Windows Terminal, in Windows 11 its installed by default
 
-![Alt text](images/002_install_git.png?raw=true "git")
+Click the __Start__ button, write __terminal__ make sure you select __Run as administrator__
 
-![Alt text](images/003_install_vscode.png?raw=true "vscode")
-
-![Alt text](images/004_install_azcli.png?raw=true "az cli")
-
-If you need to install other software you can search for it with __winget search__
-
-Eg.
-
-```bash
-
-winget search firefox
-
-```
-
-![Alt text](images/005_winget_search.png?raw=true "search")
-
-Close __Windows Terminal__
+![Alt text](images/006_start_winterm.png?raw=true "start winterm")
