@@ -10,11 +10,11 @@ In this session we will install and use Visual Studio Code with a few plugins to
 ## Table of Contents
 
 - [Prepare](#prepare)
-- [Task 1 Deploy Lab](#task-1-deploy-lab)
-- [Task 2 Install Winget](#task-1-setup-visual-studio-code-and-git)
-- [Task 3 Install Software]()
-- [Task 4 Install WSL]()
-- [Task 5 Create GitHub Account]()
+- [Task 1 Deploy Lab](task1)
+- [Task 2 Install Winget](task2)
+- [Task 3 Install Software](task3)
+- [Task 4 Install WSL](task4)
+- [Task 5 Create GitHub Account](task5)
 
 ## Prepare
 
