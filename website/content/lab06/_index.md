@@ -9,8 +9,9 @@ Running advanced playbooks with ansible
 
 ## Table of Contents
 
-- Task 1 Stat module
-- Task 2 Shell
+- [Prepare](#prepare)
+- [Task 1 Stat module](task1)
+- [Task 2 Shell](task2)
 
 ## Prepare
 

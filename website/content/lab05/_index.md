@@ -20,12 +20,12 @@ Running advanced playbooks with ansible
 ## Table of Contents
 
 - [Prepare](#prepare)
-- [Task 1 Variables and Lists](#task-1-variables-and-lists)
-- [Task 2 Register and Conditions](#task-2-register-and-conditions)
-- [Task 3 Handlers](#task-3-handlers)
-- [Task 4 Facts and debug](#task-4-facts-and-debug)
-- [Task 5 Loops](#task-5-loops)
-- [Task 6 Loops Async](#task-6-loops-async)
+- [Task 1 Variables and Lists](task1)
+- [Task 2 Register and Conditions](task2)
+- [Task 3 Handlers](task3)
+- [Task 4 Facts and debug](task4)
+- [Task 5 Loops](task5)
+- [Task 6 Loops Async](task6)
 
 ## Prepare
 

@@ -10,9 +10,9 @@ In this session we will install and use Visual Studio Code with a few plugins to
 ## Table of Contents
 
 - [Prepare](#prepare)
-- [Task 1 Ansible-vault](#task-1-ansible-vault)
-- [Task 2 Ansible Inventory yaml](#task-2-ansible-inventory-yaml)
-- [Task 3 Ansible Vault - Yaml inventory](#task-3-ansible-vault---yaml-inventory)
+- [Task 1 Ansible-vault](task1)
+- [Task 2 Ansible Inventory yaml](task2)
+- [Task 3 Ansible Vault - Yaml inventory](task3)
 
 ## Prepare
 
