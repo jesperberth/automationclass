@@ -38,6 +38,10 @@ i (for input)
 [windowsservers]
 server3
 
+```
+
+```bash
+
 [windowsservers:vars]
 ansible_user=jesbe
 ansible_password=SomeThingSimple8

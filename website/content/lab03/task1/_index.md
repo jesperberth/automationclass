@@ -5,9 +5,13 @@ weight: 10
 
 ## Task 1 Clone Git Repository
 
+We will run Visual Studio Code from WSL to get the most out of the Ansible plugin
+
 We need to configure git with a Name and email to track the changes you are making
 
-Open Terminal
+__Note:__ This has to be done on your Student machine
+
+Open Terminal / WSL (Ubuntu)
 
 ```bash
 
@@ -28,9 +32,9 @@ Open a Powershell Terminal
 **Type:**
 
 ```powershell
-mkdir ansible
+mkdir git
 
-cd ansible
+cd git
 
 ```
 

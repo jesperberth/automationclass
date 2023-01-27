@@ -88,8 +88,6 @@ ansible linuxservers -m ping
 
 If it asks "Are you sure you want to continue connecting (yes/no)?" type yes
 
-# This picture is wrong
-
 ![Alt text](images/009_connect_error.png?raw=true "Connect Error")
 
 Connection will fail, as ansible expects passwordless ssh connections to be established before running

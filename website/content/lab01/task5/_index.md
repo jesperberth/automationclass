@@ -194,6 +194,8 @@ Lets install some VS Code extentions
 
 In the terminal run below to install the extentions
 
+__Note:__ Make sure you are in the Windows Powershell Tab
+
 ```bash
 
 code --install-extension redhat.ansible
