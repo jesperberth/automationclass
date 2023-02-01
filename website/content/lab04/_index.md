@@ -5,7 +5,7 @@ chapter: false
 pre: "<b>Lab 4. </b>"
 ---
 
-In this session we will install and use Visual Studio Code with a few plugins to start working with ansible playbooks and create two playbooks, one for linux and one for windows
+In this lab we will secure our secrets with Ansible Vault
 
 ## Table of Contents
 
