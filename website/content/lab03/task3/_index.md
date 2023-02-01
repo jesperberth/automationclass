@@ -23,19 +23,77 @@ Write the following in the text pane
     file:
       path: /root/testfile.txt
       state: touch
+
 ```
 
 Save the file (Ctrl + S)
+
+Ansible Linting will load and mark Problems
+
+__Note:__ First time saving the playbook, ansible lint will take a few minutes to run as it has to download the container image from the repository
+
+![Alt text](images/016_ansible_lint.png?raw=true "Ansible lint in VSCode")
+
+Click on __Problems__ tab
+
+There are four problems that we need to fix
+
+The Playbook will run as is, but following the rules might prevent errors in the future
+
+![Alt text](images/016_lint_errors.png?raw=true "lint errors")
+
+From the top:
+
+* Truthy value should be one of false, true - yes and no works but the correct way is a true
+
+* USE FQCN for builtin module actions, we should always refer to the FQCN - ansible.builtin.file is correct
+
+* All plays should be named - __- name: First Playbook__
+
+* File permissions is unset or incorrect
+
+Take a look at the documentation for the file module
+
+[Ansible File Module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html)
+
+Add the mode: in the file task
+
+The playbook should look like this
+
+```ansible
+---
+- name: First Playbook
+  hosts: linuxservers
+  become: true
+
+  tasks:
+  - name: Create file
+    ansible.builtin.file:
+      path: /root/testfile.txt
+      state: touch
+      mode: '0755'
+
+```
+
+![Alt text](images/016_code_playbook_fixed.png?raw=true "playbook in VSCode fixed")
+
+Now commit and sync our changes to GitHub
 
 Click the Source control button in the left panel.
 
 ![Alt text](images/016_code_playbook.png?raw=true "playbook in VSCode")
 
-Write a comment **"First Playbook**" and click "Ctrl + Enter" to commit the changes
+Write a comment __First Playbook__ and click "Ctrl + Enter" to commit the changes or click the Blue __Commit__ button
 
-Now Sync the changes Push/Pull, in the blue bar at the bottom, 0 up, 1 down it will start the sync process
+Click __Yes__ to stage all your changes
 
 ![Alt text](images/018_code_git_sync.png?raw=true "git sync in VSCode")
+
+Sync the changes with GitHub, you can use the blue __Sync Changes__ button or click on the Sync button in the blue bar at the bottom, 0 up, 1 down it will start the sync process
+
+Click __Ok__ in the dialog push/pull to origin/main
+
+![Alt text](images/018_code_git_sync_button.png?raw=true "git sync in VSCode")
 
 The first time you will be prompted for github credentials
 
@@ -49,7 +107,7 @@ Log on to server "ansible" using ssh
 
 We need to install git
 
-**Type:**
+__Type:__
 
 ```bash
 sudo dnf install git -y
@@ -61,11 +119,11 @@ Lets test the playbook
 
 Clone the git repository
 
-**Note:**
+__Note:__
 
 Change to your repository
 
-**Type:**
+__Type:__
 
 ```bash
 git clone https://github.com/jesperberth/ansibleclass.git
@@ -75,7 +133,7 @@ git clone https://github.com/jesperberth/ansibleclass.git
 
 Run the playbook
 
-**Type:**
+__Type:__
 
 ```bash
 cd ansibleclass
