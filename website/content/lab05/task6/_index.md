@@ -20,10 +20,10 @@ Create a new file in Vscode 02_loop.yml
 __Type:__
 
 ```ansible
-
 ---
-- hosts: linuxservers
-  become: yes
+- name: Loop Async
+  hosts: linuxservers
+  become: true
 
   tasks:
     - name: Create dir /mnt/resource/
@@ -36,16 +36,18 @@ __Type:__
       ansible.builtin.get_url:
         url: "{{ item }}"
         dest: /mnt/resource/
+        mode: 0600
       loop:
         - https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.1/Git-2.30.0-64-bit.exe
         - https://www.python.org/ftp/python/3.8.7/python-3.8.7-embed-amd64.zip
-      async: 3
+        - https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz
+      async: 2
       poll: 0
       register: download_loop
 
     - name: Wait for downloads
-      async_status:
-        jid: "{{item.ansible_job_id}}"
+      ansible.builtin.async_status:
+        jid: "{{ item.ansible_job_id }}"
         mode: status
       retries: 300
       delay: 1
@@ -56,6 +58,8 @@ __Type:__
 ```
 
 Save, Commit and push
+
+__Note:__ We can ignore the one Problem for _async_dir
 
 ![Alt text](images/001_ansible_loop_async_playbook.png?raw=true "ansible loop async playbook")
 
