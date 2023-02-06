@@ -23,19 +23,19 @@ __Type:__
 
 ```ansible
 
-  - name: Configure firewall
-    ansible.posix.firewalld:
-      zone: public
-      service: http
-      permanent: yes
-      state: enabled
-    notify: firewall reload
+    - name: Configure firewall
+      ansible.posix.firewalld:
+        zone: public
+        service: http
+        permanent: true
+        state: enabled
+      notify: Firewall reload
 
   handlers:
-  - name: firewall reload
-    ansible.builtin.systemd:
-      name: firewalld
-      state: reloaded
+    - name: Firewall reload
+      ansible.builtin.systemd:
+        name: firewalld
+        state: reloaded
 
 ```
 
@@ -63,9 +63,6 @@ On the ansible server run the playbook again, note this time it will not run the
 __Type:__
 
 ```bash
-cd  ansibleclass
-
-git pull
 
 ansible-playbook 01_vars.yml --ask-become-pass
 

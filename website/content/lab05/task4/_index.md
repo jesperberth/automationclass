@@ -53,12 +53,14 @@ __Type:__
 
 ```ansible
 ---
-- hosts: linuxservers
+- name: Facts
+  hosts: linuxservers
 
   tasks:
-  - name: Debug Facts
-    ansible.builtin.debug:
-      msg: "{{ ansible_facts }}"
+    - name: Debug Facts
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts }}"
+
 ```
 
 Save the playbook, Commit the changes and push to github
@@ -98,9 +100,9 @@ __Type:__
 
 ```ansible
 
-  - name: Debug Facts Hostname - Unsafe Text
-    ansible.builtin.debug:
-      msg: "{{ ansible_facts['nodename'] }}"
+    - name: Debug Facts Hostname - Unsafe Text
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts['nodename'] }}"
 
 ```
 
@@ -131,13 +133,13 @@ __Type:__
 
 ```ansible
 
-  - name: Debug Facts ipv4 - List
-    ansible.builtin.debug:
-      msg: "{{ ansible_facts['all_ipv4_addresses'][0] }}"
+    - name: Debug Facts ipv4 - List
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts['all_ipv4_addresses'][0] }}"
 
-  - name: Debug Facts SeLinux Status - Dictionary
-    ansible.builtin.debug:
-      msg: "{{ ansible_facts['selinux']['status'] }}"
+    - name: Debug Facts SeLinux Status - Dictionary
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts['selinux']['status'] }}"
 
 ```
 

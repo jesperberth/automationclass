@@ -23,17 +23,18 @@ __Type:__
 
 ```ansible
 ---
-- hosts: linuxservers
-  become: yes
+- name: Vars
+  hosts: linuxservers
+  become: true
 
   vars:
-      package: httpd
+    package: httpd
 
   tasks:
-  - name: Install Packages
-    ansible.builtin.package:
-      name: "{{ package }}"
-      state: latest
+    - name: Install Packages
+      ansible.builtin.package:
+        name: "{{ package }}"
+        state: present
 ```
 
 Save the playbook, Commit the changes and push to github
@@ -63,21 +64,22 @@ __Type:__
 
 ```ansible
 ---
-- hosts: linuxservers
-  become: yes
+- name: Vars List
+  hosts: linuxservers
+  become: true
 
   vars:
-      package:
-          - httpd
-          - mariadb-server
-          - php
-          - php-mysqlnd
+    package:
+      - httpd
+      - mariadb-server
+      - php
+      - php-mysqlnd
 
   tasks:
-  - name: Install Packages
-    ansible.builtin.package:
-      name: "{{ package }}"
-      state: latest
+    - name: Install Packages
+      ansible.builtin.package:
+        name: "{{ package }}"
+        state: present
 
 ```
 
