@@ -9,25 +9,24 @@ weight: 20
 
 Create a new file in Vscode 02_stat.yml
 
-**Type:**
+__Type:__
 
 ```ansible
-
 ---
 - name: Use Ansible Shell
   hosts: linuxservers
   become: true
 
   tasks:
-  - name: Check if aws-cli is installed
-    ansible.builtin.stat:
-      path: /usr/local/aws-cli
-    register: awsinstallfile
+    - name: Check if aws-cli is installed
+      ansible.builtin.stat:
+        path: /usr/local/aws-cli
+      register: awsinstallfile
 
-  - name: Install aws-cli
-    ansible.builtin.shell: |
-      ~/aws/install
-    when: not awsinstallfile.stat.exists
+    - name: Install aws-cli
+      ansible.builtin.shell: |
+        ~/aws/install
+      when: not awsinstallfile.stat.exists
 
 ```
 
@@ -37,7 +36,7 @@ Save, Commit and push
 
 On the ansible server pull the new playbook and run it
 
-**Type:**
+__Type:__
 
 ```bash
 cd  ansibleclass
@@ -52,7 +51,7 @@ ansible-playbook 02_stat.yml --ask-become-pass
 
 On the ansible server run the playbook one more time
 
-**Type:**
+__Type:__
 
 ```bash
 
