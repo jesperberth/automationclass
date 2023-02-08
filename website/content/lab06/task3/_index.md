@@ -9,6 +9,10 @@ weight: 30
 
 [Ansible Docs - Command Module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html)
 
+Ansible always run gather facts and tasks on server nodes from the hosts variable in the playbook. With delegate_to we can force ansible to run a task on another server or on localhost.
+
+This could be to set a server in or out off maintenance mode, add or remove a server to a loadbalancer.
+
 Create a new file in Vscode __set_server_offline.sh__
 
 __Type:__
