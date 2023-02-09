@@ -1,11 +1,11 @@
 ---
-title: Pre and Post task
+title: Lookup
 weight: 40
 ---
 
-## Task 4 Pre and post task
+## Task 4 Lookup
 
-[Ansible Docs - Task Delgation](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_delegation.html)
+[Ansible Docs - Lookup](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_lookups.html)
 
 ```ansible
 ---
