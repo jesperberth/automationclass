@@ -16,40 +16,42 @@ In VSCode create a new file 01_domain.yml
 Add below to the playbook, this will create a new Active Directory.
 
 ```ansible
-
 ---
-- hosts: domaincontroller
+- name: Create Active Directory
+  hosts: domaincontroller
+
   vars:
     domain: ansible.local
 
   tasks:
-  - name: Install AD-Tools and DNS
-    win_feature:
-      name:
-      - DNS
-      - AD-Domain-Services
-      state: present
-      include_management_tools: yes
-    register: feature_install
+    - name: Install AD-Tools and DNS
+      ansible.windows.win_feature:
+        name:
+          - DNS
+          - AD-Domain-Services
+        state: present
+        include_management_tools: true
+      register: feature_install
 
-  - name: Reboot if required
-    win_reboot:
-    when: feature_install.reboot_required
+    - name: Reboot if required
+      ansible.windows.win_reboot:
+      when: feature_install.reboot_required
 
-  - name: Create new Active Directory
-    win_domain:
-      create_dns_delegation: no
-      database_path: C:\Windows\NTDS
-      dns_domain_name: "{{ domain }}"
-      domain_mode: Win2012R2
-      forest_mode: Win2012R2
-      safe_mode_password: "{{ ansible_password }}"
-      sysvol_path: C:\Windows\SYSVOL
-    register: domain_install
+    - name: Create new Active Directory
+      ansible.windows.win_domain:
+        create_dns_delegation: false
+        database_path: C:\Windows\NTDS
+        dns_domain_name: "{{ domain }}"
+        domain_mode: Win2012R2
+        forest_mode: Win2012R2
+        safe_mode_password: "{{ ansible_password }}"
+        sysvol_path: C:\Windows\SYSVOL
+      register: domain_install
 
-  - name: Reboot if required
-    win_reboot:
-    when: domain_install.reboot_required
+    - name: Reboot if required
+      ansible.windows.win_reboot:
+      when: domain_install.reboot_required
+
 ```
 
 ![Alt text](images/03_domaincontroller.png?raw=true "domain controller playbook")
