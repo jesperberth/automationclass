@@ -25,8 +25,6 @@ pip install -r ~/.ansible/collections/ansible_collections/azure/azcollection/req
 
 ```
 
-![Alt text](images/002_download_requirements_pip_azure.png?raw=true "install azure")
+![Alt text](images/001_install_pip_azure.png?raw=true "install azure")
 
 ![Alt text](images/002_run_requirements_pip_azure.png?raw=true "install azure")
-
-![Alt text](images/001_install_pip_azure.png?raw=true "install azure")
