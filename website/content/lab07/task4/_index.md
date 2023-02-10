@@ -12,28 +12,27 @@ First thing to do is install all needed packages, start the httpd daemon and ope
 In VSCode open the roles/webserver/tasks/main.yml add the following
 
 ```ansible
-
 ---
 # tasks file for webserver
 - name: Install Packages
   ansible.builtin.package:
     name: "{{ package }}"
-    state: latest
-  notify: httpd restart
+    state: present
+  notify: Httpd restart
 
 - name: Enable httpd service
   ansible.builtin.systemd:
     name: httpd
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Configure firewall
   ansible.posix.firewalld:
     zone: public
     service: http
-    permanent: yes
+    permanent: true
     state: enabled
-  notify: firewall reload
+  notify: Firewall reload
 
 ```
 
@@ -44,7 +43,6 @@ We will put a list - package in the defaults main.yml
 Open defaults/main.yml and add the following
 
 ```ansible
-
 ---
 # defaults file for webserver
 package:
@@ -64,15 +62,14 @@ We will add the handler firewall reload
 Open handlers/main.yml and add the following
 
 ```ansible
-
 ---
 # handlers file for webserver
-- name: firewall reload
+- name: Firewall reload
   ansible.builtin.systemd:
     name: firewalld
     state: reloaded
 
-- name: httpd restart
+- name: Httpd restart
   ansible.builtin.systemd:
     name: httpd
     state: restarted
@@ -115,7 +112,7 @@ galaxy_info:
   # - CC-BY-4.0
   license: BSD-3-Clause
 
-  min_ansible_version: 2.10
+  min_ansible_version: "2.10"
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:
@@ -127,9 +124,9 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-   - name: EL
-     versions:
-     - 8
+    - name: EL
+      versions:
+        - "8"
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes
@@ -142,7 +139,6 @@ galaxy_info:
 dependencies: []
   # List your role dependencies here, one per line. Be sure to remove the '[]' above,
   # if you add dependencies to this list.
-
 
 ```
 
@@ -170,19 +166,21 @@ Create a new file 02_roles.yml add the following
 
 ```ansible
 ---
-- hosts: linuxservers
-  become: yes
+- name: Webserver Role
+  hosts: linuxservers
+  become: true
 
   roles:
-      - webserver
+  - webserver
 
   tasks:
-  - name: Copy Index.php
-    ansible.builtin.copy:
-      src: index.php
-      dest: /var/www/html/index.php
-      owner: root
-      group: root
+    - name: Copy Index.php
+      ansible.builtin.copy:
+        src: index.php
+        dest: /var/www/html/index.php
+        owner: root
+        group: root
+        mode: 0755
 
 ```
 
