@@ -5,30 +5,34 @@ weight: 40
 
 ## Task 4 Lookup
 
-[Ansible Docs - Lookup](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_lookups.html)
+[Ansible Docs - Plugin Lookup](https://docs.ansible.com/ansible/latest/plugins/lookup.html)
+
+Create a new text file file.txt
+
+```text
+dev-environment
+```
+
+Create a new file 01_lookup.yml
 
 ```ansible
 ---
-- name: Task Delegation
+- name: Lookup
   hosts: linuxservers
 
-  tasks:
-    - name: Debug Facts Hostname
-      ansible.builtin.debug:
-        msg: "{{ ansible_facts['nodename'] }}"
+  vars:
+     environment: "{{ lookup('file', 'file.txt') }}"
 
-    - name: Write File
-      ansible.builtin.command:
-        cmd: ~/ansibleclass/set_server_offline.sh "{{ ansible_facts['nodename'] }}" "{{ ansible_facts['all_ipv4_addresses'][0] }}"
-      register: output
-      changed_when: output.rc == 0
-      delegate_to: localhost
+  tasks:
+    - name: Debug Write File Content
+      ansible.builtin.debug:
+        msg: "{{ environment }}"
 
 ```
 
 Save, Commit and push
 
-![Alt text](images/002_ansible_delegate_code.png?raw=true "ansible delegate playbook")
+![Alt text](images/001_ansible_lookup.png?raw=true "ansible delegate playbook")
 
 On the ansible server pull the new playbook and run it
 
@@ -39,8 +43,8 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_delegate.yml
+ansible-playbook 01_lookup.yml
 
 ```
 
-![Alt text](images/003_ansible_delegate_playbook_run.png?raw=true "ansible delegate playbook run")
+![Alt text](images/002_ansible_lookup_playbook_run.png?raw=true "ansible delegate playbook run")
