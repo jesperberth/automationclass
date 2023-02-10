@@ -66,9 +66,9 @@ In the browser go to your repository on github "click" the green "Code" button a
 
 On ansible
 
-Change the **url** to your own
+Change the __url__ to your own
 
-**Type:**
+__Type:__
 
 ```bash
 cd

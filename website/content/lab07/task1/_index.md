@@ -49,10 +49,10 @@ In VsCode create a new file 01_roles.yml
 __Type:__
 
 ```ansible
-
 ---
-- hosts: linuxservers
-  become: yes
+- name: Roles
+  hosts: linuxservers
+  become: true
 
   roles:
       - jesperberth.el_httpd
