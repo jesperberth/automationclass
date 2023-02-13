@@ -17,13 +17,15 @@ Save and Commit
 
 ![Alt text](images/06_ansible_tower_playbook.png?raw=true "Tower playbook")
 
-In Tower go to project and refresh your project, this will do a "git pull"
+In Tower go to project and __refresh__ your project, this will do a "git pull"
+
+The Revision will change matching the git revision
 
 ![Alt text](images/07_ansible_tower_refresh.png?raw=true "Refresh project")
 
-In the left pane, click Templates
+In the left pane, click __Templates__
 
-Click on Add to create a new Template select the __Add Job template__ type
+Click on __Add__ to create a new Template select the __Add Job template__ type
 
 Type
 

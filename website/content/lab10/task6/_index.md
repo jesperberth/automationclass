@@ -5,13 +5,13 @@ weight: 60
 
 ## Task 6 Create Azure Dynamic Inventory Source
 
-In the left pane click on Inventory
+In the left pane click on __Inventory__
 
 Select your inventory
 
-Click on the Sources button on the top
+Click on the __Sources__ button on the top
 
-Click Add to create a new source
+Click __Add__ to create a new source
 
 We can control how the plugin will retrieve resources from azure by adding variables to the Source
 
@@ -30,7 +30,6 @@ __Updata on Launch:__ Checked
 In the Source variables add this:
 
 ```ansible
-
 ---
 keyed_groups:
 - prefix: tag
@@ -44,19 +43,15 @@ Click __Save__
 
 ![Alt text](images/14_azure_inventory.png?raw=true "azure inventory")
 
-In the bottom of the screen click on the Sync button
+In the bottom of the screen click on the __Sync__ button
 
 ![Alt text](images/15_azure_inventory_sync.png?raw=true "azure inventory sync")
 
-In the left pane click on Jobs
-
-You should see a Inventory - Azure job running, click on it to monitor the run
-
-Go back to inventory
+In the left pane click on __inventory__
 
 Select your inventory
 
-Click on the Groups button on the top
+Click on the __Groups__ button on the top
 
 You should see a few groups based on the tags that are on the vm's in Azure
 

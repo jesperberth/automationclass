@@ -18,21 +18,21 @@ First we need to get a OAUTHTOKEN for AWX
 
 In the AWX console
 
-In the left pane, in the Access Block click Users
+In the left pane, in the __Access Block__ click __Users__
 
 Select the user "Admin"
 
 ![Alt text](images/01_ansible_tower_adminuser.png?raw=true "select admin user")
 
-Click Tokens
+Click __Tokens__
 
 ![Alt text](images/02_ansible_tower_token.png?raw=true "admin token")
 
-Click Add
+Click __Add__
 
 In the Create User Token window
 
-Select "Write" in the Scope dropdown box click save
+Select __Write__ in the Scope dropdown box click save
 
 ![Alt text](images/03_ansible_tower_create_token.png?raw=true "create admin token")
 
@@ -52,9 +52,9 @@ __Type:__
 
 ```bash
 
-export CONTROLLER_HOST=http://137.135.180.213
+export CONTROLLER_HOST=http://68.219.213.172
 export CONTROLLER_USERNAME=admin
-export CONTROLLER_OAUTH_TOKEN=flNNBoKPnlnMyNTAhHL4hhMhFxmzTe
+export CONTROLLER_OAUTH_TOKEN=oKux6ADwqn127BK3Ov4WjfbPjtPG16
 
 ```
 
@@ -66,34 +66,35 @@ Add below to the playbook
 
 ```ansible
 ---
-- hosts: localhost
+- name: Clean up AWX
+  hosts: localhost
   connection: local
-  vars:
 
   tasks:
-  - name: Remove Demo Template
-    awx.awx.job_template:
-      name: Demo Job Template
-      organization: Default
-      state: absent
+    - name: Remove Demo Template
+      awx.awx.job_template:
+        name: Demo Job Template
+        organization: Default
+        state: absent
 
-  - name: Remove Demo credential
-    awx.awx.credential:
-      name: Demo Credential
-      credential_type: Machine
-      state: absent
+    - name: Remove Demo credential
+      awx.awx.credential:
+        name: Demo Credential
+        credential_type: Machine
+        state: absent
 
-  - name: Remove Demo inventory
-    awx.awx.inventory:
-      name: Demo Inventory
-      organization: Default
-      state: absent
+    - name: Remove Demo inventory
+      awx.awx.inventory:
+        name: Demo Inventory
+        organization: Default
+        state: absent
 
-  - name: Remove Demo project
-    awx.awx.project:
-      name: Demo Project
-      organization: Default
-      state: absent
+    - name: Remove Demo project
+      awx.awx.project:
+        name: Demo Project
+        organization: Default
+        state: absent
+
 ```
 
 ![Alt text](images/06_create_awx_playbook.png?raw=true "awx playbook")

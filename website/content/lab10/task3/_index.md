@@ -5,9 +5,9 @@ weight: 30
 
 ## Task 3 Create Project inventory and Credential
 
-In the left pane, click Projects
+In the left pane, click __Projects__
 
-Click Add to create a new project
+Click __Add__ to create a new project
 
 Type
 
@@ -25,9 +25,9 @@ Leave the rest, click __Save__
 
 ![Alt text](images/02_ansible_tower_create_project.png?raw=true "Create a project")
 
-In the left pane, click Inventory
+In the left pane, click __Inventory__
 
-Click Add to create a new inventory, select Add Inventory
+Click __Add__ to create a new inventory, select __Add Inventory__
 
 Type
 
@@ -39,9 +39,9 @@ Leave the rest, click __Save__
 
 ![Alt text](images/03_ansible_tower_create_inventory.png?raw=true "Create an inventory")
 
-In the left pane, click credentials
+In the left pane, click __credentials__
 
-Click on Add to create a new Credential
+Click on __Add__ to create a new Credential
 
 Type
 

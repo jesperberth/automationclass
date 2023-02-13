@@ -33,7 +33,7 @@ Save and Commit
 
 ![Alt text](images/10_ansible_tower_playbook_webserver.png?raw=true "Tower playbook")
 
-In Tower go to project and refresh your project, this will do a "git pull"
+In Tower go to project and __refresh__ your project, this will do a "git pull"
 
 ![Alt text](images/07_ansible_tower_refresh.png?raw=true "Refresh project")
 
@@ -59,9 +59,9 @@ Mark the key and copy it to the clipboard, you will need it when we create the n
 
 Back in the Tower UI
 
-In the left pane, click Templates
+In the left pane, click __Templates__
 
-Click on Add to create a new Template select the __Job template__ type
+Click on __Add__ to create a new Template select the __Job template__ type
 
 Type
 
@@ -69,13 +69,13 @@ __Name:__ webserver
 
 __Job Type:__ Run
 
-__Inventory:__ Select your own inventory
+__Inventory:__ Select Inventory
 
-__Project:__ Select your own project
+__Project:__ Select Project
 
 __Playbook:__ 02_azure_tower.yml
 
-__Credentials:__ Select credential type "Microsoft Azure Resource Manager" and your own credentials
+__Credentials:__ Select credential type "Microsoft Azure Resource Manager" and Azure Credential
 
 __In the Extra Vars:__ add the ssh_public_key make sure you have " __before__ and __after__ the key
 
@@ -91,9 +91,9 @@ Leave the rest as default and click __Save__
 
 ![Alt text](images/11_ansible_tower_webserver_template.png?raw=true "template")
 
-In the left pane click on Templates
+In the left pane click on __Templates__
 
-Locate your webserver template and click on the Rocket to lauch it
+Locate your webserver template and click on the __Rocket__ to lauch it
 
 ![Alt text](images/12_launch_template.png?raw=true "launch template")
 

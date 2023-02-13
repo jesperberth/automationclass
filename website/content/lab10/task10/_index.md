@@ -5,7 +5,9 @@ weight: 100
 
 ## Task 10 Run Workflow template
 
-In the left pane click Templates, click on the Rocket to Launch the Workflow
+In the left pane click __Templates__
+
+Click on the __Rocket__ to Launch the Workflow
 
 ![Alt text](images/27_run_workflow.png?raw=true "Launch workflow")
 
@@ -17,13 +19,21 @@ Click Launch on the result page
 
 ![Alt text](images/29_run_workflow_survey_result.png?raw=true "Launch workflow survey result")
 
+When the last Template __Webserver_Install__ is running, click the box
+
+![Alt text](images/30_webserver_template_run.png?raw=true "Launch workflow survey result")
+
+Select __Output__ here you can see the details of the running template
+
+![Alt text](images/30_webserver_template_run_output.png?raw=true "Launch workflow survey result")
+
 Wait for the workflow to finish
 
 ![Alt text](images/30_workflow_result.png?raw=true "Launch workflow result")
 
 Go check the new website
 
-Click on the website box, click output in the top and get the ip from the "Details" in webserver Template
+Click on the __webserver__ template box, click output in the top and get the ip from the "Details"
 
 ![Alt text](images/31_workflow_result_details_ip.png?raw=true "Get IP")
 

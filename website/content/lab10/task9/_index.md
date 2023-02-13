@@ -5,9 +5,9 @@ weight: 90
 
 ## Task 9 Create Workflow template
 
-In the left pane, click Templates
+In the left pane, click __Templates__
 
-Click on Add to create a new Template select the __Add Workflow template__ type
+Click on __Add__ to create a new Template select the __Add Workflow template__ type
 
 __Name:__ Workflow
 
@@ -21,7 +21,7 @@ Leave the rest as default and click __Save__
 
 The window changes to the workflow Visualizer
 
-Click on Start
+Click on __Start__
 
 Node Type: __Select:__ Job Template
 
@@ -39,7 +39,7 @@ Hoover the mouse over the Resourcegroup box and click on the + icon
 
 ![Alt text](images/21_work_step1_workflow_plus.png?raw=true "Create workflow template step 1")
 
-Select on Success
+Select __On Success__
 
 Click Next
 
@@ -59,7 +59,7 @@ Hoover the mouse over the Webserver box and click on the + icon
 
 ![Alt text](images/23_work_step3_workflow_plus.png?raw=true "Create workflow template step 3 add new")
 
-Select on Success
+Select __On Success__
 
 Node Type: __Select:__ Inventory Source Sync
 
@@ -77,7 +77,7 @@ Hoover the mouse over the Azure box and click on the + icon
 
 ![Alt text](images/24_work_step3_workflow_plus.png?raw=true "Create workflow template step 3 add new")
 
-Select on Success
+Select __On Success__
 
 Node Type: __Select:__ Job Template
 
@@ -91,9 +91,11 @@ Click Save in the top right corner
 
 ![Alt text](images/25_work_step5_workflow.png?raw=true "Create workflow template step 4")
 
-In the top bar click Survey to add the two vars we deleted in the playbook  websiteheader: and websiteauthor:
+To replace the vars we deleted in the playbook we will use a Survey
 
-Click Add
+In the top bar click __Survey__ to add the two vars we deleted in the playbook  websiteheader: and websiteauthor:
+
+Click __Add__
 
 ![Alt text](images/26_work_add_survey.png?raw=true "Create workflow survey")
 
@@ -118,10 +120,6 @@ __Answer Type:__ Text
 Press the __Save__ Button
 
 ![Alt text](images/26_survey_2.png?raw=true "Create survey 2")
-
-Click __Preview__
-
-![Alt text](images/27_survey_preview.png?raw=true "Create survey 2")
 
 Toggle switch to On
 
