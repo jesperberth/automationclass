@@ -12,19 +12,20 @@ In VSCode create a new file 03_azure.yml
 add the following text to the file, change the name of the variable user to your initials use the same as you use to login to ansible server
 
 ```ansible
-
 ---
-- hosts: localhost
+- name: Remove Webserver
+  hosts: localhost
   connection: local
   vars:
     user: write your username here
+
   tasks:
-  - name: Delete resource group
-    azure_rm_resourcegroup:
-      name: "webserver_{{ user }}"
-      location: northeurope
-      state: absent
-      force_delete_nonempty: yes
+    - name: Delete resource group
+      azure_rm_resourcegroup:
+        name: "webserver_{{ user }}"
+        location: northeurope
+        state: absent
+        force_delete_nonempty: true
 
 ```
 
