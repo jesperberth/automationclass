@@ -20,6 +20,7 @@ In this session we will use Ansible AWX to orchestrate our ansible playbooks
 - [Task 8 Create Webserver Template](task8)
 - [Task 9 Create Workflow template](task9)
 - [Task 10 Run Workflow template](task10)
+- [Task 11 Rest API](task11)
 
 ## Prepare
 
