@@ -16,26 +16,28 @@ __Type:__
 
 ```ansible
 ---
-- hosts: domaincontroller
+- name: Create Group and user
+  hosts: domaincontroller
   vars:
     domain: ansible.local
 
   tasks:
-  - name: Create Group
-    community.windows.win_domain_group:
-      name: corp
-      scope: global
-      state: present
+    - name: Create Group
+      community.windows.win_domain_group:
+        name: corp
+        scope: global
+        state: present
 
-  - name: Create user
-    community.windows.win_domain_user:
-      name: basim
-      firstname: Bart
-      surname: Simpson
-      password: P@ssw0rd!
-      state: present
-      groups:
-      - corp
+    - name: Create user
+      community.windows.win_domain_user:
+        name: basim
+        firstname: Bart
+        surname: Simpson
+        password: P@ssw0rd!
+        state: present
+        groups:
+        - corp
+
 ```
 
 ![Alt text](images/05_addgrpanduser.png?raw=true "add group and user")
@@ -46,7 +48,7 @@ Log on to server "ansible" using ssh
 
 Use git to get the new azure playbook
 
-**Type:**
+__Type:__
 
 ```bash
 

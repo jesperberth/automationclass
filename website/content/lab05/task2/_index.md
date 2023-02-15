@@ -17,16 +17,16 @@ __Type:__
 
 ```ansible
 
-  - name: Enable httpd service
-    ansible.builtin.systemd:
-      name: httpd
-      state: started
-      enabled: yes
-    register: httpd_status
+    - name: Enable httpd service
+      ansible.builtin.systemd:
+        name: httpd
+        state: started
+        enabled: true
+      register: httpd_status
 
-  - name: Show Status
-    debug:
-      var: httpd_status
+    - name: Show Status
+      ansible.builtin.debug:
+        var: httpd_status
 
 ```
 
@@ -63,10 +63,10 @@ __Type:__
 
 ```ansible
 
-  - name: Is httpd running
-    debug:
-      msg: httpd is running
-    when: httpd_status.state == "started"
+    - name: Is httpd running
+      ansible.builtin.debug:
+        msg: httpd is running
+      when: httpd_status.state == "started"
 
 ```
 

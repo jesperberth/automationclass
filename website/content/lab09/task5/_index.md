@@ -19,10 +19,10 @@ Note: The inventory file must end with .azure_rm.yml
 plugin: azure_rm
 auth_source: auto
 include_vm_resource_groups:
- - '*'
+  - '*'
 keyed_groups:
- - prefix: tag
-   key: tags
+  - prefix: tag
+    key: tags
 
 ```
 

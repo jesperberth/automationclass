@@ -64,7 +64,7 @@ vi .azure/credentials
 
 ![Alt text](images/009_azure_credfile.png?raw=true "azure credentials")
 
-In vi **type:**
+In vi __type:__
 
 Use the vaules you collected from the Azure portal
 
@@ -94,7 +94,7 @@ tenant = tenant in the first command
 
 ```
 
-**Type:**
+__Type:__
 
 ```bash
 Hit Esc-key
@@ -116,21 +116,24 @@ add the following text to the file, change the name of the variable **user to yo
 
 ```ansible
 ---
-- hosts: localhost
+- name: Azure Create RG
+  hosts: localhost
   connection: local
   vars:
     user: write your username here
   tasks:
-  - name: Create resource group
-    azure_rm_resourcegroup:
-      name: "webserver_{{ user }}"
-      location: northeurope
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
-    register: rg
-  - debug:
-      var: rg
+    - name: Create resource group
+      azure.azcollection.azure_rm_resourcegroup:
+        name: "webserver_{{ user }}"
+        location: northeurope
+        tags:
+            solution: "webserver_{{ user }}"
+            delete: ansibletraining
+      register: rg
+    - name: Show RG
+      ansible.builtin.debug:
+        var: rg
+
 ```
 
 ![Alt text](images/011_azure_play.png?raw=true "azure play")
@@ -139,7 +142,7 @@ Log on to server "ansible" using ssh
 
 Use git to get the new azure playbook
 
-**Type:**
+__Type:__
 
 ```bash
 

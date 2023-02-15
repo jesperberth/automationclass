@@ -120,18 +120,18 @@ __Type:__
 
 ```ansible
 ---
-- hosts: windowsservers
-  collections:
-    - ansible.windows
+- name: Ansible Vault
+  hosts: windowsservers
   vars_files:
     - ~/secret.yml
   vars:
     ansible_password: "{{ windows_password }}"
   tasks:
-  - name: Install IIS (Web-Server only)
-    win_feature:
-      name: Web-Server
-      state: present
+    - name: Install IIS (Web-Server only)
+      ansible.windows.win_feature:
+        name: Web-Server
+        state: present
+
 ```
 
 Save the file

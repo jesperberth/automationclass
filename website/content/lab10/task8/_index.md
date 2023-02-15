@@ -11,13 +11,13 @@ Create a copy of 01_webserver_azure.yml -> 01_webserver_azure_tower.yml
 
 Change the hosts: to match your initials
 
-- hosts: tag_solution_webserver_jesbe
+- hosts: __tag_solution_webserver_jesbe__
 
 Remove both vars:
 
-websiteheader: "Ansible Playbook"
+websiteheader: __Ansible Playbook__
 
-websiteauthor: "Some Name"
+websiteauthor: __Some Name__
 
 ![Alt text](images/18_webserver_playbook.png?raw=true "playbook")
 
@@ -25,9 +25,9 @@ Save and commit
 
 Go to your project and sync
 
-In the left pane, click Templates
+In the left pane, click __Templates__
 
-Click on Add to create a new Template select the __Add Job template__ type
+Click on __Add__ to create a new Template select the __Add Job template__ type
 
 Type
 

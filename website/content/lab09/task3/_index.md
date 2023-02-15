@@ -17,7 +17,8 @@ add the following text to the file, change the first variable **"user"** to your
 
 ```ansible
 ---
-- hosts: localhost
+- name: Azure Webserver
+  hosts: localhost
   connection: local
   vars:
     user: write your username here
@@ -29,21 +30,22 @@ add the following text to the file, change the first variable **"user"** to your
     ssh_public_key: "{{lookup('file', '~/.ssh/id_rsa.pub') }}"
 
   tasks:
-  - name: Create a virtual network
-    azure_rm_virtualnetwork:
-      resource_group: "{{ resource_group }}"
-      name: "{{ virtual_network_name }}"
-      address_prefixes_cidr: "10.99.0.0/16"
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
+    - name: Create a virtual network
+      azure.azcollection.azure_rm_virtualnetwork:
+        resource_group: "{{ resource_group }}"
+        name: "{{ virtual_network_name }}"
+        address_prefixes_cidr: "10.99.0.0/16"
+        tags:
+            solution: "webserver_{{ user }}"
+            delete: ansibletraining
 
-  - name: Create a subnet
-    azure_rm_subnet:
-      resource_group: "{{ resource_group }}"
-      virtual_network_name: "{{ virtual_network_name }}"
-      name: "{{ subnet }}"
-      address_prefix_cidr: "10.99.0.0/24"
+    - name: Create a subnet
+      azure.azcollection.azure_rm_subnet:
+        resource_group: "{{ resource_group }}"
+        virtual_network_name: "{{ virtual_network_name }}"
+        name: "{{ subnet }}"
+        address_prefix_cidr: "10.99.0.0/24"
+
 ```
 
 ![Alt text](images/012_azure_net_playbook.png?raw=true "azure net playbook")

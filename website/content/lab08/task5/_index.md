@@ -15,22 +15,23 @@ Add below to the playbook, this will join the member servers to the new Active D
 
 ```ansible
 ---
-- hosts: domainmember
+- name: Join Active Directory
+  hosts: domainmember
   vars:
     domain: ansible.local
 
   tasks:
-  - name: Domain Join
-    win_domain_membership:
-      dns_domain_name: "{{ domain }}"
-      domain_admin_user: "{{ ansible_user }}@{{ domain }}"
-      domain_admin_password: "{{ ansible_password }}"
-      state: domain
-    register: domain_join
+    - name: Domain Join
+      ansible.windows.win_domain_membership:
+        dns_domain_name: "{{ domain }}"
+        domain_admin_user: "{{ ansible_user }}@{{ domain }}"
+        domain_admin_password: "{{ ansible_password }}"
+        state: domain
+      register: domain_join
 
-  - name: Reboot Server
-    win_reboot:
-    when: domain_join.reboot_required
+    - name: Reboot Server
+      ansible.windows.win_reboot:
+      when: domain_join.reboot_required
 
 ```
 

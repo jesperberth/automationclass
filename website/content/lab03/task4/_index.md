@@ -22,6 +22,10 @@ In VSCode add the following text to the file
 
 Save the file
 
+Ansible lint detects a new error, FCQN is missing again
+
+Change __lineinfile:__ to __ansible.builtin.lineinfile:__
+
 Notice that Git detects the changed file, do a commit add a comment "Second Edition" and Sync to Git
 
 ![Alt text](images/025_secondtask_commit.png?raw=true "Second Commit to playbook")
@@ -30,7 +34,7 @@ On ansible
 
 Pull the updated git repository
 
-**Type:**
+__Type:__
 
 ```bash
 git pull
@@ -40,7 +44,7 @@ git pull
 
 Run the playbook
 
-**Type:**
+__Type:__
 
 ```bash
 ls
@@ -54,7 +58,7 @@ Run the playbook again, the second task will become green as the line is already
 
 The "Create File" task will be changed every time as we use the touch command on the file
 
-**Type:**
+__Type:__
 
 ```bash
 ansible-playbook 01_linux.yml --ask-become-pass

@@ -5,18 +5,6 @@ weight: 20
 
 ## Task 2 Enable Ansible Extention
 
-In the left lower corner click the green **><**
-
-Select **Reopen Folder in WSL** in the menu
-
-![Alt text](images/01_run_in_wsl.png?raw=true "Code in wsl")
-
-Tick the **Trust the authors of all files in parent folder**
-
-Click **Yes i trust the authers**
-
-![Alt text](images/02_trust_the_folder.png?raw=true "Code trust")
-
 Click the **Extentions** box in the left menu
 
 Click on **Install in WSL:Ubuntu** for the Ansible Extention

@@ -14,53 +14,55 @@ weight: 40
 In VSCode add the next sections to the 02_azure.yml playbook
 
 ```ansible
-  - name: Create a public ip address for webserver
-    azure_rm_publicipaddress:
-      resource_group: "{{ resource_group }}"
-      name: public_ip_webserver
-      allocation_method: static
-      domain_name: "webserver{{ domain_sub }}"
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
-    register: webserver_pub_ip
 
-  - name: Create Security Group for webserver
-    azure_rm_securitygroup:
-      resource_group: "{{ resource_group }}"
-      name: "webserver_securitygroup"
-      purge_rules: yes
-      rules:
-          - name: Allow_SSH
-            protocol: Tcp
-            destination_port_range: 22
-            access: Allow
-            priority: 100
-            direction: Inbound
-          - name: Allow_HTTP
-            protocol: Tcp
-            destination_port_range: 80
-            access: Allow
-            priority: 101
-            direction: Inbound
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
+    - name: Create a public ip address for webserver
+      azure_rm_publicipaddress:
+        resource_group: "{{ resource_group }}"
+        name: public_ip_webserver
+        allocation_method: static
+        domain_name: "webserver{{ domain_sub }}"
+        tags:
+            solution: "webserver_{{ user }}"
+            delete: ansibletraining
+      register: webserver_pub_ip
 
-  - name: Create a network interface for webserver
-    azure_rm_networkinterface:
-      name: "webserver_nic01"
-      resource_group: "{{ resource_group }}"
-      virtual_network: "{{ virtual_network_name }}"
-      subnet_name: "{{ subnet }}"
-      security_group: "webserver_securitygroup"
-      ip_configurations:
-        - name: "webserver_nic01_ipconfig"
-          public_ip_address_name: "public_ip_webserver"
-          primary: True
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
+    - name: Create Security Group for webserver
+      azure_rm_securitygroup:
+        resource_group: "{{ resource_group }}"
+        name: "webserver_securitygroup"
+        purge_rules: true
+        rules:
+            - name: Allow_SSH
+              protocol: Tcp
+              destination_port_range: 22
+              access: Allow
+              priority: 100
+              direction: Inbound
+            - name: Allow_HTTP
+              protocol: Tcp
+              destination_port_range: 80
+              access: Allow
+              priority: 101
+              direction: Inbound
+        tags:
+            solution: "webserver_{{ user }}"
+            delete: ansibletraining
+
+    - name: Create a network interface for webserver
+      azure_rm_networkinterface:
+        name: "webserver_nic01"
+        resource_group: "{{ resource_group }}"
+        virtual_network: "{{ virtual_network_name }}"
+        subnet_name: "{{ subnet }}"
+        security_group: "webserver_securitygroup"
+        ip_configurations:
+          - name: "webserver_nic01_ipconfig"
+            public_ip_address_name: "public_ip_webserver"
+            primary: True
+        tags:
+            solution: "webserver_{{ user }}"
+            delete: ansibletraining
+
 ```
 
 ![Alt text](images/014_azure_network.png?raw=true "azure nic playbook")
@@ -94,35 +96,36 @@ Add the virtualmachine task to the 02_azure.yml playbook
 In VSCode add the next sections to the 02_azure.yml playbook
 
 ```ansible
-  - name: Create a VM webserver
-    azure_rm_virtualmachine:
-      resource_group: "{{ resource_group }}"
-      name: "webserver"
-      os_type: Linux
-      admin_username: "{{ user }}"
-      ssh_password_enabled: false
-      ssh_public_keys:
-        - path: "/home/{{ user }}/.ssh/authorized_keys"
-          key_data: "{{ ssh_public_key }}"
-      managed_disk_type: Standard_LRS
-      state: present
-      image:
-        offer: RHEL
-        publisher: RedHat
-        sku: "8_4"
-        version: latest
-      vm_size: Standard_A1_v2
-      network_interfaces: "webserver_nic01"
-      tags:
-          solution: "webserver_{{ user }}"
-          delete: ansibletraining
 
-  - name: Show webserver public ip
-    debug:
-      msg: "{{ webserver_pub_ip.state.ip_address }}"
+    - name: Create a VM webserver
+      azure_rm_virtualmachine:
+        resource_group: "{{ resource_group }}"
+        name: "webserver"
+        os_type: Linux
+        admin_username: "{{ user }}"
+        ssh_password_enabled: false
+        ssh_public_keys:
+          - path: "/home/{{ user }}/.ssh/authorized_keys"
+            key_data: "{{ ssh_public_key }}"
+        managed_disk_type: Standard_LRS
+        state: present
+        image:
+          offer: RHEL
+          publisher: RedHat
+          sku: "8_4"
+          version: latest
+        vm_size: Standard_A1_v2
+        network_interfaces: "webserver_nic01"
+        tags:
+            solution: "webserver_{{ user }}"
+            delete: ansibletraining
 
-  - name: Add webserver to ssh known_hosts
-    shell: "ssh-keyscan -t ecdsa {{ webserver_pub_ip.state.ip_address }}  >> /home/{{ user }}/.ssh/known_hosts"
+    - name: Show webserver public ip
+      debug:
+        msg: "{{ webserver_pub_ip.state.ip_address }}"
+
+    - name: Add webserver to ssh known_hosts
+      shell: "ssh-keyscan -t ecdsa {{ webserver_pub_ip.state.ip_address }}  >> /home/{{ user }}/.ssh/known_hosts"
 
 ```
 

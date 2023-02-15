@@ -7,7 +7,7 @@ weight: 50
 
 We will add server 2 to the inventory
 
-**Type:**
+__Type:__
 
 ```bash
 cd
@@ -18,7 +18,7 @@ vi ansible-hosts
 
 ![Alt text](images/029_edit_hosts.png?raw=true "Edit hosts")
 
-In vi **type:**
+In vi __type:__
 
 ```bash
 i (for input)
@@ -28,7 +28,7 @@ server1
 server2
 ```
 
-**Type:**
+__Type:__
 
 ```bash
 Hit Esc-key
@@ -36,7 +36,7 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-**Type:**
+__Type:__
 
 ```bash
 cd ansibleclass

@@ -23,44 +23,48 @@ And change the **- hosts: tag_solution_webserver_jesbe** so it matches your init
 
 ```ansible
 ---
-- hosts: tag_solution_webserver_jesbe
-  become: yes
+- name: Configure Webserver
+  hosts: tag_solution_webserver_jesbe
+  become: true
   vars:
     websiteheader: "Ansible Playbook"
     websiteauthor: "Jesper Berth"
+
   tasks:
-  - name: Install Apache
-    dnf:
-      name: httpd
-      state: latest
+    - name: Install Apache
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
 
-  - name: Enable Apache
-    systemd:
-      name: httpd
-      enabled: yes
-      state: started
+    - name: Enable Apache
+      ansible.builtin.systemd:
+        name: httpd
+        enabled: true
+        state: started
 
-  - name: Allow http in firewall
-    firewalld:
-      service: http
-      permanent: true
-      state: enabled
-      immediate: yes
-    notify:
-      - reload firewall
+    - name: Allow http in firewall
+      ansible.posix.firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        immediate: true
+      notify:
+        - Reload firewall
 
-  - name: Add index.html
-    template:
-      src: index.html.j2
-      dest: /var/www/html/index.html
-      owner: root
-      group: root
+    - name: Add index.html
+      ansible.builtin.template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0755
 
   handlers:
-  - name: reload firewall
-    service:
-      name: firewalld
-      state: reloaded
+    - name: Reload firewall
+      ansible.builtin.service:
+        name: firewalld
+        state: reloaded
+
 ```
 
 ![Alt text](images/021_webserver_playbook.png?raw=true "azure install httpd playbook")
@@ -69,13 +73,17 @@ In VSCode create a new jinja file index.html.j2
 
 ```html
 <html>
-<header><title>{{ websiteheader }}</title></header>
-<body>
-<h1>Welcome to {{ websiteheader }}</h1>
+    <header>
+        <title>{{ websiteheader }}</title></header>
 
-<h3>This site was created with Ansible by {{ websiteauthor }}
+        <body>
+            <h1>Welcome to {{ websiteheader }}</h1>
 
-</body>
+            <h3>This site was created with Ansible by {{ websiteauthor }}
+
+            <p>Hosted on {{ inventory_hostname }} running {{ ansible_facts['os_family'] }}<p>
+
+        </body>
 </html>
 ```
 

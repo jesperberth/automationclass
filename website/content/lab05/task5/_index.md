@@ -18,27 +18,27 @@ Create a new file in Vscode 01_loop.yml
 __Type:__
 
 ```ansible
-
 ---
-- hosts: linuxservers
-  become: yes
+- name: Loop
+  hosts: linuxservers
+  become: true
 
   tasks:
-  - name: Ensure group developers exists
-    group:
-      name: Developers
-      state: present
+    - name: Ensure group developers exists
+      ansible.builtin.group:
+        name: Developers
+        state: present
 
-  - name: Create Users
-    ansible.builtin.user:
-      name: "{{ item }}"
-      group: Developers
-    loop:
-      - homer
-      - bart
-      - lisa
-      - ned
-      - moe
+    - name: Create Users
+      ansible.builtin.user:
+        name: "{{ item }}"
+        group: Developers
+      loop:
+        - homer
+        - bart
+        - lisa
+        - ned
+        - moe
 
 ```
 
@@ -68,32 +68,32 @@ Change the file 01_loop.yml
 __Type:__
 
 ```ansible
-
 ---
-- hosts: linuxservers
-  become: yes
+- name: Loop 2
+  hosts: linuxservers
+  become: true
 
   tasks:
-  - name: Ensure group developers exists
-    group:
-      name: "{{ item }}"
-      state: present
-    loop:
-      - It
-      - Developers
-      - Finance
-      - Management
+    - name: Ensure group developers exists
+      ansible.builtin.group:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - It
+        - Developers
+        - Finance
+        - Management
 
-  - name: Create Users
-    ansible.builtin.user:
-      name: "{{ item.name }}"
-      group: "{{ item.groups }}"
-    loop:
-      - { name: 'homer', groups: 'Developers' }
-      - { name: 'bart', groups: 'It' }
-      - { name: 'lisa', groups: 'Management' }
-      - { name: 'ned', groups: 'Finance' }
-      - { name: 'moe', groups: 'Developers' }
+    - name: Create Users
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        group: "{{ item.groups }}"
+      loop:
+        - { name: 'homer', groups: 'Developers' }
+        - { name: 'bart', groups: 'It' }
+        - { name: 'lisa', groups: 'Management' }
+        - { name: 'ned', groups: 'Finance' }
+        - { name: 'moe', groups: 'Developers' }
 
 ```
 

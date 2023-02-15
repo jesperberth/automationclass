@@ -1,35 +1,41 @@
 ---
-title: Install WinGet
-weight: 10
+title: Connect to Student
+weight: 20
 ---
 
 
-## Task 1 Install WinGet
+## Task 2 Connect to Student
 
-We will use winget command to install our software for the labs
+Log on to your workstation __student__ using rdp
 
-First we need to enable winget
+On the Azure portal click Virtual Machines
 
-Log in to your student desktop
+![Alt text](images/000_azure_portal.png?raw=true "Azure Portal")
 
-One the Desktop
+Select your Resource Group, it's named __ansible-initials__
 
-Click __Microsoft Store__ in the taskbarc
+![Alt text](images/000_azure_portal_resourcegroup.png?raw=true "Azure Portal")
 
-![Alt text](images/003_microsoft_store.png?raw=true "start microsoft store")
+Click on the student vm
 
-Click __Search__ and type __app install__
+![Alt text](images/000_azure_portal_vm.png?raw=true "Azure Portal VMs")
 
-Click on __App Installer__
+Get the ansible servers external ip, click on the "Copy to ClipBoard"
 
-![Alt text](images/004_search_appinstall.png?raw=true "start microsoft store")
+![Alt text](images/000_azure_portal_vm_ip.png?raw=true "Azure Portal VM ip")
 
-Installation will start automaticly
+Start a Remote Desktop Client (On windows run __mstsc__) paste the public IP and connect
 
-![Alt text](images/005_app_installer.png?raw=true "app installer")
+![Alt text](images/000_azure_portal_vm_mstsc.png?raw=true "mstsc")
 
-Start Windows Terminal, in Windows 11 its installed by default
+Click "More choises" type your username/initials and password click __Ok__
 
-Click the __Start__ button, write __terminal__ make sure you select __Run as administrator__
+![Alt text](images/000_azure_portal_vm_mstsc_login.png?raw=true "mstsc login")
 
-![Alt text](images/006_start_winterm.png?raw=true "start winterm")
+Select the "Don't ask me again for connections to this computer and click __Yes__
+
+![Alt text](images/000_azure_portal_vm_mstsc_login_yes.png?raw=true "mstsc login")
+
+On the stundent vm click __Accept__
+
+![Alt text](images/000_student_accept.png?raw=true "Student accept")

@@ -15,16 +15,18 @@ Add below to the playbook, this will set the member servers dns client to use th
 
 ```ansible
 ---
-- hosts: domainmember
+- name: Change DNS for member server
+  hosts: domainmember
 
   tasks:
-  - name: Change DNS for member servers
-    ansible.windows.win_dns_client:
-      adapter_names: "*"
-      dns_servers: 10.1.0.7
+    - name: Change DNS for member servers
+      ansible.windows.win_dns_client:
+        adapter_names: "*"
+        dns_servers: 10.1.0.7
 
-  - name: Reboot member servers
-    win_reboot:
+    - name: Reboot member servers
+      win_reboot:
+
 ```
 
 ![Alt text](images/07_changedns.png?raw=true "changedns playbook")

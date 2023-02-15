@@ -65,7 +65,15 @@ chmod +x deploy_lab.sh
 
 __Note:__
 
-Username cannot be __root/administrator/admin/user/guest/owner/adm__
+Username __cannot__ be any of the names below:
+
+|  |  |  |  |  |  |  |
+|---|---|---|---|---|---|---|
+| 1 | 123 | a | actuser | adm | admin | admin1 |
+| admin2 | administrator | aspnet | backup | console | david | guest |
+| john | owner | root | server | sql | support_388945a0 | support |
+| sys | test | test1 | test2 | test3 | user | user1 |
+| user2 |
 
 __Use your initials as username__ eg. jesbe
 
@@ -77,6 +85,21 @@ Be between 12 and 123 characters
 - Have upper characters
 - Have a digit
 - Have a special character (Regex match [\W_])
+
+Special charactor is one of these:
+
+```bash
+
+#$%^&*_-+=`|\(){}[]:;"'<>,.?/~!@
+
+```
+
+Following is __NOT__ allow as password
+|  |  |  |  |  |
+|---|---|---|---|---|
+| abc@123 |	iloveyou! |	P@$$w0rd | P@ssw0rd | P@ssword123 |
+| Pa$$word | pass@word1 | Password!	| Password1 | Password22 |
+
 
 __Note:__
 
