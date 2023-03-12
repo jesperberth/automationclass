@@ -12,6 +12,10 @@ Running advanced playbooks with ansible
 - [Prepare](#prepare)
 - [Task 1 Stat module](task1)
 - [Task 2 Shell](task2)
+- [Task 3 Task Delegation](task3)
+- [Task 4 Lookup](task4)
+- [Task 5 Block](task5)
+- [Task 6 Tags](task6)
 
 ## Prepare
 
