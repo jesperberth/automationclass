@@ -7,7 +7,9 @@ weight: 40
 
 [Ansible Docs - Plugin Lookup](https://docs.ansible.com/ansible/latest/plugins/lookup.html)
 
-Create a new text file file.txt
+Create a new text file __file.txt__
+
+Add this line
 
 ```text
 dev-environment
