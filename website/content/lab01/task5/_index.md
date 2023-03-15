@@ -33,9 +33,21 @@ WSL is now ready
 
 ![Alt text](images/03_wsl_ready.png?raw=true "wsl ready")
 
+Enable Systemd for WSL
+
+```bash
+
+sudo echo -e "[boot]\nsystemd=true" >> /etc/wsl.conf
+
+```
+
+![Alt text](images/04_wsl_systemd.png?raw=true "wsl set systemd")
+
 Close the Linux console
 
-We need to update WSL
+We will check for updates to WSL
+
+The shutdown is need for the systemd to work
 
 Open Windows Terminal and run
 
@@ -65,7 +77,7 @@ code --install-extension ms-vscode-remote.remote-wsl
 
 Now start WSL from Windows Terminal
 
-In the menu select **Ubuntu**
+In the menu select __Ubuntu__
 
 ![Alt text](images/06_start_ubuntu.png?raw=true "start ubuntu")
 
@@ -89,49 +101,6 @@ sudo apt-get install docker.io -y
 
 ![Alt text](images/08_install_docker.png?raw=true "install docker")
 
-Open .bashrc in vi
-
-```bash
-
-cd
-
-vi .bashrc
-
-```
-
-Go to the end of the file
-
-```bash
-
-i (hit i to toggle input)
-
-```
-
-Copy and paste the following five lines to enable dockerd at start
-
-```bash
-
-RUNNING=`ps aux | grep dockerd | grep -v grep`
-if [ -z "$RUNNING" ]; then
-    sudo /usr/bin/dockerd > /dev/null 2>&1 &
-    disown
-fi
-
-```
-
-Save and quit
-
-```bash
-
-Hit Esc-key
-
-:wq (: for a command w for write and q for quit vi)
-
-
-```
-
-![Alt text](images/09_edit_bashrc.png?raw=true "bashrc")
-
 Add user to the docker group
 
 ```bash
@@ -146,31 +115,11 @@ Next allow your user to run docker without typing a password
 
 ```bash
 
-sudo visudo
-
-```
-
-add the line below in the bottom of the file
-
-**Change** USERNAME to your user
-
-```bash
-
-USERNAME ALL = NOPASSWD: /usr/bin/dockerd
+echo '$USER ALL = NOPASSWD: /usr/bin/dockerd' | sudo EDITOR='tee -a' visudo
 
 ```
 
 ![Alt text](images/11_visudo.png?raw=true "visudo")
-
-To save
-
-```bash
-
-Hit Esc-key two times
-
-then x
-
-```
 
 Close the Ubuntu tab in Windows Terminal and open it again
 
