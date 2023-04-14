@@ -23,28 +23,14 @@ yes - to accept the fingerprint
 
 ![Alt text](images/000_azure_ssh.png?raw=true "ssh")
 
-> **Note**
+> __Note__
 > Sudo Password is equal to your user account password
 
 Ansible is a Python based program, we will install python in a Python Virtuelenv, in which we can isolate the python version and modules from the system python.
 
-To meet ansible 2.12 requirements we need to upgrade Python to version 3.9
-
-__Type:__
+Check python version
 
 ```bash
-
-sudo dnf install -y @python39
-
-```
-
-![Alt text](images/000_install_python.png?raw=true "install python")
-
-And we need to set the alternative for python3 command to python3.9
-
-```bash
-
-sudo alternatives --set python3 /usr/bin/python3.9
 
 python3 --version
 

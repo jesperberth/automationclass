@@ -35,9 +35,13 @@ WSL is now ready
 
 Enable Systemd for WSL
 
+Enter password when prompted
+
 ```bash
 
-sudo echo -e "[boot]\nsystemd=true" >> /etc/wsl.conf
+sudo su
+
+echo -e "[boot]\nsystemd=true" >> /etc/wsl.conf
 
 ```
 
@@ -121,7 +125,7 @@ echo '$USER ALL = NOPASSWD: /usr/bin/dockerd' | sudo EDITOR='tee -a' visudo
 
 ![Alt text](images/11_visudo.png?raw=true "visudo")
 
-Close the Ubuntu tab in Windows Terminal and open it again
+__Close__ the Ubuntu tab in Windows Terminal and open it again
 
 run a docker command to check that it works
 
