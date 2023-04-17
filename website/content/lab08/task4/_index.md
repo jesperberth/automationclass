@@ -25,7 +25,7 @@ Add below to the playbook, this will set the member servers dns client to use th
         dns_servers: 10.1.0.7
 
     - name: Reboot member servers
-      win_reboot:
+      ansible.windows.win_reboot:
 
 ```
 

@@ -57,7 +57,7 @@ And change the **- hosts: tag_solution_webserver_jesbe** so it matches your init
         dest: /var/www/html/index.html
         owner: root
         group: root
-        mode: 0755
+        mode: "0755"
 
   handlers:
     - name: Reload firewall

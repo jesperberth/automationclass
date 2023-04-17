@@ -91,6 +91,8 @@ ansible-playbook 02_azure.yml
 
 [Ansible Module shell](https://docs.ansible.com/ansible/latest/modules/shell_module.html#shell-module)
 
+[ANsible Module Wait_for](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/wait_for_module.html)
+
 Add the virtualmachine task to the 02_azure.yml playbook
 
 In VSCode add the next sections to the 02_azure.yml playbook
@@ -123,6 +125,13 @@ In VSCode add the next sections to the 02_azure.yml playbook
     - name: Show webserver public ip
       debug:
         msg: "{{ webserver_pub_ip.state.ip_address }}"
+
+    - name: Wait for ssh on webserver
+      ansible.builtin.wait_for:
+        host: "{{ webserver_pub_ip.state.ip_address }}"
+        port: 22
+        delay: 10
+        timeout: 600
 
     - name: Add webserver to ssh known_hosts
       shell: "ssh-keyscan -t ecdsa {{ webserver_pub_ip.state.ip_address }}  >> /home/{{ user }}/.ssh/known_hosts"

@@ -44,6 +44,13 @@ Create a new file in Vscode 01_delegate.yml
       ansible.builtin.debug:
         msg: "{{ ansible_facts['nodename'] }}"
 
+    - name: Set x on set_server_offline.sh
+      ansible.builtin.file:
+        path: ~/ansibleclass/set_server_offline.sh
+        state: touch
+        mode: +x
+      delegate_to: localhost
+
     - name: Write File
       ansible.builtin.command:
         cmd: ~/ansibleclass/set_server_offline.sh "{{ ansible_facts['nodename'] }}" "{{ ansible_facts['all_ipv4_addresses'][0] }}"
