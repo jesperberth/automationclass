@@ -18,14 +18,14 @@ Envoronment deployed in Microsoft Azure
 
 5 servers
 
-3 - Running Red Hat Enterprise Linux 8
+3 - Running Red Hat Enterprise Linux 9
 Accessible with ssh and http/https
 
 * ansible - 10.1.0.4
 * server1 - 10.1.0.5
 * server2 - 10.1.0.6
 
-2 - Running Windows Server 2019 with GUI
+2 - Running Windows Server 2022 with GUI
 Accessible with winRM and RDP
 
 * server3 - 10.1.0.7
