@@ -15,7 +15,7 @@ jobs:
           with:
             resource-group: ${{ vars.RESOURCE_GROUP }}
             dns-name-label: ${{ vars.RESOURCE_GROUP }}${{ github.run_number }}
-            image: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.CONTAINER_IMAGE }}":latest
+            image: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.CONTAINER_IMAGE }}:latest
             #registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             #registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
             #registry-password: ${{ secrets.DOCKERHUB_KEY }}
