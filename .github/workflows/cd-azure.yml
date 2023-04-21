@@ -19,5 +19,5 @@ jobs:
             #registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             #registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
             #registry-password: ${{ secrets.DOCKERHUB_KEY }}
-            name: ${{ vars.CONTAINER_IMAGE }}"
+            name: ${{ vars.CONTAINER_IMAGE }}
             location: 'north europe'
