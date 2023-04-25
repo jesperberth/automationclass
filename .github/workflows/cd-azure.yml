@@ -22,4 +22,4 @@ jobs:
             name: ${{ vars.CONTAINER_NAME }}
             location: 'north europe'
             cpu: 1   #Optional
-            memory: 0.1   #Optional
+            memory: 1.5   #Optional
