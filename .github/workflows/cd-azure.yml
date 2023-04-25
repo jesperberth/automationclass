@@ -16,8 +16,10 @@ jobs:
             resource-group: ${{ vars.RESOURCE_GROUP }}
             dns-name-label: ${{ vars.RESOURCE_GROUP }}${{ github.run_number }}
             image: ${{ vars.CONTAINER_IMAGE }}:latest
-            registry-login-server: ${{ vars.DOCKERHUB_LOGIN_SERVER }}
-            registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
-            registry-password: ${{ secrets.DOCKERHUB_KEY }}
+            #registry-login-server: ${{ vars.DOCKERHUB_LOGIN_SERVER }}
+            #registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
+            #registry-password: ${{ secrets.DOCKERHUB_KEY }}
             name: ${{ vars.CONTAINER_NAME }}
             location: 'north europe'
+            cpu: 1   #Optional
+            memory: 0.1   #Optional
