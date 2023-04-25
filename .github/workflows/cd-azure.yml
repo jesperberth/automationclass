@@ -1,5 +1,21 @@
 name: CD-Azure
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      cpu:
+        type: choice
+        description: Select number of CPU
+        options:
+          - "1"
+          - "2"
+        default: "1"
+      memory:
+        type: choice
+        description: Select amount of memory
+        options:
+          - "1.5"
+          - "3"
+        default: "1.5"
 
 jobs:
   deploy:
@@ -14,12 +30,12 @@ jobs:
           uses: 'azure/aci-deploy@v1'
           with:
             resource-group: ${{ vars.RESOURCE_GROUP }}
-            dns-name-label: ${{ vars.RESOURCE_GROUP }}${{ github.run_number }}
+            dns-name-label: ${{ vars.CONTAINER_NAME }}${{ github.run_number }}
             image: ${{ vars.CONTAINER_IMAGE }}:latest
             #registry-login-server: ${{ vars.DOCKERHUB_LOGIN_SERVER }}
             #registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
             #registry-password: ${{ secrets.DOCKERHUB_KEY }}
             name: ${{ vars.CONTAINER_NAME }}
             location: 'north europe'
-            cpu: 1   #Optional
-            memory: 1.5   #Optional
+            cpu: ${{ github.event.inputs.cpu }}
+            memory: ${{ github.event.inputs.memory }}
