@@ -16,6 +16,10 @@ on:
           - "1.5"
           - "3"
         default: "1.5"
+      environment:
+        description: 'Environment to run deployment against'
+        type: environment
+        required: true
 
 jobs:
   deploy:
@@ -32,9 +36,6 @@ jobs:
             resource-group: ${{ vars.RESOURCE_GROUP }}
             dns-name-label: ${{ vars.CONTAINER_NAME }}${{ github.run_number }}
             image: ${{ vars.CONTAINER_IMAGE }}:latest
-            #registry-login-server: ${{ vars.DOCKERHUB_LOGIN_SERVER }}
-            #registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
-            #registry-password: ${{ secrets.DOCKERHUB_KEY }}
             name: ${{ vars.CONTAINER_NAME }}
             location: 'north europe'
             cpu: ${{ github.event.inputs.cpu }}
