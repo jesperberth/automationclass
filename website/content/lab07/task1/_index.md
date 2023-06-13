@@ -17,7 +17,7 @@ Search for a role called el_httpd
 
 ![Alt text](images/002_ansible_galaxy_search.png?raw=true "ansible galaxy search")
 
-Click on the top result "el_https"
+Click on the top result "el_httpd"
 
 Click the Read Me for a short description of the role and how use it
 

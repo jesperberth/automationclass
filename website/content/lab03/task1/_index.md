@@ -29,9 +29,9 @@ We need to create a folder for our local git repositories
 
 Open a Powershell Terminal
 
-**Type:**
+__Type:__
 
-```powershell
+```bash
 mkdir git
 
 cd git
@@ -48,7 +48,7 @@ Copy the url
 
 In Terminal
 
-write **git clone** and paste the url
+write __git clone__ and paste the url
 
 ```powershell
 
@@ -58,7 +58,7 @@ git clone https://github.com/jesperberth/ansibleclass.git
 
 ![Alt text](images/009_git_clone.png?raw=true "git clone")
 
-Open the new git project folder **ansibleclass**
+Open the new git project folder __ansibleclass__
 
 start Visual Studio Code
 

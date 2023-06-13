@@ -16,7 +16,7 @@ We will modify this to use tags
 Add following to the __block:__ we created
 
 ```ansible
-      tag:
+      tags:
         - install
         - config
 ```
@@ -26,7 +26,7 @@ Add following to the __block:__ we created
 and this to the __Configure firewall__ task
 
 ```ansible
-      tag:
+      tags:
         - firewall
         - config
 ```
