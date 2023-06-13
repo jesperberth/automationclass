@@ -30,13 +30,13 @@ __Type:__
       ansible.builtin.file:
         path: /mnt/resource/
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Download files
       ansible.builtin.get_url:
         url: "{{ item }}"
         dest: /mnt/resource/
-        mode: 0600
+        mode: "0600"
       loop:
         - https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.1/Git-2.30.0-64-bit.exe
         - https://www.python.org/ftp/python/3.8.7/python-3.8.7-embed-amd64.zip

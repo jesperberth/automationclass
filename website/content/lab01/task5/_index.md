@@ -119,7 +119,7 @@ Next allow your user to run docker without typing a password
 
 ```bash
 
-echo '$USER ALL = NOPASSWD: /usr/bin/dockerd' | sudo EDITOR='tee -a' visudo
+echo $USER' ALL = NOPASSWD: /usr/bin/dockerd' | sudo EDITOR='tee -a' visudo
 
 ```
 
