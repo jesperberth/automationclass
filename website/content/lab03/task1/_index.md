@@ -27,8 +27,6 @@ git config --list
 
 We need to create a folder for our local git repositories
 
-Open a Powershell Terminal
-
 __Type:__
 
 ```bash
