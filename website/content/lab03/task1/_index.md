@@ -13,7 +13,13 @@ __Note:__ This has to be done on your Student machine
 
 Open Terminal / WSL (Ubuntu)
 
+You must be in the __/home/USER__
+
 ```bash
+
+cd
+
+pwd
 
 git config --global user.name "Full Name"
 

@@ -38,7 +38,7 @@ Add below to the playbook, this will create a new Active Directory.
       when: feature_install.reboot_required
 
     - name: Create new Active Directory
-      ansible.windows.win_domain:
+      microsoft.ad.domain:
         create_dns_delegation: false
         database_path: C:\Windows\NTDS
         dns_domain_name: "{{ domain }}"

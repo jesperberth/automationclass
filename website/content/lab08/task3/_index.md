@@ -23,13 +23,13 @@ __Type:__
 
   tasks:
     - name: Create Group
-      community.windows.win_domain_group:
+      microsoft.ad.group:
         name: corp
         scope: global
         state: present
 
     - name: Create user
-      community.windows.win_domain_user:
+      microsoft.ad.user:
         name: basim
         firstname: Bart
         surname: Simpson
