@@ -88,3 +88,39 @@ ansible-playbook 01_vars.yml --ask-become-pass
 ```
 
 ![Alt text](images/005_conditional_playbook_run.png?raw=true "ansible conditional in playbook run")
+
+We can use NOT in the condition to control if we should run a task in case a value isn't matching the rule
+
+Add below to the playbook 01_vars.yml
+
+__Type:__
+
+```ansible
+
+    - name: Is httpd not started
+      ansible.builtin.debug:
+        msg: httpd is not running
+      when: not httpd_status.state == "started"
+
+```
+
+Save the playbook, Commit the changes and push to github
+
+![Alt text](images/004_conditional_playbook_not.png?raw=true "ansible conditional in playbook not")
+
+On the ansible server pull the new playbook and run it
+
+__Type:__
+
+```bash
+cd  ansibleclass
+
+git pull
+
+ansible-playbook 01_vars.yml --ask-become-pass
+
+```
+
+![Alt text](images/005_conditional_playbook_not_run.png?raw=true "ansible conditional in playbook run")
+
+Becourse the condition is not meet, the task will be skipped

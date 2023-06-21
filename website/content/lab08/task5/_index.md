@@ -22,7 +22,7 @@ Add below to the playbook, this will join the member servers to the new Active D
 
   tasks:
     - name: Domain Join
-      ansible.windows.win_domain_membership:
+      microsoft.ad.membership:
         dns_domain_name: "{{ domain }}"
         domain_admin_user: "{{ ansible_user }}@{{ domain }}"
         domain_admin_password: "{{ ansible_password }}"

@@ -86,6 +86,8 @@ Be between 12 and 123 characters
 - Have a digit
 - Have a special character (Regex match [\W_])
 
+__DON'T__ Start with a special character as it will give us troubles later on in the lab
+
 Special charactor is one of these:
 
 ```bash
@@ -99,7 +101,6 @@ Following is __NOT__ allow as password
 |---|---|---|---|---|
 | abc@123 |	iloveyou! |	P@$$w0rd | P@ssw0rd | P@ssword123 |
 | Pa$$word | pass@word1 | Password!	| Password1 | Password22 |
-
 
 __Note:__
 

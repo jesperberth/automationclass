@@ -25,7 +25,7 @@ __Overwrite:__ Checked
 
 __Overwrite Variables:__ Checked
 
-__Updata on Launch:__ Checked
+__Update on Launch:__ Checked
 
 In the Source variables add this:
 

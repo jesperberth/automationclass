@@ -29,6 +29,10 @@ winget install Microsoft.AzureCLI
 
 ```
 
+Click "Y" to accept the source aggreement
+
+![Alt text](images/001_winget_accept.png?raw=true "winget accept")
+
 ![Alt text](images/001_install_powershell.png?raw=true "powershell")
 
 ![Alt text](images/002_install_git.png?raw=true "git")

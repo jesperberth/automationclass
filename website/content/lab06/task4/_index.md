@@ -23,12 +23,12 @@ Create a new file 01_lookup.yml
   hosts: linuxservers
 
   vars:
-     environmentvar: "{{ lookup('file', 'file.txt') }}"
+    file_contents: "{{ lookup('file', 'file.txt') }}"
 
   tasks:
     - name: Debug Write File Content
       ansible.builtin.debug:
-        msg: "{{ environmentvar }}"
+        msg: "{{ file_contents }}"
 
 ```
 
