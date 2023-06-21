@@ -11,7 +11,7 @@ weight: 40
 
 [ansible docs - debug module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/debug_module.html)
 
-Per default ansible will collect facts from all hosts, this can be disabled in the playbook by setting __gather_facts: no__ this will speedup the playbook run, but facts will not be available for use in the playbook
+Per default ansible will collect facts from all hosts, this can be disabled in the playbook by setting __gather_facts: false__ this will speedup the playbook run, but facts will not be available for use in the playbook
 
 you can run gather facts as a task in a playbook with module
 
