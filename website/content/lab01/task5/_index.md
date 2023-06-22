@@ -33,43 +33,11 @@ WSL is now ready
 
 ![Alt text](images/03_wsl_ready.png?raw=true "wsl ready")
 
-Enable Systemd for WSL
-
-Enter password when prompted
-
-```bash
-
-sudo su
-
-echo -e "[boot]\nsystemd=true" >> /etc/wsl.conf
-
-```
-
-![Alt text](images/04_wsl_systemd.png?raw=true "wsl set systemd")
-
-Close the Linux console
-
-We will check for updates to WSL
-
-The shutdown is need for the systemd to work
-
-Open Windows Terminal and run
-
-```powershell
-
-wsl --update
-
-wsl --shutdown
-
-```
-
-![Alt text](images/04_wsl_update.png?raw=true "wsl update")
-
 Close the terminal and reopen it
 
 We need to install the vscode remote extention
 
-In the terminal
+In the Powershell terminal
 
 ```powershell
 
