@@ -36,7 +36,8 @@ __Type:__
         password: P@ssw0rd!
         state: present
         groups:
-        - corp
+          add:
+            - corp
 
 ```
 
