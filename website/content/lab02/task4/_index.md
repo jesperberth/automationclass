@@ -7,6 +7,8 @@ weight: 40
 
 Windows Servers can be connected in different ways, we will use ansible_messageencryption, but Certificate encryption is available, but requires more work
 
+![ansible](/images/ansible.png)
+
 Log on to server "ansible" using ssh
 
 We need to install pywinrm before being able to connect to windows servers from ansible

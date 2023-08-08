@@ -5,6 +5,8 @@ weight: 30
 
 ## Task 3 Connect Linux host
 
+![ansible](/images/ansible.png)
+
 Log on to server "ansible" using ssh
 
 Lets create a configuration file for ansible in your root dir

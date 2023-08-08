@@ -7,6 +7,8 @@ weight: 20
 
 Log on to server "ansible" using ssh
 
+![ansible](/images/ansible.png)
+
 __Type:__
 
 ```bash

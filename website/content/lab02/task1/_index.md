@@ -5,11 +5,19 @@ weight: 10
 
 ## Task 1 Install Ansible
 
+On
+
+![student](/images/student.png)
+
 Start Windows Terminal
 
 In the startmenu __Type__ "terminal" and click on __Windows Terminal__
 
 ![Alt text](images/000_student_start_winterm.png?raw=true "Student start winterminal")
+
+In
+
+![student-pwsh](/images/student-pwsh.png)
 
 In the Windows Terminal write ssh __username@ansible__ hit enter
 
@@ -25,6 +33,10 @@ yes - to accept the fingerprint
 
 > __Note__
 > Sudo Password is equal to your user account password
+
+In
+
+![ansible](/images/ansible.png)
 
 Ansible is a Python based program, we will install python in a Python Virtuelenv, in which we can isolate the python version and modules from the system python.
 
