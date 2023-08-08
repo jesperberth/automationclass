@@ -46,7 +46,11 @@ Save, Commit and push
 
 ![Alt text](images/001_ansible_loop_playbook.png?raw=true "ansible loop playbook")
 
-On the ansible server pull the new playbook and run it
+On
+
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 
@@ -101,7 +105,11 @@ Save, Commit and push
 
 ![Alt text](images/003_ansible_loop_hash_playbook.png?raw=true "ansible loop hash playbook")
 
-On the ansible server pull the new playbook and run it
+On
+
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 

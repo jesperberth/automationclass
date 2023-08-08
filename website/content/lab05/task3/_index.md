@@ -43,7 +43,11 @@ Save the playbook, Commit the changes and push to github
 
 ![Alt text](images/001_handlers_playbook.png?raw=true "ansible handlers in playbook")
 
-On the ansible server pull the new playbook and run it
+On
+
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 

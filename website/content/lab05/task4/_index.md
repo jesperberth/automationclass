@@ -147,7 +147,11 @@ Save, Commit and push
 
 ![Alt text](images/009_ansible_facts_list_dic_playbook.png?raw=true "ansible facts list and dic playbook")
 
-On the ansible server pull the new playbook and run it
+On
+
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 

@@ -63,7 +63,11 @@ __Note:__ We can ignore the one Problem for _async_dir
 
 ![Alt text](images/001_ansible_loop_async_playbook.png?raw=true "ansible loop async playbook")
 
-On the ansible server pull the new playbook and run it
+On
+
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 
