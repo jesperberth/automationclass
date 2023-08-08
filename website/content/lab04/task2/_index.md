@@ -7,6 +7,10 @@ weight: 20
 
 Another option for the inventory is using a yaml file instead of the ini format, the yaml file will give us some other options for the vault
 
+On
+
+![ansible](/images/ansible.png)
+
 Lets create a new ansible-hosts.yml
 
 Copy the following inventory to ansible-hosts.yml
