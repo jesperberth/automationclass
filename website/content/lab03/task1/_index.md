@@ -13,6 +13,8 @@ __Note:__ This has to be done on your Student machine
 
 Open Terminal / WSL (Ubuntu)
 
+![student-wsl](/images/student-wsl.png)
+
 You must be in the __/home/USER__
 
 ```bash
@@ -42,6 +44,10 @@ cd git
 
 ```
 
+On
+
+![github](/images/github.png)
+
 On your "ansibleclass" repository page
 
 Click the green "Code" button to retrieve the URL for the repository
@@ -50,7 +56,9 @@ Copy the url
 
 ![Alt text](images/010_repourl.png?raw=true "Paste Repo URL")
 
-In Terminal
+In
+
+![student-wsl](/images/student-wsl.png)
 
 write __git clone__ and paste the url
 

@@ -99,9 +99,15 @@ The first time you will be prompted for github credentials
 
 ![Alt text](images/019_code_git_sync_login.png?raw=true "git login in VSCode")
 
+On
+
+![github](/images/github.png)
+
 Open the Git Hub repository, the 01_linux.yml is now added, note the comment next to the filename
 
 ![Alt text](images/020_github_new.png?raw=true "github new file")
+
+![ansible](/images/ansible.png)
 
 Log on to server "ansible" using ssh
 

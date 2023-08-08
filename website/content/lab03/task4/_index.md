@@ -30,7 +30,9 @@ Notice that Git detects the changed file, do a commit add a comment "Second Edit
 
 ![Alt text](images/025_secondtask_commit.png?raw=true "Second Commit to playbook")
 
-On ansible
+On
+
+![ansible](/images/ansible.png)
 
 Pull the updated git repository
 
