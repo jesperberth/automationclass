@@ -6,6 +6,10 @@ weight: 30
 
 ## Task 3 Install WinGet
 
+On Student
+
+![student](/images/student.png)
+
 We will use winget command to install our software for the labs
 
 First we need to enable winget
@@ -27,6 +31,10 @@ Click on __App Installer__
 Installation will start automaticly
 
 ![Alt text](images/005_app_installer.png?raw=true "app installer")
+
+In Powershell
+
+![student-pwsh](/images/student-pwsh.png)
 
 Start Windows Terminal, in Windows 11 its installed by default
 

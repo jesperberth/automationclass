@@ -7,6 +7,8 @@ weight: 10
 
 Login to Azure
 
+![azure](/images/azure.png)
+
 In your browser go to [http://portal.azure.com](http://portal.azure.com)
 
 Your username will be __userxx__ as below

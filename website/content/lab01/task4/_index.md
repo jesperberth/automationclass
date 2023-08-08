@@ -5,6 +5,10 @@ weight: 40
 
 ## Task 4 Install Software
 
+In
+
+![student-pwsh](/images/student-pwsh.png)
+
 Set the timezone to match your current timezone
 
 ```bash
