@@ -69,9 +69,11 @@ In VSCode add the next sections to the 02_azure.yml playbook
 
 Save and commit to Git
 
-Log on to server "ansible" using ssh
+On
 
-Use git to get the new azure playbook
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 **Type:**
 
@@ -142,9 +144,11 @@ In VSCode add the next sections to the 02_azure.yml playbook
 
 Save and commit to Git
 
-Log on to server "ansible" using ssh
+On
 
-Use git to get the new azure playbook
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 **Type:**
 

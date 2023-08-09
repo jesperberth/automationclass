@@ -52,9 +52,11 @@ add the following text to the file, change the first variable **"user"** to your
 
 Save and commit to Git
 
-Log on to server "ansible" using ssh
+On
 
-Use git to get the new azure playbook
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 **Type:**
 
