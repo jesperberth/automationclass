@@ -188,7 +188,11 @@ Create a new file 02_roles.yml add the following
 
 Save and commit
 
-On the ansible server pull the new playbook and run it
+On
+
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 
