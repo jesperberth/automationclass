@@ -61,7 +61,11 @@ Save, Commit and push
 
 ![Alt text](images/001_add_block.png?raw=true "ansible block playbook")
 
-On the ansible server pull the playbook and run it
+On
+
+![ansible](/images/ansible.png)
+
+Pull the playbook and run it
 
 __Type:__
 
