@@ -5,7 +5,7 @@ weight: 10
 
 ## Task 1 Ansible Galaxy and role install
 
-[https://galaxy.ansible.com](https://galaxy.ansible.com/home)
+Go to [https://galaxy.ansible.com](https://galaxy.ansible.com/home)
 
 [Ansible Docs - ansible-galaxy](https://docs.ansible.com/ansible/latest/cli/ansible-galaxy.html)
 
@@ -27,7 +27,9 @@ Click on the GitHub Repo button to get to the repository for this role, you are 
 
 Lets install the role
 
-On the ansible server
+On
+
+![ansible](/images/ansible.png)
 
 __Type:__
 
@@ -63,7 +65,11 @@ Save, Commit and push
 
 ![Alt text](images/005_ansible_role_playbook.png?raw=true "ansible role playbook")
 
-On the ansible server pull the new playbook and run it
+On
+
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 

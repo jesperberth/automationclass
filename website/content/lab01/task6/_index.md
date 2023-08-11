@@ -7,6 +7,8 @@ weight: 60
 
 Open a browser and go to [Git Hub](https://github.com)
 
+![github](/images/github.png)
+
 If you have a github account login, otherwise create a new account
 
 ![Alt text](images/005_create_github.png?raw=true "Create GitHub Account")

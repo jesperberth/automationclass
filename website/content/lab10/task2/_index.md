@@ -40,7 +40,11 @@ The Token will only be visible one time so copy the token and save it in a notep
 
 ![Alt text](images/04_ansible_tower_view_token.png?raw=true "view admin token")
 
-On the ansible server we need to set three Environment variables
+On
+
+![ansible](/images/ansible.png)
+
+We need to set three Environment variables
 
 Change the IP to your awx host
 
@@ -101,9 +105,11 @@ Add below to the playbook
 
 Save and commit to Git
 
-On the ansible server
+On
 
-Use git to get the new azure playbook
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 

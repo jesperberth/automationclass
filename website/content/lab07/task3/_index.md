@@ -13,7 +13,9 @@ We will use ansible-galaxy command to initialize a role template
 
 Its important that you do a git pull before we are adding anything in the folders
 
-On ansible
+On
+
+![ansible](/images/ansible.png)
 
 __Type:__
 
@@ -37,7 +39,9 @@ ls -al
 
 Now lets add, commit and push this to our git repo so we can work with the role in VSCode
 
-On ansible
+On
+
+![ansible](/images/ansible.png)
 
 __Type:__
 

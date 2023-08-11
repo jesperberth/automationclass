@@ -30,13 +30,13 @@ keyed_groups:
 
 Save and commit to Git
 
-Log on to server "ansible" using ssh
+On
 
-Use git to get the new azure inventory
+![ansible](/images/ansible.png)
 
-And run a test against Azure
+Pull the new playbook and run it
 
-**Type:**
+__Type:__
 
 ```bash
 

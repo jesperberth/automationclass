@@ -9,6 +9,10 @@ We need to register an azure application to enable ansible automation
 
 In your browser log on to [https://portal.azure.com](https://portal.azure.com)
 
+On
+
+![azure](/images/azure.png)
+
 In the top bar, click the "cloudshell" icon marked with red
 
 ![Alt text](images/01_start_cloud_shell.png?raw=true "Cloud Shell")
@@ -49,7 +53,9 @@ Copy the line id: "xxx-xxx" to the same notepad
 
 __Below is for both command and GUI__ versions
 
-Log on to server "ansible" using ssh
+On
+
+![ansible](/images/ansible.png)
 
 We will create the authentication file, you must start in your home dir
 
@@ -138,9 +144,11 @@ add the following text to the file, change the name of the variable **user to yo
 
 ![Alt text](images/011_azure_play.png?raw=true "azure play")
 
-Log on to server "ansible" using ssh
+On
 
-Use git to get the new azure playbook
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 

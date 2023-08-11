@@ -6,6 +6,10 @@ weight: 20
 
 ## Task 2 Connect to Student
 
+In Azure
+
+![azure](/images/azure.png)
+
 Log on to your workstation __student__ using rdp
 
 On the Azure portal click Virtual Machines

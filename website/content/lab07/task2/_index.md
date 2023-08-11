@@ -11,7 +11,9 @@ We need to do some config to git, as we need to do some of the work on our linux
 
 And copy our public ssh key to our github account
 
-On ansible
+On
+
+![ansible](/images/ansible.png)
 
 __Type:__
 
@@ -28,7 +30,11 @@ cat ~/.ssh/id_rsa.pub
 
 ![Alt text](images/001_git_commands.png?raw=true "git commands")
 
-In your browser go to github.com and login to your account
+Go to
+
+![github](/images/github.png)
+
+Login to your account
 
 In the top right corner "click" on your profile and select "Settings"
 
@@ -42,9 +48,17 @@ In the left menu "click" on "SSH and GPG keys"
 
 ![Alt text](images/004_github_newssh.png?raw=true "github settings")
 
-From the linux terminal copy the pub key
+On
+
+![ansible](/images/ansible.png)
+
+copy the pub key
 
 ![Alt text](images/005_github_pubkey.png?raw=true "github settings")
+
+On
+
+![github](/images/github.png)
 
 Give the new key a Title "ansible"
 
@@ -64,7 +78,9 @@ In the browser go to your repository on github "click" the green "Code" button a
 
 ![Alt text](images/008_github_sshurl.png?raw=true "github sshurl")
 
-On ansible
+On
+
+![ansible](/images/ansible.png)
 
 Change the __url__ to your own
 

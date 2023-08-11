@@ -39,7 +39,9 @@ In Tower go to project and __refresh__ your project, this will do a "git pull"
 
 We need the public ssh key from server ansible
 
-Log on to server "ansible" using ssh
+On
+
+![ansible](/images/ansible.png)
 
 and retrive your public key
 

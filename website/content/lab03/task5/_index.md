@@ -5,6 +5,10 @@ weight: 50
 
 ## Task 5 Add server two and run the playbook
 
+On
+
+![ansible](/images/ansible.png)
+
 We will add server 2 to the inventory
 
 __Type:__

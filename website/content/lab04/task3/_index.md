@@ -7,6 +7,10 @@ weight: 30
 
 In this task we will encrypt the password for the windows servers and place it in the new yaml inventory file
 
+On
+
+![ansible](/images/ansible.png)
+
 Encrypt you password
 
 __Type:__

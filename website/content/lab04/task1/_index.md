@@ -11,6 +11,10 @@ In this lab we will work with ansible-vault to encrypt sensitive data as passwor
 
 First we need to remove the password for the windows servers in the ansible-hosts file
 
+On
+
+![ansible](/images/ansible.png)
+
 ```bash
 cd
 
@@ -140,7 +144,11 @@ Notice that Git detects the changed file, do a commit add a comment "Vault" and 
 
 ![Alt text](images/035_vault_playbook.png?raw=true "vault playbook")
 
-On server ansible do a git pull and run the playbook
+On
+
+![ansible](/images/ansible.png)
+
+Do a git pull and run the playbook
 
 ```bash
 

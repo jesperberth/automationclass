@@ -7,7 +7,9 @@ weight: 70
 
 We need the __private__ ssh key from server ansible
 
-Log on to server "ansible" using ssh
+On
+
+![ansible](/images/ansible.png)
 
 and retrive your public key
 

@@ -34,7 +34,11 @@ Save the playbook, Commit the changes and push to github
 
 ![Alt text](images/001_register_playbook.png?raw=true "ansible register in playbook")
 
-On the ansible server pull the new playbook and run it
+On
+
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 
@@ -74,7 +78,11 @@ Save the playbook, Commit the changes and push to github
 
 ![Alt text](images/004_conditional_playbook.png?raw=true "ansible conditional in playbook")
 
-On the ansible server pull the new playbook and run it
+On
+
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 
@@ -108,7 +116,11 @@ Save the playbook, Commit the changes and push to github
 
 ![Alt text](images/004_conditional_playbook_not.png?raw=true "ansible conditional in playbook not")
 
-On the ansible server pull the new playbook and run it
+On
+
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 

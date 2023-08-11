@@ -33,11 +33,13 @@ add the following text to the file, change the name of the variable user to your
 
 Save and commit to Git
 
-Log on to server "ansible" using ssh
+On
 
-Use git to get the new azure playbook
+![ansible](/images/ansible.png)
 
-**Type:**
+Pull the new playbook and run it
+
+__Type:__
 
 ```bash
 

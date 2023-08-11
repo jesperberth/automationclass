@@ -5,7 +5,9 @@ weight: 10
 
 ## Task 1 Install requirements for Azure
 
-Log on to server "ansible" using ssh
+On
+
+![ansible](/images/ansible.png)
 
 Install ansible azure collection
 

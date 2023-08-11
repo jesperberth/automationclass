@@ -171,7 +171,7 @@ Create a new file 02_roles.yml add the following
   become: true
 
   roles:
-  - webserver
+    - webserver
 
   tasks:
     - name: Copy Index.php
@@ -180,7 +180,7 @@ Create a new file 02_roles.yml add the following
         dest: /var/www/html/index.php
         owner: root
         group: root
-        mode: 0755
+        mode: '0755'
 
 ```
 
@@ -188,7 +188,11 @@ Create a new file 02_roles.yml add the following
 
 Save and commit
 
-On the ansible server pull the new playbook and run it
+On
+
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 

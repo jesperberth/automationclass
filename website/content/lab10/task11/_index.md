@@ -13,7 +13,9 @@ We can work with AWX with out utilizing the UI, and call the Rest API directly
 
 We have already created the OAUTH Token, we can use this to authenticate the API call
 
-On Ansible
+On
+
+![ansible](/images/ansible.png)
 
 run the following to get a list of all Workflow Templates
 

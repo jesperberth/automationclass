@@ -9,7 +9,9 @@ weight: 10
 
 We need to add child groups to the windowsserver group in the host file, when using child groups we can target the group windowsserver or one of the child groups like domaincontrollers
 
-Log on to server "ansible" using ssh
+On
+
+![ansible](/images/ansible.png)
 
 Use vi to edit ansible-hosts.yml
 

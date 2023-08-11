@@ -7,7 +7,11 @@ weight: 50
 
 Install WSL
 
-In Terminal
+In
+
+![student-pwsh](/images/student-pwsh.png)
+
+Install WSL
 
 When its ready, reboot the workstation
 
@@ -33,43 +37,11 @@ WSL is now ready
 
 ![Alt text](images/03_wsl_ready.png?raw=true "wsl ready")
 
-Enable Systemd for WSL
+Close the Linux terminal and open powershell
 
-Enter password when prompted
-
-```bash
-
-sudo su
-
-echo -e "[boot]\nsystemd=true" >> /etc/wsl.conf
-
-```
-
-![Alt text](images/04_wsl_systemd.png?raw=true "wsl set systemd")
-
-Close the Linux console
-
-We will check for updates to WSL
-
-The shutdown is need for the systemd to work
-
-Open Windows Terminal and run
-
-```powershell
-
-wsl --update
-
-wsl --shutdown
-
-```
-
-![Alt text](images/04_wsl_update.png?raw=true "wsl update")
-
-Close the terminal and reopen it
+![student-pwsh](/images/student-pwsh.png)
 
 We need to install the vscode remote extention
-
-In the terminal
 
 ```powershell
 
@@ -84,6 +56,8 @@ Now start WSL from Windows Terminal
 In the menu select __Ubuntu__
 
 ![Alt text](images/06_start_ubuntu.png?raw=true "start ubuntu")
+
+![student-wsl](/images/student-wsl.png)
 
 Now update the Ubuntu
 
@@ -138,6 +112,10 @@ docker ps
 if it looks like this, it worked
 
 ![Alt text](images/12_docker_ps.png?raw=true "docker ps")
+
+In
+
+![student-pwsh](/images/student-pwsh.png)
 
 Lets install some VS Code extentions
 

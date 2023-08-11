@@ -36,7 +36,11 @@ Save, Commit and push
 
 ![Alt text](images/001_ansible_lookup.png?raw=true "ansible delegate playbook")
 
-On the ansible server pull the new playbook and run it
+On
+
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 __Type:__
 

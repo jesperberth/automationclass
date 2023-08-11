@@ -91,11 +91,11 @@ In VSCode create a new jinja file index.html.j2
 
 Save and commit to Git
 
-Log on to server "ansible" using ssh
+On
 
-Use git to get the new azure playbook
+![ansible](/images/ansible.png)
 
-Run the new playbook with the dynamic inventory
+Pull the new playbook and run it with the dynamic inventory
 
 **Type:**
 

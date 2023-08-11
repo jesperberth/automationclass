@@ -58,9 +58,11 @@ Add below to the playbook, this will create a new Active Directory.
 
 Save and commit to Git
 
-Log on to server "ansible" using ssh
+On
 
-Use git to get the new azure playbook
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 **Type:**
 

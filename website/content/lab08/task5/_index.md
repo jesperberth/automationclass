@@ -39,9 +39,11 @@ Add below to the playbook, this will join the member servers to the new Active D
 
 Save and commit to Git
 
-Log on to server "ansible" using ssh
+On
 
-Use git to get the new azure playbook
+![ansible](/images/ansible.png)
+
+Pull the new playbook and run it
 
 **Type:**
 
@@ -60,6 +62,10 @@ ansible-playbook 01_joinad.yml --ask-vault-password
 Lets check that everything worked
 
 Logon to the Domain Controller (server3) using RDP
+
+On
+
+![server3](/images/server3.png)
 
 In the Server Manager Console, top right corner select tools and click on "Active Directory Users and Computers"
 
