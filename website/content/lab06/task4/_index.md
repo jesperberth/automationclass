@@ -26,7 +26,7 @@ Create a new file 01_lookup.yml
     file_contents: "{{ lookup('file', 'file.txt') }}"
 
   tasks:
-    - name: Debug Write File Content
+    - name: Debug Print File Content
       ansible.builtin.debug:
         msg: "{{ file_contents }}"
 
