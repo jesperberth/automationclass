@@ -20,7 +20,7 @@ In the AWX console
 
 In the left pane, in the __Access Block__ click __Users__
 
-Select the user "Admin"
+Select the user __Admin__
 
 ![Alt text](images/01_ansible_tower_adminuser.png?raw=true "select admin user")
 

@@ -49,7 +49,7 @@ __Name:__ Azure Credential
 
 __Organization:__ Default
 
-Click on the "Credential Type and select
+Click on the __Credential Type__ and select
 
 Microsoft Azure Resource Manager
 

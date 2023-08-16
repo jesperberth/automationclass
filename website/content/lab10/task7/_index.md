@@ -37,7 +37,7 @@ __Name:__ webserver
 
 __Organization:__ Default
 
-Credential Type: Machine
+__Credential Type:__ Machine
 
 __Username:__ __jesbe__ <---- Change to your initials
 
