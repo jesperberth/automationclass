@@ -19,6 +19,23 @@ __Note:__
 
 We need to set an option in vi before pasteing the configuration
 
+__Type:__
+
+```bash
+
+cd
+
+vi ansible-hosts.yml
+
+Hit Esc-key
+
+:set paste <Hit Enter>
+
+Hit Esc-key
+
+i (to toggle insert)
+```
+
 __Remember__ to change the ansible_user to your initials
 
 ```ansible
@@ -37,23 +54,6 @@ windowsservers:
     ansible_winrm_transport: ntlm
     ansible_winrm_message_encryption: always
 
-```
-
-__Type:__
-
-```bash
-
-cd
-
-vi ansible-hosts.yml
-
-Hit Esc-key
-
-:set paste <Hit Enter>
-
-Hit Esc-key
-
-i (to toggle insert)
 ```
 
 ![Alt text](images/037_set_paste.png?raw=true "vi paste")
