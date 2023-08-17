@@ -5,6 +5,10 @@ weight: 20
 
 ## Task 2 Enable Ansible Extention
 
+In
+
+![vscode](/images/student-vscode.png)
+
 Click the **Extentions** box in the left menu
 
 Click on **Install in WSL:Ubuntu** for the Ansible Extention

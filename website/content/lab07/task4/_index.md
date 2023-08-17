@@ -5,7 +5,11 @@ weight: 40
 
 ## Task 4 Create a role - part 2
 
-In VSCode we need to create tasks, handlers, meta and defaults
+In
+
+![vscode](/images/student-vscode.png)
+
+We need to create tasks, handlers, meta and defaults
 
 First thing to do is install all needed packages, start the httpd daemon and open the firewall
 

@@ -5,6 +5,10 @@ weight: 40
 
 ## Task 4 Adding tasks to the playbook
 
+In
+
+![vscode](/images/student-vscode.png)
+
 Lets add a second task in the playbook 01_linux.yml
 
 In VSCode add the following text to the file

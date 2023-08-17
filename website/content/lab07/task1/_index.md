@@ -46,7 +46,11 @@ ansible-galaxy role list
 
 To test the role lets create a new playbook
 
-In VsCode create a new file 01_roles.yml
+In
+
+![vscode](/images/student-vscode.png)
+
+Create a new file 01_roles.yml
 
 __Type:__
 

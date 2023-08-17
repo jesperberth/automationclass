@@ -5,7 +5,9 @@ weight: 40
 
 ## Task 4 Create Azure RM Template
 
-In VSCode
+In
+
+![vscode](/images/student-vscode.png)
 
 Create a copy of 01_azure.yml -> 01_azure_tower.yml
 
@@ -44,7 +46,3 @@ __Credentials:__ Select credential type "Microsoft Azure Resource Manager" and A
 Leave the rest as default and click __Save__
 
 ![Alt text](images/08_ansible_tower_template.png?raw=true "Create template")
-
-Click on the "Launch" button and wait a minute to see the result
-
-![Alt text](images/09_ansible_tower_template_run.png?raw=true "Run template")

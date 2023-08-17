@@ -47,6 +47,10 @@ We will use debug module to show the facts in a playbook
 
 Debug will write any text including variables
 
+In
+
+![vscode](/images/student-vscode.png)
+
 Create a new playbook 01_facts.yml
 
 __Type:__
@@ -94,6 +98,10 @@ Lets get the nodename of our servers, nodename is an Ansible UnSafe Text
 
 ![Alt text](images/006_ansible_facts_nodename.png?raw=true "ansible facts nodename")
 
+In
+
+![vscode](/images/student-vscode.png)
+
 Add the below task to the playbook 01_facts.yml
 
 __Type:__
@@ -126,6 +134,10 @@ ansible-playbook 01_facts.yml
 ![Alt text](images/008_ansible_facts_nodename_playbook_run.png?raw=true "ansible facts nodename playbook")
 
 Now lets try getting output from a list and a dictionary
+
+In
+
+![vscode](/images/student-vscode.png)
 
 Add the below task to the playbook 01_facts.yml
 

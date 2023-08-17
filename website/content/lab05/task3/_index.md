@@ -13,6 +13,10 @@ Handlers will run tasks on changes in other tasks
 
 A handler is a task placed in a seperat section __handlers:__ in the playbook and run when a task __notify__ it to run
 
+In
+
+![vscode](/images/student-vscode.png)
+
 Add below to the playbook 01_vars.yml
 
 First task configures the firewall and has the notify option sat

@@ -11,11 +11,11 @@ Click on the __Rocket__ to Launch the Workflow
 
 ![Alt text](images/27_run_workflow.png?raw=true "Launch workflow")
 
-Fill out the survey, click Next
+Fill out the survey, click __Next__
 
 ![Alt text](images/28_run_workflow_survey.png?raw=true "Launch workflow survey")
 
-Click Launch on the result page
+Click __Launch__ on the result page
 
 ![Alt text](images/29_run_workflow_survey_result.png?raw=true "Launch workflow survey result")
 

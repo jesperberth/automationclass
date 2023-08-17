@@ -9,7 +9,11 @@ weight: 40
 
 [ansible docs - win reboot module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
 
-In VSCode create a new file 01_changedns.yml
+In
+
+![vscode](/images/student-vscode.png)
+
+Create a new file 01_changedns.yml
 
 Add below to the playbook, this will set the member servers dns client to use the new domaincontroller.
 

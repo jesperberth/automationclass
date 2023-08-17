@@ -7,9 +7,13 @@ weight: 70
 
 We need to delete the webserver_{{user}} Resource group from Azure before we can start on the next lab
 
-In VSCode create a new file 03_azure.yml
+In
 
-add the following text to the file, change the name of the variable user to your initials use the same as you use to login to ansible server
+![vscode](/images/student-vscode.png)
+
+Create a new file 03_azure.yml
+
+Add the following text to the file, change the name of the variable __user__ to your initials use the same as you use to login to ansible server
 
 ```ansible
 ---

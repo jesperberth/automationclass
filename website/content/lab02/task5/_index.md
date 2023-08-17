@@ -81,7 +81,7 @@ ansible-doc ansible.windows.win_feature
 
 ![Alt text](images/026_ansible-doc-winfeature.png?raw=true "ansible-doc -l")
 
-## Optional Set Nano as default editor
+## Optional - Set Nano as default editor
 
 Some ansible commands as ansible-vault will use a the default editor vi
 

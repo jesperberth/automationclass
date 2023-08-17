@@ -7,7 +7,7 @@ weight: 60
 
 In the left pane click on __Inventory__
 
-Select your inventory
+Select your __inventory__
 
 Click on the __Sources__ button on the top
 
@@ -49,7 +49,7 @@ In the bottom of the screen click on the __Sync__ button
 
 In the left pane click on __inventory__
 
-Select your inventory
+Select your __inventory__
 
 Click on the __Groups__ button on the top
 

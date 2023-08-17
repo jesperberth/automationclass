@@ -9,7 +9,11 @@ weight: 50
 
 [ansible docs - win reboot module](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
 
-In VSCode create a new file 01_joinad.yml
+In
+
+![vscode](/images/student-vscode.png)
+
+Create a new file 01_joinad.yml
 
 Add below to the playbook, this will join the member servers to the new Active Directory.
 

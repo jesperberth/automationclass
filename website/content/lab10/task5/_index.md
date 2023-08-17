@@ -5,7 +5,9 @@ weight: 50
 
 ## Task 5 Create Azure Webserver template
 
-In VSCode
+In
+
+![vscode](/images/student-vscode.png)
 
 Create a copy of 02_azure.yml -> 02_azure_tower.yml
 
@@ -92,13 +94,3 @@ ssh_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCl/myugJcFI/2XmWcLd5P+tKV
 Leave the rest as default and click __Save__
 
 ![Alt text](images/11_ansible_tower_webserver_template.png?raw=true "template")
-
-In the left pane click on __Templates__
-
-Locate your webserver template and click on the __Rocket__ to lauch it
-
-![Alt text](images/12_launch_template.png?raw=true "launch template")
-
-Wait for template to finish
-
-![Alt text](images/13_launch_template_run.png?raw=true "launch template")

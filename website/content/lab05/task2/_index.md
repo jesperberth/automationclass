@@ -11,6 +11,10 @@ All Tasks in a playbook has an output, we can put this output into a variable an
 
 Add a task to start the httpd service, register the output of systemd and show the output with debug
 
+In
+
+![vscode](/images/student-vscode.png)
+
 Add below to the playbook 01_vars.yml
 
 __Type:__
@@ -61,6 +65,10 @@ We can use facts from the registered variable httpd_status in a condition
 
 [ansible docs - conditionals](https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html)
 
+In
+
+![vscode](/images/student-vscode.png)
+
 Add below to the playbook 01_vars.yml
 
 __Type:__
@@ -98,6 +106,10 @@ ansible-playbook 01_vars.yml --ask-become-pass
 ![Alt text](images/005_conditional_playbook_run.png?raw=true "ansible conditional in playbook run")
 
 We can use NOT in the condition to control if we should run a task in case a value isn't matching the rule
+
+In
+
+![vscode](/images/student-vscode.png)
 
 Add below to the playbook 01_vars.yml
 

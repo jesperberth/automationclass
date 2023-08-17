@@ -5,7 +5,9 @@ weight: 80
 
 ## Task 8 Create Webserver Template
 
-In VSCode
+In
+
+![vscode](/images/student-vscode.png)
 
 Create a copy of 01_webserver_azure.yml -> 01_webserver_azure_tower.yml
 

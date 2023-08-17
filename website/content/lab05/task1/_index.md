@@ -17,6 +17,10 @@ In ansible vars can be defined in 22 different places, yes .... and they all tak
 
 Lets use a single variable in a playbook
 
+In
+
+![vscode](/images/student-vscode.png)
+
 Create a new playbook 01_vars.yml
 
 __Type:__
@@ -61,6 +65,10 @@ ansible-playbook 01_vars.yml --ask-become-pass
 ![Alt text](images/002_vars_playbook_run.png?raw=true "ansible vars in playbook run")
 
 Lets change the playbook to use a list to install several packages
+
+In
+
+![vscode](/images/student-vscode.png)
 
 Change the playbook 01_vars.yml
 

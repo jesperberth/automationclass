@@ -7,15 +7,28 @@ weight: 50
 
 [Ansible Docs - Block](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_blocks.html)
 
-With block: we can manage multiple tasks as one, and have a fallback task with rescue:
+With block: we can group tasks in a block and control the execution of the block with a condition, all options you can apply to a task can be applied to the block with the exeption of loops.
+
+There are two optional "blocks" to put on the block:
+
+The rescue: block will run in case of a failure in any of the tasks in the block
+
+The always: Will always run regardless of the results in the block: or rescue:
+
+In
+
+![vscode](/images/student-vscode.png)
 
 Open the file 01_vars.yml
 
 We will modify this to use blocks
 
-From __tasks:__ and the following 4 tasks
+From the line __tasks:__ and the following 4 tasks
 
-Install Packages, Enable httpd service, Show Status, Is httpd running
+- Install Packages
+- Enable httpd service
+- Show Status
+- Is httpd running
 
 Change to the following code snippet
 
@@ -48,7 +61,7 @@ Change to the following code snippet
       rescue:
         - name: Print when errors
           ansible.builtin.debug:
-            msg: 'There is an error in this block)'
+            msg: 'There is an error in this block'
 
       always:
         - name: Always do this

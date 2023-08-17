@@ -21,29 +21,20 @@ tzutil /s "Romance Standard Time"
 
 You need to install the following software
 
+- Git
+- VSCode
+
+Run the following command
+
 ```bash
 
-winget install microsoft.powershell
-
-winget install git.git
-
-winget install Microsoft.VisualStudioCode
-
-winget install Microsoft.AzureCLI
+winget install git.git Microsoft.VisualStudioCode --accept-source-agreements
 
 ```
 
-Click "Y" to accept the source aggreement
+![Alt text](images/001_winget_install.png?raw=true "winget accept")
 
-![Alt text](images/001_winget_accept.png?raw=true "winget accept")
-
-![Alt text](images/001_install_powershell.png?raw=true "powershell")
-
-![Alt text](images/002_install_git.png?raw=true "git")
-
-![Alt text](images/003_install_vscode.png?raw=true "vscode")
-
-![Alt text](images/004_install_azcli.png?raw=true "az cli")
+### Optional - Use winget search
 
 If you need to install other software you can search for it with __winget search__
 
