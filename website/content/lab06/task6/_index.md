@@ -9,6 +9,10 @@ weight: 60
 
 With tag: we can enable or disable tagged tasks
 
+In
+
+![vscode](/images/student-vscode.png)
+
 Open the file 01_vars.yml
 
 We will modify this to use tags

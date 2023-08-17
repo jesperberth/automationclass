@@ -11,7 +11,11 @@ The Azure Resource Manager inventory plugin is part of ansible and can return a 
 
 [Azure Resource Manager inventory plugin](https://docs.ansible.com/ansible/latest/plugins/inventory/azure_rm.html)
 
-In VSCode create a new file webserver.azure_rm.yml
+In
+
+![vscode](/images/student-vscode.png)
+
+Create a new file webserver.azure_rm.yml
 
 Note: The inventory file must end with .azure_rm.yml
 

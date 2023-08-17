@@ -11,7 +11,11 @@ weight: 40
 
 [Ansible Module azure_rm_networkinterface](https://docs.ansible.com/ansible/latest/modules/azure_rm_networkinterface_module.html#azure-rm-networkinterface-module)
 
-In VSCode add the next sections to the 02_azure.yml playbook
+In
+
+![vscode](/images/student-vscode.png)
+
+Add the next sections to the 02_azure.yml playbook
 
 ```ansible
 
@@ -93,11 +97,13 @@ ansible-playbook 02_azure.yml
 
 [Ansible Module shell](https://docs.ansible.com/ansible/latest/modules/shell_module.html#shell-module)
 
-[ANsible Module Wait_for](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/wait_for_module.html)
+[Ansible Module Wait_for](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/wait_for_module.html)
+
+In
+
+![vscode](/images/student-vscode.png)
 
 Add the virtualmachine task to the 02_azure.yml playbook
-
-In VSCode add the next sections to the 02_azure.yml playbook
 
 ```ansible
 

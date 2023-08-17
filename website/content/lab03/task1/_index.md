@@ -84,6 +84,10 @@ code .
 
 ![Alt text](images/009_start_code.png?raw=true "Start VSCode")
 
+In
+
+![vscode](/images/student-vscode.png)
+
 Click "Yes, I trust the authers" button
 
 ![Alt text](images/009_start_code_trust.png?raw=true "Start VSCode trust")

@@ -5,7 +5,9 @@ weight: 50
 
 ## Task 5 Create Azure Webserver template
 
-In VSCode
+In
+
+![vscode](/images/student-vscode.png)
 
 Create a copy of 02_azure.yml -> 02_azure_tower.yml
 

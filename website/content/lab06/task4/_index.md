@@ -7,13 +7,21 @@ weight: 40
 
 [Ansible Docs - Plugin Lookup](https://docs.ansible.com/ansible/latest/plugins/lookup.html)
 
+In
+
+![vscode](/images/student-vscode.png)
+
 Create a new text file __file.txt__
 
 Add this line
 
 ```text
 dev-environment
+
 ```
+In
+
+![vscode](/images/student-vscode.png)
 
 Create a new file 01_lookup.yml
 

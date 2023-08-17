@@ -73,7 +73,9 @@ Leave the rest as default and click __Save__
 
 Lets test that our Azure credentials works
 
-In VSCode
+In
+
+![vscode](/images/student-vscode.png)
 
 Create a new file 00_azure_tower.yml add the following
 

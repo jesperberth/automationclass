@@ -8,7 +8,11 @@ weight: 30
 [ansible docs - win domain group module](https://docs.ansible.com/ansible/latest/collections/community/windows/win_domain_group_module.html)
 [ansible docs - win domain user module](https://docs.ansible.com/ansible/latest/collections/community/windows/win_domain_user_module.html)
 
-In VSCode create a new file 02_domain.yml
+In
+
+![vscode](/images/student-vscode.png)
+
+Create a new file 02_domain.yml
 
 Add below to the playbook, this will create a new group and user in AD.
 

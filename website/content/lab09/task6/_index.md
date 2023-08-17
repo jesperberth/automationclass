@@ -15,11 +15,15 @@ Install apache webserver, setup the static website, allow http trafic on the loc
 
 [Ansible Module template](https://docs.ansible.com/ansible/latest/modules/template_module.html)
 
-In VSCode create a new file 01_webserver_azure.yml
+In
+
+![vscode](/images/student-vscode.png)
+
+Create a new file 01_webserver_azure.yml
 
 Change the websiteauthor to your name
 
-And change the **- hosts: tag_solution_webserver_jesbe** so it matches your initials
+And change the __- hosts: tag_solution_webserver_jesbe__ so it matches your initials
 
 ```ansible
 ---
@@ -97,7 +101,7 @@ On
 
 Pull the new playbook and run it with the dynamic inventory
 
-**Type:**
+__Type:__
 
 ```bash
 

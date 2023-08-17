@@ -64,7 +64,11 @@ export CONTROLLER_OAUTH_TOKEN=oKux6ADwqn127BK3Ov4WjfbPjtPG16
 
 ![Alt text](images/05_ansible_tower_export_token.png?raw=true "export token")
 
-In VSCode create a new playbook 01_awx.yml
+In
+
+![vscode](/images/student-vscode.png)
+
+Create a new playbook 01_awx.yml
 
 Add below to the playbook
 

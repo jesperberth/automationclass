@@ -5,7 +5,9 @@ weight: 40
 
 ## Task 4 Create Azure RM Template
 
-In VSCode
+In
+
+![vscode](/images/student-vscode.png)
 
 Create a copy of 01_azure.yml -> 01_azure_tower.yml
 

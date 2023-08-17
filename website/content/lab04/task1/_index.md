@@ -116,7 +116,9 @@ ansible-vault edit secret.yml
 
 Lets create a playbook to use the encryptet var file
 
-In VSCode
+In
+
+![vscode](/images/student-vscode.png)
 
 Create a new file 01_vault.yml
 

@@ -13,7 +13,11 @@ Ansible always run gather facts and tasks on server nodes from the hosts variabl
 
 This could be to set a server in or out off maintenance mode, add or remove a server to a loadbalancer.
 
-Create a new file in Vscode __set_server_offline.sh__
+In
+
+![vscode](/images/student-vscode.png)
+
+Create a new file __set_server_offline.sh__
 
 __Type:__
 
@@ -32,7 +36,11 @@ echo 0
 
 ![Alt text](images/001_bash_script.png?raw=true "bash script")
 
-Create a new file in Vscode 01_delegate.yml
+In
+
+![vscode](/images/student-vscode.png)
+
+Create a new file 01_delegate.yml
 
 ```ansible
 ---

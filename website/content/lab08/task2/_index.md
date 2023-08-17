@@ -11,7 +11,11 @@ weight: 20
 
 [ansible docs - win domain](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_domain_module.html)
 
-In VSCode create a new file 01_domain.yml
+In
+
+![vscode](/images/student-vscode.png)
+
+Create a new file 01_domain.yml
 
 Add below to the playbook, this will create a new Active Directory.
 

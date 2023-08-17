@@ -13,6 +13,10 @@ weight: 50
 
 In ansible we can use loops to repeat a task multiple times eg. creating users
 
+In
+
+![vscode](/images/student-vscode.png)
+
 Create a new file in Vscode 01_loop.yml
 
 __Type:__
@@ -66,6 +70,10 @@ ansible-playbook 01_loop.yml --ask-become-pass
 ![Alt text](images/002_ansible_loop_playbook_run.png?raw=true "ansible loop playbook run")
 
 We can iterate over a list of hashes
+
+In
+
+![vscode](/images/student-vscode.png)
 
 Change the file 01_loop.yml
 

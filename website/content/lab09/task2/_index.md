@@ -114,9 +114,11 @@ Lets test the connection to azure by creating a small playbook
 
 [Ansible Module azure_rm_resourcegroup](https://docs.ansible.com/ansible/latest/modules/azure_rm_resourcegroup_module.html#azure-rm-resourcegroup-module)
 
-In VSCode
+In
 
-create a new playbook file 01_azure.yml
+![vscode](/images/student-vscode.png)
+
+Create a new playbook file 01_azure.yml
 
 add the following text to the file, change the name of the variable **user to your initials** use the same as you use to login to ansible server
 

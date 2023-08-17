@@ -5,6 +5,10 @@ weight: 30
 
 ## Task 3 Create the first playbook
 
+In
+
+![vscode](/images/student-vscode.png)
+
 In the file explorer part of VSCode rigth click on the pane below the "ANSIBLECLASS"
 
 ![Alt text](images/015_code_newfile.png?raw=true "new file in VSCode")

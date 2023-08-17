@@ -7,7 +7,11 @@ weight: 20
 
 [Ansible Docs - shell module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/shell_module.html)
 
-Create a new file in Vscode 02_stat.yml
+In
+
+![vscode](/images/student-vscode.png)
+
+Create a new file 02_stat.yml
 
 __Type:__
 

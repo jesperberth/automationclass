@@ -9,11 +9,13 @@ weight: 30
 
 [Ansible Module azure_rm_subnet](https://docs.ansible.com/ansible/latest/modules/azure_rm_subnet_module.html#azure-rm-subnet-module)
 
-In VSCode
+In
 
-create a new playbook file 02_azure.yml
+![vscode](/images/student-vscode.png)
 
-add the following text to the file, change the first variable **"user"** to your initials, use the same as in previous task, it will be used for creating resources and a login to the webserver
+Create a new playbook file 02_azure.yml
+
+add the following text to the file, change the first variable __"user"__ to your initials, use the same as in previous task, it will be used for creating resources and a login to the webserver
 
 ```ansible
 ---

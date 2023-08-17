@@ -61,6 +61,10 @@ git push origin main
 
 ![Alt text](images/008_ansible_git_push.png?raw=true "ansible git push")
 
-In VSCode do a push/pull to get the changes, you should see the roles \ webserver with all the default content
+In
+
+![vscode](/images/student-vscode.png)
+
+Do a push/pull to get the changes, you should see the roles \ webserver with all the default content
 
 ![Alt text](images/009_vscode_push_pull.png?raw=true "vscode push pull")
