@@ -21,7 +21,7 @@ Before installtion the collection we need to install several python modules, the
 
 cd
 
-ansible-galaxy collection install azure.azcollection
+ansible-galaxy collection install azure.azcollection --force
 
 pip install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt
 
