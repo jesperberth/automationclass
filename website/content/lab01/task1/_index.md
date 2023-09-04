@@ -11,11 +11,11 @@ Login to Azure
 
 In your browser go to [http://portal.azure.com](http://portal.azure.com)
 
-Your username will be __userxx__ as below
+Your username will be __userX__ as below
 
 ```bash
 
-userxx@redhatbyarrow.onmicrosoft.com
+userX@redhatbyarrow.onmicrosoft.com
 
 ```
 
