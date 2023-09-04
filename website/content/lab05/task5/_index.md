@@ -63,7 +63,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_loop.yml --ask-become-pass
+ansible-playbook 01_loop.yml 
 
 ```
 
@@ -126,7 +126,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_loop.yml --ask-become-pass
+ansible-playbook 01_loop.yml 
 
 ```
 

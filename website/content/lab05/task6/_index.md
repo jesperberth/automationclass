@@ -76,7 +76,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 02_loop.yml --ask-become-pass
+ansible-playbook 02_loop.yml 
 
 ```
 

@@ -150,7 +150,7 @@ cd ansibleclass
 
 ls
 
-ansible-playbook 01_linux.yml --ask-become-pass
+ansible-playbook 01_linux.yml 
 
 ```
 

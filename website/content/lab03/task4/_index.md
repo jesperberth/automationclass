@@ -55,7 +55,7 @@ __Type:__
 ```bash
 ls
 
-ansible-playbook 01_linux.yml --ask-become-pass
+ansible-playbook 01_linux.yml 
 ```
 
 ![Alt text](images/027_run_playbook_secondtask.png?raw=true "Run playbook")
@@ -67,7 +67,7 @@ The "Create File" task will be changed every time as we use the touch command on
 __Type:__
 
 ```bash
-ansible-playbook 01_linux.yml --ask-become-pass
+ansible-playbook 01_linux.yml 
 ```
 
 ![Alt text](images/028_run_playbook_secondtask_idempodent.png?raw=true "Run playbook")

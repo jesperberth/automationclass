@@ -51,7 +51,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 02_stat.yml --ask-become-pass
+ansible-playbook 02_stat.yml 
 
 ```
 
@@ -63,7 +63,7 @@ __Type:__
 
 ```bash
 
-ansible-playbook 02_stat.yml --ask-become-pass
+ansible-playbook 02_stat.yml 
 
 ```
 

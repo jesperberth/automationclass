@@ -51,7 +51,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_vars.yml --ask-become-pass
+ansible-playbook 01_vars.yml 
 
 ```
 
@@ -99,7 +99,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_vars.yml --ask-become-pass
+ansible-playbook 01_vars.yml 
 
 ```
 
@@ -141,7 +141,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_vars.yml --ask-become-pass
+ansible-playbook 01_vars.yml 
 
 ```
 
