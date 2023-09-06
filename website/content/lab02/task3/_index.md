@@ -201,12 +201,12 @@ ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=ye
 
 This will fail as the user dosn't have the right permissions
 
-Add -b (become will default use sudo to root) and --ask-become-pass is the escalation password
+Add -b (become will default use sudo to root) and  is the escalation password
 
 __Type:__
 
 ```bash
-ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=yes" -b --ask-become-pass
+ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=yes" -b 
 ```
 
 ![Alt text](images/017_systemd_works.png?raw=true "ansible systemd works")

@@ -82,7 +82,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_roles.yml --ask-become-pass
+ansible-playbook 01_roles.yml 
 
 ```
 

@@ -63,7 +63,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_stat.yml --ask-become-pass
+ansible-playbook 01_stat.yml 
 
 ```
 
@@ -75,7 +75,7 @@ The download task will have status __skipping__ and the unzip task will have sta
 
 ```bash
 
-ansible-playbook 01_stat.yml --ask-become-pass
+ansible-playbook 01_stat.yml 
 
 ```
 

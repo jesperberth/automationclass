@@ -45,7 +45,7 @@ __Type:__
 ```bash
 cd ansibleclass
 
-ansible-playbook 01_linux.yml --ask-become-pass
+ansible-playbook 01_linux.yml 
 ```
 
 ![Alt text](images/030_2_server_play_error.png?raw=true "Run playbook error")
