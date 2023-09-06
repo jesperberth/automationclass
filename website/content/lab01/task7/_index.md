@@ -1,17 +1,13 @@
 ---
 title: Clone Git Repo
-weight: 60
+weight: 70
 ---
 
-## Task 6 Clone Git Repository
+## Task 7 Clone Git Repository
 
-We will run Visual Studio Code from WSL to get the most out of the Ansible plugin
+We need to configure git and clone the repository on the Student/WSL
 
-We need to configure git with a Name and email to track the changes you are making
-
-__Note:__ This has to be done on your Student machine
-
-Open Terminal / WSL (Ubuntu)
+On
 
 ![student-wsl](/images/student-wsl.png)
 
@@ -44,25 +40,27 @@ cd git
 
 ```
 
+![Alt text](images/02_git_dir.png?raw=true "Git dir")
+
 On
 
 ![github](/images/github.png)
 
-On your "ansibleclass" repository page
+On your __ansibleclass__ repository page
 
-Click the green "Code" button to retrieve the URL for the repository
+Click the green __Code__ button to retrieve the URL for the repository
 
-Copy the url
+Copy the __HTTPS__ url
 
 ![Alt text](images/010_repourl.png?raw=true "Paste Repo URL")
 
-In
+On
 
 ![student-wsl](/images/student-wsl.png)
 
 write __git clone__ and paste the url
 
-```powershell
+```bash
 
 git clone https://github.com/jesperberth/ansibleclass.git
 
@@ -88,8 +86,46 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Click "Yes, I trust the authers" button
+Click __Yes, I trust the authers__ button
 
 ![Alt text](images/009_start_code_trust.png?raw=true "Start VSCode trust")
 
-![Alt text](images/014_git_in_vscode.png?raw=true "Git repo is now in VSCode")
+Select your __Theme__
+
+Click __Mark Done__
+
+And Close the __Welcome__ Tab
+
+![Alt text](images/04_theme_vscode.png?raw=true "VSCode Theme")
+
+Now we have our __Ansibleclass__ repo with the __README.md__ file in VSCode
+
+![Alt text](images/05_vscode_ready.png?raw=true "Git repo is now in VSCode")
+
+To push changes back to our GitHub repository we need to authenticate
+
+In the __EXPLORER__ (The Red box is the File Explorer) click once on the README.md file
+
+![Alt text](images/06_vscode_explorer.png?raw=true "EXPLORER in VSCode")
+
+Add the following line to the __README__ (The Red box is the editor) each file you open will be a Tab here in the editor
+
+__Note:__ The White Dot next to the filename __README.md__ this is to indicate that the file isn't saved
+
+```md
+
+Playbooks for ansible basic
+
+```
+
+Click __Ctrl + S__ to save the file
+
+![Alt text](images/06_vscode_readme.png?raw=true "README in VSCode")
+
+All files in the __ansibleclass__ folder are monitored by __git__
+
+Git detects the changes
+
+- In the left menu, the source control 
+
+![Alt text](images/07_vscode_readme.png?raw=true "README in VSCode")
