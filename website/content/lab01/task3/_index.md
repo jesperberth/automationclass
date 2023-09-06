@@ -21,6 +21,10 @@ tzutil /s "Romance Standard Time"
 
 You need to install the following software
 
+We will use Windows 11's builtin package management system __winget__
+
+Winget is installed as default on Windows 11 22H2
+
 - Git
 - VSCode
 
@@ -33,19 +37,3 @@ winget install git.git Microsoft.VisualStudioCode --accept-source-agreements
 ```
 
 ![Alt text](images/001_winget_install.png?raw=true "winget accept")
-
-### Optional - Use winget search
-
-If you need to install other software you can search for it with __winget search__
-
-Eg.
-
-```bash
-
-winget search firefox
-
-```
-
-![Alt text](images/005_winget_search.png?raw=true "search")
-
-Close __Windows Terminal__
