@@ -32,7 +32,9 @@ Run the following command
 
 ```bash
 
-winget install git.git Microsoft.VisualStudioCode --accept-source-agreements
+winget install git.git --accept-source-agreements
+
+winget install Microsoft.VisualStudioCode
 
 ```
 

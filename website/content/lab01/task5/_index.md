@@ -9,28 +9,36 @@ Open a browser and go to [Git Hub](https://github.com)
 
 ![github](/images/github.png)
 
-If you have a github account login, otherwise create a new account
+If you have a github account login, and go to task 6 - otherwise create a new account
 
-![Alt text](images/005_create_github.png?raw=true "Create GitHub Account")
+Type in your email and __Click__ Sign up for free
 
-Login to your github account
+![Alt text](images/01_github.png?raw=true "GitHub")
 
-Click on Repositories
+Enter __Password__ click next
 
-Click the green "New" in the top right corner
+Enter __Username__ click next
 
-![Alt text](images/006_login_github.png?raw=true "Login GitHub")
+Enter __y or n__ for updates and announcements
 
-Give you repository a name "ansibleclass"
+Verify your account
 
-Select "Public" - it's default - **for the purpose of these labs keep it public**
+Click __Submit__
 
-Make Sure you tick **"Initialize this repository with a README"**
+![Alt text](images/02_create_account.png?raw=true "Create GitHub Account")
 
-Click "Create repository"
+Select __Just Me__
 
-![Alt text](images/007_newrepo_github.png?raw=true "Create Repo")
+![Alt text](images/03_question1.png?raw=true "Create GitHub Account question")
 
-Your new repository is created with an empty README.md file
+Select your __interests__
 
-![Alt text](images/008_newrepo_created_github.png?raw=true "New Repo")
+![Alt text](images/04_question2.png?raw=true "Create GitHub Account question")
+
+Select the __Free__ Account
+
+![Alt text](images/05_select_free.png?raw=true "Free Account")
+
+Your GitHub account is now ready
+
+![Alt text](images/06_account_done.png?raw=true "Create GitHub Account")

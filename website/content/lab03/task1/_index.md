@@ -111,35 +111,9 @@ Open the Git Hub repository, the 01_linux.yml is now added, note the comment nex
 
 ![Alt text](images/020_github_new.png?raw=true "github new file")
 
+On
+
 ![ansible](/images/ansible.png)
-
-Log on to server "ansible" using ssh
-
-We need to install git
-
-__Type:__
-
-```bash
-sudo dnf install git -y
-```
-
-![Alt text](images/021_install_git.png?raw=true "install git")
-
-Lets test the playbook
-
-Clone the git repository
-
-__Note:__
-
-Change to your repository
-
-__Type:__
-
-```bash
-git clone https://github.com/jesperberth/ansibleclass.git
-```
-
-![Alt text](images/022_git_clone.png?raw=true "git clone")
 
 Run the playbook
 
@@ -150,7 +124,7 @@ cd ansibleclass
 
 ls
 
-ansible-playbook 01_linux.yml 
+ansible-playbook 01_linux.yml
 
 ```
 

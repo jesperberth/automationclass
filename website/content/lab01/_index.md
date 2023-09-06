@@ -5,7 +5,7 @@ chapter: false
 pre: "<b>Lab 1. </b>"
 ---
 
-In this session we will install and use Visual Studio Code with a few plugins to start working with ansible playbooks and create two playbooks, one for linux and one for windows
+In the first lab we will Deploy our lab environment, configure and install necessary software and utils and create a GitHub account and repository
 
 ## Table of Contents
 
