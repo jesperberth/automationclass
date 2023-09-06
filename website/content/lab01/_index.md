@@ -12,10 +12,9 @@ In this session we will install and use Visual Studio Code with a few plugins to
 - [Prepare](#prepare)
 - [Task 1 Deploy Lab](task1)
 - [Task 2 Connect to Student](task2)
-- [Task 3 Install Winget](task3)
-- [Task 4 Install Software](task4)
-- [Task 5 Install WSL](task5)
-- [Task 6 Create GitHub Account](task6)
+- [Task 3 Install Software](task4)
+- [Task 4 Install WSL](task5)
+- [Task 5 Create GitHub Account](task6)
 
 ## Prepare
 
