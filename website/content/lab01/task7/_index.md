@@ -102,8 +102,6 @@ Now we have our __Ansibleclass__ repo with the __README.md__ file in VSCode
 
 ![Alt text](images/05_vscode_ready.png?raw=true "Git repo is now in VSCode")
 
-To push changes back to our GitHub repository we need to authenticate
-
 In the __EXPLORER__ (The Red box is the File Explorer) click once on the README.md file
 
 ![Alt text](images/06_vscode_explorer.png?raw=true "EXPLORER in VSCode")
@@ -126,6 +124,70 @@ All files in the __ansibleclass__ folder are monitored by __git__
 
 Git detects the changes
 
-- In the left menu, the source control 
+- In the left menu, the source control will reflect number of files with changes
+- In the Editor, git will show added lines with green mark on each line, and a red arrow where a line is deleted
+- In the bottom, git will show the branch we are on and indicate with a * that there are uncommited changes for this branch
 
 ![Alt text](images/07_vscode_readme.png?raw=true "README in VSCode")
+
+Click on the __Source Control__ in the left menu
+
+The left pane now changes to SCM (Git) here we can see files that have changed
+
+![Alt text](images/08_vscode_scm.png?raw=true "VSCode SCM")
+
+If you click the file __README.md__ you will see the original file in the left and the __Working Tree__ file to the right with the differences highlighted
+
+Close the __working tree__ tab
+
+![Alt text](images/09_vscode_working_tree.png?raw=true "VSCode SCM")
+
+The __Message__ box in SCM is for the Commit message
+
+Add the following text: __Add text in readme__
+
+Click __Commit__
+
+![Alt text](images/10_vscode_commit.png?raw=true "VSCode Commit")
+
+The new file is in the __Working Tree__ the file need to be staged in Git before it can be Commited
+
+Click __Always__ now VSCode will automatically add new files to the stageing area
+
+![Alt text](images/11_vscode_stage.png?raw=true "VSCode Commit")
+
+The README.md file has now been __Staged__ and __Commited__ to our local repository to push the changes to GitHub click on __Sync Changes__
+
+On the bottom status line you can see that our local repository has changes that need to be pushed up
+
+Click __Ok, Don't Show Again__
+
+![Alt text](images/12_vscode_sync.png?raw=true "VSCode Sync")
+
+To push changes back to our GitHub repository we need to authenticate the first time
+
+Click __Allow__
+
+![Alt text](images/13_vscode_allow.png?raw=true "VSCode allow")
+
+A browser will open and let you authorize GitHub for VSCode
+
+Click __Authorize Visual-Studio-Code__
+
+![Alt text](images/14_github_auth.png?raw=true "VSCode allow")
+
+Type your __Password__ and click __Confirm__
+
+![Alt text](images/15_github_auth_password.png?raw=true "VSCode allow")
+
+Click __Open__
+
+![Alt text](images/16_github_auth_password.png?raw=true "VSCode allow")
+
+You are now Authorized and the changes are synced
+
+![Alt text](images/18_vscode_github_done.png?raw=true "VSCode allow")
+
+Go to your github repository and check that the change has been synced
+
+![Alt text](images/19_github_repo.png?raw=true "github repo")
