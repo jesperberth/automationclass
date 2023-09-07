@@ -15,10 +15,10 @@ In VSCode add the following text to the file
 
 ```ansible
 
-  - name: Add line in file
-    lineinfile:
-      path: /root/testfile.txt
-      line: Ansible was here...
+    - name: Add line in file
+      lineinfile:
+        path: /root/testfile.txt
+        line: Ansible was here...
 
 ```
 
@@ -53,9 +53,9 @@ Run the playbook
 __Type:__
 
 ```bash
-ls
 
-ansible-playbook 01_linux.yml 
+ansible-playbook 01_linux.yml
+
 ```
 
 ![Alt text](images/027_run_playbook_secondtask.png?raw=true "Run playbook")
@@ -67,7 +67,9 @@ The "Create File" task will be changed every time as we use the touch command on
 __Type:__
 
 ```bash
-ansible-playbook 01_linux.yml 
+
+ansible-playbook 01_linux.yml
+
 ```
 
 ![Alt text](images/028_run_playbook_secondtask_idempodent.png?raw=true "Run playbook")
