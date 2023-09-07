@@ -201,7 +201,7 @@ ansible linuxservers -m systemd -a "name=cockpit.socket state=started enabled=ye
 
 This will fail as the user dosn't have the right permissions
 
-Add -b (become will default use sudo to root) and  is the escalation password
+Add -b (become will default use sudo to root)
 
 __Type:__
 
