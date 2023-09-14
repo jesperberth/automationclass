@@ -11,13 +11,13 @@ On
 
 ![ansible](/images/ansible.png)
 
-Lets create a new ansible-hosts.yml
+Create a new file __ansible-hosts.yml__
 
 Copy the following inventory to ansible-hosts.yml
 
 __Note:__
 
-We need to set an option in vi before pasteing the configuration
+We need to set an option in vi before we paste the configuration
 
 __Type:__
 
@@ -35,6 +35,10 @@ Hit Esc-key
 
 i (to toggle insert)
 ```
+
+![Alt text](images/037_set_paste.png?raw=true "vi paste")
+
+Note that it now writes -- INSERT (paste) -- in the bottom
 
 __Remember__ to change the ansible_user to your initials
 
@@ -56,10 +60,6 @@ windowsservers:
 
 ```
 
-![Alt text](images/037_set_paste.png?raw=true "vi paste")
-
-Note that it now writes -- INSERT (paste) -- in the bottom
-
 You can do a copy/paste of the inventory
 
 ![Alt text](images/037_yaml_inventory.png?raw=true "yaml inventory")
@@ -72,7 +72,7 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-Lets change ansible.cfg to use the new inventory, you just need to add the .yml to the inventory line
+Change __ansible.cfg__ to use the new inventory, you just need to add the .yml to the inventory line
 
 ```bash
 
