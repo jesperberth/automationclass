@@ -17,7 +17,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Add below to the playbook 01_vars.yml
+Add below to the playbook __01_vars.yml__
 
 First task configures the firewall and has the notify option sat
 
@@ -60,7 +60,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_vars.yml 
+ansible-playbook 01_vars.yml
 
 ```
 
@@ -72,7 +72,7 @@ __Type:__
 
 ```bash
 
-ansible-playbook 01_vars.yml 
+ansible-playbook 01_vars.yml
 
 ```
 

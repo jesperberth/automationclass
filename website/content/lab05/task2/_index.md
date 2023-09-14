@@ -15,7 +15,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Add below to the playbook 01_vars.yml
+Add below to the playbook __01_vars.yml__
 
 __Type:__
 
@@ -51,7 +51,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_vars.yml 
+ansible-playbook 01_vars.yml
 
 ```
 
@@ -99,7 +99,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_vars.yml 
+ansible-playbook 01_vars.yml
 
 ```
 
@@ -111,7 +111,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Add below to the playbook 01_vars.yml
+Add below to the playbook __01_vars.yml__
 
 __Type:__
 
@@ -141,7 +141,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_vars.yml 
+ansible-playbook 01_vars.yml
 
 ```
 
