@@ -11,7 +11,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file 02_stat.yml
+Create a new file __02_stat.yml__
 
 __Type:__
 

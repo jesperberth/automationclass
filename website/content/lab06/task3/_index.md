@@ -40,7 +40,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file 01_delegate.yml
+Create a new file __01_delegate.yml__
 
 ```ansible
 ---

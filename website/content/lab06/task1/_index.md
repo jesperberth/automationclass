@@ -11,7 +11,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file 01_stat.yml
+Create a new file __01_stat.yml__
 
 __Type:__
 
@@ -63,7 +63,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_stat.yml 
+ansible-playbook 01_stat.yml
 
 ```
 
@@ -75,7 +75,7 @@ The download task will have status __skipping__ and the unzip task will have sta
 
 ```bash
 
-ansible-playbook 01_stat.yml 
+ansible-playbook 01_stat.yml
 
 ```
 
