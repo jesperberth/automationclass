@@ -76,7 +76,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 02_loop.yml 
+ansible-playbook 02_loop.yml
 
 ```
 

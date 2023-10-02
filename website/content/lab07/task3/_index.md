@@ -205,7 +205,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 02_roles.yml 
+ansible-playbook 02_roles.yml
 
 ```
 

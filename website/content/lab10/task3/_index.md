@@ -86,8 +86,8 @@ Create a new file 00_azure_tower.yml add the following
   connection: local
 
   tasks:
-  - name: Get facts for all resource groups
-    azure_rm_resourcegroup_info:
+    - name: Get facts for all resource groups
+      azure_rm_resourcegroup_info:
 
 ```
 
