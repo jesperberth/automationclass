@@ -11,9 +11,15 @@ In
 
 We need to create tasks, handlers, meta and defaults
 
-First thing to do is install all needed packages, start the httpd daemon and open the firewall
+The role has the same content as our playbook, but each block has been divided into matching folders
 
-In VSCode open the roles/webserver/tasks/main.yml add the following
+The role will install all needed packages, start the httpd daemon and open the firewall
+
+In VSCode open the __roles/webserver/tasks/main.yml__ add the following
+
+__Note:__ Make sure you don't have multiple identical lines in the top like this
+
+![Alt text](images/01_vscode_tasks_fail.png?raw=true "vscode tasks fail")
 
 ```ansible
 ---
@@ -44,7 +50,7 @@ In VSCode open the roles/webserver/tasks/main.yml add the following
 
 We will put a list - package in the defaults main.yml
 
-Open defaults/main.yml and add the following
+Open __defaults/main.yml__ and add the following
 
 ```ansible
 ---
@@ -63,7 +69,7 @@ package:
 
 We will add the handler firewall reload
 
-Open handlers/main.yml and add the following
+Open __handlers/main.yml__ and add the following
 
 ```ansible
 ---
@@ -84,7 +90,7 @@ Open handlers/main.yml and add the following
 
 As a last thing, you need to update the meta/main.yml
 
-In VSCode change the meta/main.yml so it matches your information, to get a god score on galaxy you will need to fill in
+In VSCode change the __meta/main.yml__ so it matches your information, to get a god score on galaxy you will need to fill in
 
 - author
 - description
@@ -96,6 +102,8 @@ In VSCode change the meta/main.yml so it matches your information, to get a god 
 - dependecies (if any)
 
 Fill in author, description, company, licens and platform
+
+__Note:__ To get a good linting replace the content with the code below, all indentations is correct here
 
 ```ansible
 galaxy_info:
@@ -150,7 +158,7 @@ dependencies: []
 
 Create an php file index.php make sure its in the root of your ansibleclass repo
 
-In VSCode add the following to index.php
+In VSCode add the following to __index.php__
 
 ```php
 <?PHP
@@ -166,7 +174,7 @@ And finally lets create a playbook to run it all
 
 First we use our role to install and configure httpd and php next we have a simple task that copies our php file
 
-Create a new file 02_roles.yml add the following
+Create a new file __02_roles.yml__ add the following
 
 ```ansible
 ---

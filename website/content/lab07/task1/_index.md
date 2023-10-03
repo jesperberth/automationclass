@@ -15,9 +15,11 @@ Ansible Galaxy holds roles and collections, its an Hub for sharing ansible conte
 
 Search for a role called el_httpd
 
+In the left menu click __Search__ and type in __el_httpd__ in the search box
+
 ![Alt text](images/002_ansible_galaxy_search.png?raw=true "ansible galaxy search")
 
-Click on the top result "el_httpd"
+Click on the top result __el_httpd__
 
 Click the Read Me for a short description of the role and how use it
 
@@ -50,7 +52,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file 01_roles.yml
+Create a new file __01_roles.yml__
 
 __Type:__
 
@@ -82,7 +84,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_roles.yml 
+ansible-playbook 01_roles.yml
 
 ```
 
