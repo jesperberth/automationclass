@@ -13,7 +13,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file 01_changedns.yml
+Create a new file __01_changedns.yml__
 
 Add below to the playbook, this will set the member servers dns client to use the new domaincontroller.
 

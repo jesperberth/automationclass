@@ -15,7 +15,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file 01_domain.yml
+Create a new file __01_domain.yml__
 
 Add below to the playbook, this will create a new Active Directory.
 

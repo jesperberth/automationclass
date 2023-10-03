@@ -13,7 +13,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file 01_joinad.yml
+Create a new file __01_joinad.yml__
 
 Add below to the playbook, this will join the member servers to the new Active Directory.
 
@@ -63,22 +63,58 @@ ansible-playbook 01_joinad.yml --ask-vault-password
 
 ![Alt text](images/10_joinad_run.png?raw=true "join ad playbook run")
 
-Lets check that everything worked
+Check that everything worked
 
-Logon to the Domain Controller (server3) using RDP
+In
+
+![vscode](/images/student-vscode.png)
+
+Create a new playbook __03_domain.yml__
+
+To list all computers in the OU __Computers__
+
+```ansible
+---
+- name: Create Group and user
+  hosts: domaincontroller
+  vars:
+    domain: ansible.local
+
+  tasks:
+    - name: Search all computer accounts
+      microsoft.ad.object_info:
+        filter: objectClass -eq 'computer'
+        properties: '*'
+        search_scope: one_level
+        search_base: CN=Computers,DC=ansible,DC=local
+      register: computers
+
+    - name: Show Computers
+      ansible.builtin.debug:
+        msg: "{{ computers }}"
+
+```
+
+![Alt text](images/11_list_computers.png?raw=true "list computers")
+
+Save and commit to Git
 
 On
 
-![server3](/images/server3.png)
+![ansible](/images/ansible.png)
 
-In the Server Manager Console, top right corner select tools and click on "Active Directory Users and Computers"
+Pull the new playbook and run it
 
-![Alt text](images/11_open_ad_users.png?raw=true "Open Active Directory Users and Computers")
+__Type:__
 
-In the new window click on computers, server4 should be visible here
+```bash
 
-![Alt text](images/12_computers.png?raw=true "Show Computers")
+cd ansibleclass
 
-Click on users, see that the user "basim" exist and the group "corp" exist, right click on "corp" and select properties select the "Members" Tab, the user "basim" should be a member.
+git pull
 
-![Alt text](images/13_grpanduser.png?raw=true "Show Users")
+ansible-playbook 03_domain.yml --ask-vault-password
+
+```
+
+![Alt text](images/12_list_computers_run.png?raw=true "list computers run")
