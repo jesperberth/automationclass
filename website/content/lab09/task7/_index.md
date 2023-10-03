@@ -11,7 +11,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file 03_azure.yml
+Create a new file __03_azure.yml__
 
 Add the following text to the file, change the name of the variable __user__ to your initials use the same as you use to login to ansible server
 

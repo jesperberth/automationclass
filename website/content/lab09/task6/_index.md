@@ -19,11 +19,13 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file 01_webserver_azure.yml
+Create a new file __01_webserver_azure.yml__
 
-Change the websiteauthor to your name
+Change the __websiteauthor__ to your name
 
-And change the __- hosts: tag_solution_webserver_jesbe__ so it matches your initials
+And
+
+change the __- hosts: tag_solution_webserver_jesbe__ so it matches your initials
 
 ```ansible
 ---
@@ -73,7 +75,7 @@ And change the __- hosts: tag_solution_webserver_jesbe__ so it matches your init
 
 ![Alt text](images/021_webserver_playbook.png?raw=true "azure install httpd playbook")
 
-In VSCode create a new jinja file index.html.j2
+In VSCode create a new jinja file __index.html.j2__
 
 ```html
 <html>
@@ -116,6 +118,14 @@ ansible-playbook 01_webserver_azure.yml -i ./webserver.azure_rm.yml
 ![Alt text](images/023_webserver_run.png?raw=true "webserver playbook run")
 
 Check the result in a browser
+
+Get the webservers ip in the Azure Portal
+
+Click __Virtual Machines__
+
+Sort: __Resource Group equals__ and select your __Webserver__ Resource
+
+![Alt text](images/025_webserver_ip.png?raw=true "webserver playbook run")
 
 ```code
 http://<your webserver ip>

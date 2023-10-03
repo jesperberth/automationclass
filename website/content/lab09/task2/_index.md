@@ -13,11 +13,11 @@ On
 
 ![azure](/images/azure.png)
 
-In the top bar, click the "cloudshell" icon marked with red
+In the top bar, click the __cloudshell__ icon marked with red
 
 ![Alt text](images/01_start_cloud_shell.png?raw=true "Cloud Shell")
 
-Select "Bash"
+Select __Bash__
 
 ![Alt text](images/02_start_cloud_shell_bash.png?raw=true "Cloud Shell")
 
@@ -50,8 +50,6 @@ echo $SubID
 ![Alt text](images/03_get_sub_id.png?raw=true "Cloud Shell sub id")
 
 Copy the line id: "xxx-xxx" to the same notepad
-
-__Below is for both command and GUI__ versions
 
 On
 
@@ -118,9 +116,9 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new playbook file 01_azure.yml
+Create a new playbook file __01_azure.yml__
 
-add the following text to the file, change the name of the variable **user to your initials** use the same as you use to login to ansible server
+add the following text to the file, change the name of the variable __user to your initials__ use the same as you use to login to ansible server
 
 ```ansible
 ---

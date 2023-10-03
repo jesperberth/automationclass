@@ -15,7 +15,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Add the next sections to the 02_azure.yml playbook
+Add the next sections to the __02_azure.yml__ playbook
 
 ```ansible
 
@@ -79,7 +79,7 @@ On
 
 Pull the new playbook and run it
 
-**Type:**
+__Type:__
 
 ```bash
 
