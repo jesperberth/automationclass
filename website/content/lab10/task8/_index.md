@@ -9,11 +9,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a copy of 01_webserver_azure.yml -> 01_webserver_azure_tower.yml
-
-Change the hosts: to match your initials
-
-- hosts: __tag_solution_webserver_jesbe__
+Create a copy of __01_webserver_azure.yml -> 01_webserver_azure_tower.yml__
 
 Remove both vars:
 
@@ -25,7 +21,7 @@ websiteauthor: __Some Name__
 
 Save and commit
 
-Go to your project and sync
+Go to your __project__ and __sync__
 
 In the left pane, click __Templates__
 

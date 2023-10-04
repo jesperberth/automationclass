@@ -68,7 +68,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new playbook 01_awx.yml
+Create a new playbook __01_awx.yml__
 
 Add below to the playbook
 
