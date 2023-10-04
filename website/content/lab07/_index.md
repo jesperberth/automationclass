@@ -11,9 +11,8 @@ Using roles
 
 - [Prepare](#prepare)
 - [Task 1 Ansible Galaxy and role install](task1)
-- [Task 2 Add SSH key to GitHub](task2)
-- [Task 3 Create a role - part 1](task3)
-- [Task 4 Create a role - part 2](task4)
+- [Task 2 Create a role - part 1](task2)
+- [Task 3 Create a role - part 2](task3)
 
 ## Prepare
 

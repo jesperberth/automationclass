@@ -15,9 +15,9 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file webserver.azure_rm.yml
+Create a new file __webserver.azure_rm.yml__
 
-Note: The inventory file must end with .azure_rm.yml
+Note: The inventory file must end with __.azure_rm.yml__
 
 ```ansible
 plugin: azure_rm

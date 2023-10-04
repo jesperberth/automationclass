@@ -5,21 +5,11 @@ weight: 10
 
 ## Task 1 Install Ansible
 
-On
-
-![student](/images/student.png)
-
-Start Windows Terminal
-
-In the startmenu __Type__ "terminal" and click on __Windows Terminal__
-
-![Alt text](images/000_student_start_winterm.png?raw=true "Student start winterminal")
-
 In
 
 ![student-pwsh](/images/student-pwsh.png)
 
-In the Windows Terminal write ssh __username@ansible__ hit enter
+In the Windows Terminal write __ssh username@ansible__ hit enter
 
 __Type:__
 
@@ -65,6 +55,8 @@ python3 -m venv ansible
 To activate our virtualenv ansible run the following
 
 which python - is just to check that were using the correct python
+
+If you close the ssh session you will need to run __source ansible/bin/activate__ again to enable the python virtual environement
 
 __Type:__
 

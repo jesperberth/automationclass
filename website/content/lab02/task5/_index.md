@@ -5,6 +5,8 @@ weight: 50
 
 ## Task 5 Ansible Collections
 
+On
+
 ![ansible](/images/ansible.png)
 
 In ansible 2.10 and forward, most modules will be delivered from collections via [Ansible Galaxy](https://galaxy.ansible.com)

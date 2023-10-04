@@ -19,9 +19,9 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Open the file 01_vars.yml
+Open the file __01_vars.yml__
 
-We will modify this to use blocks
+We will modify the playbook to use blocks
 
 From the line __tasks:__ and the following 4 tasks
 
@@ -29,6 +29,10 @@ From the line __tasks:__ and the following 4 tasks
 - Enable httpd service
 - Show Status
 - Is httpd running
+
+It's from line __13__ to __33__ both included
+
+![Alt text](images/001_remove_block.png?raw=true "ansible block playbook")
 
 Change to the following code snippet
 

@@ -15,13 +15,13 @@ In ansible vars can be defined in 22 different places, yes .... and they all tak
 
 [ansible docs - package module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/package_module.html)
 
-Lets use a single variable in a playbook
+Use a single variable in a playbook
 
 In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new playbook 01_vars.yml
+Create a new playbook __01_vars.yml__
 
 __Type:__
 
@@ -58,19 +58,19 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_vars.yml 
+ansible-playbook 01_vars.yml
 
 ```
 
 ![Alt text](images/002_vars_playbook_run.png?raw=true "ansible vars in playbook run")
 
-Lets change the playbook to use a list to install several packages
+Change the playbook to use a list to install several packages
 
 In
 
 ![vscode](/images/student-vscode.png)
 
-Change the playbook 01_vars.yml
+Change the playbook __01_vars.yml__
 
 __Type:__
 
@@ -112,7 +112,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_vars.yml 
+ansible-playbook 01_vars.yml
 
 ```
 

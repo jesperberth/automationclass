@@ -12,7 +12,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file 02_domain.yml
+Create a new file __02_domain.yml__
 
 Add below to the playbook, this will create a new group and user in AD.
 

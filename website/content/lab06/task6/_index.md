@@ -13,7 +13,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Open the file 01_vars.yml
+Open the file __01_vars.yml__
 
 We will modify this to use tags
 
@@ -38,6 +38,17 @@ and this to the __Configure firewall__ task
 Save, Commit and push
 
 ![Alt text](images/002_tag2_playbook.png?raw=true "ansible tag playbook")
+
+and this to the __Is Httpd not started__ task
+
+```ansible
+      tags:
+        - config
+```
+
+Save, Commit and push
+
+![Alt text](images/003_tag3_playbook.png?raw=true "ansible tag playbook")
 
 On
 

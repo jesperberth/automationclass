@@ -1,43 +1,41 @@
 ---
-title: Install WinGet
+title: Install Software
 weight: 30
 ---
 
+## Task 3 Install Software
 
-## Task 3 Install WinGet
-
-On Student
-
-![student](/images/student.png)
-
-We will use winget command to install our software for the labs
-
-First we need to enable winget
-
-Log in to your student desktop
-
-One the Desktop
-
-Click __Microsoft Store__ in the taskbarc
-
-![Alt text](images/003_microsoft_store.png?raw=true "start microsoft store")
-
-Click __Search__ and type __app install__
-
-Click on __App Installer__
-
-![Alt text](images/004_search_appinstall.png?raw=true "start microsoft store")
-
-Installation will start automaticly
-
-![Alt text](images/005_app_installer.png?raw=true "app installer")
-
-In Powershell
+In
 
 ![student-pwsh](/images/student-pwsh.png)
 
-Start Windows Terminal, in Windows 11 its installed by default
+Set the timezone to match your current timezone
 
-Click the __Start__ button, write __terminal__ make sure you select __Run as administrator__
+```bash
 
-![Alt text](images/006_start_winterm.png?raw=true "start winterm")
+tzutil /s "Romance Standard Time"
+
+```
+
+![Alt text](images/001_set_timezone.png?raw=true "set timezone")
+
+You need to install the following software
+
+We will use Windows 11's builtin package management system __winget__
+
+Winget is installed as default on Windows 11 22H2
+
+- Git
+- VSCode
+
+Run the following command
+
+```bash
+
+winget install git.git --accept-source-agreements
+
+winget install Microsoft.VisualStudioCode
+
+```
+
+![Alt text](images/001_winget_install.png?raw=true "winget accept")

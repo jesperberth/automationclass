@@ -1,95 +1,116 @@
 ---
-title: Clone Git Repo
+title: Create the first playbook
 weight: 10
 ---
 
-## Task 1 Clone Git Repository
-
-We will run Visual Studio Code from WSL to get the most out of the Ansible plugin
-
-We need to configure git with a Name and email to track the changes you are making
-
-__Note:__ This has to be done on your Student machine
-
-Open Terminal / WSL (Ubuntu)
-
-![student-wsl](/images/student-wsl.png)
-
-You must be in the __/home/USER__
-
-```bash
-
-cd
-
-pwd
-
-git config --global user.name "Full Name"
-
-git config --global user.email "email@address.com"
-
-git config --list
-
-```
-
-![Alt text](images/009_git_config.png?raw=true "Git Config")
-
-We need to create a folder for our local git repositories
-
-__Type:__
-
-```bash
-mkdir git
-
-cd git
-
-```
-
-On
-
-![github](/images/github.png)
-
-On your "ansibleclass" repository page
-
-Click the green "Code" button to retrieve the URL for the repository
-
-Copy the url
-
-![Alt text](images/010_repourl.png?raw=true "Paste Repo URL")
-
-In
-
-![student-wsl](/images/student-wsl.png)
-
-write __git clone__ and paste the url
-
-```powershell
-
-git clone https://github.com/jesperberth/ansibleclass.git
-
-```
-
-![Alt text](images/009_git_clone.png?raw=true "git clone")
-
-Open the new git project folder __ansibleclass__
-
-start Visual Studio Code
-
-```powershell
-
-cd ansibleclass
-
-code .
-
-```
-
-![Alt text](images/009_start_code.png?raw=true "Start VSCode")
+## Task 1 Create the first playbook
 
 In
 
 ![vscode](/images/student-vscode.png)
 
-Click "Yes, I trust the authers" button
+In the __File explorer__ part of VSCode rigth click on the pane below the "ANSIBLECLASS"
 
-![Alt text](images/009_start_code_trust.png?raw=true "Start VSCode trust")
+Select __New File__
 
-![Alt text](images/014_git_in_vscode.png?raw=true "Git repo is now in VSCode")
+![Alt text](images/015_code_newfile.png?raw=true "new file in VSCode")
+
+Name it __01_linux.yml__
+
+Write the following in the text pane
+
+```ansible
+---
+- hosts: linuxservers
+  become: yes
+
+  tasks:
+  - name: Create file
+    file:
+      path: /root/testfile.txt
+      state: touch
+
+```
+
+Save the file (Ctrl + S)
+
+Ansible Linting will load and mark Problems
+
+__Note:__ First time saving the playbook, ansible lint will take a few minutes to run as it has to download the container image from the repository
+
+![Alt text](images/016_ansible_lint.png?raw=true "Ansible lint in VSCode")
+
+Click on __Problems__ tab - if the __Problems__ tab is missing use the shortcut (Ctrl + Shift + M)
+
+There are six problems that we need to fix
+
+The Playbook will run as is, but following the rules might prevent errors in the future
+
+![Alt text](images/016_lint_errors.png?raw=true "lint errors")
+
+From the top:
+
+- All plays should be named - __- name: First Playbook__
+- Truthy value should be one of false, true - yes and no works but the correct way is a true
+- USE FQCN for builtin module actions, we should always refer to the FQCN - ansible.builtin.file is correct
+- File permissions is unset or incorrect
+- Wrong indentation: expected at least 3
+- No new line character at the end of file. All playbooks should end with a blank line
+
+Take a look at the documentation for the file module
+
+[Ansible File Module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html)
+
+Add the mode: in the file task
+
+The playbook should look like this
+
+```ansible
+---
+- name: First Playbook
+  hosts: linuxservers
+  become: true
+
+  tasks:
+    - name: Create file
+      ansible.builtin.file:
+        path: /root/testfile.txt
+        state: touch
+        mode: '0755'
+
+```
+
+![Alt text](images/016_code_playbook_fixed.png?raw=true "playbook in VSCode fixed")
+
+Now commit and sync our changes to GitHub
+
+Click the Source control button in the left panel.
+
+Write a comment __First Playbook__ and click the Blue __Commit__ button
+
+![Alt text](images/018_code_git_sync.png?raw=true "git sync in VSCode")
+
+Sync the changes with GitHub, click the blue __Sync Changes__
+
+![Alt text](images/018_code_git_sync_button.png?raw=true "git sync in VSCode")
+
+On
+
+![ansible](/images/ansible.png)
+
+Run the playbook
+
+__Type:__
+
+```bash
+cd
+
+cd ansibleclass
+
+git pull
+
+ansible-playbook 01_linux.yml
+
+```
+
+![Alt text](images/023_run_playbook.png?raw=true "Run playbook")

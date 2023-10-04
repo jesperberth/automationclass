@@ -5,17 +5,18 @@ chapter: false
 pre: "<b>Lab 1. </b>"
 ---
 
-In this session we will install and use Visual Studio Code with a few plugins to start working with ansible playbooks and create two playbooks, one for linux and one for windows
+In the first lab we will Deploy our lab environment, configure and install necessary software and utils and create a GitHub account and repository
 
 ## Table of Contents
 
 - [Prepare](#prepare)
 - [Task 1 Deploy Lab](task1)
 - [Task 2 Connect to Student](task2)
-- [Task 3 Install Winget](task3)
-- [Task 4 Install Software](task4)
-- [Task 5 Install WSL](task5)
-- [Task 6 Create GitHub Account](task6)
+- [Task 3 Install Software](task3)
+- [Task 4 Install WSL](task4)
+- [Task 5 Create GitHub Account](task5)
+- [Task 6 Clone Git Repository](task6)
+- [Task 7 Enable Ansible extention](task7)
 
 ## Prepare
 

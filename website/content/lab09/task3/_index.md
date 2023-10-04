@@ -13,9 +13,9 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new playbook file 02_azure.yml
+Create a new playbook file __02_azure.yml__
 
-add the following text to the file, change the first variable __"user"__ to your initials, use the same as in previous task, it will be used for creating resources and a login to the webserver
+add the following text to the file, change the first variable __user__ to your initials, use the same as in previous task, it will be used for creating resources and a login to the webserver
 
 ```ansible
 ---

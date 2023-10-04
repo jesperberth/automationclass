@@ -9,11 +9,9 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a copy of 01_azure.yml -> 01_azure_tower.yml
+Create a copy of __01_azure.yml -> 01_azure_tower.yml__
 
 Change the variable user: - it should be your initials as we copied your working playbook from previous lab
-
-to __your initials eg. "jesbe"__
 
 Save and Commit
 

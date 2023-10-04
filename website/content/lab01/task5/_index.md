@@ -1,138 +1,44 @@
 ---
-title: Install WSL
+title: Create GitHub Account
 weight: 50
 ---
 
-## Task 5 Install WSL
+## Task 5 Create GitHub Account
 
-Install WSL
+Open a browser and go to [Git Hub](https://github.com)
 
-In
+![github](/images/github.png)
 
-![student-pwsh](/images/student-pwsh.png)
+If you have a github account login, and go to task 6 - otherwise create a new account
 
-Install WSL
+Type in your email and __Click__ Sign up for free
 
-When its ready, reboot the workstation
+![Alt text](images/01_github.png?raw=true "GitHub")
 
-```powershell
+Enter __Password__ click next
 
-wsl --install
+Enter __Username__ click next
 
-```
+Enter __y or n__ for updates and announcements
 
-![Alt text](images/01_install_wsl.png?raw=true "install wsl")
+Verify your account
 
-Login to you workstation
+Click __Submit__
 
-After the reboot
+![Alt text](images/02_create_account.png?raw=true "Create GitHub Account")
 
-Ubuntu will continue the installation
+Select __Just Me__
 
-When ready it will prompt for a username and password
+![Alt text](images/03_question1.png?raw=true "Create GitHub Account question")
 
-![Alt text](images/02_install_wsl_add_user.png?raw=true "install wsl add user")
+Select your __interests__
 
-WSL is now ready
+![Alt text](images/04_question2.png?raw=true "Create GitHub Account question")
 
-![Alt text](images/03_wsl_ready.png?raw=true "wsl ready")
+Select the __Free__ Account
 
-Close the Linux terminal and open powershell
+![Alt text](images/05_select_free.png?raw=true "Free Account")
 
-![student-pwsh](/images/student-pwsh.png)
+Your GitHub account is now ready
 
-We need to install the vscode remote extention
-
-```powershell
-
-code --install-extension ms-vscode-remote.remote-wsl
-
-```
-
-![Alt text](images/05_code_remote_ext.png?raw=true "code extention")
-
-Now start WSL from Windows Terminal
-
-In the menu select __Ubuntu__
-
-![Alt text](images/06_start_ubuntu.png?raw=true "start ubuntu")
-
-![student-wsl](/images/student-wsl.png)
-
-Now update the Ubuntu
-
-```bash
-
-sudo apt-get update && sudo apt-get upgrade -y
-
-```
-
-![Alt text](images/07_update_ubuntu.png?raw=true "update ubuntu")
-
-Install docker
-
-```bash
-
-sudo apt-get install docker.io -y
-
-```
-
-![Alt text](images/08_install_docker.png?raw=true "install docker")
-
-Add user to the docker group
-
-```bash
-
-sudo usermod -aG docker $USER
-
-```
-
-![Alt text](images/10_groupadd.png?raw=true "groupadd")
-
-Next allow your user to run docker without typing a password
-
-```bash
-
-echo $USER' ALL = NOPASSWD: /usr/bin/dockerd' | sudo EDITOR='tee -a' visudo
-
-```
-
-![Alt text](images/11_visudo.png?raw=true "visudo")
-
-__Close__ the Ubuntu tab in Windows Terminal and open it again
-
-run a docker command to check that it works
-
-```bash
-
-docker ps
-
-```
-
-if it looks like this, it worked
-
-![Alt text](images/12_docker_ps.png?raw=true "docker ps")
-
-In
-
-![student-pwsh](/images/student-pwsh.png)
-
-Lets install some VS Code extentions
-
-- Ansible
-- Indent Rainbow
-- Indent One Space
-
-In the terminal run below to install the extentions
-
-__Note:__ Make sure you are in the Windows Powershell Tab
-
-```bash
-
-code --install-extension redhat.ansible
-code --install-extension oderwat.indent-rainbow
-code --install-extension usernamehw.indent-one-space
-
-```
-
-![Alt text](images/13_install_code_extentions.png?raw=true "Install code extentions")
+![Alt text](images/06_account_done.png?raw=true "Create GitHub Account")

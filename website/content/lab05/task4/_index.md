@@ -19,7 +19,11 @@ ansible.builtin.setup
 
 or just run a ansible -m setup
 
-Lets get the facts of our linuxservers
+Get the facts of our linuxservers
+
+On
+
+![ansible](/images/ansible.png)
 
 __Type:__
 
@@ -51,7 +55,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new playbook 01_facts.yml
+Create a new playbook __01_facts.yml__
 
 __Type:__
 
@@ -88,8 +92,8 @@ ansible-playbook 01_facts.yml
 
 Facts can be in one of three type
 
-* List (Array) - will have [ ] values which are seperated with a ,
-* Dictionary - will have { } around the key value pairs
+* List (Array) - will have __[  ]__ values which are seperated with a comma __,__
+* Dictionary - will have __{  }__ around the __key:value__ pairs which are seperated with a comma __,__
 * Ansible UnSafe Text (Variable)
 
 ![Alt text](images/005_ansible_facts.png?raw=true "ansible facts")
@@ -102,7 +106,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Add the below task to the playbook 01_facts.yml
+Add the below task to the playbook __01_facts.yml__
 
 __Type:__
 
@@ -139,7 +143,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Add the below task to the playbook 01_facts.yml
+Add the below task to the playbook __01_facts.yml__
 
 __Type:__
 

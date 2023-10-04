@@ -11,7 +11,7 @@ On
 
 ![ansible](/images/ansible.png)
 
-and retrive your public key
+retrive your private key
 
 __Type:__
 

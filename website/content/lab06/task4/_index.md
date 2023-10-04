@@ -23,7 +23,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file 01_lookup.yml
+Create a new file __01_lookup.yml__
 
 ```ansible
 ---

@@ -77,7 +77,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file 00_azure_tower.yml add the following
+Create a new file __00_azure_tower.yml__ add the following
 
 ```ansible
 ---
@@ -86,8 +86,13 @@ Create a new file 00_azure_tower.yml add the following
   connection: local
 
   tasks:
-  - name: Get facts for all resource groups
-    azure_rm_resourcegroup_info:
+    - name: Get facts for all resource groups
+      azure_rm_resourcegroup_info:
+      register: rg
+
+    - name: Show Resource Groups
+      ansible.builtin.debug:
+        msg: "{{ rg }}"
 
 ```
 

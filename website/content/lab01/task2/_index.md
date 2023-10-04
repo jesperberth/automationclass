@@ -39,7 +39,3 @@ Click "More choises" type your username/initials and password click __Ok__
 Select the "Don't ask me again for connections to this computer and click __Yes__
 
 ![Alt text](images/000_azure_portal_vm_mstsc_login_yes.png?raw=true "mstsc login")
-
-On the student vm click __Accept__
-
-![Alt text](images/000_student_accept.png?raw=true "Student accept")

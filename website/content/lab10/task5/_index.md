@@ -9,11 +9,9 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a copy of 02_azure.yml -> 02_azure_tower.yml
+Create a copy of __02_azure.yml -> 02_azure_tower.yml__
 
 Change the variable user: - so it matches the variable in the 01_azure_tower.yml
-
-to __your initials eg. "jesbe"__
 
 Remove the following lines from the playbook:
 
@@ -45,7 +43,7 @@ On
 
 ![ansible](/images/ansible.png)
 
-and retrive your public key
+retrive your public key
 
 __Type:__
 

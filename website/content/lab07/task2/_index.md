@@ -1,15 +1,17 @@
 ---
-title: Add SSH key to GitHub
+title: Create a role - part 1
 weight: 20
 ---
 
-## Task 2 Add SSH key to GitHub
+## Task 2 Create a role - part 1
 
-[Ansible docs - Roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
+Now we will create our own Role, webserver installing and configuring httpd and php
 
-We need to do some config to git, as we need to do some of the work on our linux host
+The role will be placed in the same git repository as we are using for the playbooks, but could have been placed in a seperate repo and committed to Ansible-Galaxy
 
-And copy our public ssh key to our github account
+We will use ansible-galaxy command to initialize a role template
+
+Its important that you do a git pull before we are adding anything in the folders
 
 On
 
@@ -18,87 +20,51 @@ On
 __Type:__
 
 ```bash
-cd
 
-git config --global user.email "you@example.com"
+cd  ansibleclass
 
-git config --global user.name "Your Name"
+git pull
 
-cat ~/.ssh/id_rsa.pub
+mkdir roles
+
+cd roles
+
+ansible-galaxy init webserver
+
+ls -al
 
 ```
 
-![Alt text](images/001_git_commands.png?raw=true "git commands")
+![Alt text](images/007_ansible_galaxy_init.png?raw=true "ansible galaxy init")
 
-Go to
-
-![github](/images/github.png)
-
-Login to your account
-
-In the top right corner "click" on your profile and select "Settings"
-
-![Alt text](images/002_github_settings.png?raw=true "github settings")
-
-In the left menu "click" on "SSH and GPG keys"
-
-![Alt text](images/003_github_settings.png?raw=true "github settings")
-
-"Click" on the green "New SSH key"
-
-![Alt text](images/004_github_newssh.png?raw=true "github settings")
+Now lets add, commit and push this to our git repo so we can work with the role in VSCode
 
 On
 
 ![ansible](/images/ansible.png)
-
-copy the pub key
-
-![Alt text](images/005_github_pubkey.png?raw=true "github settings")
-
-On
-
-![github](/images/github.png)
-
-Give the new key a Title "ansible"
-
-paste the key
-
-and click "Add SSH key"
-
-![Alt text](images/006_github_pubkey_add.png?raw=true "github settings")
-
-Now the key is created, you can see usage and delete the key when you are done with this course (My key is deleted)
-
-![Alt text](images/007_github_pubkey.png?raw=true "github settings")
-
-Now lets get the ssh url
-
-In the browser go to your repository on github "click" the green "Code" button and select "SSH" copy the url
-
-![Alt text](images/008_github_sshurl.png?raw=true "github sshurl")
-
-On
-
-![ansible](/images/ansible.png)
-
-Change the __url__ to your own
 
 __Type:__
 
 ```bash
+
 cd
 
 cd ansibleclass
 
-git remote set-url origin git@github.com:jesperberth/ansibleclass.git
+git add .
+
+git commit -m "Adding roles"
+
+git push origin main
 
 ```
 
-![Alt text](images/009_github_sshurl_cmd.png?raw=true "github sshurl cmd")
+![Alt text](images/008_ansible_git_push.png?raw=true "ansible git push")
 
-Do a git pull
+In
 
-It will prompt you for RSA fingerprint authenticy, write "yes"
+![vscode](/images/student-vscode.png)
 
-![Alt text](images/010_git_pull.png?raw=true "git pull")
+Do a push/pull to get the changes, you should see the roles \ webserver with all the default content
+
+![Alt text](images/009_vscode_push_pull.png?raw=true "vscode push pull")

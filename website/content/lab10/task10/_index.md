@@ -19,7 +19,7 @@ Click __Launch__ on the result page
 
 ![Alt text](images/29_run_workflow_survey_result.png?raw=true "Launch workflow survey result")
 
-When the last Template __Webserver_Install__ is running, click the box
+When the Template __Webserver__ is running, click the box
 
 ![Alt text](images/30_webserver_template_run.png?raw=true "Launch workflow survey result")
 

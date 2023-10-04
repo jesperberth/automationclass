@@ -5,37 +5,46 @@ weight: 20
 
 ## Task 2 Run ansible command
 
-Log on to server "ansible" using ssh
+On
 
 ![ansible](/images/ansible.png)
+
+We can see the ansible version and the python package versions installed
 
 __Type:__
 
 ```bash
 ansible --version
+
+pip freeze
+
 ```
 
 ![Alt text](images/004_install_ansible_version.png?raw=true "Ansible --version")
+
+--help Will give you other options for ansible command
 
 __Type:__
 
 ```bash
 ansible --help
+
 ```
 
-Will give you other options for ansible command
+![Alt text](images/004_ansible_help.png?raw=true "Ansible --help")
+
+Run ansible against localhost with module ping
 
 [Ansible Ping Module](https://docs.ansible.com/ansible/latest/modules/ping_module.html)
 
 ```bash
 ansible localhost -m ping
-```
 
-Will run ansible against localhost with module ping
+```
 
 ![Alt text](images/005_install_ansible_localhost_ping.png?raw=true "Ansible localhost ping")
 
-[Ansible File Module](https://docs.ansible.com/ansible/latest/modules/list_of_files_modules.html)
+[Ansible File Module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html)
 
 __Type:__
 

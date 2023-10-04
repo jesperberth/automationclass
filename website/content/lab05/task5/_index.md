@@ -17,7 +17,7 @@ In
 
 ![vscode](/images/student-vscode.png)
 
-Create a new file in Vscode 01_loop.yml
+Create a new file in Vscode __01_loop.yml__
 
 __Type:__
 
@@ -63,7 +63,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_loop.yml 
+ansible-playbook 01_loop.yml
 
 ```
 
@@ -126,7 +126,7 @@ cd  ansibleclass
 
 git pull
 
-ansible-playbook 01_loop.yml 
+ansible-playbook 01_loop.yml
 
 ```
 
