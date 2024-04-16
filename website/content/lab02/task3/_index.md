@@ -38,7 +38,7 @@ i (hit i to toggle input)
 
 ```bash
 [defaults]
-inventory = /home/jesbe/ansible-hosts
+inventory = /home/jesbe/hosts.yml
 ```
 
 __Type:__
@@ -56,7 +56,7 @@ Create the Ansible Hosts file
 __Type:__
 
 ```bash
-vi ansible-hosts
+vi hosts.yml
 ```
 
 In vi __Type:__
@@ -66,8 +66,9 @@ i (hit i to toggle input)
 ```
 
 ```bash
-[linuxservers]
-server1
+linuxservers:
+  hosts:
+    server1:
 ```
 
 __Type:__

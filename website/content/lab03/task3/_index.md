@@ -16,7 +16,7 @@ __Type:__
 ```bash
 cd
 
-vi ansible-hosts
+vi hosts.yml
 
 ```
 
@@ -25,9 +25,10 @@ In vi __type:__
 ```bash
 i (for input)
 
-[linuxservers]
-server1
-server2
+linuxservers:
+  hosts:
+    server1:
+    server2:
 
 ```
 
@@ -45,7 +46,7 @@ Hit Esc-key
 __Type:__
 
 ```bash
-cd ansibleclass
+cd git/ansibleclass
 
 ansible-playbook 01_linux.yml
 ```

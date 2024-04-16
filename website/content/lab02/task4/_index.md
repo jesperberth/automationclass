@@ -33,20 +33,20 @@ Add after the first group, linuxservers
 __Type:__
 
 ```bash
-vi ansible-hosts
+vi hosts.yml
 
 i (for input)
 
-[windowsservers]
-server3
-
-[windowsservers:vars]
-ansible_user=jesbe
-ansible_password=SomeThingSimple8
-ansible_port=5985
-ansible_connection=winrm
-ansible_winrm_transport=ntlm
-ansible_winrm_message_encryption=always
+windowsservers:
+  hosts:
+    server3:
+  vars:
+    ansible_user: jesbe
+    ansible_password: SomeThingSimple8
+    ansible_port: 5985
+    ansible_connection: winrm
+    ansible_winrm_transport: ntlm
+    ansible_winrm_message_encryption: always
 ```
 
 __Type:__

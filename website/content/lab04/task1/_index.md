@@ -18,26 +18,33 @@ On
 ```bash
 cd
 
-vi ansible-hosts
+vi hosts.yml
 
 ```
 
-In vi go to the line ansible_password=SomeThingSimple8
+In vi go to the line ansible_password: SomeThingSimple8
 
 __type:__
 
 in vi dd will remove the line
 
 ```bash
+Hit Esc
+
+set marker at the line with ansible_password
+
 dd
 
-[windowsservers:vars]
-ansible_user=jesbe
-ansible_password=SomeThingSimple8   <--------- Make sure the marker is at this line
-ansible_port=5985
-ansible_connection=winrm
-ansible_winrm_transport=ntlm
-ansible_winrm_message_encryption=always
+windowsservers:
+  hosts:
+    server3:
+  vars:
+    ansible_user: jesbe
+    ansible_password: SomeThingSimple8   <--------- Make sure the marker is at this line
+    ansible_port: 5985
+    ansible_connection: winrm
+    ansible_winrm_transport: ntlm
+    ansible_winrm_message_encryption: always
 ```
 
 __Type:__
@@ -154,7 +161,7 @@ Do a git pull and run the playbook
 
 ```bash
 
-cd ansibleclass
+cd git/ansibleclass
 
 git pull
 

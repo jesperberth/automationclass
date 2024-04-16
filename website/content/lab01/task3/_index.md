@@ -9,10 +9,11 @@ In
 
 ![student-pwsh](/images/student-pwsh.png)
 
+Start the terminal with __elevated rights__
+
 Set the timezone to match your current timezone
 
 ```bash
-
 tzutil /s "Romance Standard Time"
 
 ```
@@ -21,20 +22,24 @@ tzutil /s "Romance Standard Time"
 
 You need to install the following software
 
-We will use Windows 11's builtin package management system __winget__
-
-Winget is installed as default on Windows 11 22H2
-
 - Git
 - VSCode
 
-Run the following command
+We will use Chocolatey to install the software
+
+To install chocolatay Run the following command
 
 ```bash
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-winget install git.git --accept-source-agreements
+```
 
-winget install Microsoft.VisualStudioCode
+Close and start the Terminal with elevated rights
+
+```bash
+choco install git -y
+
+choco install vscode -y
 
 ```
 

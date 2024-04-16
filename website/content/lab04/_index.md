@@ -11,8 +11,7 @@ In this lab we will secure our secrets with Ansible Vault
 
 - [Prepare](#prepare)
 - [Task 1 Ansible-vault](task1)
-- [Task 2 Ansible Inventory yaml](task2)
-- [Task 3 Ansible Vault - Yaml inventory](task3)
+- [Task 2 Ansible Vault - Inventory](task2)
 
 ## Prepare
 

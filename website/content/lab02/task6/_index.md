@@ -99,6 +99,10 @@ __Type:__
 ```bash
 cd
 
+mkdir git
+
+cd git
+
 git clone git@github.com:jesperberth/ansibleclass.git
 
 ```

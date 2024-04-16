@@ -40,13 +40,27 @@ python3 --version
 
 ![Alt text](images/000_default_python.png?raw=true "default python")
 
+We need to upgrade python to version 3.11
+
+```bash
+
+sudo dnf update -y
+
+sudo dnf install python3.11
+
+sudo dnf install python3.11-pip
+
+python3.11 --version
+
+```
+
 Lets create a Python virtualenv for our ansible installation
 
 __Type:__
 
 ```bash
 
-python3 -m venv ansible
+python3.11 -m venv venv-ansible
 
 ```
 
@@ -62,7 +76,7 @@ __Type:__
 
 ```bash
 
-source ansible/bin/activate
+source venv-ansible/bin/activate
 
 which python
 
@@ -90,7 +104,7 @@ pip3 install --upgrade pip
 __Type:__
 
 ```bash
-pip install ansible
+pip install ansible==9.4.0
 ```
 
 ![Alt text](images/003_install_ansible.png?raw=true "Install Ansible")

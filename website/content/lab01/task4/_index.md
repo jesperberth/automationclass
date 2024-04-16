@@ -113,10 +113,6 @@ if it looks like this, it worked
 
 ![Alt text](images/12_docker_ps.png?raw=true "docker ps")
 
-In
-
-![student-pwsh](/images/student-pwsh.png)
-
 Lets install some VS Code extentions
 
 - Ansible
@@ -124,8 +120,6 @@ Lets install some VS Code extentions
 - Indent One Space
 
 In the terminal run below to install the extentions
-
-__Note:__ Make sure you are in the Windows Powershell Tab
 
 ```bash
 

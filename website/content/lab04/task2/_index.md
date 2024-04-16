@@ -1,68 +1,49 @@
 ---
-title: Yaml Inventory
-weight: 20
+title: Encryptet inventory
+weight: 30
 ---
 
-## Task 2 Yaml Inventory
+## Task 3 Encryptet inventory
 
-Another option for the inventory is using a yaml file instead of the ini format, the yaml file will give us some other options for the vault
+In this task we will encrypt the password for the windows servers and place it in the new yaml inventory file
 
 On
 
 ![ansible](/images/ansible.png)
 
-Create a new file __ansible-hosts.yml__
-
-Copy the following inventory to ansible-hosts.yml
-
-__Note:__
-
-We need to set an option in vi before we paste the configuration
+Encrypt you password
 
 __Type:__
 
 ```bash
 
+ansible-vault encrypt_string 'SomeThingSimple8' --name ansible_password
+
+```
+
+![Alt text](images/040_ansible_vault_string.png?raw=true "Encrypt string")
+
+Copy the string
+
+![Alt text](images/041_ansible_vault_string_copy.png?raw=true "Encrypt string copy")
+
+Paste the encryptet string into ansible-hosts.yml
+
+When copied you might need to indent the lines with spaces so it placed under the first S in password, se the picture
+
+```bash
+
 cd
 
-vi ansible-hosts.yml
-
-Hit Esc-key
-
-:set paste <Hit Enter>
-
-Hit Esc-key
+vi hosts.yml
 
 i (to toggle insert)
-```
-
-![Alt text](images/037_set_paste.png?raw=true "vi paste")
-
-Note that it now writes -- INSERT (paste) -- in the bottom
-
-__Remember__ to change the ansible_user to your initials
-
-```ansible
-linuxservers:
-  hosts:
-    server1:
-    server2:
-windowsservers:
-  hosts:
-    server3:
-    server4:
-  vars:
-    ansible_user: jesbe
-    ansible_port: 5985
-    ansible_connection: winrm
-    ansible_winrm_transport: ntlm
-    ansible_winrm_message_encryption: always
 
 ```
 
-You can do a copy/paste of the inventory
+Add __server4__ to the __windowsserver:__ section
 
-![Alt text](images/037_yaml_inventory.png?raw=true "yaml inventory")
+Save the inventory file
 
 __Type:__
 
@@ -72,36 +53,14 @@ Hit Esc-key
 :wq (: for a command w for write and q for quit vi)
 ```
 
-Change __ansible.cfg__ to use the new inventory, you just need to add the .yml to the inventory line
+![Alt text](images/042_inventory_encrypt.png?raw=true "inventory encryptet string")
+
+Lets do a test with win_ping
 
 ```bash
 
-cd
-
-vi .ansible.cfg
-
-i (for input)
-
-inventory = /home/jesbe/ansible-hosts.yml
+ansible windowsservers -m win_ping --ask-vault-pass
 
 ```
 
-__Type:__
-
-```bash
-Hit Esc-key
-
-:wq (: for a command w for write and q for quit vi)
-```
-
-![Alt text](images/038_ansible_cfg.png?raw=true "config")
-
-Do a ping test to check if we are using the new inventory
-
-```bash
-
-ansible linuxservers -m ping
-
-```
-
-![Alt text](images/039_ansible_yaml_test.png?raw=true "test yaml inventory")
+![Alt text](images/043_win_ping.png?raw=true "win ping")
